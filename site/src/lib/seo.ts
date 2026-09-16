@@ -3,8 +3,15 @@ import { href, locales, type Locale, type Route } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import type { Settings, Profilo, Sede, Pubblicazione, Nota, Patologia, Faq } from "./content";
 
+/**
+ * URL pubblico del sito, in ordine: dominio in Keystatic → env esplicita →
+ * URL di produzione Vercel → URL del deploy (preview) → localhost.
+ * Quando il cliente compra il dominio basta scriverlo in settings.dominio.
+ */
 export function siteUrl(settings: Settings): string {
-  return (settings.dominio || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  const base = settings.dominio || process.env.NEXT_PUBLIC_SITE_URL || (vercel ? `https://${vercel}` : "") || "http://localhost:3000";
+  return base.replace(/\/$/, "");
 }
 
 type MetaInput = {

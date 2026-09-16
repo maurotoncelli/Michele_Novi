@@ -20,6 +20,14 @@ Fatto il 16/09/2026, dopo l'ok a stack ([09_tecnica.md](09_tecnica.md)) e direzi
 
 Quando arrivano i dati mancanti si compilano **solo in Keystatic** (o nei YAML): niente da toccare nel codice.
 
+## Deploy e repo
+
+- **Vercel**: progetto `michele-novi-sito`, team **ATSTUDIO** (`atstudio`), root directory `site`, Node 24. URL provvisorio: <https://michele-novi-sito.vercel.app>. Env già impostate (production + preview): `KEYSTATIC_STORAGE=github`, `KEYSTATIC_GITHUB_OWNER=maurotoncelli`, `KEYSTATIC_GITHUB_REPO=Michele_Novi_Website`, `KEYSTATIC_PATH_PREFIX=site`. Da aggiungere quando ci sono: `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, `RESEND_API_KEY`, `NEXT_PUBLIC_GA_ID`.
+- **Git**: un solo repo alla **radice del workspace** (bibbia + fonti + site). Su GitHub: `maurotoncelli/Michele_Novi_Website`, **privato** (contiene CV e recapiti del cliente). Vercel builda solo `site/`.
+- **robots.txt**: `Disallow: /` finché `settings.dominio` è vuoto o il deploy è di anteprima. Così `*.vercel.app` non viene indicizzato. Appena c'è il dominio, si scrive in Keystatic → settings → Dominio e il sito diventa indicizzabile.
+- **Dominio**: lo compra **il cliente** (intestato a lui). Poi: Vercel → progetto → Domains → aggiungere; DNS `A 76.76.21.21` (apex) + `CNAME cname.vercel-dns.com` (www); redirect 301 dal vecchio `centrosaluteonline.it` se ancora suo.
+- **Keystatic in produzione**: serve una **GitHub App** (una volta sola): in locale con `KEYSTATIC_STORAGE=github` in `.env.local`, `npm run dev`, aprire `/keystatic` → il wizard crea la App e scrive le tre chiavi in `.env.local`; copiarle su Vercel. Da quel momento ogni salvataggio in `/keystatic` è un commit su `main` → deploy automatico.
+
 ## Cosa è successo
 
 | Data | Cosa |
@@ -41,7 +49,7 @@ Quando arrivano i dati mancanti si compilano **solo in Keystatic** (o nei YAML):
 4. Finire H–J (foto ritratto → `home.ritratto` e `profilo.ritratto`; pulizia web; conferma testo form).
 5. Far leggere a Michele le **bozze cliniche** in `site/content/patologie/*` e la nota di esempio nel quaderno: sono scritte da noi sulla base della bibbia, vanno validate da lui.
 6. Confermare il nome **«Quaderno»** per la sezione blog/news (alternative in [08_contenuti.md](08_contenuti.md)).
-7. Deploy: repo GitHub, Vercel, Keystatic in GitHub mode (variabili in `site/.env.example`), Resend con dominio verificato.
+7. Deploy: Vercel **fatto** (vedi sotto). Restano: push su GitHub + `vercel git connect`, GitHub App di Keystatic, Resend con dominio verificato.
 
 Il codice è pronto ma i campi vuoti restano vuoti finché non arrivano i dati veri. Non inventare telefono, orari o indirizzi «tanto poi si cambia»: finisce pubblicato.
 

@@ -49,3 +49,16 @@ src/proxy.ts        redirect / ? /it|/en da Accept-Language + cookie mn_lang
 - I corpi Markdoc: `index.mdoc` (IT) + `corpoEn.mdoc` (EN). Nel corpo si parte da `##` (un `#` viene comunque reso come H2).
 - Slug: `slug` per l'italiano, `slugEn` per l'inglese. Le rotte EN sono mappate in `routing.ts`; `next.config.ts` fa rewrite/redirect.
 - Tutto SSG. Dopo un salvataggio in Keystatic (GitHub mode) parte il deploy Vercel.
+
+## Deploy
+
+Vercel, team `atstudio`, progetto `michele-novi-sito`, **root directory `site`** (il repo git sta una cartella sopra). Anteprima: <https://michele-novi-sito.vercel.app>.
+
+```bash
+# dalla radice del workspace (dove sta .git)
+vercel deploy --scope atstudio          # anteprima
+vercel deploy --prod --scope atstudio   # produzione
+vercel env ls --scope atstudio
+```
+
+Con il repo collegato (`vercel git connect`), ogni push su `main` va in produzione da solo. Il `robots.txt` blocca l'indicizzazione finché `settings.dominio` è vuoto.

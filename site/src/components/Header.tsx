@@ -21,7 +21,6 @@ export type HeaderProps = {
 };
 
 export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }: HeaderProps) {
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   // Il menu è "aperto per un percorso": cambiando pagina si chiude da solo.
   const [openPath, setOpenPath] = useState<string | null>(null);
@@ -30,13 +29,6 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
     const next = typeof v === "function" ? v(open) : v;
     setOpenPath(next ? pathname : null);
   };
-
-  useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 8);
-    on();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -56,7 +48,7 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
       <a href="#contenuto" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-petrolio focus:px-4 focus:py-2 focus:text-white">
         {a11y.salta}
       </a>
-      <header className={`header-vetro sticky top-0 z-50 transition-shadow duration-500 ${scrolled ? "is-scrolled" : ""}`}>
+      <header className="header-solido sticky top-0 z-50">
         <div className="contenitore flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
           <Link href={homeHref} className="group flex min-w-0 items-center gap-3" aria-label={nome}>
             <span className="incavo grid h-10 w-10 shrink-0 place-items-center text-petrolio transition group-hover:text-petrolio-2">

@@ -58,23 +58,23 @@ Regole:
 - `sedi` — nome, struttura, indirizzo, città, coordinate, telefono proprio, orari, regime (SSN / privato / sport), servizi, foto, link Maps, `gbpUrl`.
 - `patologie` — titolo, area (spalla / arto superiore / sport / come si opera), lead, corpo MDX, FAQ, patologie correlate, sedi dove si tratta, pubblicazioni correlate.
 - `pubblicazioni` — titolo originale, autori, rivista, anno, DOI, PubMed ID, abstract, **riassunto per pazienti** (opzionale), PDF (se lecito), tag, patologie correlate. Ordine: anno desc.
-- `quaderno` — titolo, data, lead, corpo MDX, copertina, tag, `youtubeId` opzionale, pubblicazioni correlate, autore (fisso: Michele), stato bozza/pubblicato.
+- `quaderno` (etichetta CMS: Approfondimenti) — titolo, data, lead, corpo MDX, copertina (anteprima), tag, `video` (file) e/o `youtube` (URL o ID), pubblicazioni correlate, autore (fisso: Michele), stato bozza/pubblicato.
 - `recensioni` — nome, testo, piattaforma, data, sede, mostra sì/no.
 - `faq` — domanda, risposta, contesto (spalla / prima visita / sede).
 
 Ogni entry ha `seo: { title, description, ogImage }` opzionale con fallback generato dal titolo.
 
-### Il Quaderno (blog / news)
+### Approfondimenti (blog / news)
 
-Nome della sezione: **Quaderno**. Rotta `/quaderno`.  
-Perché: è già una delle metafore del design (`06_design.md`), è in prima persona, dice «appunti di chi lavora» e non «news aziendali». In inglese resta *Notebook*. Evitare Blog / News / Insights / Magazine.
+Nome della sezione: **Approfondimenti**. Rotta pubblica `/it/approfondimenti` (EN `/en/in-depth`). Cartella app: `quaderno/`.  
+I vecchi slug `/quaderno` e `/notebook` fanno 301.
 
 Dentro, due binari con filtro, stesso hub:
 
-- **Pubblicazioni** — i paper, `/quaderno/pubblicazioni/[slug]`, impaginati da scientifici, `ScholarlyArticle`.
-- **Dal lavoro** — le note per pazienti, `/quaderno/[slug]`, `Article` con autore visibile.
+- **Pubblicazioni** — i paper, `/approfondimenti/pubblicazioni/[slug]`, impaginati da scientifici, `ScholarlyArticle`. Lista espandibile: prime 3, poi «Mostra tutte».
+- **Dal lavoro** — le note per pazienti, `/approfondimenti/[slug]`, `Article` con autore visibile. Ogni nota ha copertina e slot video (file o YouTube).
 
-Peso nel sito: voce di primo livello nel menu, fascia in home con gli ultimi 3 pezzi (misti), feed RSS `/quaderno/feed.xml`, ogni patologia linka i pezzi correlati e viceversa. Pagina tag `/quaderno/tag/[tag]`.
+Peso nel sito: voce di primo livello nel menu, fascia in home con gli ultimi 3 pezzi (misti), feed RSS `/approfondimenti/feed.xml`, ogni patologia linka i pezzi correlati e viceversa. Pagina tag `/approfondimenti/tag/[tag]`.
 
 Flusso di pubblicazione: Michele scrive in `/keystatic` → bozza su branch → preview Vercel → merge → ISR rigenera la pagina, la home, il feed e la sitemap. Nessun deploy manuale.
 
@@ -92,7 +92,7 @@ Flusso di pubblicazione: Michele scrive in `/keystatic` → bozza su branch → 
 ### i18n
 
 - Rotte `/it/...` e `/en/...`, `it` default con redirect da `/` in base ad `Accept-Language` (una volta, poi cookie).
-- Slug tradotti dove ha senso SEO (`/it/quaderno` → `/en/notebook`, `/it/sedi` → `/en/locations`) tramite mappa in `i18n/routing.ts`.
+- Slug tradotti dove ha senso SEO (`/it/approfondimenti` → `/en/in-depth`, `/it/dove` → `/en/locations`) tramite mappa in `i18n/routing.ts`.
 - `hreflang` reciproco + `x-default` su ogni pagina; sitemap con alternates.
 - Formattazione date/numeri via `Intl`, non stringhe.
 - Contenuto senza traduzione EN: la pagina EN mostra l'IT con avviso, non 404. I paper restano in inglese in entrambe le lingue.

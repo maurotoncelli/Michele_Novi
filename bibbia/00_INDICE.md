@@ -35,7 +35,7 @@ Lingua di questa cartella: italiano.
 | [03_sedi_e_contatti.md](03_sedi_e_contatti.md) | Quattro sedi, telefono, email, GBP | Aggiornato 16/09 |
 | [04_centro_san_verano.md](04_centro_san_verano.md) | SV: suo, autonomo, non ostentare | Aggiornato 16/09 |
 | [05_architettura_sito.md](05_architettura_sito.md) | Pagine, albero, cosa c’è in v1 | Aggiornato 16/09 |
-| [06_design.md](06_design.md) | Estetica, motion, icone, tono visivo | Aggiornato 16/09 |
+| [06_design.md](06_design.md) | Estetica, motion, icone; **passata C/D + sans moderna** | Aggiornato 16/09 pomeriggio |
 | [07_presenza_online.md](07_presenza_online.md) | Inventario web e piano di pulizia | Aggiornato 16/09 |
 | [08_contenuti.md](08_contenuti.md) | Paper, blog, recensioni, editoria | Aggiornato 16/09 |
 | [09_tecnica.md](09_tecnica.md) | Stack, SEO, privacy, dati legali | Aggiornato 16/09 |

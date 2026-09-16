@@ -55,65 +55,95 @@ inEvidenza:
       en: Shoulder surgery with Giuseppe Porcellini.
 timeline:
   - periodo: 2006–2012
+    tipo: formazione
     titolo:
-      it: Laurea in Medicina e Chirurgia, 108/110
+      it: Laurea Magistrale in Medicina e Chirurgia, 108/110
       en: Medical degree, 108/110
     luogo: Università di Pisa
-  - periodo: '2011'
-    titolo:
-      it: Royal National Orthopaedic Hospital — chirurgia del nervo periferico (Sinisi)
-      en: Royal National Orthopaedic Hospital — peripheral nerve surgery (Sinisi)
-    luogo: Londra
   - periodo: '2013'
+    tipo: formazione
     titolo:
-      it: Abilitazione e iscrizione all'Ordine dei Medici di Pisa
-      en: Licence and registration, Pisa Medical Council
+      it: Abilitazione e iscrizione all'Ordine dei Medici di Pisa, n. 5749
+      en: Licence and registration, Pisa Medical Council, no. 5749
     luogo: Pisa
   - periodo: 2013–2018
+    tipo: formazione
     titolo:
-      it: Specializzazione in Ortopedia e Traumatologia, 110/110 con lode
+      it: Specializzazione in Ortopedia e Traumatologia, 110/110 e lode
       en: Residency in Orthopaedics and Traumatology, 110/110 with honours
     luogo: Università di Pisa
-  - periodo: '2015'
+  - periodo: '2016'
+    tipo: formazione
     titolo:
-      it: University of Washington Hand Center — mano e microchirurgia (Vedder)
-      en: University of Washington Hand Center — hand and microsurgery (Vedder)
-    luogo: Seattle
-  - periodo: 2016–2017
-    titolo:
-      it: Ecografia muscolo-scheletrica avanzata SIUMB
-      en: Advanced musculoskeletal ultrasound, SIUMB
+      it: Corso avanzato di ecografia muscolo-scheletrica SIUMB
+      en: Advanced musculoskeletal ultrasound course, SIUMB
     luogo: Italia
-  - periodo: '2017'
+  - periodo: '2023'
+    tipo: formazione
     titolo:
-      it: Charité — spalla e gomito (Scheibel)
-      en: Charité — shoulder and elbow (Scheibel)
+      it: Oxford Partial Knee Instructional Course
+      en: Oxford Partial Knee Instructional Course
+    luogo: Oxford
+  - periodo: '2024'
+    tipo: formazione
+    titolo:
+      it: Clinical Observation Arthroplasty, Sint-Jozefskliniek
+      en: Clinical Observation Arthroplasty, Sint-Jozefskliniek
+    luogo: Izegem, Belgio
+  - periodo: '2011'
+    tipo: fellowship
+    titolo:
+      it: Peripheral Nerve Injury Unit, Royal National Orthopaedic Hospital (Sinisi)
+      en: Peripheral Nerve Injury Unit, Royal National Orthopaedic Hospital (Sinisi)
+    luogo: Londra
+  - periodo: '2015'
+    tipo: fellowship
+    titolo:
+      it: University of Washington Medical Center — Hand Center (Vedder)
+      en: University of Washington Medical Center — Hand Center (Vedder)
+    luogo: Seattle
+  - periodo: '2017'
+    tipo: fellowship
+    titolo:
+      it: Fellowship spalla e gomito, Charité Universitätsmedizin (Scheibel)
+      en: Shoulder and elbow fellowship, Charité Universitätsmedizin (Scheibel)
     luogo: Berlino
   - periodo: '2018'
+    tipo: fellowship
     titolo:
-      it: Ospedale Cervesi — spalla (Porcellini)
-      en: Cervesi Hospital — shoulder (Porcellini)
+      it: Unità Spalla e Gomito, Ospedale D. Cervesi (Porcellini)
+      en: Shoulder and Elbow Unit, Cervesi Hospital (Porcellini)
     luogo: Cattolica
+  - periodo: '2025'
+    tipo: fellowship
+    titolo:
+      it: Fellowship, Massachusetts General Hospital — Harvard Medical School (Elhassan)
+      en: Fellowship, Massachusetts General Hospital — Harvard Medical School (Elhassan)
+    luogo: Boston
+  - periodo: dal 2018
+    tipo: lavoro
+    titolo:
+      it: Libera professione, ambulatorio e chirurgia
+      en: Private practice, clinic and surgery
+    luogo: Toscana
   - periodo: 2019–2020
+    tipo: lavoro
     titolo:
       it: Research fellow, chirurgia della spalla
       en: Research fellow, shoulder surgery
     luogo: Università di Pisa
   - periodo: 2020–2021
+    tipo: lavoro
     titolo:
-      it: Clinica e ricerca funzionale su spalla e gomito
-      en: Clinical work and functional research on shoulder and elbow
+      it: Assistenza, chirurgia e ricerca funzionale su spalla e gomito
+      en: Clinical work, surgery and functional research on shoulder and elbow
     luogo: AOU Modena
   - periodo: dal 2021
+    tipo: lavoro
     titolo:
       it: Dirigente medico, SOC Ortopedia Protesica
       en: Consultant, Joint Replacement Unit
     luogo: Ospedale San Pietro Igneo, Fucecchio
-  - periodo: '2025'
-    titolo:
-      it: Massachusetts General Hospital — Harvard Medical School, transfer muscolari di spalla (Elhassan)
-      en: Massachusetts General Hospital — Harvard Medical School, shoulder tendon transfers (Elhassan)
-    luogo: Boston
 docenza:
   - periodo: 2023–2025
     testo:

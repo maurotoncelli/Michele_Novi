@@ -2,7 +2,7 @@
 
 Due strati. Sopra: quello che Mauro vuole far vedere (16/09). Sotto: filtri per non fare un sito che *sembra* complicato come maurotoncelli.it, o un cartoon anatomico.
 
-Token (hex, font) **dopo** lo shooting e dopo aver visto palette SV — che **non** si copia in MN.
+Token colore: base già in `site/` (campo, osso, petrolio, rame, menta/pesca). **Font riaperto il 16/09 pomeriggio:** Newsreader esce, si va su una sans contemporanea. Palette SV **non** si copia in MN.
 
 ---
 
@@ -77,14 +77,28 @@ La metafora articolare **si può vedere** (incastri, strati, icone). Non si illu
 - Nota «Dal lavoro»: titolo, lead, corpo, disclaimer, CTA.
 - Stati vuoti: fascia recensioni assente se non ci sono pezzi; il menu Articoli c’è perché i paper ci sono.
 
-## Token (vuoti di proposito)
+## Passata 16/09 pomeriggio (Mauro, dopo la v1 online)
 
-| Token | Quando |
-|-------|--------|
-| `--bg` | dopo foto; partenza: chiaro freddo, non crema |
-| `--fg` | dopo foto |
-| `--accent` | uno, dalle foto o da un segno MN — non la palette SV |
-| Font titoli / corpo | self-hosted, pochi pesi, invitanti |
+La v1 implementata è troppo calma e troppo “serif da studio”. Si tiene la **materia ossea** e i colori; si butta il carattere da editoriale.
+
+- Home: **ritratto grande**, non ovale-placeholder. Foto di Michele (shooting); in mockup si usa un posto, non una faccia finta in produzione.
+- Home **più dinamica**: strati, docking, cucitura, card che si aprono. Quasi tutti gli elementi possono muoversi, come un corpo.
+- **Disegni** al posto delle sole icone a tratto. Una famiglia, carina e utile. Foglio: `tavole/proposta-iconografia-moderna.png`.
+- **Tutto moderno, niente serif.** **Chiuso: Geist** (titoli e UI). Newsreader via.
+
+Due proposte da scegliere (o fondere):
+
+- **C — Ritratto moderno** (`tavole/proposta-C-ritratto-moderno.png`): foto a tutta altezza a destra, testo sans a sinistra, disegni piccoli sotto.
+- **D — Atlante disegnato** (`tavole/proposta-D-atlante-disegnato.png`): figura ritagliata + costellazione di schede illustrate che si incastrano.
+
+## Token
+
+| Token | Stato 16/09 |
+|-------|-------------|
+| Campo / osso / petrolio / rame / menta / pesca | Tenuti. Si rinfresca l’uso, non l’hex. |
+| Font | **Geist**, unico. |
+| Ritratto | `home.ritratto` → foto a tutto schermo. Oggi placeholder in `public/images/home/`. |
+| Disegni | `public/images/disegni/` + singleton Keystatic `disegni`. Nelle card ossee, non al posto delle card. |
 
 ## Shooting (incluso)
 

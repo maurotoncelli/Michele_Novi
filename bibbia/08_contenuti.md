@@ -41,11 +41,10 @@ Alonso: esempio che ha fatto lui. **Default no**, senza consenso.
 
 Lui: «articoli qualcosa, suggerisci tu».
 
-**Proposta (16/09):** voce menu **Quaderno**. Hub con due filtri: *Pubblicazioni* | *Dal lavoro*.  
-URL: `/quaderno`, `/quaderno/pubblicazioni/[slug]`, `/quaderno/[slug]`. EN: *Notebook*.
+**Chiuso (16/09 sera):** voce menu **Approfondimenti**. Hub con due filtri: *Pubblicazioni* | *Dal lavoro*.  
+URL: `/it/approfondimenti`, `/it/approfondimenti/pubblicazioni/[slug]`, `/it/approfondimenti/[slug]`. EN: *In depth* (`/en/in-depth`). I vecchi `/quaderno` e `/notebook` restano 301.
 
-Perché Quaderno: è già metafora del design, è in prima persona, non suona «news aziendali». Da proporre a Michele.  
-Alternative: *Articoli* (neutro), *In chiaro*, *Appunti*. Per il binario pazienti, se “Dal lavoro” non gli piace: Note / In ambulatorio / Spalla in chiaro.
+Ogni nota ha **immagine in anteprima** (`copertina`) e spazio **video** (file in Keystatic e/o URL YouTube).
 
 Dettaglio tecnico (modello dati, feed, ISR): [`09_tecnica.md`](09_tecnica.md).
 
@@ -70,7 +69,7 @@ Ogni testo sanitario: lui firma. Niente promesse di guarigione. Disclaimer: non 
 
 ## YouTube / reel
 
-Non in produzione v1. Il CMS ha già un campo `youtubeId` opzionale. Il blog è pensato come mozzo verso video e Instagram.
+Ogni approfondimento ha in Keystatic un file video e/o un URL YouTube (`youtube-nocookie.com`). Il file ha la precedenza.
 
 ## Cosa non è contenuto del sito MN
 

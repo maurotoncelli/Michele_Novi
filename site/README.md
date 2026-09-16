@@ -1,8 +1,8 @@
 # Sito Dott. Michele Novi
 
-Next.js 16 (App Router) ∑ TypeScript ∑ Tailwind v4 ∑ Keystatic ∑ i18n `/it` `/en` ∑ Vercel.
+Next.js 16 (App Router) ù TypeScript ù Tailwind v4 ù Keystatic ù i18n `/it` `/en` ù Vercel.
 
-La documentazione di progetto (brief, decisioni, contenuti, design) Ë in `../bibbia/`. Leggi prima `../bibbia/HANDOFF.md`.
+La documentazione di progetto (brief, decisioni, contenuti, design) ù in `../bibbia/`. Leggi prima `../bibbia/HANDOFF.md`.
 
 ## Comandi
 
@@ -17,11 +17,11 @@ npm run typecheck
 
 ## Variabili d'ambiente
 
-Copia `.env.example` in `.env.local`. Nessuna variabile Ë obbligatoria per il build:
+Copia `.env.example` in `.env.local`. Nessuna variabile ù obbligatoria per il build:
 
 | Variabile | Serve a |
 |-----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | URL canonico finchÈ `settings.dominio` Ë vuoto |
+| `NEXT_PUBLIC_SITE_URL` | URL canonico finchù `settings.dominio` ù vuoto |
 | `KEYSTATIC_STORAGE` | `local` (scrive su `content/`) o `github` (produzione) |
 | `KEYSTATIC_GITHUB_*`, `KEYSTATIC_SECRET` | Solo con storage `github` |
 | `RESEND_API_KEY`, `RESEND_FROM` | Invio email del form. Senza chiave il form logga e risponde ok |
@@ -30,14 +30,15 @@ Copia `.env.example` in `.env.local`. Nessuna variabile Ë obbligatoria per il bu
 ## Dove sta cosa
 
 ```
-content/            dati (YAML + Markdoc) gestiti da Keystatic ó unica fonte dei contenuti
-keystatic.config.tsx  schema: settings, profilo, home ∑ sedi, patologie, pubblicazioni, quaderno, faq, recensioni
+content/            dati (YAML + Markdoc) gestiti da Keystatic ù unica fonte dei contenuti
+public/images/disegni/  disegni del catalogo (singleton Keystatic `disegni`)
+keystatic.config.tsx  schema: settings, profilo, home ó sedi, patologie, pubblicazioni, approfondimenti (collection `quaderno`), faq, recensioni
 src/i18n/           routing.ts (slug tradotti), messages/{it,en}.json (stringhe UI), legale.ts
 src/lib/content.ts  unico punto di lettura dei dati (reader Keystatic + cache)
 src/lib/seo.ts      metadata, hreflang, JSON-LD
 src/lib/markdoc.tsx rendering del corpo (H1?H2, fallback EN?IT)
 src/app/[locale]/   pagine; [...rest] ? 404 nel layout del sito
-src/app/api/        contatto (Resend, honeypot, rate limit) ∑ keystatic
+src/app/api/        contatto (Resend, honeypot, rate limit) ù keystatic
 src/components/     Header, Footer, CookieBanner, ContactForm, ui/ (Segno, Reveal, Strati, Cucitura), blocks/
 src/proxy.ts        redirect / ? /it|/en da Accept-Language + cookie mn_lang
 ```
@@ -61,4 +62,4 @@ vercel deploy --prod --scope atstudio   # produzione
 vercel env ls --scope atstudio
 ```
 
-Con il repo collegato (`vercel git connect`), ogni push su `main` va in produzione da solo. Il `robots.txt` blocca l'indicizzazione finchÈ `settings.dominio` Ë vuoto.
+Con il repo collegato (`vercel git connect`), ogni push su `main` va in produzione da solo. Il `robots.txt` blocca l'indicizzazione finchù `settings.dominio` ù vuoto.

@@ -4,7 +4,7 @@
     "chiSono": "Chi sono",
     "cosaCuro": "Cosa curo",
     "dove": "Dove",
-    "quaderno": "Quaderno",
+    "quaderno": "Approfondimenti",
     "contatti": "Contatti",
     "menu": "Menu",
     "chiudi": "Chiudi",
@@ -20,6 +20,8 @@
     "scopri": "Scopri",
     "leggi": "Leggi",
     "tutte": "Tutte",
+    "mostraTutte": "Mostra tutte",
+    "mostraMeno": "Mostra le prime",
     "indietro": "Indietro",
     "vediSuMaps": "Apri in Google Maps",
     "schedaGoogle": "Scheda Google",
@@ -36,7 +38,7 @@
     "opero": "Opero",
     "fiduciaTitolo": "Perché fidarsi",
     "recensioniTitolo": "Dicono di me",
-    "quadernoTitolo": "Dal Quaderno",
+    "quadernoTitolo": "Dagli approfondimenti",
     "quadernoLead": "Pubblicazioni scientifiche e note dal lavoro.",
     "contattoTitolo": "Prendi contatto",
     "contattoLead": "La segreteria risponde, fissa la visita e ti dice cosa portare."
@@ -45,6 +47,9 @@
     "titolo": "Chi sono",
     "inEvidenza": "In evidenza",
     "percorso": "Formazione e percorso",
+    "esperienze": "Esperienze lavorative",
+    "fellowship": "Fellowship internazionali",
+    "formazione": "Formazione",
     "docenza": "Docenza e società scientifiche",
     "pubblicazioni": "Pubblicazioni principali",
     "tuttePubblicazioni": "Tutte le pubblicazioni",
@@ -87,7 +92,7 @@
     "altreSedi": "Altre sedi"
   },
   "quaderno": {
-    "titolo": "Quaderno",
+    "titolo": "Approfondimenti",
     "lead": "Due binari: le pubblicazioni scientifiche, impaginate da paper, e le note dal lavoro, scritte per chi viene in visita.",
     "tutto": "Tutto",
     "pubblicazioni": "Pubblicazioni",
@@ -111,7 +116,8 @@
     "vuoto": "Ancora nessun pezzo qui.",
     "disclaimer": "Queste note informano e non sostituiscono la visita. Non descrivono casi identificabili.",
     "feed": "Feed RSS",
-    "soloInglese": "I paper restano in inglese: è la lingua in cui sono stati pubblicati."
+    "soloInglese": "I paper restano in inglese: è la lingua in cui sono stati pubblicati.",
+    "video": "Video"
   },
   "contatti": {
     "titolo": "Contatti",
@@ -167,7 +173,7 @@
     "siteName": "Dott. Michele Novi",
     "homeTitle": "Dott. Michele Novi — Ortopedico, spalla e arto superiore",
     "homeDescription": "Chirurgo ortopedico specialista di spalla, gomito e arto superiore. Visite e interventi a Fucecchio, Pisa e Peccioli. Un numero per tutte le sedi.",
-    "quadernoDescription": "Pubblicazioni scientifiche e note dal lavoro del Dott. Michele Novi, ortopedico della spalla.",
+    "quadernoDescription": "Pubblicazioni scientifiche e approfondimenti dal lavoro del Dott. Michele Novi, ortopedico della spalla.",
     "doveDescription": "Le strutture in cui il Dott. Michele Novi visita e opera in Toscana.",
     "cosaCuroDescription": "Spalla, gomito e mano, traumatologia sportiva, artroscopia. Cosa cura il Dott. Michele Novi.",
     "contattiDescription": "Segreteria unica per prenotare una visita con il Dott. Michele Novi."

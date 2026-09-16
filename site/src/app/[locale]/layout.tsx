@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Plus_Jakarta_Sans } from "next/font/google";
+import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
@@ -10,17 +10,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 
-const newsreader = Newsreader({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-jakarta",
+  variable: "--font-geist",
   display: "swap",
 });
 
@@ -61,7 +53,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang={l} className={`${newsreader.variable} ${jakarta.variable} h-full`}>
+    <html lang={l} className={`${geist.variable} h-full`}>
       <body className="aloni flex min-h-full flex-col">
         <Header
           locale={l}

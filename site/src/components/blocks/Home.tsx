@@ -3,81 +3,68 @@ import Image from "next/image";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import type { Home, Patologia, Pubblicazione, Nota, Recensione, Sede, Settings } from "@/lib/content";
-import { telHref, waHref, slugPatologia } from "@/lib/content";
+import { getDisegni, slugPatologia, srcDisegno, telHref, waHref } from "@/lib/content";
+import { Disegno } from "../ui/Disegno";
 import { Reveal } from "../ui/Reveal";
 import { Strati } from "../ui/Strati";
 import { isSegno, Segno } from "../ui/Segno";
 import { ModuloSede, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
 import { Sezione } from "./Pagina";
 
-/* ------------------------------------------------------------------ Hero */
+/* ------------------------------------------------------------------ Hero: foto a tutto schermo, niente buco osseo */
 export function Hero({ home, settings, locale }: { home: Home; settings: Settings; locale: Locale }) {
   const m = getMessages(locale);
   const tel = telHref(settings.telefono);
   const wa = waHref(settings.whatsapp, pick(settings.whatsappTesto, locale));
   const ritratto = home.ritratto;
+  const foto = ritratto?.src
+    ? ritratto.src.startsWith("/")
+      ? ritratto.src
+      : `/images/home/${ritratto.src}`
+    : "/images/home/ritratto-placeholder.jpg";
 
   return (
-    <section className="contenitore pt-8 md:pt-14">
-      <Reveal className="osso osso-lg cucitura relative overflow-hidden">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-menta blur-3xl" aria-hidden="true" />
-        <div className="pointer-events-none absolute -right-16 top-1/3 h-72 w-72 rounded-full bg-pesca blur-3xl" aria-hidden="true" />
-        <div className="relative grid gap-8 p-7 md:grid-cols-[1.15fr_1fr] md:items-center md:gap-12 md:p-12 lg:p-16">
-          <div>
-            {pick(home.eyebrow, locale) && <p className="eyebrow mb-4">{pick(home.eyebrow, locale)}</p>}
-            <h1 className="text-[2.6rem] leading-[1.02] md:text-[3.6rem] lg:text-[4.2rem]">{pick(home.titolo, locale)}</h1>
-            <p className="mt-5 max-w-xl text-[1.1rem] leading-relaxed text-grafite md:text-[1.2rem]">{pick(home.sottotitolo, locale)}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-2">
-              {tel && (
-                <a href={tel} className="btn btn-petrolio">
-                  <Segno nome="telefono" size={18} />
-                  {m.cta.chiamaSegreteria}
-                </a>
-              )}
-              {wa && (
-                <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-osso">
-                  <Segno nome="whatsapp" size={18} />
-                  {m.cta.whatsapp}
-                </a>
-              )}
-              {!tel && (
-                <Link href={href(locale, { kind: "contatti" })} className="btn btn-petrolio">
-                  <Segno nome="mail" size={18} />
-                  {m.cta.scrivi}
-                </Link>
-              )}
-              <Link href={href(locale, { kind: "dove" })} className="btn btn-ghost">
-                {m.cta.dove}
-                <Segno nome="freccia" size={18} />
+    <section className="relative left-1/2 w-screen min-h-[calc(100svh-4rem)] -translate-x-1/2 md:min-h-[calc(100svh-4.5rem)]">
+      <Image
+        src={foto}
+        alt={pick(ritratto?.alt, locale) || m.a11y.ritrattoDi}
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[center_18%]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-inchiostro/75 via-inchiostro/25 to-inchiostro/30" aria-hidden="true" />
+      <div className="contenitore relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-12 pt-16 md:min-h-[calc(100svh-4.5rem)] md:pb-16">
+        <Reveal className="max-w-2xl text-osso">
+          {pick(home.eyebrow, locale) && <p className="eyebrow mb-4 text-osso/70">{pick(home.eyebrow, locale)}</p>}
+          <h1 className="text-[2.7rem] leading-[1.02] text-osso md:text-[4rem] lg:text-[4.6rem]">{pick(home.titolo, locale)}</h1>
+          <p className="mt-5 max-w-xl text-[1.1rem] leading-relaxed text-osso/85 md:text-[1.22rem]">{pick(home.sottotitolo, locale)}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            {tel && (
+              <a href={tel} className="btn btn-petrolio">
+                <Segno nome="telefono" size={18} />
+                {m.cta.chiamaSegreteria}
+              </a>
+            )}
+            {wa && (
+              <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-osso">
+                <Segno nome="whatsapp" size={18} />
+                {m.cta.whatsapp}
+              </a>
+            )}
+            {!tel && (
+              <Link href={href(locale, { kind: "contatti" })} className="btn btn-petrolio">
+                <Segno nome="mail" size={18} />
+                {m.cta.scrivi}
               </Link>
-            </div>
+            )}
+            <Link href={href(locale, { kind: "dove" })} className="btn btn-osso">
+              {m.cta.dove}
+              <Segno nome="freccia" size={18} />
+            </Link>
           </div>
-
-          {/* Finestra: il ritratto alloggiato in una cavità scavata nella lastra */}
-          <div className="relative mx-auto w-full max-w-[26rem] md:max-w-none">
-            <div
-              className="incavo relative aspect-[4/5] overflow-hidden"
-              style={{ borderRadius: "46% 54% 48% 52% / 52% 44% 56% 48%" }}
-            >
-              {ritratto?.src ? (
-                <Image
-                  src={ritratto.src}
-                  alt={pick(ritratto.alt, locale) || m.a11y.ritrattoDi}
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 40vw, 90vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 grid place-items-center bg-gradient-to-b from-osso-2 to-osso-3 text-petrolio/50">
-                  <Segno nome="spalla" size={96} strokeWidth={1} />
-                </div>
-              )}
-              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_12px_30px_rgba(26,30,34,.14),inset_0_-4px_12px_rgba(255,255,255,.5)]" style={{ borderRadius: "inherit" }} aria-hidden="true" />
-            </div>
-          </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -135,21 +122,31 @@ export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
 }
 
 /* ------------------------------------------------------------------ Perché fidarsi */
-export function FasciaFiducia({ home, locale }: { home: Home; locale: Locale }) {
+export async function FasciaFiducia({ home, locale }: { home: Home; locale: Locale }) {
   const m = getMessages(locale);
   const voci = (home.fiducia ?? []).filter((v) => pick(v.testo, locale));
   if (!voci.length) return null;
+  const catalogo = await getDisegni();
   return (
     <Sezione eyebrow={m.nav.chiSono} titolo={m.home.fiduciaTitolo} azione={{ href: href(locale, { kind: "chiSono" }), label: m.nav.chiSono }}>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        {voci.map((v, i) => (
-          <Reveal key={i} as="li" delay={i * 70} className="osso osso-sm flex items-start gap-3 p-4">
-            <span className="incavo grid h-9 w-9 shrink-0 place-items-center text-petrolio">
-              <Segno nome={isSegno(v.segno) ? v.segno : "check"} size={18} />
+        {voci.map((v, i) => {
+          const disegno = srcDisegno(catalogo, v.segno, locale);
+          return (
+          <Reveal key={i} as="li" delay={i * 70} className="osso osso-sm flex flex-col gap-3 p-4">
+            <span className="relative aspect-[5/3] w-full overflow-hidden rounded-[1rem] bg-osso-2/80">
+              {disegno ? (
+                <Disegno src={disegno.src} alt={disegno.alt} />
+              ) : (
+                <span className="absolute inset-0 grid place-items-center text-petrolio">
+                  <Segno nome={isSegno(v.segno) ? v.segno : "check"} size={22} />
+                </span>
+              )}
             </span>
-            <span className="pt-1.5 text-[0.95rem] leading-snug">{pick(v.testo, locale)}</span>
+            <span className="text-[0.95rem] leading-snug">{pick(v.testo, locale)}</span>
           </Reveal>
-        ))}
+          );
+        })}
       </ul>
     </Sezione>
   );

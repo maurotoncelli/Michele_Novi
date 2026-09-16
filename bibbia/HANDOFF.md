@@ -1,7 +1,7 @@
 # Handoff
 
 > Prima lettura per una chat nuova. Workspace: `Michele_Novi_Website`.  
-> Aggiornato: **16 settembre 2026**.
+> Aggiornato: **16 settembre 2026, sera**. Sezione **Approfondimenti**, header solido, barre CV, pubblicazioni espandibili.
 
 ## In una frase
 
@@ -12,13 +12,45 @@ Sito vetrina **veloce, SEO, italiano + inglese, data-driven** per il Dott. Miche
 Fatto il 16/09/2026, dopo l'ok a stack ([09_tecnica.md](09_tecnica.md)) e direzione estetica «schede ossee» ([06_design.md](06_design.md)).
 
 - **Stack**: Next.js 16 App Router, TypeScript, Tailwind v4, Keystatic (local ora, GitHub in produzione), i18n `/it` `/en` con slug tradotti, Resend per il form, Vercel come target.
-- **Pagine**: home · chi-sono · cosa-curo (+ 5 schede) · dove (+ 4 sedi) · quaderno (tutto / pubblicazioni / dal-lavoro / tag / singola nota / singolo paper / feed RSS) · contatti · privacy · cookie · 404. Tutte in IT e EN.
+- **Pagine**: home · chi-sono · cosa-curo (+ 5 schede) · dove (+ 4 sedi) · **Approfondimenti** (`/it/approfondimenti`, EN `/en/in-depth`; cartella interna `quaderno/`) · contatti · privacy · cookie · 404. Tutte in IT e EN. I vecchi URL `/quaderno` e `/notebook` fanno 301.
 - **SEO**: metadata + canonical + hreflang, JSON-LD (Physician, MedicalBusiness per sede, MedicalWebPage, ScholarlyArticle, Article, FAQPage, Breadcrumb), sitemap, robots, `/llms.txt`, OG image generata.
 - **Contenuti seminati** da questa bibbia: settings, profilo, home, 4 sedi, 5 patologie (IT+EN, bozze), 12 paper dal CV, 1 nota di esempio, 5 FAQ. Recensioni: vuote.
 - **Volutamente vuoti** (in `site/content/settings.yaml`): `telefono`, `whatsapp`, `email`, `emailDestinazioneForm`, `orari`, `dominio`. Il sito degrada bene: senza telefono mostra «numero a breve» e spinge sul form.
 - **Come si lavora**: `cd site && npm run dev` → sito su `:3000`, pannello su `/keystatic`. Comandi e variabili in `site/README.md`.
 
 Quando arrivano i dati mancanti si compilano **solo in Keystatic** (o nei YAML): niente da toccare nel codice.
+
+## Passata aperta: design (16/09 pomeriggio)
+
+Il sito v1 è **strutturalmente ok** e online, ma visivamente è ancora un telaio: hero con ovale-placeholder, card pulite, icone a tratto singolo, titoli in **Newsreader** (serif). Mauro: **non va**. Prossimo lavoro = rinfrescare la home, non toccare lo stack.
+
+**Cosa deve cambiare**
+
+1. **Ritratto grande in home.** Non un bollino a destra: una foto vera, bella, a tutta altezza (o quasi). Finché non c’è lo shooting, si progetta il *posto* della foto; non si inventa la faccia di Michele in produzione.
+2. **Home più dinamica.** Più strati, più incastri, più movimento (già nel brief: ventaglio, docking, cucitura). Oggi è troppo statica e “da template chiaro”.
+3. **Iconografia disegnata.** Non più solo SVG schematici. Famiglia di disegni carini (spalla, gomito, sport, artroscopia, sedi, quaderno) — stilosa, subito leggibile, una sola mano. Le foto restano per lui e per le sedi.
+4. **Font: tutto moderno.** Newsreader **esce**. Niente serif da editoriale medico. Una sola sans contemporanea (titoli + UI), tracking stretto, pesi pochi. Candidati da provare in codice: Geist / Satoshi / Switzer / Cabinet Grotesk — si sceglie dopo le tavole.
+5. **Colori: la base resta.** Campo, osso, petrolio, rame, menta/pesca. Si rinfresca l’uso (più contrasto, più tinta sulle lastre), non si cambia palette.
+
+**Chiuso in implementazione (16/09 sera)**
+
+- Hero home: **foto a tutto schermo**, niente buco/ovale osseo. File in Keystatic `home.ritratto` → `public/images/home/`. Oggi è un placeholder da sostituire con Michele.
+- Font: **Geist** per tutto (titoli e UI). Newsreader e Jakarta via.
+- Disegni: cartella `site/public/images/disegni/`, catalogo Keystatic singleton `disegni` (`content/disegni.yaml`). Nelle card esistenti (patologie, sedi, fiducia) c’è un riquadro più grande che ospita il disegno. Se una patologia ha `immagine`, quella vince sul catalogo.
+
+**Due direzioni visive** (stessa palette, due tempi). Tavole in `bibbia/tavole/`:
+
+| | C — Ritratto moderno | D — Atlante disegnato |
+|---|---|---|
+| File | `proposta-C-ritratto-moderno.png` | `proposta-D-atlante-disegnato.png` |
+| Centro | Foto a tutta altezza, testo a sinistra, card sotto | Figura ritagliata + costellazione di schede illustrate che si incastrano |
+| Disegno | Chip piccoli, secondari | Primario: le schede *sono* i disegni |
+| Font | Grotesk geometrica, tutto sans | Sans un po’ più caratterizzata, comunque no serif |
+
+Foglio segni: `proposta-iconografia-moderna.png`.  
+Le tavole A/B e la fusione ossea restano come storia; **non** sono più la direzione da implementare così com’è (troppo calma, troppo serif).
+
+**Vincoli che restano:** niente rosso da carrello, niente before/after, niente cartoon anatomico da Awwwards, niente stock medico blu. Il ritratto in produzione è quello di Michele, non un generate.
 
 ## Deploy e repo
 
@@ -40,16 +72,24 @@ Quando arrivano i dati mancanti si compilano **solo in Keystatic** (o nei YAML):
 | set 2026 | Incontro al **San Verano**. Chiuse sedi, perimetro clinico, prezzi, paper, P. IVA. Interrotto a metà G. |
 | 16/09/2026 | Letto il **CV 2026** (docx). Canone formazione. Fellowship **Harvard / MGH Boston 2025** (Elhassan). |
 | 16/09/2026 | Scelta estetica **«schede ossee»** (tavole in `bibbia/tavole/FUSIONE_osso_*.png`). Stack approvato. **Sito v1 costruito in `site/`**: tutte le pagine IT+EN, Keystatic, SEO, form. Build pulita. |
+| 16/09/2026 | Repo GitHub `maurotoncelli/Michele_Novi` + Vercel `michele-novi-sito` collegati. URL provvisorio online. |
+| 16/09/2026 pomeriggio | Mauro: la v1 è troppo statica e **il serif non piace**. Si riapre il design: ritratto grande, home dinamica, disegni, **tutto moderno**. Tavole C/D + foglio segni in `bibbia/tavole/`. |
 
 ## Cosa fare adesso (ordine)
 
-1. Far **ricontrollare il cellulare** (348 4332733 detto vs 348 4331733 online). Poi scriverlo in `settings.telefono` / `whatsapp`: da lì finisce in header, contatti, footer e JSON-LD.
-2. Ritirare: Drive dei paper (PDF → `site/public/paper/`, campo `pdf` di ogni pubblicazione), screenshot recensioni (→ collection `recensioni`, solo con consenso), URL delle 4 schede Google (→ `sedi.*.mapsUrl` + `coordinate`).
-3. Chiudere dominio (`michelenovi.it` vs `michelenoviortopedico.it`) → `settings.dominio`, DNS, redirect 301 dal vecchio. Fascia oraria segreteria → `settings.orari`.
-4. Finire H–J (foto ritratto → `home.ritratto` e `profilo.ritratto`; pulizia web; conferma testo form).
-5. Far leggere a Michele le **bozze cliniche** in `site/content/patologie/*` e la nota di esempio nel quaderno: sono scritte da noi sulla base della bibbia, vanno validate da lui.
-6. Confermare il nome **«Quaderno»** per la sezione blog/news (alternative in [08_contenuti.md](08_contenuti.md)).
-7. Deploy: Vercel **fatto** (vedi sotto). Restano: push su GitHub + `vercel git connect`, GitHub App di Keystatic, Resend con dominio verificato.
+**Adesso (design — questa chat)**
+
+1. Scegliere tra **C** (ritratto grande, home più pulita) e **D** (atlante disegnato, più incastri), o una fusione (“C per l’hero, D per le fasce”).
+2. Chiudere il **font**: una sans moderna per tutto. Newsreader via. Poi si cambia in `site/` (layout + `globals.css`), non si mescolano due famiglie.
+3. Progettare il sistema di **disegni** (stessa mano delle tavole) e il posto del **ritratto a tutta altezza**. In produzione la foto è quella di Michele: va chiesta / shooting.
+
+**In parallelo (dati, non bloccano il design)**
+
+4. Far **ricontrollare il cellulare** (348 4332733 detto vs 348 4331733 online). Poi `settings.telefono` / `whatsapp`.
+5. Ritirare: Drive dei paper, screenshot recensioni, URL delle 4 schede Google.
+6. Dominio (lo compra il cliente) → `settings.dominio`. Orari segreteria → `settings.orari`.
+7. Repo GitHub: **passare a privato** (è ancora public, contiene CV e PEC). Poi GitHub App di Keystatic.
+8. Far validare a Michele le bozze in `site/content/patologie/*`. Nome sezione chiuso: **Approfondimenti** (EN *In depth*).
 
 Il codice è pronto ma i campi vuoti restano vuoti finché non arrivano i dati veri. Non inventare telefono, orari o indirizzi «tanto poi si cambia»: finisce pubblicato.
 

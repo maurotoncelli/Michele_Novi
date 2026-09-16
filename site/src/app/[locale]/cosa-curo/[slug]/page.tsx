@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getPatologia, getPatologie, getPubblicazioni, getSedi, getSettings, slugPatologia } from "@/lib/content";
+import { getDisegni, getPatologia, getPatologie, getPubblicazioni, getSedi, getSettings, slugPatologia, srcDisegno } from "@/lib/content";
+import { Disegno } from "@/components/ui/Disegno";
 import { renderBody, headings } from "@/lib/markdoc";
 import { breadcrumbJsonLd, buildMetadata, faqItems, faqJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
-import { isSegno, Segno } from "@/components/ui/Segno";
+import { Segno } from "@/components/ui/Segno";
 import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { SchedaPatologia } from "@/components/blocks/Schede";
@@ -48,7 +48,10 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const p = await getPatologia(slug, l);
   if (!p) notFound();
-  const [s, tutte, sedi, paper] = await Promise.all([getSettings(), getPatologie(), getSedi(), getPubblicazioni()]);
+  const [s, tutte, sedi, paper, catalogo] = await Promise.all([getSettings(), getPatologie(), getSedi(), getPubblicazioni(), getDisegni()]);
+  const disegno = p.immagine?.src
+    ? { src: p.immagine.src, alt: pick(p.immagine.alt, l) || pick(p.titolo, l) }
+    : srcDisegno(catalogo, p.segno, l);
   const m = getMessages(l);
 
   const { element, fallbackToIt } = await renderBody(p.corpo, p.corpoEn, l);
@@ -79,15 +82,12 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
           <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-menta blur-3xl" aria-hidden="true" />
           <div className="relative grid gap-6 p-7 md:grid-cols-[1.4fr_1fr] md:items-center md:p-12">
             <div>
-              <span className="incavo mb-6 grid h-14 w-14 place-items-center text-petrolio">
-                <Segno nome={isSegno(p.segno) ? p.segno : "spalla"} size={30} />
-              </span>
               <h1 className="text-[2.4rem] leading-[1.05] md:text-[3.2rem]">{pick(p.titolo, l)}</h1>
               <p className="mt-4 max-w-2xl text-[1.1rem] leading-relaxed text-grafite">{pick(p.lead, l)}</p>
             </div>
-            {p.immagine?.src && (
-              <div className="incavo relative aspect-[5/4] overflow-hidden" style={{ borderRadius: "52% 48% 50% 50% / 46% 54% 46% 54%" }}>
-                <Image src={p.immagine.src} alt={pick(p.immagine.alt, l)} fill sizes="(min-width: 768px) 35vw, 90vw" className="object-cover" />
+            {disegno && (
+              <div className="relative aspect-[5/4] overflow-hidden rounded-[1.6rem] bg-osso-2">
+                <Disegno src={disegno.src} alt={disegno.alt} />
               </div>
             )}
           </div>

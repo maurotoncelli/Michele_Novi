@@ -94,7 +94,7 @@ export default config({
   ui: {
     brand: { name: "Michele Novi — Sito" },
     navigation: {
-      Sito: ["settings", "home", "profilo"],
+      Sito: ["settings", "home", "profilo", "disegni"],
       Contenuti: ["patologie", "sedi", "quaderno", "pubblicazioni", "faq", "recensioni"],
     },
   },
@@ -159,10 +159,19 @@ export default config({
         timeline: fields.array(
           fields.object({
             periodo: fields.text({ label: "Periodo" }),
+            tipo: fields.select({
+              label: "Barra",
+              options: [
+                { label: "Esperienze lavorative", value: "lavoro" },
+                { label: "Fellowship internazionali", value: "fellowship" },
+                { label: "Formazione", value: "formazione" },
+              ],
+              defaultValue: "formazione",
+            }),
             titolo: testo("Cosa"),
             luogo: fields.text({ label: "Dove" }),
           }),
-          { label: "Formazione e percorso", itemLabel: (p) => `${p.fields.periodo.value} — ${p.fields.titolo.fields.it.value}` },
+          { label: "Percorso (barre in Chi sono)", itemLabel: (p) => `${p.fields.periodo.value} · ${p.fields.tipo.value} — ${p.fields.titolo.fields.it.value}` },
         ),
         docenza: fields.array(
           fields.object({ periodo: fields.text({ label: "Periodo" }), testo: testo("Cosa") }),
@@ -201,7 +210,7 @@ export default config({
                 { label: "Dove", value: "sedi" },
                 { label: "Perché fidarsi", value: "fiducia" },
                 { label: "Recensioni", value: "recensioni" },
-                { label: "Quaderno", value: "quaderno" },
+                { label: "Approfondimenti", value: "quaderno" },
                 { label: "Contatto", value: "contatto" },
               ],
               defaultValue: "patologie",
@@ -211,6 +220,26 @@ export default config({
           { label: "Ordine delle fasce", itemLabel: (p) => `${p.fields.tipo.value}${p.fields.attiva.value ? "" : " (off)"}` },
         ),
         seo,
+      },
+    }),
+
+    disegni: singleton({
+      label: "Disegni",
+      path: "content/disegni",
+      format: { data: "yaml" },
+      schema: {
+        voci: fields.array(
+          fields.object({
+            id: fields.select({ label: "Segno", options: SEGNI, defaultValue: "spalla" }),
+            file: fields.image({
+              label: "Disegno",
+              directory: "public/images/disegni",
+              publicPath: "/images/disegni/",
+            }),
+            alt: testo("Testo alternativo"),
+          }),
+          { label: "Catalogo", description: "Una voce per segno. I file stanno in public/images/disegni/. Se una patologia ha una Immagine propria, quella vince.", itemLabel: (p) => p.fields.id.value },
+        ),
       },
     }),
   },
@@ -337,7 +366,7 @@ export default config({
     }),
 
     quaderno: collection({
-      label: "Quaderno — Dal lavoro",
+      label: "Approfondimenti — Dal lavoro",
       slugField: "slug",
       path: "content/quaderno/*/",
       format: { contentField: "corpo" },
@@ -349,11 +378,20 @@ export default config({
         data: fields.date({ label: "Data", validation: { isRequired: true } }),
         aggiornato: fields.date({ label: "Aggiornato il" }),
         lead: testo("Lead", { multiline: true }),
-        copertina: immagine("Copertina", "quaderno"),
+        copertina: immagine("Immagine in anteprima", "quaderno"),
         corpo: fields.markdoc({ label: "Corpo (IT)" }),
         corpoEn: fields.markdoc({ label: "Corpo (EN)" }),
         tag: fields.array(fields.text({ label: "Tag" }), { label: "Tag", itemLabel: (p) => p.value }),
-        youtubeId: fields.text({ label: "YouTube ID (opzionale)" }),
+        video: fields.file({
+          label: "Video (file)",
+          description: "MP4 o WebM. Se c'è anche YouTube, il file ha la precedenza.",
+          directory: "public/video/quaderno",
+          publicPath: "/video/quaderno/",
+        }),
+        youtube: fields.text({
+          label: "YouTube",
+          description: "URL completo (watch, youtu.be, shorts) oppure solo l'ID del video.",
+        }),
         patologie: fields.array(fields.relationship({ label: "Pagina", collection: "patologie" }), {
           label: "Patologie correlate",
           itemLabel: (p) => p.value ?? "",

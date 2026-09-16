@@ -5,12 +5,14 @@ import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { formatDate, getMessages, pick } from "@/i18n";
 import { getNota, getNote, getPatologie, getPubblicazioni, getSettings, slugNota } from "@/lib/content";
+import { srcMedia } from "@/lib/media";
 import { renderBody } from "@/lib/markdoc";
 import { articleJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { SchedaNota, SchedaPatologia } from "@/components/blocks/Schede";
+import { VideoApprofondimento } from "@/components/blocks/VideoApprofondimento";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export const dynamicParams = false;
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/quaderno
     routeEn: { kind: "nota", slug: slugNota(n, "en") },
     title: pick(n.seo?.title, l) || pick(n.titolo, l),
     description: pick(n.seo?.description, l) || pick(n.lead, l),
-    image: n.seo?.ogImage ?? n.copertina?.src,
+    image: n.seo?.ogImage ?? srcMedia(n.copertina?.src, "quaderno") ?? undefined,
     noindex: n.seo?.noindex,
     type: "article",
     publishedTime: n.data,
@@ -55,6 +57,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
   const citati = (n.pubblicazioni ?? []).map((sl) => paper.find((x) => x.slug === sl)).filter(Boolean) as typeof paper;
   const altre = note.filter((x) => x.slug !== n.slug).slice(0, 3);
   const pubSlug = slugNota(n, l);
+  const copertina = srcMedia(n.copertina?.src, "quaderno");
 
   return (
     <>
@@ -88,27 +91,16 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
           <p className="mt-5 text-sm text-grafite">{s.nome}</p>
         </Reveal>
 
-        {n.copertina?.src && (
+        {copertina && (
           <Reveal className="incavo relative mx-auto mt-10 aspect-[16/9] max-w-4xl overflow-hidden" style={{ borderRadius: "2.5rem 3rem 2.5rem 3.25rem / 3rem 2.5rem 3.25rem 2.5rem" }}>
-            <Image src={n.copertina.src} alt={pick(n.copertina.alt, l)} fill priority sizes="(min-width: 1024px) 60rem, 100vw" className="object-cover" />
+            <Image src={copertina} alt={pick(n.copertina?.alt, l) || pick(n.titolo, l)} fill priority sizes="(min-width: 1024px) 60rem, 100vw" className="object-cover" />
           </Reveal>
         )}
 
         <div className="mx-auto max-w-[42rem] py-12">
           <AvvisoLingua show={fallbackToIt} locale={l} />
           <div className="testo">{element}</div>
-          {n.youtubeId && (
-            <div className="incavo mt-10 aspect-video overflow-hidden rounded-[1.75rem]">
-              <iframe
-                title="YouTube"
-                src={`https://www.youtube-nocookie.com/embed/${n.youtubeId}`}
-                className="h-full w-full border-0"
-                loading="lazy"
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          )}
+          <VideoApprofondimento file={n.video} youtube={n.youtube} titolo={pick(n.titolo, l)} />
           {citati.length > 0 && (
             <div className="osso osso-sm mt-12 p-5">
               <p className="eyebrow mb-3">{m.quaderno.paperCorrelati}</p>

@@ -15,6 +15,8 @@ type EntryOf<K extends keyof Collections> = NonNullable<Awaited<ReturnType<Colle
 export type Settings = NonNullable<Awaited<ReturnType<typeof reader.singletons.settings.read>>>;
 export type Profilo = NonNullable<Awaited<ReturnType<typeof reader.singletons.profilo.read>>>;
 export type Home = NonNullable<Awaited<ReturnType<typeof reader.singletons.home.read>>>;
+export type Disegni = NonNullable<Awaited<ReturnType<typeof reader.singletons.disegni.read>>>;
+export type CatalogoDisegni = Record<string, { src: string; alt: { it: string; en: string } }>;
 export type Patologia = EntryOf<"patologie"> & { slug: string };
 export type Sede = EntryOf<"sedi"> & { slug: string };
 export type Pubblicazione = EntryOf<"pubblicazioni"> & { slug: string };
@@ -41,6 +43,29 @@ export const getHome = cache(async (): Promise<Home> => {
   if (!h) throw new Error("content/home.yaml mancante");
   return h;
 });
+
+function publicDisegno(file: string | null | undefined, id: string) {
+  if (file) return file.startsWith("/") ? file : `/images/disegni/${file}`;
+  return `/images/disegni/${id}.png`;
+}
+
+/** Catalogo disegni da Keystatic. Se manca il file in CMS si usa public/images/disegni/{id}.png */
+export const getDisegni = cache(async (): Promise<CatalogoDisegni> => {
+  const d = await reader.singletons.disegni.read();
+  const map: CatalogoDisegni = {};
+  for (const v of d?.voci ?? []) {
+    if (!v.id) continue;
+    map[v.id] = { src: publicDisegno(v.file, v.id), alt: v.alt ?? { it: v.id, en: v.id } };
+  }
+  return map;
+});
+
+export function srcDisegno(catalogo: CatalogoDisegni, id: string | null | undefined, locale: Locale): { src: string; alt: string } | null {
+  if (!id) return null;
+  const voce = catalogo[id];
+  const src = voce?.src ?? `/images/disegni/${id}.png`;
+  return { src, alt: voce ? (locale === "en" ? voce.alt.en || voce.alt.it : voce.alt.it) || id : id };
+}
 
 export const getPatologie = cache(async (): Promise<Patologia[]> => {
   const all = await reader.collections.patologie.all();
@@ -114,7 +139,18 @@ export const getRecensioni = cache(async (): Promise<Recensione[]> => {
   return all.map(({ slug, entry }) => ({ ...entry, slug })).filter((r) => r.mostra);
 });
 
-/** Voce del Quaderno unificata per liste miste. */
+export type TipoPercorso = "lavoro" | "fellowship" | "formazione";
+
+export function tipoPercorso(v: { tipo?: string | null } | null | undefined): TipoPercorso {
+  return v?.tipo === "lavoro" || v?.tipo === "fellowship" ? v.tipo : "formazione";
+}
+
+export function annoPercorso(periodo: string): number {
+  const m = periodo.match(/(\d{4})/);
+  return m ? Number(m[1]) : 0;
+}
+
+/** Voce degli approfondimenti unificata per liste miste. */
 export type VoceQuaderno =
   | { tipo: "paper"; data: string; slug: string; item: Pubblicazione }
   | { tipo: "nota"; data: string; slug: string; item: Nota };

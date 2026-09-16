@@ -4,7 +4,7 @@
     "chiSono": "About",
     "cosaCuro": "What I treat",
     "dove": "Where",
-    "quaderno": "Notebook",
+    "quaderno": "In depth",
     "contatti": "Contact",
     "menu": "Menu",
     "chiudi": "Close",
@@ -20,6 +20,8 @@
     "scopri": "Learn more",
     "leggi": "Read",
     "tutte": "All",
+    "mostraTutte": "Show all",
+    "mostraMeno": "Show the first ones",
     "indietro": "Back",
     "vediSuMaps": "Open in Google Maps",
     "schedaGoogle": "Google listing",
@@ -36,7 +38,7 @@
     "opero": "Surgery",
     "fiduciaTitolo": "Why trust me",
     "recensioniTitolo": "What patients say",
-    "quadernoTitolo": "From the Notebook",
+    "quadernoTitolo": "From the in-depth notes",
     "quadernoLead": "Scientific publications and notes from the clinic.",
     "contattoTitolo": "Get in touch",
     "contattoLead": "The office answers, books the visit and tells you what to bring."
@@ -45,6 +47,9 @@
     "titolo": "About",
     "inEvidenza": "Highlights",
     "percorso": "Training and career",
+    "esperienze": "Work experience",
+    "fellowship": "International fellowships",
+    "formazione": "Education",
     "docenza": "Teaching and societies",
     "pubblicazioni": "Main publications",
     "tuttePubblicazioni": "All publications",
@@ -87,7 +92,7 @@
     "altreSedi": "Other locations"
   },
   "quaderno": {
-    "titolo": "Notebook",
+    "titolo": "In depth",
     "lead": "Two tracks: peer-reviewed publications, laid out as papers, and notes from the clinic, written for patients.",
     "tutto": "All",
     "pubblicazioni": "Publications",
@@ -111,7 +116,8 @@
     "vuoto": "Nothing here yet.",
     "disclaimer": "These notes inform and do not replace a consultation. They describe no identifiable cases.",
     "feed": "RSS feed",
-    "soloInglese": "Papers are shown in the language they were published in."
+    "soloInglese": "Papers are shown in the language they were published in.",
+    "video": "Video"
   },
   "contatti": {
     "titolo": "Contact",

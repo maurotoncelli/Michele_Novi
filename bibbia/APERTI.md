@@ -43,13 +43,12 @@ Lui: «articoli qualcosa, suggerisci tu».
 
 **Proposta Mauro**
 
-- Voce menu: **Quaderno** (`/quaderno`, EN *Notebook*) — prima ipotesi era *Articoli*
+- Voce menu: **Approfondimenti** (`/it/approfondimenti`, EN *In depth* `/en/in-depth`). Chiuso il 16/09.
 - Due binari sotto, stesso hub:
   - **Pubblicazioni** — i paper, impaginati da scientifici
   - **Dal lavoro** — pezzi per pazienti; al lancio 1 placeholder
 
-Alternative al nome hub: *Articoli*, *In chiaro*, *Appunti*. Se “Dal lavoro” non gli suona: *Note*, *In ambulatorio*, *Spalla in chiaro*. Evitare Blog / News / Insights.  
-**Da confermare con Michele.**
+«Dal lavoro» si può ancora rivedere (*Note*, *In ambulatorio*). Hub: non si riapre.
 
 ### Inglese
 

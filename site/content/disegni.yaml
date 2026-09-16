@@ -1,0 +1,51 @@
+voci:
+  - id: spalla
+    file: spalla.png
+    alt:
+      it: Disegno della spalla
+      en: Shoulder drawing
+  - id: gomito
+    file: gomito.png
+    alt:
+      it: Disegno di gomito e mano
+      en: Elbow and hand drawing
+  - id: sport
+    file: sport.png
+    alt:
+      it: Disegno di un gesto sportivo
+      en: Sport gesture drawing
+  - id: artroscopia
+    file: artroscopia.png
+    alt:
+      it: Disegno dell'artroscopia
+      en: Arthroscopy drawing
+  - id: anca
+    file: anca.png
+    alt:
+      it: Disegno di anca e ginocchio
+      en: Hip and knee drawing
+  - id: ospedale
+    file: ospedale.png
+    alt:
+      it: Disegno di un ospedale
+      en: Hospital drawing
+  - id: studio
+    file: studio.png
+    alt:
+      it: Disegno di uno studio
+      en: Practice drawing
+  - id: clinica
+    file: clinica.png
+    alt:
+      it: Disegno di una clinica
+      en: Clinic drawing
+  - id: quaderno
+    file: quaderno.png
+    alt:
+      it: Disegno di un quaderno
+      en: Notebook drawing
+  - id: globo
+    file: globo.png
+    alt:
+      it: Disegno di un globo
+      en: Globe drawing

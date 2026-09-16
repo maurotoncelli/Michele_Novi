@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { href, locales, type Locale, type Route } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import type { Settings, Profilo, Sede, Pubblicazione, Nota, Patologia, Faq } from "./content";
+import { srcMedia } from "./media";
 
 /**
  * URL pubblico del sito, in ordine: dominio in Keystatic → env esplicita →
@@ -193,7 +194,7 @@ export function articleJsonLd(settings: Settings, n: Nota, locale: Locale, slug:
       datePublished: n.data,
       dateModified: n.aggiornato || n.data,
       author: { "@id": physicianId(settings) },
-      image: n.copertina?.src ? `${base}${n.copertina.src}` : undefined,
+      image: srcMedia(n.copertina?.src, "quaderno") ? `${base}${srcMedia(n.copertina?.src, "quaderno")}` : undefined,
       inLanguage: locale,
       keywords: n.tag?.join(", ") || undefined,
     },

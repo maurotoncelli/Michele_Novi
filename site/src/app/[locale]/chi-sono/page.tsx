@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getProfilo, getPubblicazioni, getSedi, getSettings } from "@/lib/content";
+import { annoPercorso, getProfilo, getPubblicazioni, getSedi, getSettings, tipoPercorso } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
 import { Cucitura } from "@/components/ui/Cucitura";
 import { Briciole, Sezione } from "@/components/blocks/Pagina";
+import { BarrePercorso } from "@/components/blocks/BarrePercorso";
+import { ListaPubblicazioni } from "@/components/blocks/ListaPubblicazioni";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/chi-sono">): Promise<Metadata> {
@@ -33,6 +34,26 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
   const [s, p, paper, sedi] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni(), getSedi()]);
   const m = getMessages(l);
   const principali = paper.filter((x) => x.principale);
+  const listaPaper = (principali.length ? principali : paper).map((x) => ({
+    href: href(l, { kind: "paper", slug: x.slug }),
+    anno: x.anno,
+    titolo: pick(x.titoloBreve, l) || x.titolo,
+    rivista: x.rivista,
+  }));
+  const barre = (
+    [
+      { id: "lavoro" as const, titolo: m.chiSono.esperienze },
+      { id: "fellowship" as const, titolo: m.chiSono.fellowship },
+      { id: "formazione" as const, titolo: m.chiSono.formazione },
+    ]
+  ).map((b) => ({
+    ...b,
+    voci: (p.timeline ?? [])
+      .filter((t) => tipoPercorso(t) === b.id)
+      .slice()
+      .sort((a, b2) => annoPercorso(a.periodo) - annoPercorso(b2.periodo))
+      .map((t) => ({ periodo: t.periodo, titolo: pick(t.titolo, l), luogo: t.luogo })),
+  }));
 
   return (
     <>
@@ -94,49 +115,15 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
         </Sezione>
       )}
 
-      {/* Percorso: espandibile */}
-      {p.timeline && p.timeline.length > 0 && (
-        <Sezione>
-          <Reveal>
-            <details className="osso group open:pb-2">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 [&::-webkit-details-marker]:hidden">
-                <h2 className="text-[1.6rem]">{m.chiSono.percorso}</h2>
-                <span className="incavo grid h-10 w-10 shrink-0 place-items-center text-petrolio transition group-open:rotate-45">
-                  <Segno nome="piu" size={18} />
-                </span>
-              </summary>
-              <ol className="relative mx-6 mb-4 border-l border-linea pl-6">
-                {p.timeline.map((t, i) => (
-                  <li key={i} className="relative py-3">
-                    <span className="absolute -left-[1.85rem] top-5 h-3 w-3 rounded-full border-2 border-osso bg-petrolio-2" aria-hidden="true" />
-                    <p className="text-xs font-semibold tracking-wide text-grafite">{t.periodo}</p>
-                    <p className="mt-0.5 font-medium">{pick(t.titolo, l)}</p>
-                    {t.luogo && <p className="text-sm text-grafite">{t.luogo}</p>}
-                  </li>
-                ))}
-              </ol>
-            </details>
-          </Reveal>
+      {barre.some((b) => b.voci.length > 0) && (
+        <Sezione titolo={m.chiSono.percorso}>
+          <BarrePercorso barre={barre} />
         </Sezione>
       )}
 
-      {/* Pubblicazioni principali */}
-      {principali.length > 0 && (
+      {listaPaper.length > 0 && (
         <Sezione eyebrow={m.nav.quaderno} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "quadernoPubblicazioni" }), label: m.chiSono.tuttePubblicazioni }}>
-          <ol className="divide-y divide-linea overflow-hidden rounded-[1.75rem] border border-linea bg-osso">
-            {principali.map((x) => (
-              <li key={x.slug}>
-                <Link href={href(l, { kind: "paper", slug: x.slug })} className="group flex items-baseline gap-4 px-6 py-4 hover:bg-osso-2/60">
-                  <span className="w-12 shrink-0 text-sm text-grafite">{x.anno}</span>
-                  <span className="flex-1">
-                    <span className="serif block text-[1.1rem] leading-snug group-hover:text-petrolio">{pick(x.titoloBreve, l) || x.titolo}</span>
-                    <span className="block text-sm text-grafite">{x.rivista}</span>
-                  </span>
-                  <Segno nome="freccia" size={18} className="hidden shrink-0 self-center text-nebbia group-hover:text-petrolio sm:block" />
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <ListaPubblicazioni voci={listaPaper} more={m.cta.mostraTutte} less={m.cta.mostraMeno} />
         </Sezione>
       )}
 

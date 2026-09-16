@@ -1,0 +1,37 @@
+slug: Villa Donatello
+nome: Villa Donatello
+citta: Sesto Fiorentino
+provincia: FI
+# Civico da verificare sul sito della struttura prima del go-live (bibbia/03_sedi_e_contatti.md).
+indirizzo: Via Attilio Ragionieri 101
+cap: '50019'
+tipo: clinica
+propria: false
+visite: false
+chirurgia: true
+infiltrazioni: false
+ecografo: false
+regime:
+  it: Casa di cura · solo interventi
+  en: Private hospital · surgery only
+ruolo:
+  it: >-
+    A Villa Donatello opero, in regime privato, i pazienti che visito nelle altre sedi. Qui non faccio visite
+    ambulatoriali: la prima visita e i controlli si fanno a Fucecchio, Pisa o Peccioli.
+  en: >-
+    At Villa Donatello I operate privately on patients seen at the other locations. I do not hold outpatient
+    clinics here: first visits and follow-ups take place in Fucecchio, Pisa or Peccioli.
+comeArrivare:
+  it: Nell'area fiorentina, a Sesto Fiorentino, vicino all'uscita Firenze Nord dell'A1.
+  en: In the Florence area, in Sesto Fiorentino, near the Firenze Nord exit of the A1 motorway.
+accessibilita:
+  it: Parcheggio interno. Struttura accessibile.
+  en: On-site parking. Accessible building.
+orari:
+  it: ''
+  en: ''
+peso: 4
+sitoStruttura: https://www.villadonatello.com/
+patologie:
+  - come-si-opera
+  - spalla

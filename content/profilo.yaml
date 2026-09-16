@@ -1,0 +1,150 @@
+nome: Michele Novi
+titolo:
+  it: Ortopedico e traumatologo. Chirurgia della spalla, del gomito e dell'arto superiore.
+  en: Orthopaedic and trauma surgeon. Shoulder, elbow and upper-limb surgery.
+apertura:
+  it: >-
+    Sono dirigente medico della SOC Ortopedia Protesica dell'Ospedale San Pietro Igneo di Fucecchio e visito
+    in libera professione a Pisa e a Peccioli. Mi occupo di chirurgia artroscopica, protesica e traumatologica
+    dell'arto superiore, con la spalla al centro. Alla prima visita cerco di capire una cosa sola: qual è la
+    strada giusta per quella persona, non quale intervento si può fare.
+  en: >-
+    I am a consultant in the Joint Replacement Unit at San Pietro Igneo Hospital in Fucecchio and see patients
+    privately in Pisa and Peccioli. My work is arthroscopic, joint-replacement and trauma surgery of the upper
+    limb, with the shoulder at its centre. At the first visit I try to understand one thing only: which path is
+    right for that person, not which operation could be done.
+ritratto:
+  alt:
+    it: Ritratto del Dott. Michele Novi
+    en: Portrait of Dr Michele Novi
+inEvidenza:
+  - anno: '2025'
+    titolo:
+      it: Massachusetts General Hospital — Harvard Medical School, Boston
+      en: Massachusetts General Hospital — Harvard Medical School, Boston
+    testo:
+      it: Fellowship con Bassem Elhassan sui transfer muscolari di spalla e sulla chirurgia complessa della cuffia.
+      en: Fellowship with Bassem Elhassan on shoulder tendon transfers and complex rotator cuff surgery.
+  - anno: dal 2021
+    titolo:
+      it: Dirigente medico, SOC Ortopedia Protesica — Ospedale San Pietro Igneo, Fucecchio
+      en: Consultant, Joint Replacement Unit — San Pietro Igneo Hospital, Fucecchio
+    testo:
+      it: ASL Toscana Centro. Chirurgia protesica e traumatologica in ospedale pubblico.
+      en: Tuscany Central Health Authority. Joint replacement and trauma surgery in a public hospital.
+  - anno: '2017'
+    titolo:
+      it: Charité — Universitätsmedizin Berlin
+      en: Charité — Universitätsmedizin Berlin
+    testo:
+      it: Fellowship in chirurgia di spalla e gomito con Markus Scheibel.
+      en: Shoulder and elbow surgery fellowship with Markus Scheibel.
+  - anno: '2015'
+    titolo:
+      it: University of Washington Hand Center, Seattle
+      en: University of Washington Hand Center, Seattle
+    testo:
+      it: Mano, microchirurgia e ricostruzione con Nicholas Vedder.
+      en: Hand, microsurgery and reconstruction with Nicholas Vedder.
+  - anno: '2018'
+    titolo:
+      it: Ospedale Cervesi, Cattolica
+      en: Cervesi Hospital, Cattolica
+    testo:
+      it: Chirurgia della spalla con Giuseppe Porcellini.
+      en: Shoulder surgery with Giuseppe Porcellini.
+timeline:
+  - periodo: 2006–2012
+    titolo:
+      it: Laurea in Medicina e Chirurgia, 108/110
+      en: Medical degree, 108/110
+    luogo: Università di Pisa
+  - periodo: '2011'
+    titolo:
+      it: Royal National Orthopaedic Hospital — chirurgia del nervo periferico (Sinisi)
+      en: Royal National Orthopaedic Hospital — peripheral nerve surgery (Sinisi)
+    luogo: Londra
+  - periodo: '2013'
+    titolo:
+      it: Abilitazione e iscrizione all'Ordine dei Medici di Pisa
+      en: Licence and registration, Pisa Medical Council
+    luogo: Pisa
+  - periodo: 2013–2018
+    titolo:
+      it: Specializzazione in Ortopedia e Traumatologia, 110/110 con lode
+      en: Residency in Orthopaedics and Traumatology, 110/110 with honours
+    luogo: Università di Pisa
+  - periodo: '2015'
+    titolo:
+      it: University of Washington Hand Center — mano e microchirurgia (Vedder)
+      en: University of Washington Hand Center — hand and microsurgery (Vedder)
+    luogo: Seattle
+  - periodo: 2016–2017
+    titolo:
+      it: Ecografia muscolo-scheletrica avanzata SIUMB
+      en: Advanced musculoskeletal ultrasound, SIUMB
+    luogo: Italia
+  - periodo: '2017'
+    titolo:
+      it: Charité — spalla e gomito (Scheibel)
+      en: Charité — shoulder and elbow (Scheibel)
+    luogo: Berlino
+  - periodo: '2018'
+    titolo:
+      it: Ospedale Cervesi — spalla (Porcellini)
+      en: Cervesi Hospital — shoulder (Porcellini)
+    luogo: Cattolica
+  - periodo: 2019–2020
+    titolo:
+      it: Research fellow, chirurgia della spalla
+      en: Research fellow, shoulder surgery
+    luogo: Università di Pisa
+  - periodo: 2020–2021
+    titolo:
+      it: Clinica e ricerca funzionale su spalla e gomito
+      en: Clinical work and functional research on shoulder and elbow
+    luogo: AOU Modena
+  - periodo: dal 2021
+    titolo:
+      it: Dirigente medico, SOC Ortopedia Protesica
+      en: Consultant, Joint Replacement Unit
+    luogo: Ospedale San Pietro Igneo, Fucecchio
+  - periodo: '2025'
+    titolo:
+      it: Massachusetts General Hospital — Harvard Medical School, transfer muscolari di spalla (Elhassan)
+      en: Massachusetts General Hospital — Harvard Medical School, shoulder tendon transfers (Elhassan)
+    luogo: Boston
+docenza:
+  - periodo: 2023–2025
+    testo:
+      it: Docente ai corsi di artroscopia di spalla Stryker, ICLO Verona
+      en: Faculty, Stryker shoulder arthroscopy courses, ICLO Verona
+  - periodo: ''
+    testo:
+      it: Docente al Master di II livello in chirurgia di spalla e gomito; modulo spalla SIUMB; tutor di microchirurgia
+      en: Faculty, second-level Master in shoulder and elbow surgery; SIUMB shoulder module; microsurgery tutor
+societa:
+  - SICSeG
+  - SIOT
+  - SICM
+  - SECEC
+  - EFORT
+comeValuto:
+  it: >-
+    La prima visita può cambiare la strada. Spesso chi arriva con una diagnosi di "protesi" può essere curato
+    in altro modo, e chi ha rimandato per anni scopre che l'intervento è più semplice di quanto temeva.
+    Guardo le immagini insieme a te, ti spiego cosa vedo e cosa non vedo, e decidiamo il percorso.
+  en: >-
+    The first visit can change the path. Often someone who arrives with a "replacement" diagnosis can be
+    treated another way, and someone who has postponed for years finds surgery is simpler than feared.
+    We look at the images together, I explain what I see and what I do not, and we decide the path.
+territorio:
+  it: >-
+    In Valdera partecipo a iniziative di prevenzione e screening ortopedico per il territorio, e tengo lezioni
+    e corsi per colleghi e fisioterapisti.
+  en: >-
+    In the Valdera area I take part in prevention and orthopaedic screening initiatives for the community,
+    and I teach courses for colleagues and physiotherapists.
+lingue:
+  - Italiano
+  - English (C1)

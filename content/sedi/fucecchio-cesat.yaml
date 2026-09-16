@@ -1,0 +1,39 @@
+slug: CESAT — Ospedale San Pietro Igneo
+nome: CESAT — Ospedale San Pietro Igneo
+citta: Fucecchio
+provincia: FI
+indirizzo: Piazza Spartaco Lavagnini 5
+cap: '50054'
+tipo: ospedale
+propria: false
+visite: true
+chirurgia: true
+infiltrazioni: true
+ecografo: false
+regime:
+  it: Ospedale pubblico · ricoveri e chirurgia in SSN
+  en: Public hospital · admissions and surgery under the NHS
+ruolo:
+  it: >-
+    Qui lavoro come dirigente medico della SOC Ortopedia Protesica, ASL Toscana Centro. È la sede degli interventi
+    in regime pubblico: protesi di spalla, chirurgia artroscopica e traumatologia dell'arto superiore, oltre alla
+    protesica di anca e ginocchio. La degenza per gli interventi in SSN non ha costi per il paziente.
+  en: >-
+    Here I work as a consultant in the Joint Replacement Unit of the Tuscany Central Health Authority. This is where
+    surgery under the public system takes place: shoulder replacement, arthroscopic surgery and upper-limb trauma,
+    as well as hip and knee replacement. Admission for NHS procedures has no cost for the patient.
+comeArrivare:
+  it: L'ospedale è in centro a Fucecchio, sulla piazza principale. Dalla FI-PI-LI uscita San Miniato / Fucecchio.
+  en: The hospital is in the centre of Fucecchio, on the main square. From the FI-PI-LI motorway take the San Miniato / Fucecchio exit.
+accessibilita:
+  it: Ingresso accessibile. Parcheggi pubblici nelle vie intorno alla piazza.
+  en: Accessible entrance. Public parking in the streets around the square.
+orari:
+  it: ''
+  en: ''
+peso: 1
+sitoStruttura: https://www.uslcentro.toscana.it/
+patologie:
+  - spalla
+  - come-si-opera
+  - anca-e-ginocchio

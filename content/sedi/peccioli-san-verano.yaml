@@ -1,0 +1,38 @@
+slug: Centro Medico San Verano
+nome: Centro Medico San Verano
+citta: Peccioli
+provincia: PI
+indirizzo: Via Cavour 13
+cap: '56037'
+tipo: studio
+propria: true
+visite: true
+chirurgia: false
+infiltrazioni: true
+ecografo: true
+regime:
+  it: Centro medico · visite ambulatoriali
+  en: Medical centre · outpatient visits
+ruolo:
+  it: >-
+    A Peccioli visito in ambulatorio: prima visita, controlli dopo l'intervento, infiltrazioni ed ecografia
+    muscolo-scheletrica come parte della visita. È la sede più comoda per chi vive in Valdera. Qui non si opera:
+    se serve un intervento, lo programmiamo a Fucecchio, Pisa o Villa Donatello.
+  en: >-
+    In Peccioli I run an outpatient clinic: first visits, post-operative follow-ups, injections and musculoskeletal
+    ultrasound as part of the visit. It is the most convenient location for people living in the Valdera area.
+    No surgery is performed here: if an operation is needed, we schedule it in Fucecchio, Pisa or Villa Donatello.
+comeArrivare:
+  it: Nel centro storico di Peccioli, in via Cavour. Da Pontedera circa 20 minuti.
+  en: In the historic centre of Peccioli, on Via Cavour. About 20 minutes from Pontedera.
+accessibilita:
+  it: Accesso al piano terra. Parcheggio gratuito nelle vicinanze.
+  en: Ground-floor access. Free parking nearby.
+orari:
+  it: ''
+  en: ''
+peso: 3
+patologie:
+  - spalla
+  - arto-superiore
+  - traumatologia-sportiva

@@ -1,0 +1,23 @@
+nome: Dott. Michele Novi
+ruolo:
+  it: Ortopedico — spalla e arto superiore
+  en: Orthopaedic surgeon — shoulder and upper limb
+# Telefono, WhatsApp, email e orari restano vuoti finché non sono confermati (bibbia/APERTI.md).
+telefono: ''
+whatsapp: ''
+whatsappTesto:
+  it: Vorrei informazioni per una visita.
+  en: I would like information about a consultation.
+email: ''
+emailDestinazioneForm: ''
+orari:
+  it: ''
+  en: ''
+instagram: https://www.instagram.com/michelenovi_md/
+linkedin: https://www.linkedin.com/in/michele-novi-5897775a/
+piva: '02296540509'
+albo: OMCeO Pisa n. 5749
+pec: michele.novi.w5is@pi.omceo.it
+disclaimer:
+  it: Le informazioni di questo sito non sostituiscono la visita medica. Ogni caso va valutato di persona.
+  en: The information on this site does not replace a medical consultation. Every case must be assessed in person.

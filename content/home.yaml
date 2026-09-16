@@ -1,0 +1,47 @@
+eyebrow:
+  it: Dott. Michele Novi · Ortopedico
+  en: Dr Michele Novi · Orthopaedic surgeon
+titolo:
+  it: Spalla e arto superiore.
+  en: Shoulder and upper limb.
+sottotitolo:
+  it: Chirurgo ortopedico in Toscana. Ti dico dove ricevo, cosa curo e come raggiungermi. Il resto lo vediamo in visita.
+  en: Orthopaedic surgeon in Tuscany. Here is where I see patients, what I treat and how to reach me. The rest we discuss at the visit.
+ritratto:
+  alt:
+    it: Ritratto del Dott. Michele Novi
+    en: Portrait of Dr Michele Novi
+fiducia:
+  - testo:
+      it: Dirigente medico, Ortopedia Protesica — Ospedale San Pietro Igneo, Fucecchio
+      en: Consultant, Joint Replacement Unit — San Pietro Igneo Hospital, Fucecchio
+    segno: ospedale
+  - testo:
+      it: Fellowship Harvard / Massachusetts General Hospital 2025, transfer muscolari di spalla
+      en: Harvard / Massachusetts General Hospital fellowship 2025, shoulder tendon transfers
+    segno: spalla
+  - testo:
+      it: Formazione a Berlino (Charité), Seattle, Londra e Cattolica
+      en: Trained in Berlin (Charité), Seattle, London and Cattolica
+    segno: globo
+  - testo:
+      it: Pubblicazioni su riviste internazionali con revisione
+      en: Publications in peer-reviewed international journals
+    segno: quaderno
+  - testo:
+      it: Docente ai corsi di artroscopia di spalla, ICLO Verona
+      en: Faculty at shoulder arthroscopy courses, ICLO Verona
+    segno: artroscopia
+fasce:
+  - tipo: patologie
+    attiva: true
+  - tipo: sedi
+    attiva: true
+  - tipo: fiducia
+    attiva: true
+  - tipo: recensioni
+    attiva: true
+  - tipo: quaderno
+    attiva: true
+  - tipo: contatto
+    attiva: true

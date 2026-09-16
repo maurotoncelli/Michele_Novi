@@ -1,0 +1,38 @@
+slug: Casa di Cura San Rossore
+nome: Casa di Cura San Rossore
+citta: Pisa
+provincia: PI
+# Civico da verificare sul sito della struttura prima del go-live (bibbia/03_sedi_e_contatti.md).
+indirizzo: Viale delle Cascine 152/F
+cap: '56122'
+tipo: clinica
+propria: false
+visite: true
+chirurgia: true
+infiltrazioni: true
+ecografo: true
+regime:
+  it: Casa di cura · libera professione
+  en: Private hospital · private practice
+ruolo:
+  it: >-
+    A Pisa visito e opero in libera professione. Prima visita, controlli, infiltrazioni eco-guidate e interventi
+    di chirurgia artroscopica e protesica della spalla e dell'arto superiore.
+  en: >-
+    In Pisa I see patients and operate privately. First visits, follow-ups, ultrasound-guided injections and
+    arthroscopic and joint-replacement surgery of the shoulder and upper limb.
+comeArrivare:
+  it: La casa di cura è sul viale delle Cascine, a pochi minuti dal centro e dalla stazione di Pisa San Rossore.
+  en: The clinic is on Viale delle Cascine, a few minutes from the centre and from Pisa San Rossore station.
+accessibilita:
+  it: Parcheggio interno per i pazienti. Struttura accessibile.
+  en: On-site parking for patients. Accessible building.
+orari:
+  it: ''
+  en: ''
+peso: 2
+sitoStruttura: https://www.sanrossorecuramedica.it/
+patologie:
+  - spalla
+  - arto-superiore
+  - traumatologia-sportiva

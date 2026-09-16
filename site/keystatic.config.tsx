@@ -18,6 +18,8 @@ const storage =
           owner: process.env.KEYSTATIC_GITHUB_OWNER ?? "",
           name: process.env.KEYSTATIC_GITHUB_REPO ?? "",
         },
+        // Il repo contiene anche bibbia/ e fonti/: il sito sta nella sottocartella site/.
+        pathPrefix: process.env.KEYSTATIC_PATH_PREFIX ?? "site",
       } as const)
     : ({ kind: "local" } as const);
 

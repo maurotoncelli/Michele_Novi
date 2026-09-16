@@ -1,51 +1,36 @@
-# Sito Dott. Michele Novi
+# Dott. Michele Novi â€” sito e informazioni
 
-Next.js 16 (App Router) · TypeScript · Tailwind v4 · Keystatic · i18n `/it` `/en` · Vercel.
+Due binari, nella stessa cartella (e nello stesso repo):
 
-La documentazione di progetto (brief, decisioni, contenuti, design) è in `../bibbia/`. Leggi prima `../bibbia/HANDOFF.md`.
+1. **`bibbia/`** â€” informazioni pulite sul medico, sulle sedi, sul sito.
+2. **`site/`** â€” il sito (Next.js + Keystatic), root directory del progetto Vercel.
 
-## Comandi
+Il prototipo HTML di prova **non conta**. Sta in `_archivio/demo-sito-2026-09/` e non si tocca.
 
-```bash
-npm install
-npm run dev        # http://localhost:3000  (Keystatic: /keystatic)
-npm run build      # build di produzione, tutte le rotte SSG
-npm run start      # serve la build
-npm run lint
-npm run typecheck
-```
+## Da dove partire
 
-## Variabili d'ambiente
+1. [`bibbia/HANDOFF.md`](bibbia/HANDOFF.md) â€” se apri una chat nuova.
+2. [`bibbia/DECISIONI.md`](bibbia/DECISIONI.md) â€” vincoli giÃ  chiusi (anche dopo l'incontro al San Verano).
+3. [`bibbia/APERTI.md`](bibbia/APERTI.md) â€” telefono da ricontrollare, dominio, file da ritirare.
+4. [`bibbia/00_INDICE.md`](bibbia/00_INDICE.md) â€” tutti i capitoli.
+5. [`site/README.md`](site/README.md) â€” comandi, variabili, mappa del codice.
 
-Copia `.env.example` in `.env.local`. Nessuna variabile è obbligatoria per il build:
+## Cartelle
 
-| Variabile | Serve a |
-|-----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | URL canonico finché `settings.dominio` è vuoto |
-| `KEYSTATIC_STORAGE` | `local` (scrive su `content/`) o `github` (produzione) |
-| `KEYSTATIC_GITHUB_*`, `KEYSTATIC_SECRET` | Solo con storage `github` |
-| `RESEND_API_KEY`, `RESEND_FROM` | Invio email del form. Senza chiave il form logga e risponde ok |
-| `NEXT_PUBLIC_GA_ID` | GA4. Se assente: niente banner, niente analytics |
+| Cartella | Contenuto |
+|----------|-----------|
+| `bibbia/` | Fonte di veritÃ . Dieci capitoli + handoff, decisioni, aperti. |
+| `fonti/` | Appunti grezzi, PDF (CV, piano tecnico), ricerche web del 4/09. |
+| `bibbia/tavole/` | Tavole estetiche generate (A, B e fusione Â«schede osseeÂ»). |
+| `site/` | Codice del sito. Contenuti in `site/content/` (Keystatic). |
+| `_archivio/` | Demo HTML + vecchia bibbia del 4/09. Solo storico. |
 
-## Dove sta cosa
+## In una riga
 
-```
-content/            dati (YAML + Markdoc) gestiti da Keystatic — unica fonte dei contenuti
-keystatic.config.tsx  schema: settings, profilo, home · sedi, patologie, pubblicazioni, quaderno, faq, recensioni
-src/i18n/           routing.ts (slug tradotti), messages/{it,en}.json (stringhe UI), legale.ts
-src/lib/content.ts  unico punto di lettura dei dati (reader Keystatic + cache)
-src/lib/seo.ts      metadata, hreflang, JSON-LD
-src/lib/markdoc.tsx rendering del corpo (H1?H2, fallback EN?IT)
-src/app/[locale]/   pagine; [...rest] ? 404 nel layout del sito
-src/app/api/        contatto (Resend, honeypot, rate limit) · keystatic
-src/components/     Header, Footer, CookieBanner, ContactForm, ui/ (Segno, Reveal, Strati, Cucitura), blocks/
-src/proxy.ts        redirect / ? /it|/en da Accept-Language + cookie mn_lang
-```
+Vetrina **cosa / dove / contatto** per un chirurgo di spalla e arto superiore in Toscana. Quattro sedi. Italiano e inglese. Next.js + Keystatic + Vercel. Niente WordPress, niente prenotazione in v1.
 
-## Regole
+Job CRM **#64**, 1.500 â‚¬ confermati il 31 agosto 2026.
 
-- Niente testo o numero hardcoded nelle pagine: stringhe UI in `messages/`, dati in `content/`.
-- I campi bilingui sono oggetti `{ it, en }`; `pick()` ricade sull'italiano se manca l'inglese.
-- I corpi Markdoc: `index.mdoc` (IT) + `corpoEn.mdoc` (EN). Nel corpo si parte da `##` (un `#` viene comunque reso come H2).
-- Slug: `slug` per l'italiano, `slugEn` per l'inglese. Le rotte EN sono mappate in `routing.ts`; `next.config.ts` fa rewrite/redirect.
-- Tutto SSG. Dopo un salvataggio in Keystatic (GitHub mode) parte il deploy Vercel.
+## Repo privato
+
+Contiene dati del cliente (CV, recapiti, P. IVA). Resta **privato**. Mai committare `.env*`.

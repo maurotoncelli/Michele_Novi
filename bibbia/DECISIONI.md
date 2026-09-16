@@ -1,0 +1,114 @@
+# Decisioni
+
+In caso di dubbio **questo file prevale**.  
+Aggiornato: **16 settembre 2026** (CV 2026 letto).
+
+Le voci **PROPOSTA** sono di Mauro, non firmate da Michele.
+
+---
+
+## Relazione e offerta
+
+- Cliente: Dott. Michele Novi. Introduzione: Lorenzo Querci.
+- Job CRM **#64**, contatto **#1003**.
+- Preventivo **1.500 €** confermato il 31/08/2026 (validità 31/10/2026).
+- Pacchetto: sito vetrina + shooting + blog/articoli editabili + SEO di base + go-live. **Senza** calendario in v1.
+- Proprietà: codice e contenuti al cliente a saldo. Dominio intestato a lui.
+- Gestionale (agenda, cartelle, pagamenti): **fuori scope**.
+
+## Cos’è il sito MN
+
+- Tre compiti in superficie: **cosa fa, dove lo fa, come contattarlo**.
+- «Landing page» = chiarezza, **non** monopagina.
+- Architettura **multipagina**, albero rovesciato: semplice sopra, profondo sotto.
+- Il sito è la **fonte di verità**. I terzi si allineano o si spengono.
+- Lo studio è pieno: si allinea la presenza online, non si “procacciano pazienti a vuoto”.
+- MN e SV sono **due siti**. SV lo fa Michele; non si ostenta la proprietà.
+
+## Perimetro clinico (incontro San Verano)
+
+- In evidenza: **chirurgia della spalla e dell’arto superiore**.
+- Gomito e mano stanno **dentro** l’arto superiore, non come brand a parte.
+- Traumatologia sportiva: **sì, con peso**.
+- Anca e ginocchio: **sì, ma secondarie** rispetto alla spalla. Testi utili sul vecchio centrosaluteonline.
+- Ecografia: solo **esito della sua visita**. Non centro eco su invio di altri.
+- Pagina sul **come si opera** (artroscopia / metodo): sì.
+- Microchirurgia della mano: formazione vera, **non** servizio di punta.
+- CESAT: **Dirigente medico, SOC Ortopedia Protesica**, Ospedale San Pietro Igneo, Fucecchio, dal maggio 2021. Non scrivere “direttore SOC”.
+- **Simone Nicoletti: non nominarlo** sul sito MN.
+- Maestri e fellowship: **si possono nominare tutti**. Inclusa, dal CV 2026: **MGH Boston / Harvard 2025, Bassem Elhassan** (transfer muscolari di spalla). È la voce che manca su San Rossore.
+- Date LinkedIn post-specializzazione (Pisa 2019–20, Modena 2020–21): **confermate**.
+- Canone CV: file **Michele Novi CV 2026.docx**. Il PDF europeo 2019 è storico.
+- Albo OMCeO Pisa **n. 5749**. Inglese C1. Non pubblicare il tedesco A1 del PDF 2019.
+
+## Sedi (quattro, stop)
+
+| Sede | Visite | Chirurgia |
+|------|--------|-----------|
+| CESAT / San Pietro Igneo, Fucecchio | sì | sì |
+| Casa di Cura San Rossore, Pisa | sì | sì (esclusiva) |
+| Centro Medico San Verano, Via Cavour 13, Peccioli | sì | no |
+| Villa Donatello | no | sì (un po’ borderline rispetto all’esclusiva San Rossore) |
+
+Tutto il resto online è **fuori** dal sito MN.
+
+Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sbandierare in home.
+
+## Contatto
+
+- Un solo numero pubblico, da **ricontrollare** (vedi APERTI). Il 329 **non** va online.
+- WhatsApp: sì, sul numero pubblico, testo precompilato **non clinico**.
+- Canale di prenotazione sul sito: **segreteria**, non Doctolib come bottone principale.
+- Nessun telefono di Fucecchio / CUP / centralini struttura sul sito MN.
+- Prezzi: **non online**. Li dice la segreteria. Niente convenzioni in elenco.
+- Recensioni: nome e cognome **per esteso**; pezzi curati a mano, dalle sue screenshot.
+
+## Dominio e dati legali
+
+- Dominio **nuovo** (nome ancora da scegliere).
+- Vecchio sito: `centrosaluteonline.it`, **ancora suo** → tenerlo acceso e fare 301 quando il nuovo è live.
+- Titolare: Dott. Michele Novi. P. IVA **02296540509**. PEC **michele.novi.w5is@pi.omceo.it**.
+
+## Stack
+
+- Next.js App Router + TypeScript + Tailwind.
+- Hosting Vercel.
+- CMS Keystatic nel repo (foto, testi, sedi, paper, 1 nota blog). Niente WordPress, niente CMS a canone, niente database pazienti.
+- i18n: italiano + inglese, rotte `/it` `/en` (stile maurotoncelli.it).
+- Form: email transazionale, niente dati sanitari.
+- Analytics: GA4 + Search Console, cookie dopo consenso.
+
+## SEO
+
+- HTML gerarchico, un H1 a pagina, sitemap, JSON-LD, keyword vere.
+- Indicizzazione pensata anche per motori conversazionali (titoli chiari, FAQ, `llms.txt` da valutare).
+- Blog / articoli come motore nel tempo, collegabile a YouTube e reel.
+- **PROPOSTA:** niente pezzi da agenzia SEO.
+
+## Contenuti
+
+- I paper del Drive vanno **tutti**, impaginati da articoli scientifici, DOI/link fonti funzionanti.
+- Blog non scientifico: **1 placeholder** al lancio (non tre).
+- Chi pubblica: **Michele**.
+- Caso Alonso: solo con consenso. Default: non pubblicare il nome.
+- Foto: shooting reale, niente stock.
+- Form: niente descrizione del problema.
+
+## Design
+
+- Moderno, fruibile, distinto. Base molto chiara, non giallognola. Gradient muted, font invitanti, un accento.
+- Informazione ad albero: sintesi in superficie, termini precisi in profondità.
+- Professionalità + disponibilità + chiarezza.
+- Motion fluida e riconoscibile (parallassi, apparizioni, incastri). Non cursori o magnetismo che **rallentano**.
+- Catalogo icone/disegni di qualità (anche per parole come *artroscopia*).
+- Recensioni e schede sede curate (mappa, foto, eventuali amenity).
+- Home più semplice del portfolio Mauro: lui ha già detto che quel sito è troppo complicato.
+
+## Fuori v1 (annotato, non costruito)
+
+- Prenotazione / calendario
+- Videochiamate
+- Area paziente
+- Pagamenti
+- Widget recensioni live
+- Sito del Centro San Verano (lo fa lui)

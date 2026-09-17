@@ -71,7 +71,9 @@ SICSeG, SIOT, SICM, SECEC, EFORT — relatore, moderatore, faculty, responsabile
 - Docente: Corso avanzato eco MSK SIUMB, modulo spalla
 - Tutor: microchirurgia vascolare e nervosa
 
-## Pubblicazioni «tra le principali» (ordine del docx)
+## Pubblicazioni «tra le principali» (ordine del CV 2026)
+
+Sostituito come canone il 17/09 da [`PUBBLICAZIONI.md`](PUBBLICAZIONI.md) (14 voci: + bicipite distale 2020, + Gartland III 2021).
 
 1. Remplissage, Hill–Sachs, atleti — *Osteology*, 2022
 2. 3D printing in shoulder surgery — *Minerva Orthopaedics*, 2021

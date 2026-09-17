@@ -78,7 +78,7 @@ Scheda clinica più aggiornata, ma: fellowship di spalla usata due volte, **manc
 
 ## Paper
 
-Lista «principali» del CV 2026 + eventuali 2025 PubMed: [08_contenuti.md](08_contenuti.md). Sul sito: **tutti** quelli del Drive, quando arriva.
+Lista «tra le principali» del 17/09/2026 (14 voci): [08_contenuti.md](08_contenuti.md) e [`../fonti/pdf/PUBBLICAZIONI.md`](../fonti/pdf/PUBBLICAZIONI.md). Sul sito: **tutti** quelli del Drive, quando arriva. Eventuali 2025 PubMed restano fuori da questa rosa.
 
 ## Due anime, un volto
 

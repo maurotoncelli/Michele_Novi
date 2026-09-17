@@ -27,8 +27,8 @@ Fuori orario: richiama / solo in fascia / altro — **non chiesto**.
 ### File ancora da ritirare
 
 1. ~~Docx di riferimento~~ **arrivato** (16/09): `fonti/pdf/Michele_Novi_CV_2026.docx`. Harvard/MGH 2025 chiuso.
-2. Cartella **Drive dei paper** (lui vuole *tutti* sul sito; il CV elenca 12 «principali»).
-3. Raccolta **screenshot recensioni**. Su Drive c’è già `…/Michele Novi + Mauro Toncelli/recensioni/` — **vuota**.
+2. Cartella **Drive dei paper** (lui vuole *tutti* sul sito). Rosa «tra le principali» arrivata il 17/09: `fonti/pdf/PUBBLICAZIONI.docx` — **14 voci** (il CV ne aveva 12; aggiunti bicipite distale 2020 e Gartland III 2021).
+3. ~~Screenshot recensioni~~ **arrivati** (17/09): 9 pubbliche in Keystatic + 1 WhatsApp tenuto fuori (`fonti/recensioni/`). Drive `…/recensioni/` resta da allineare.
 4. Link o screenshot delle **4 schede Google** + Gmail della scheda San Verano.
 
 Senza i paper non si chiude `/articoli`. Senza le recensioni la fascia home **non si mostra**.

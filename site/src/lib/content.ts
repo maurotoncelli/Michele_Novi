@@ -136,7 +136,10 @@ export const getFaq = cache(async (contesto?: Faq["contesto"]): Promise<Faq[]> =
 
 export const getRecensioni = cache(async (): Promise<Recensione[]> => {
   const all = await reader.collections.recensioni.all();
-  return all.map(({ slug, entry }) => ({ ...entry, slug })).filter((r) => r.mostra);
+  return all
+    .map(({ slug, entry }) => ({ ...entry, slug }))
+    .filter((r) => r.mostra)
+    .sort((a, b) => (a.peso ?? 10) - (b.peso ?? 10) || a.nome.localeCompare(b.nome));
 });
 
 export type TipoPercorso = "lavoro" | "fellowship" | "formazione";

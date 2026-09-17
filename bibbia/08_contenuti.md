@@ -14,7 +14,7 @@ Ha **tutti gli articoli in Drive**. Li vuole sul sito:
 
 Questo è il cuore della sezione Articoli al lancio.
 
-**12 «principali» nel CV 2026** (ordine suo): Remplissage 2022; 3D printing spalla 2021; frattura periprotesica omero 2021; CAS reverse shoulder 2021; scafoide 2021; coronal shear gomito 2021; lussazione anteriore bloccata 2021; claims PTH 2020; head-split JBJS 2020; technology applications 2019; cuffia irreparabile 2018; Lo Scalpello 2018. Dettaglio: [`../fonti/pdf/Michele_Novi_CV_2026.md`](../fonti/pdf/Michele_Novi_CV_2026.md).
+**14 «tra le principali»** (canone 17/09/2026, `PUBBLICAZIONI.docx`): Remplissage 2022; 3D printing 2021; frattura periprotesica omero 2021; CAS reverse shoulder 2021; scafoide 2021; coronal shear gomito 2021; lussazione anteriore bloccata 2021; **bicipite distale 2020**; **Gartland III 2021**; claims PTH 2020; head-split JBJS 2020; technology applications 2019; cuffia irreparabile 2018; Lo Scalpello 2018. Titoli ufficiali e DOI: [`../fonti/pdf/PUBBLICAZIONI.md`](../fonti/pdf/PUBBLICAZIONI.md). Il CV 2026 ne elencava 12: mancavano bicipite e Gartland.
 
 PubMed ha in più almeno due del **2025** (spazio quadrilatero; ML su protesi di spalla) e altri lavori non in quella rosa. Inventario 4/09: [`../fonti/ricerca/2026-09-04_linkedin-e-pubmed.md`](../fonti/ricerca/2026-09-04_linkedin-e-pubmed.md).  
 Idee “versione paziente”: [`../fonti/ricerca/2026-09-04_idee-articoli-dai-paper.md`](../fonti/ricerca/2026-09-04_idee-articoli-dai-paper.md).

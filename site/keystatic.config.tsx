@@ -438,6 +438,7 @@ export default config({
         piattaforma: fields.text({ label: "Piattaforma (Google, Doctolib, …)" }),
         data: fields.date({ label: "Data" }),
         sede: fields.relationship({ label: "Sede", collection: "sedi" }),
+        peso: fields.integer({ label: "Ordine in home (più basso = prima)", defaultValue: 10 }),
         mostra: fields.checkbox({ label: "Mostra sul sito", defaultValue: false }),
       },
     }),

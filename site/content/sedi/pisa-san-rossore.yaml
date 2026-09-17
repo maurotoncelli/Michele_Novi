@@ -5,6 +5,9 @@ provincia: PI
 # Civico da verificare sul sito della struttura prima del go-live (bibbia/03_sedi_e_contatti.md).
 indirizzo: Viale delle Cascine 152/F
 cap: '56122'
+coordinate:
+  lat: 43.72424
+  lng: 10.37487
 tipo: clinica
 propria: false
 visite: true

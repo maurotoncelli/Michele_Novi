@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getPatologie, getPubblicazione, getPubblicazioni, getSettings, slugPatologia } from "@/lib/content";
+import { hrefArticolo, srcPaper } from "@/lib/media";
 import { breadcrumbJsonLd, buildMetadata, paperJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
@@ -43,7 +44,8 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
   const correlate = (p.patologie ?? []).map((sl) => patologie.find((x) => x.slug === sl)).filter(Boolean) as typeof patologie;
   const altre = tutte.filter((x) => x.slug !== p.slug && (x.tag ?? []).some((t) => (p.tag ?? []).includes(t))).slice(0, 3);
   const titoloBreve = pick(p.titoloBreve, l);
-  const fonte = p.doi ? `https://doi.org/${p.doi}` : p.url;
+  const articolo = hrefArticolo(p.doi, p.url);
+  const pdf = srcPaper(p.pdf);
 
   return (
     <>
@@ -119,17 +121,26 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
               )}
             </dl>
             <div className="mt-6 flex flex-wrap gap-2">
-              {fonte && (
-                <a href={fonte} target="_blank" rel="noopener noreferrer" className="btn btn-petrolio">
-                  {m.cta.fonte}
-                  <Segno nome="esterno" size={16} />
-                </a>
-              )}
-              {p.pdf && (
-                <a href={p.pdf} target="_blank" rel="noopener noreferrer" className="btn btn-osso">
-                  <Segno nome="doc" size={16} />
-                  {m.cta.pdf}
-                </a>
+              {pdf ? (
+                <>
+                  <a href={pdf} target="_blank" rel="noopener noreferrer" className="btn btn-osso">
+                    <Segno nome="doc" size={16} />
+                    {m.cta.pdf}
+                  </a>
+                  {articolo && (
+                    <a href={articolo} target="_blank" rel="noopener noreferrer" className="btn btn-petrolio">
+                      {m.cta.fonte}
+                      <Segno nome="esterno" size={16} />
+                    </a>
+                  )}
+                </>
+              ) : (
+                articolo && (
+                  <a href={articolo} target="_blank" rel="noopener noreferrer" className="btn btn-petrolio">
+                    {m.cta.articolo}
+                    <Segno nome="esterno" size={16} />
+                  </a>
+                )
               )}
             </div>
           </div>

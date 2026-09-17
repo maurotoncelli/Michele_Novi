@@ -42,6 +42,7 @@ Alonso: esempio che ha fatto lui. **Default no**, senza consenso.
 Lui: «articoli qualcosa, suggerisci tu».
 
 **Chiuso (16/09 sera):** voce menu **Approfondimenti**. Hub con due filtri: *Pubblicazioni* | *Dal lavoro*.  
+**17/09:** anche **Pubblicazioni** in menu di primo livello (stesso URL del filtro, non un hub a parte).  
 URL: `/it/approfondimenti`, `/it/approfondimenti/pubblicazioni/[slug]`, `/it/approfondimenti/[slug]`. EN: *In depth* (`/en/in-depth`). I vecchi `/quaderno` e `/notebook` restano 301.
 
 Ogni nota ha **immagine in anteprima** (`copertina`) e spazio **video** (file in Keystatic e/o URL YouTube).

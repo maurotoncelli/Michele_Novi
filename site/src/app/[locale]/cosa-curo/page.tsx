@@ -38,7 +38,7 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.cosaCuro.titolo }]} />
       <Intestazione eyebrow={m.nav.cosaCuro} titolo={m.cosaCuro.titolo} lead={m.cosaCuro.lead} compatta />
 
-      <Sezione className="!pt-2">
+      <Sezione>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {principali.map((p, i) => (
             <Reveal key={p.slug} delay={i * 70} className={p.principale ? "md:col-span-2 lg:col-span-2" : ""}>
@@ -52,7 +52,7 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
             <ul className="flex flex-wrap gap-2">
               {secondarie.map((p) => (
                 <li key={p.slug}>
-                  <Link href={href(l, { kind: "cosaCuro", slug: slugPatologia(p, l) })} className="osso osso-pill inline-flex items-center gap-2 px-4 py-2 text-[0.95rem] hover:text-petrolio">
+                  <Link href={href(l, { kind: "cosaCuro", slug: slugPatologia(p, l) })} className="inline-flex items-center gap-2 py-2 text-[0.95rem] hover:text-petrolio">
                     <Segno nome={isSegno(p.segno) ? p.segno : "anca"} size={18} className="text-petrolio" />
                     {pick(p.titolo, l)}
                   </Link>

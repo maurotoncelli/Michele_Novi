@@ -4,7 +4,6 @@ import { getMessages, pick } from "@/i18n";
 import { getHome, getPatologie, getProfilo, getQuaderno, getRecensioni, getSedi, getSettings } from "@/lib/content";
 import { buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
-import { Cucitura } from "@/components/ui/Cucitura";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 import { FasciaFiducia, FasciaPatologie, FasciaQuaderno, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
 
@@ -41,7 +40,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <JsonLd data={physicianJsonLd(settings, profilo, sedi, l)} />
       <Hero home={home} settings={settings} locale={l} />
-      <Cucitura tinta="campo" className="mt-6 opacity-90" />
       {fasce.map((tipo) => {
         switch (tipo) {
           case "patologie":

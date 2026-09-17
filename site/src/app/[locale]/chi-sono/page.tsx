@@ -7,10 +7,10 @@ import { breadcrumbJsonLd, buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
-import { Cucitura } from "@/components/ui/Cucitura";
 import { Briciole, Sezione } from "@/components/blocks/Pagina";
 import { BarrePercorso } from "@/components/blocks/BarrePercorso";
 import { ListaPubblicazioni } from "@/components/blocks/ListaPubblicazioni";
+import { hrefArticolo, srcPaper } from "@/lib/media";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/chi-sono">): Promise<Metadata> {
@@ -39,6 +39,8 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
     anno: x.anno,
     titolo: pick(x.titoloBreve, l) || x.titolo,
     rivista: x.rivista,
+    pdf: srcPaper(x.pdf),
+    articolo: hrefArticolo(x.doi, x.url),
   }));
   const barre = (
     [
@@ -68,29 +70,28 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
       />
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.chiSono.titolo }]} />
 
-      {/* Apertura: lastra con ritratto in finestra */}
+      {/* Apertura: ritratto + testo allineati in alto, un solo blocco. */}
       <section className="contenitore pt-6 md:pt-10">
-        <Reveal className="osso osso-lg cucitura relative overflow-hidden">
-          <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-menta blur-3xl" aria-hidden="true" />
-          <div className="relative grid gap-8 p-7 md:grid-cols-[1fr_1.4fr] md:items-center md:p-12">
-            <div className="mx-auto w-full max-w-[20rem] md:max-w-none">
-              <div className="incavo relative aspect-[4/5] overflow-hidden" style={{ borderRadius: "48% 52% 46% 54% / 54% 46% 54% 46%" }}>
-                {p.ritratto?.src ? (
-                  <Image src={p.ritratto.src} alt={pick(p.ritratto.alt, l) || m.a11y.ritrattoDi} fill priority sizes="(min-width: 768px) 30vw, 80vw" className="object-cover" />
-                ) : (
-                  <div className="absolute inset-0 grid place-items-center text-petrolio/50">
-                    <Segno nome="spalla" size={80} strokeWidth={1} />
-                  </div>
-                )}
-              </div>
+        <Reveal>
+          <div className="grid max-w-5xl gap-8 md:grid-cols-[16.5rem_minmax(0,1fr)] md:items-start md:gap-14">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[16.5rem] overflow-hidden bg-petrolio-3 md:mx-0 md:max-w-none">
+              {p.ritratto?.src ? (
+                <Image src={p.ritratto.src} alt={pick(p.ritratto.alt, l) || m.a11y.ritrattoDi} fill priority sizes="(min-width: 768px) 18rem, 80vw" className="object-cover" />
+              ) : (
+                <div className="absolute inset-0 grid place-items-center text-petrolio/50">
+                  <Segno nome="spalla" size={80} strokeWidth={1} />
+                </div>
+              )}
             </div>
             <div>
               <p className="eyebrow mb-3">{m.chiSono.titolo}</p>
               <h1 className="text-[2.4rem] leading-[1.05] md:text-[3.2rem]">{p.nome}</h1>
-              <p className="serif mt-3 text-[1.25rem] text-petrolio">{pick(p.titolo, l)}</p>
-              <p className="mt-5 max-w-2xl text-[1.08rem] leading-relaxed text-grafite">{pick(p.apertura, l)}</p>
+              {pick(p.titolo, l) && (
+                <p className="mt-3 max-w-md text-[1.05rem] leading-snug text-grafite">{pick(p.titolo, l)}</p>
+              )}
+              <p className="mt-6 max-w-xl text-[1.12rem] leading-relaxed text-inchiostro">{pick(p.apertura, l)}</p>
               {p.lingue && p.lingue.length > 0 && (
-                <p className="mt-4 flex flex-wrap items-center gap-1.5 text-sm text-grafite">
+                <p className="mt-6 flex flex-wrap items-center gap-1.5 text-sm text-grafite">
                   <Segno nome="globo" size={16} className="text-nebbia" />
                   {p.lingue.join(" · ")}
                 </p>
@@ -102,10 +103,10 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
 
       {/* In evidenza */}
       {p.inEvidenza && p.inEvidenza.length > 0 && (
-        <Sezione titolo={m.chiSono.inEvidenza}>
-          <ol className="grid gap-4 md:grid-cols-2">
+        <Sezione titolo={m.chiSono.inEvidenza} tinta="osso">
+          <ol className="grid gap-10 md:grid-cols-2">
             {p.inEvidenza.map((v, i) => (
-              <Reveal key={i} as="li" delay={i * 80} className={`osso p-6 ${i === 0 ? "vetro vetro-menta md:col-span-2" : ""}`}>
+              <Reveal key={i} as="li" delay={i * 80} className={i === 0 ? "md:col-span-2" : undefined}>
                 <p className="eyebrow text-rame">{v.anno}</p>
                 <h3 className={`mt-2 leading-tight ${i === 0 ? "text-[1.9rem]" : "text-[1.4rem]"}`}>{pick(v.titolo, l)}</h3>
                 <p className="mt-2 text-grafite">{pick(v.testo, l)}</p>
@@ -122,8 +123,8 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
       )}
 
       {listaPaper.length > 0 && (
-        <Sezione eyebrow={m.nav.quaderno} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "quadernoPubblicazioni" }), label: m.chiSono.tuttePubblicazioni }}>
-          <ListaPubblicazioni voci={listaPaper} more={m.cta.mostraTutte} less={m.cta.mostraMeno} />
+        <Sezione eyebrow={m.nav.quaderno} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "quadernoPubblicazioni" }), label: m.chiSono.tuttePubblicazioni }} tinta="osso">
+          <ListaPubblicazioni voci={listaPaper} more={m.cta.mostraTutte} less={m.cta.mostraMeno} pdfLabel={m.cta.pdf} articoloLabel={m.cta.articolo} />
         </Sezione>
       )}
 
@@ -159,7 +160,6 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
         </div>
       </Sezione>
 
-      <Cucitura tinta="campo" />
       <FasciaContatto locale={l} />
     </>
   );

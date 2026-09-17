@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#f7f6f3",
+    themeColor: "#f7f6f3",
   width: "device-width",
   initialScale: 1,
 };
@@ -65,6 +65,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             { label: m.nav.cosaCuro, href: href(l, { kind: "cosaCuro" }) },
             { label: m.nav.dove, href: href(l, { kind: "dove" }) },
             { label: m.nav.quaderno, href: href(l, { kind: "quaderno" }) },
+            { label: m.nav.pubblicazioni, href: href(l, { kind: "quadernoPubblicazioni" }) },
             { label: m.nav.contatti, href: href(l, { kind: "contatti" }) },
           ]}
           tel={tel ? { href: tel, label: m.cta.chiama } : null}

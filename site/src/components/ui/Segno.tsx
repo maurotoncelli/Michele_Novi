@@ -34,6 +34,8 @@ export type NomeSegno =
   | "linkedin"
   | "youtube"
   | "check"
+  | "auto"
+  | "access"
   | "doc"
   | "quaderno"
   | "piu"
@@ -216,6 +218,21 @@ const paths: Record<NomeSegno, React.ReactNode> = {
     </>
   ),
   check: <path d="M5 12l4 4L19 6" />,
+  auto: (
+    <>
+      <path d="M5 16h14M4 16l1.5-5.5A2 2 0 0 1 7.4 9h9.2a2 2 0 0 1 1.9 1.5L20 16" />
+      <path d="M7 9l1-3h8l1 3" />
+      <circle cx="7.5" cy="16" r="1.4" />
+      <circle cx="16.5" cy="16" r="1.4" />
+    </>
+  ),
+  access: (
+    <>
+      <circle cx="12" cy="5" r="2" />
+      <path d="M8 22l2-8h4l2 8" />
+      <path d="M7 12h10" />
+    </>
+  ),
   doc: (
     <>
       <path d="M7 3h7l5 5v13H7z" />

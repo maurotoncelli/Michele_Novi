@@ -5,6 +5,7 @@
     "cosaCuro": "Cosa curo",
     "dove": "Dove",
     "quaderno": "Approfondimenti",
+    "pubblicazioni": "Pubblicazioni",
     "contatti": "Contatti",
     "menu": "Menu",
     "chiudi": "Chiudi",
@@ -27,6 +28,7 @@
     "schedaGoogle": "Scheda Google",
     "sitoStruttura": "Sito della struttura",
     "fonte": "Vai alla fonte",
+    "articolo": "Articolo",
     "pdf": "PDF"
   },
   "home": {
@@ -82,14 +84,16 @@
     "soloChirurgia": "Solo interventi",
     "indirizzo": "Indirizzo",
     "comeArrivare": "Come arrivare",
-    "accessibilita": "Accessibilità e parcheggio",
+    "accessibilita": "Accessibilità",
+    "parcheggio": "Parcheggio",
     "orari": "Orari",
     "suAppuntamento": "Su appuntamento",
     "cosaFaccioQui": "Cosa faccio qui",
     "prenota": "Come si prenota",
     "prenotaTesto": "Tramite la segreteria del Dott. Novi, non tramite il centralino della struttura.",
     "patologieTipiche": "Di cosa mi occupo qui",
-    "altreSedi": "Altre sedi"
+    "altreSedi": "Altre sedi",
+    "mappa": "Mappa"
   },
   "quaderno": {
     "titolo": "Approfondimenti",

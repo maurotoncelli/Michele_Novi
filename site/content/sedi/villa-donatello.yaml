@@ -5,6 +5,9 @@ provincia: FI
 # Civico da verificare sul sito della struttura prima del go-live (bibbia/03_sedi_e_contatti.md).
 indirizzo: Via Attilio Ragionieri 101
 cap: '50019'
+coordinate:
+  lat: 43.82346
+  lng: 11.22283
 tipo: clinica
 propria: false
 visite: false

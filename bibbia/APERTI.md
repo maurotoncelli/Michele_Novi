@@ -27,7 +27,8 @@ Fuori orario: richiama / solo in fascia / altro — **non chiesto**.
 ### File ancora da ritirare
 
 1. ~~Docx di riferimento~~ **arrivato** (16/09): `fonti/pdf/Michele_Novi_CV_2026.docx`. Harvard/MGH 2025 chiuso.
-2. Cartella **Drive dei paper** (lui vuole *tutti* sul sito). Rosa «tra le principali» arrivata il 17/09: `fonti/pdf/PUBBLICAZIONI.docx` — **14 voci** (il CV ne aveva 12; aggiunti bicipite distale 2020 e Gartland III 2021).
+2. Cartella **Drive dei paper** (lui vuole *tutti* sul sito). Rosa «tra le principali» arrivata il 17/09: `fonti/pdf/PUBBLICAZIONI.docx` — **14 voci**.
+   Scaricati dalle riviste **solo i 7 OA** (lecito) in `site/public/paper/`. Mancano i 7 a pagamento: 3D Minerva, scafoide Minerva, gomito AOTS, lussazione bloccata, Gartland/Injury, claims PTH, head-split JBJS. Per quelli serve il PDF suo (accepted manuscript o copia autore).
 3. ~~Screenshot recensioni~~ **arrivati** (17/09): 9 pubbliche in Keystatic + 1 WhatsApp tenuto fuori (`fonti/recensioni/`). Drive `…/recensioni/` resta da allineare.
 4. Link o screenshot delle **4 schede Google** + Gmail della scheda San Verano.
 
@@ -82,6 +83,7 @@ URL chiesti in call 28/08, mai arrivati.
 - Pulizia directory (blocco I): si fa **dopo** il go-live, non prima.
 - Job title CRM da correggere in Ortopedico.
 - Piano social di Michele: da farsi mandare, per allineare i pezzi “Dal lavoro”.
+- Font più marcato (Geist è neutro). Mano dei disegni (atlas attuale = tappabuchi). Shooting ritratto + 4 sedi. Vedi HANDOFF «Cosa è ancora aperto».
 
 ---
 

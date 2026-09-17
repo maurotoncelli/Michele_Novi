@@ -60,6 +60,39 @@ export const getDisegni = cache(async (): Promise<CatalogoDisegni> => {
   return map;
 });
 
+const TAG_A_DISEGNO: Record<string, string> = {
+  spalla: "spalla",
+  instabilità: "spalla",
+  instabilita: "spalla",
+  cuffia: "spalla",
+  protesi: "spalla",
+  artroscopia: "artroscopia",
+  sport: "sport",
+  traumatologia: "sport",
+  gomito: "gomito",
+  mano: "gomito",
+  polso: "gomito",
+  bicipite: "gomito",
+  tendine: "gomito",
+  scafoide: "gomito",
+  anca: "anca",
+  ginocchio: "anca",
+  pediatrico: "gomito",
+  frattura: "spalla",
+  tecnologia: "artroscopia",
+};
+
+/** Disegno di catalogo a partire da tag / patologie. Sempre un id usabile. */
+export function idDisegnoDaTag(tag: readonly string[] | null | undefined, patologie: readonly string[] | null | undefined = []): string {
+  const pool = [...(tag ?? []), ...(patologie ?? [])].map((t) => t.toLowerCase());
+  for (const t of pool) {
+    if (TAG_A_DISEGNO[t]) return TAG_A_DISEGNO[t];
+    const hit = Object.keys(TAG_A_DISEGNO).find((k) => t.includes(k));
+    if (hit) return TAG_A_DISEGNO[hit];
+  }
+  return "quaderno";
+}
+
 export function srcDisegno(catalogo: CatalogoDisegni, id: string | null | undefined, locale: Locale): { src: string; alt: string } | null {
   if (!id) return null;
   const voce = catalogo[id];

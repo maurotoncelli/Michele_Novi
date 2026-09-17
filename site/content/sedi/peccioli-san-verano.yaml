@@ -2,8 +2,11 @@ slug: Centro Medico San Verano
 nome: Centro Medico San Verano
 citta: Peccioli
 provincia: PI
-indirizzo: Via Cavour 13
+indirizzo: Viale Cavour 13
 cap: '56037'
+coordinate:
+  lat: 43.54851
+  lng: 10.7193
 tipo: studio
 propria: true
 visite: true

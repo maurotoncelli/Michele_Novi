@@ -25,6 +25,19 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
   const visito = sedi.filter((x) => x.visite);
   const opero = sedi.filter((x) => x.chirurgia);
 
+  const colonna = (titolo: string, lista: typeof sedi) => (
+    <div className="min-w-0">
+      <p className="eyebrow mb-6">{titolo}</p>
+      <div className="grid gap-8">
+        {lista.map((x, i) => (
+          <Reveal key={x.slug} delay={i * 70}>
+            <SchedaSede s={x} locale={l} />
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <>
       <JsonLd
@@ -36,27 +49,12 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.nav.dove }]} />
       <Intestazione eyebrow={m.nav.dove} titolo={m.dove.titolo} lead={m.dove.lead} compatta />
 
-      <Sezione className="!pt-2" eyebrow={m.dove.visito}>
-        <div className="grid gap-4 lg:grid-cols-2">
-          {visito.map((x, i) => (
-            <Reveal key={x.slug} delay={i * 70}>
-              <SchedaSede s={x} locale={l} />
-            </Reveal>
-          ))}
+      <Sezione>
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-16 lg:divide-x lg:divide-linea">
+          {colonna(m.dove.visito, visito)}
+          {opero.length > 0 ? <div className="lg:pl-16">{colonna(m.dove.opero, opero)}</div> : null}
         </div>
       </Sezione>
-
-      {opero.length > 0 && (
-        <Sezione eyebrow={m.dove.opero} className="!pt-0">
-          <div className="grid gap-4 lg:grid-cols-2">
-            {opero.map((x, i) => (
-              <Reveal key={x.slug} delay={i * 70}>
-                <SchedaSede s={x} locale={l} />
-              </Reveal>
-            ))}
-          </div>
-        </Sezione>
-      )}
 
       <FasciaContatto locale={l} />
     </>

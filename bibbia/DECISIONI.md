@@ -1,7 +1,7 @@
 # Decisioni
 
 In caso di dubbio **questo file prevale**.  
-Aggiornato: **16 settembre 2026** (CV 2026 letto).
+Aggiornato: **17 settembre 2026** (restyling presenza + trattini aboliti).
 
 Le voci **PROPOSTA** sono di Mauro, non firmate da Michele.
 
@@ -88,6 +88,7 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 ## Contenuti
 
 - I paper del Drive vanno **tutti**, impaginati da articoli scientifici, DOI/link fonti funzionanti.
+- PDF in sito **solo OA** (`site/public/paper/`). Paywall: bottone Articolo → DOI, niente file. I 7 mancanti li manda lui.
 - Blog non scientifico: **1 placeholder** al lancio (non tre).
 - Chi pubblica: **Michele**.
 - Caso Alonso: solo con consenso. Default: non pubblicare il nome.
@@ -96,13 +97,19 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 
 ## Design
 
-- Moderno, fruibile, distinto. Base molto chiara, non giallognola. Gradient muted, font invitanti, un accento.
+- Moderno, fruibile, distinto. Base molto chiara, non giallognola. Un accento.
+- **Riferimenti chiusi (17/09):** Aesop + Odyssée — pulizia, crema, aria. Lastre **piatte** (niente ombra, blob, vetro). Accento **`#1E6AA8`**.
+- **Niente trattini** sotto i titoli, niente filo a tutta riga, niente cucitura a onda. Mauro: effetto quaderno. Ritmo = spazio + fascia `osso-3`.
+- Header desktop: **una riga** (nome | menu | azioni). Ruolo sotto il nome **nascosto da lg**. Menu include **Pubblicazioni**.
+- Chi sono: ritratto + testo in alto; titolo sotto il nome. Niente MN, niente colophon, niente didascalia sotto la foto.
+- Dove hub: **due colonne** desktop (visito | opero). Scheda sede: **Google Maps** (query nome+indirizzo) + griglia icone (prenota / arrivare / accessibilità / parcheggio).
+- Barre CV: puntini in colonna propria, non assoluti sul testo.
+- Font: **Geist** (unico). Un sans più marcato è ancora aperto; non si mescolano famiglie.
+- Disegni atlas in `public/images/disegni/`: tappabuchi. Altra mano da scegliere.
+- Appunti: `fonti/appunti/2026-09-17_restyling-estetico.md`.
 - Informazione ad albero: sintesi in superficie, termini precisi in profondità.
-- Professionalità + disponibilità + chiarezza.
-- Motion fluida e riconoscibile (parallassi, apparizioni, incastri). Non cursori o magnetismo che **rallentano**.
-- Catalogo icone/disegni di qualità (anche per parole come *artroscopia*).
-- Recensioni e schede sede curate (mappa, foto, eventuali amenity).
-- Home più semplice del portfolio Mauro: lui ha già detto che quel sito è troppo complicato.
+- Motion fluida. Non cursori o magnetismo che **rallentano**.
+- Recensioni e schede sede curate. Home più semplice del portfolio Mauro.
 
 ## Fuori v1 (annotato, non costruito)
 

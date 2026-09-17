@@ -22,7 +22,6 @@ export type HeaderProps = {
 
 export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }: HeaderProps) {
   const pathname = usePathname();
-  // Il menu è "aperto per un percorso": cambiando pagina si chiude da solo.
   const [openPath, setOpenPath] = useState<string | null>(null);
   const open = openPath !== null && openPath === pathname;
   const setOpen = (v: boolean | ((prev: boolean) => boolean)) => {
@@ -41,7 +40,37 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
     };
   }, [open]);
 
-  const isActive = (href: string) => pathname === href || pathname?.startsWith(href + "/");
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    const hit = pathname === href || pathname.startsWith(`${href}/`);
+    if (!hit) return false;
+    return !nav.some(
+      (n) =>
+        n.href !== href &&
+        n.href.length > href.length &&
+        (pathname === n.href || pathname.startsWith(`${n.href}/`)),
+    );
+  };
+
+  const voce = (n: NavItem, grande = false) => (
+    <Link
+      key={n.href}
+      href={n.href}
+      aria-current={isActive(n.href) ? "page" : undefined}
+      className={
+        grande
+          ? `flex items-center justify-between border-b border-linea py-4 text-[1.45rem] last:border-0 ${isActive(n.href) ? "text-petrolio" : "text-inchiostro"}`
+          : `relative whitespace-nowrap py-3.5 text-[0.8rem] tracking-[0.02em] transition xl:text-[0.92rem] ${
+              isActive(n.href)
+                ? "text-petrolio after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-petrolio"
+                : "text-inchiostro/70 hover:text-inchiostro"
+            }`
+      }
+    >
+      {n.label}
+      {grande && <Segno nome="freccia" size={18} className="text-nebbia" />}
+    </Link>
+  );
 
   return (
     <>
@@ -49,33 +78,22 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
         {a11y.salta}
       </a>
       <header className="header-solido sticky top-0 z-50">
-        <div className="contenitore flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
-          <Link href={homeHref} className="group flex min-w-0 items-center gap-3" aria-label={nome}>
-            <span className="incavo grid h-10 w-10 shrink-0 place-items-center text-petrolio transition group-hover:text-petrolio-2">
-              <Segno nome="spalla" size={22} />
+        <div className="contenitore flex min-h-[4.5rem] items-center gap-4 md:min-h-[5.25rem] lg:gap-6 xl:gap-10">
+          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-2.5 xl:gap-3" aria-label={nome}>
+            <span className="grid h-9 w-9 shrink-0 place-items-center border border-linea text-petrolio md:h-10 md:w-10">
+              <Segno nome="spalla" size={18} />
             </span>
             <span className="min-w-0 leading-tight">
-              <span className="serif block truncate text-[1.05rem] text-inchiostro">{nome}</span>
-              <span className="hidden truncate text-[0.72rem] font-medium tracking-wide text-grafite sm:block">{ruolo}</span>
+              <span className="serif block truncate text-[1.05rem] text-inchiostro md:text-[1.15rem] xl:text-[1.25rem]">{nome}</span>
+              <span className="mt-0.5 hidden truncate text-[0.68rem] font-medium tracking-[0.08em] text-grafite uppercase sm:block lg:hidden">{ruolo}</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Principale">
-            {nav.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                aria-current={isActive(n.href) ? "page" : undefined}
-                className={`rounded-full px-3.5 py-2 text-[0.9rem] font-medium transition ${
-                  isActive(n.href) ? "bg-osso text-petrolio shadow-[inset_0_1px_0_#fff,0_1px_2px_rgba(26,30,34,.06)]" : "text-inchiostro/80 hover:bg-osso/70 hover:text-inchiostro"
-                }`}
-              >
-                {n.label}
-              </Link>
-            ))}
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-3.5 xl:gap-x-7 lg:flex" aria-label="Principale">
+            {nav.map((n) => voce(n))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="ml-auto flex shrink-0 items-center justify-end gap-2 xl:gap-3 lg:ml-0">
             <div className="hidden md:block">
               <LanguageSwitcher locale={locale} label={a11y.cambiaLingua} />
             </div>
@@ -102,41 +120,24 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
           </div>
         </div>
 
-        {/* Menu mobile: lastra ossea che scende */}
-        <div
-          id="menu-mobile"
-          hidden={!open}
-          className="lg:hidden"
-        >
-          <div className="contenitore pb-5">
-            <div className="osso osso-lg p-5">
-              <nav className="flex flex-col" aria-label="Principale (mobile)">
-                {nav.map((n) => (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    aria-current={isActive(n.href) ? "page" : undefined}
-                    className={`serif flex items-center justify-between border-b border-linea py-3.5 text-[1.35rem] last:border-0 ${isActive(n.href) ? "text-petrolio" : "text-inchiostro"}`}
-                  >
-                    {n.label}
-                    <Segno nome="freccia" size={18} className="text-nebbia" />
-                  </Link>
-                ))}
-              </nav>
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                {tel && (
-                  <a href={tel.href} className="btn btn-petrolio">
-                    <Segno nome="telefono" size={18} />
-                    {tel.label}
-                  </a>
-                )}
-                <Link href={scrivi.href} className={`btn ${tel ? "btn-osso" : "btn-petrolio"}`}>
-                  <Segno nome="mail" size={18} />
-                  {scrivi.label}
-                </Link>
-                <div className="ml-auto">
-                  <LanguageSwitcher locale={locale} label={a11y.cambiaLingua} />
-                </div>
+        <div id="menu-mobile" hidden={!open} className="lg:hidden">
+          <div className="contenitore border-t border-linea pb-8 pt-2">
+            <nav className="flex flex-col" aria-label="Principale (mobile)">
+              {nav.map((n) => voce(n, true))}
+            </nav>
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              {tel && (
+                <a href={tel.href} className="btn btn-petrolio">
+                  <Segno nome="telefono" size={18} />
+                  {tel.label}
+                </a>
+              )}
+              <Link href={scrivi.href} className={`btn ${tel ? "btn-osso" : "btn-petrolio"}`}>
+                <Segno nome="mail" size={18} />
+                {scrivi.label}
+              </Link>
+              <div className="ml-auto">
+                <LanguageSwitcher locale={locale} label={a11y.cambiaLingua} />
               </div>
             </div>
           </div>

@@ -6,36 +6,58 @@ import { Segno } from "../ui/Segno";
 /** Intestazione di pagina: eyebrow, H1, lead. Una sola per pagina. */
 export function Intestazione({ eyebrow, titolo, lead, children, compatta = false }: { eyebrow?: string; titolo: string; lead?: string; children?: ReactNode; compatta?: boolean }) {
   return (
-    <header className={`contenitore ${compatta ? "pt-10 pb-6 md:pt-14" : "pt-12 pb-10 md:pt-20 md:pb-14"}`}>
-      <Reveal className="max-w-3xl">
-        {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-        <h1 className="text-[2.4rem] leading-[1.05] md:text-[3.4rem]">{titolo}</h1>
-        {lead && <p className="mt-5 max-w-2xl text-[1.1rem] leading-relaxed text-grafite md:text-[1.2rem]">{lead}</p>}
-        {children}
-      </Reveal>
+    <header className="bg-osso-3">
+      <div className={`contenitore ${compatta ? "pt-10 pb-8 md:pt-14 md:pb-10" : "pt-12 pb-10 md:pt-20 md:pb-14"}`}>
+        <Reveal className="max-w-3xl">
+          {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
+          <h1 className="text-[2.4rem] leading-[1.05] md:text-[3.4rem]">{titolo}</h1>
+          {lead && <p className="mt-5 max-w-2xl text-[1.1rem] leading-relaxed text-grafite md:text-[1.2rem]">{lead}</p>}
+          {children}
+        </Reveal>
+      </div>
     </header>
   );
 }
 
-export function Sezione({ id, eyebrow, titolo, lead, children, className = "", azione }: { id?: string; eyebrow?: string; titolo?: string; lead?: string; children: ReactNode; className?: string; azione?: { href: string; label: string } }) {
+export function Sezione({
+  id,
+  eyebrow,
+  titolo,
+  lead,
+  children,
+  className = "",
+  azione,
+  tinta,
+}: {
+  id?: string;
+  eyebrow?: string;
+  titolo?: string;
+  lead?: string;
+  children: ReactNode;
+  className?: string;
+  azione?: { href: string; label: string };
+  tinta?: "campo" | "osso";
+}) {
   return (
-    <section id={id} className={`contenitore py-12 md:py-16 ${className}`}>
-      {(titolo || eyebrow) && (
-        <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4 md:mb-10">
-          <div className="max-w-2xl">
-            {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
-            {titolo && <h2 className="text-[1.9rem] leading-tight md:text-[2.4rem]">{titolo}</h2>}
-            {lead && <p className="mt-3 text-[1.05rem] text-grafite">{lead}</p>}
-          </div>
-          {azione && (
-            <Link href={azione.href} className="btn btn-ghost -mr-3">
-              {azione.label}
-              <Segno nome="freccia" size={18} />
-            </Link>
-          )}
-        </Reveal>
-      )}
-      {children}
+    <section id={id} className={tinta === "osso" ? "bg-osso-3" : undefined}>
+      <div className={`contenitore py-12 md:py-16 ${className}`}>
+        {(titolo || eyebrow) && (
+          <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4 md:mb-10">
+            <div className="max-w-2xl">
+              {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
+              {titolo && <h2 className="text-[1.9rem] leading-tight md:text-[2.4rem]">{titolo}</h2>}
+              {lead && <p className="mt-3 text-[1.05rem] text-grafite">{lead}</p>}
+            </div>
+            {azione && (
+              <Link href={azione.href} className="btn btn-ghost -mr-3 shrink-0">
+                {azione.label}
+                <Segno nome="freccia" size={18} />
+              </Link>
+            )}
+          </Reveal>
+        )}
+        {children}
+      </div>
     </section>
   );
 }

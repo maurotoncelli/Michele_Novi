@@ -92,7 +92,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
         </Reveal>
 
         {copertina && (
-          <Reveal className="incavo relative mx-auto mt-10 aspect-[16/9] max-w-4xl overflow-hidden" style={{ borderRadius: "2.5rem 3rem 2.5rem 3.25rem / 3rem 2.5rem 3.25rem 2.5rem" }}>
+          <Reveal className="relative mx-auto mt-10 aspect-[16/9] max-w-4xl overflow-hidden bg-petrolio-3">
             <Image src={copertina} alt={pick(n.copertina?.alt, l) || pick(n.titolo, l)} fill priority sizes="(min-width: 1024px) 60rem, 100vw" className="object-cover" />
           </Reveal>
         )}

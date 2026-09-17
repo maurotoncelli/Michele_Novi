@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ token
-   Direzione "Schede ossee" (bibbia/06_design.md).
-   Base chiara e fredda, aloni menta/pesca, petrolio come accento, rame sulla cucitura. */
+   Crema + azzurro. Lastre piatte (Aesop / Odyssée): niente ombrine, niente blob. */
 @theme {
   --color-campo: #f7f6f3;
   --color-osso: #ffffff;
@@ -11,15 +10,15 @@
   --color-menta: #e8f3f4;
   --color-pesca: #fdf2ed;
   --color-salvia: #edf5f0;
-  --color-petrolio: #0c535c;
-  --color-petrolio-2: #17717d;
-  --color-petrolio-3: #e3eff0;
+  --color-petrolio: #1e6aa8;
+  --color-petrolio-2: #2b82c4;
+  --color-petrolio-3: #e5f1f8;
   --color-rame: #c9785c;
   --color-rame-2: #f3dfd5;
   --color-inchiostro: #1a1e22;
   --color-grafite: #5b6470;
   --color-nebbia: #8d95a0;
-  --color-linea: rgba(26, 30, 34, 0.08);
+  --color-linea: rgba(26, 30, 34, 0.1);
 
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
@@ -55,18 +54,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Aloni: luce menta in alto a sinistra, pesca in alto a destra, salvia in basso. */
 .aloni {
-  background-image:
-    radial-gradient(ellipse 60% 45% at 8% 6%, rgba(232, 243, 244, 0.95) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 92% 12%, rgba(253, 242, 237, 0.85) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(237, 245, 240, 0.8) 0%, transparent 70%);
-  background-attachment: fixed;
-}
-@media (max-width: 767px) {
-  .aloni {
-    background-attachment: scroll;
-  }
+  background-color: var(--color-campo);
 }
 
 ::selection {
@@ -97,82 +86,58 @@ p {
 
 /* Classi componente: in @layer components, così le utility Tailwind (hidden, md:flex…) vincono sempre. */
 @layer components {
-/* ------------------------------------------------------------------ osso */
-/* Superficie ossea: bianco opaco, bordi smussati asimmetrici, luce dall'alto. */
+/* ------------------------------------------------------------------ lastra */
+/* Piatta: niente ombra, niente raggio a blob. Il campo fa da superficie. */
 .osso {
   position: relative;
-  background: linear-gradient(165deg, var(--color-osso) 0%, var(--color-osso-2) 100%);
-  border: 1px solid rgba(26, 30, 34, 0.06);
-  border-radius: 1.75rem 2.25rem 1.75rem 2.5rem / 2.25rem 1.75rem 2.5rem 1.75rem;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -3px 8px rgba(26, 30, 34, 0.035),
-    var(--shadow-osso);
-  transition:
-    transform 0.6s var(--ease-osso),
-    box-shadow 0.6s var(--ease-osso);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
-.osso-lg {
-  border-radius: 2.5rem 3.25rem 2.5rem 3.5rem / 3.25rem 2.5rem 3.5rem 2.5rem;
-}
-.osso-sm {
-  border-radius: 1.1rem 1.4rem 1.1rem 1.5rem / 1.4rem 1.1rem 1.5rem 1.1rem;
-}
+.osso-lg,
+.osso-sm,
 .osso-pill {
-  border-radius: 999px;
+  border-radius: 0;
 }
 a.osso:hover,
 .osso-vivo:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -3px 8px rgba(26, 30, 34, 0.035),
-    var(--shadow-osso-hover);
+  transform: none;
+  box-shadow: none;
 }
 
-/* Cavità: incavo in cui si alloggiano i moduli (docking sedi, recess CTA). */
 .incavo {
-  background: linear-gradient(180deg, var(--color-osso-3) 0%, var(--color-osso-2) 100%);
-  border-radius: 999px;
-  box-shadow:
-    inset 0 2px 6px rgba(26, 30, 34, 0.08),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+  background: var(--color-osso-2);
+  border-radius: 0;
+  box-shadow: none;
 }
 
-/* Vetro: strati traslucidi, tinti. */
 .vetro {
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(18px) saturate(1.25);
-  -webkit-backdrop-filter: blur(18px) saturate(1.25);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 10px 30px -14px rgba(26, 30, 34, 0.12);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 0;
+  box-shadow: none;
 }
-.vetro-menta {
-  background: rgba(232, 243, 244, 0.7);
-}
-.vetro-pesca {
-  background: rgba(253, 242, 237, 0.72);
-}
+.vetro-menta,
+.vetro-pesca,
 .vetro-salvia {
-  background: rgba(237, 245, 240, 0.72);
+  background: transparent;
 }
 
-/* Cucitura: la linea luminosa rame tra due ossa. */
 .cucitura {
   position: relative;
 }
 .cucitura::after {
   content: "";
   position: absolute;
-  left: 12%;
-  right: 12%;
-  bottom: -1px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-rame) 30%, var(--color-rame) 70%, transparent);
-  box-shadow: 0 0 14px rgba(201, 120, 92, 0.45);
-  opacity: 0.85;
+  background: var(--color-linea);
+  box-shadow: none;
+  opacity: 1;
 }
 
 /* Bottoni */
@@ -198,27 +163,21 @@ a.osso:hover,
 }
 .btn-petrolio {
   color: #fff;
-  background: linear-gradient(135deg, var(--color-petrolio) 0%, var(--color-petrolio-2) 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 8px 20px -10px rgba(12, 83, 92, 0.55);
+  background: var(--color-petrolio);
+  box-shadow: none;
 }
 .btn-petrolio:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 12px 26px -10px rgba(12, 83, 92, 0.6);
+  background: var(--color-petrolio-2);
 }
 .btn-osso {
   color: var(--color-inchiostro);
-  background: linear-gradient(165deg, #fff, var(--color-osso-2));
-  border: 1px solid rgba(26, 30, 34, 0.08);
-  box-shadow:
-    inset 0 1px 0 #fff,
-    0 6px 16px -10px rgba(26, 30, 34, 0.25);
+  background: transparent;
+  border: 1px solid var(--color-linea);
+  box-shadow: none;
 }
 .btn-osso:hover {
-  transform: translateY(-1px);
+  border-color: var(--color-petrolio);
+  color: var(--color-petrolio);
 }
 .btn-ghost {
   color: var(--color-petrolio);
@@ -253,11 +212,11 @@ a.osso:hover,
 
 /* Eyebrow */
 .eyebrow {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-grafite);
+  color: var(--color-petrolio);
 }
 
 /* ------------------------------------------------------------------ motion */
@@ -398,10 +357,18 @@ a.osso:hover,
   padding-inline: clamp(1rem, 4vw, 2.5rem);
 }
 
-/* Header solido, sticky, mai trasparente */
+/* Header solido, sticky, una riga: nome | voci al centro | azioni. */
+:root {
+  --header-h: 4.5rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --header-h: 5.25rem;
+  }
+}
 .header-solido {
-  background: var(--color-osso);
+  background: var(--color-campo);
   border-bottom: 1px solid var(--color-linea);
-  box-shadow: 0 10px 28px -20px rgba(26, 30, 34, 0.28);
+  box-shadow: none;
 }
 }

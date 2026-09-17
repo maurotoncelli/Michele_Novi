@@ -5,6 +5,7 @@
     "cosaCuro": "What I treat",
     "dove": "Where",
     "quaderno": "In depth",
+    "pubblicazioni": "Publications",
     "contatti": "Contact",
     "menu": "Menu",
     "chiudi": "Close",
@@ -27,6 +28,7 @@
     "schedaGoogle": "Google listing",
     "sitoStruttura": "Facility website",
     "fonte": "Go to source",
+    "articolo": "Article",
     "pdf": "PDF"
   },
   "home": {
@@ -82,14 +84,16 @@
     "soloChirurgia": "Surgery only",
     "indirizzo": "Address",
     "comeArrivare": "Getting there",
-    "accessibilita": "Access and parking",
+    "accessibilita": "Access",
+    "parcheggio": "Parking",
     "orari": "Hours",
     "suAppuntamento": "By appointment",
     "cosaFaccioQui": "What I do here",
     "prenota": "How to book",
     "prenotaTesto": "Through Dr Novi's office, not the facility switchboard.",
     "patologieTipiche": "What I treat here",
-    "altreSedi": "Other locations"
+    "altreSedi": "Other locations",
+    "mappa": "Map"
   },
   "quaderno": {
     "titolo": "In depth",

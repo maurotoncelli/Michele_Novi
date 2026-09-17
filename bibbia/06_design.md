@@ -91,11 +91,20 @@ Due proposte da scegliere (o fondere):
 - **C — Ritratto moderno** (`tavole/proposta-C-ritratto-moderno.png`): foto a tutta altezza a destra, testo sans a sinistra, disegni piccoli sotto.
 - **D — Atlante disegnato** (`tavole/proposta-D-atlante-disegnato.png`): figura ritagliata + costellazione di schede illustrate che si incastrano.
 
+## Passata 17/09 — presenza (in codice)
+
+Mauro: contenuti e struttura restano; il sito era **anonimo**. Riferimenti **Odyssée** + **Aesop**.
+
+In `site/` (17/09 mattina): lastre piatte, petrolio `#1E6AA8`, header a **una riga**, fasce `osso-3` per il ritmo. **Aboliti** trattini sotto i titoli, filo a tutta riga, cucitura a onda (effetto quaderno). Dettaglio e divieti: [HANDOFF.md](HANDOFF.md), [`../fonti/appunti/2026-09-17_restyling-estetico.md`](../fonti/appunti/2026-09-17_restyling-estetico.md).
+
+Aperti: mano dei disegni, font con spina. Il ramo `restyling-osseo` (sagome) è chiuso. C/D del 16/09 non sono più un fork da implementare.
+
 ## Token
 
-| Token | Stato 16/09 |
+| Token | Stato 17/09 |
 |-------|-------------|
-| Campo / osso / petrolio / rame / menta / pesca | Tenuti. Si rinfresca l’uso, non l’hex. |
+| Campo / osso / rame / menta / pesca | Tenuti. |
+| Petrolio | **`#1E6AA8`** (17/09). Non il teal vecchio. |
 | Font | **Geist**, unico. |
 | Ritratto | `home.ritratto` → foto a tutto schermo. Oggi placeholder in `public/images/home/`. |
 | Disegni | `public/images/disegni/` + singleton Keystatic `disegni`. Nelle card ossee, non al posto delle card. |

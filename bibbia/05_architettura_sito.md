@@ -21,7 +21,7 @@ Albero **rovesciato**: cosa / dove / contatto in superficie; CV, patologie, pape
 
 ## Chrome (tutte le pagine)
 
-**Header.** Wordmark Dott. Michele Novi. Sottotitolo corto: *Ortopedico — spalla e arto superiore*. Menu: Chi sono · Cosa curo · Dove · Articoli · Contatti. IT | EN. CTA: **Chiama** + **Scrivi**. WhatsApp quando il numero è chiuso.
+**Header.** Wordmark Dott. Michele Novi. Sottotitolo corto: *Ortopedico — spalla e arto superiore*. Menu: Chi sono · Cosa curo · Dove · Approfondimenti · Pubblicazioni · Contatti. IT | EN. CTA: **Chiama** + **Scrivi**. WhatsApp quando il numero è chiuso.
 
 **Footer.** Nome, una riga di specialità, telefono, orari (quando ci sono), email `info@`. Le quattro sedi come città + link. Instagram, LinkedIn. Privacy, cookie, P. IVA. Niente Doctolib come canale principale. Niente CUP.
 
@@ -54,7 +54,7 @@ Stesso albero sotto `/en/...`. Default `/it`.
 | `/it/articoli/[slug]` | Nota / placeholder | no |
 | `/it/privacy`, `/it/cookie` | Legale | footer |
 
-**Non in v1:** `/prenota`, pagina Nicoletti, pagina equipe, URL per le sedi morte, pagina eco come “servizio a catalogo”, `/pubblicazioni` staccata (stanno sotto Articoli).
+**Non in v1:** `/prenota`, pagina Nicoletti, pagina equipe, URL per le sedi morte, pagina eco come “servizio a catalogo”. Pubblicazioni sono voce di menu, URL resta `/it/approfondimenti/pubblicazioni` (non un hub staccato).
 
 Ecografia: un paragrafo in Chi sono / Cosa curo / scheda sede se c’è la macchina. **Non** una sesta specialità da prenotare.
 

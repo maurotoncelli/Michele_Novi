@@ -6,7 +6,6 @@ import type { Home, Patologia, Pubblicazione, Nota, Recensione, Sede, Settings }
 import { getDisegni, slugPatologia, srcDisegno, telHref, waHref } from "@/lib/content";
 import { Disegno } from "../ui/Disegno";
 import { Reveal } from "../ui/Reveal";
-import { Strati } from "../ui/Strati";
 import { isSegno, Segno } from "../ui/Segno";
 import { ModuloSede, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
 import { Sezione } from "./Pagina";
@@ -24,7 +23,7 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
     : "/images/home/ritratto-placeholder.jpg";
 
   return (
-    <section className="relative left-1/2 w-screen min-h-[calc(100svh-4rem)] -translate-x-1/2 md:min-h-[calc(100svh-4.5rem)]">
+    <section className="relative left-1/2 w-screen min-h-[calc(100svh-var(--header-h))] -translate-x-1/2">
       <Image
         src={foto}
         alt={pick(ritratto?.alt, locale) || m.a11y.ritrattoDi}
@@ -34,7 +33,7 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
         className="object-cover object-[center_18%]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-inchiostro/75 via-inchiostro/25 to-inchiostro/30" aria-hidden="true" />
-      <div className="contenitore relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-12 pt-16 md:min-h-[calc(100svh-4.5rem)] md:pb-16">
+      <div className="contenitore relative flex min-h-[calc(100svh-var(--header-h))] flex-col justify-end pb-12 pt-16 md:pb-16">
         <Reveal className="max-w-2xl text-osso">
           {pick(home.eyebrow, locale) && <p className="eyebrow mb-4 text-osso/70">{pick(home.eyebrow, locale)}</p>}
           <h1 className="text-[2.7rem] leading-[1.02] text-osso md:text-[4rem] lg:text-[4.6rem]">{pick(home.titolo, locale)}</h1>
@@ -76,18 +75,14 @@ export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[];
   const secondarie = patologie.filter((p) => p.secondaria);
   if (!principali.length) return null;
   return (
-    <Sezione eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} lead={m.home.cosaCuroLead} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }}>
-      <Strati className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {principali.map((p, i) => (
-          <div
-            key={p.slug}
-            className="strato"
-            style={{ "--strato-y": `${-i * 56}px`, "--strato-rot": `${(i - (principali.length - 1) / 2) * -1.2}deg` } as React.CSSProperties}
-          >
-            <SchedaPatologia p={p} locale={locale} index={i} strato />
-          </div>
+    <Sezione eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} lead={m.home.cosaCuroLead} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso">
+      <ul className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {principali.map((p) => (
+          <li key={p.slug}>
+            <SchedaPatologia p={p} locale={locale} />
+          </li>
         ))}
-      </Strati>
+      </ul>
       {secondarie.length > 0 && (
         <Reveal className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.95rem] text-grafite">
           <span>{m.cosaCuro.secondarie}:</span>
@@ -108,15 +103,13 @@ export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
   if (!sedi.length) return null;
   return (
     <Sezione eyebrow={m.nav.dove} titolo={m.home.doveTitolo} lead={m.home.doveLead} azione={{ href: href(locale, { kind: "dove" }), label: m.cta.tutte }}>
-      <Reveal className="incavo p-2 sm:p-3">
-        <ul className="grid gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
-          {sedi.map((s, i) => (
-            <Reveal key={s.slug} as="li" delay={i * 80}>
-              <ModuloSede s={s} locale={locale} />
-            </Reveal>
-          ))}
-        </ul>
-      </Reveal>
+      <ul className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {sedi.map((s, i) => (
+          <Reveal key={s.slug} as="li" delay={i * 80}>
+            <ModuloSede s={s} locale={locale} />
+          </Reveal>
+        ))}
+      </ul>
     </Sezione>
   );
 }
@@ -128,13 +121,13 @@ export async function FasciaFiducia({ home, locale }: { home: Home; locale: Loca
   if (!voci.length) return null;
   const catalogo = await getDisegni();
   return (
-    <Sezione eyebrow={m.nav.chiSono} titolo={m.home.fiduciaTitolo} azione={{ href: href(locale, { kind: "chiSono" }), label: m.nav.chiSono }}>
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <Sezione eyebrow={m.nav.chiSono} titolo={m.home.fiduciaTitolo} azione={{ href: href(locale, { kind: "chiSono" }), label: m.nav.chiSono }} tinta="osso">
+      <ul className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
         {voci.map((v, i) => {
           const disegno = srcDisegno(catalogo, v.segno, locale);
           return (
-          <Reveal key={i} as="li" delay={i * 70} className="osso osso-sm flex flex-col gap-3 p-4">
-            <span className="relative aspect-[5/3] w-full overflow-hidden rounded-[1rem] bg-osso-2/80">
+          <Reveal key={i} as="li" delay={i * 70} className="flex flex-col gap-4">
+            <span className="relative aspect-[5/3] w-full overflow-hidden bg-petrolio-3">
               {disegno ? (
                 <Disegno src={disegno.src} alt={disegno.alt} />
               ) : (
@@ -159,10 +152,10 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
   if (!voci.length) return null;
   return (
     <Sezione titolo={m.home.recensioniTitolo}>
-      <ul className="grid gap-4 md:grid-cols-3">
+      <ul className="grid gap-10 md:grid-cols-3">
         {voci.map((r, i) => (
-          <Reveal key={r.slug} as="li" delay={i * 90} className="osso p-6">
-            <blockquote className="serif text-[1.15rem] leading-relaxed">“{pick(r.testo, locale)}”</blockquote>
+          <Reveal key={r.slug} as="li" delay={i * 90}>
+            <blockquote className="text-[1.15rem] leading-relaxed">“{pick(r.testo, locale)}”</blockquote>
             <footer className="mt-4 text-sm text-grafite">
               <span className="font-semibold text-inchiostro">{r.nome}</span>
               {r.piattaforma ? ` · ${r.piattaforma}` : ""}
@@ -179,8 +172,8 @@ export function FasciaQuaderno({ voci, locale }: { voci: ({ tipo: "paper"; item:
   const m = getMessages(locale);
   if (!voci.length) return null;
   return (
-    <Sezione eyebrow={m.nav.quaderno} titolo={m.home.quadernoTitolo} lead={m.home.quadernoLead} azione={{ href: href(locale, { kind: "quaderno" }), label: m.cta.tutte }}>
-      <ul className="grid gap-4 md:grid-cols-3">
+    <Sezione eyebrow={m.nav.quaderno} titolo={m.home.quadernoTitolo} lead={m.home.quadernoLead} azione={{ href: href(locale, { kind: "quaderno" }), label: m.cta.tutte }} tinta="osso">
+      <ul className="grid gap-10 md:grid-cols-3">
         {voci.slice(0, 3).map((v, i) => (
           <Reveal key={v.item.slug} as="li" delay={i * 90}>
             {v.tipo === "paper" ? <SchedaPaper p={v.item} locale={locale} /> : <SchedaNota n={v.item} locale={locale} />}

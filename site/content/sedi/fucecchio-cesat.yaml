@@ -4,6 +4,9 @@ citta: Fucecchio
 provincia: FI
 indirizzo: Piazza Spartaco Lavagnini 5
 cap: '50054'
+coordinate:
+  lat: 43.73089
+  lng: 10.80754
 tipo: ospedale
 propria: false
 visite: true

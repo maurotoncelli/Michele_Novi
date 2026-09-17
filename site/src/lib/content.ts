@@ -83,8 +83,13 @@ const TAG_A_DISEGNO: Record<string, string> = {
 };
 
 /** Disegno di catalogo a partire da tag / patologie. Sempre un id usabile. */
-export function idDisegnoDaTag(tag: readonly string[] | null | undefined, patologie: readonly string[] | null | undefined = []): string {
-  const pool = [...(tag ?? []), ...(patologie ?? [])].map((t) => t.toLowerCase());
+export function idDisegnoDaTag(
+  tag: readonly (string | null)[] | null | undefined,
+  patologie: readonly (string | null)[] | null | undefined = [],
+): string {
+  const pool = [...(tag ?? []), ...(patologie ?? [])]
+    .filter((t): t is string => Boolean(t))
+    .map((t) => t.toLowerCase());
   for (const t of pool) {
     if (TAG_A_DISEGNO[t]) return TAG_A_DISEGNO[t];
     const hit = Object.keys(TAG_A_DISEGNO).find((k) => t.includes(k));

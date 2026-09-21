@@ -680,6 +680,53 @@ a.osso:hover,
   }
 }
 
+/* Sommario che segue: voci con indice, la corrente si accende in petrolio e si sposta di poco a destra. */
+.sommario-voce {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-block: 0.55rem;
+  color: var(--color-grafite);
+  border-top: 1px solid var(--color-linea);
+  transition:
+    color 0.35s var(--ease-osso),
+    padding-left 0.45s var(--ease-osso);
+}
+.sommario li:last-child .sommario-voce {
+  border-bottom: 1px solid var(--color-linea);
+}
+.sommario-indice {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-nebbia);
+  transition: color 0.35s var(--ease-osso);
+}
+.sommario-testo {
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+.sommario-voce:hover {
+  color: var(--color-inchiostro);
+}
+.sommario-voce[data-attiva] {
+  color: var(--color-petrolio);
+  padding-left: 0.5rem;
+}
+.sommario-voce[data-attiva] .sommario-indice {
+  color: var(--color-petrolio);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sommario-voce {
+    transition: none;
+  }
+}
+/* Ancore delle sezioni fuori dal corpo Markdoc: stesso margine dei titoli. */
+.ancora {
+  scroll-margin-top: 6rem;
+}
+
 /* Rotaia: fila orizzontale a filo dei bordi della finestra, dentro un contenitore centrato.
    Il margine negativo la porta al vivo; il padding riporta la prima scheda in colonna col titolo. */
 .rotaia {
@@ -707,6 +754,28 @@ a.osso:hover,
   .rotaia > * {
     flex-basis: clamp(17rem, 23vw, 20rem);
   }
+}
+/* Rotaia intera: una voce alla volta, la successiva fa capolino a destra. */
+.rotaia.rotaia-intera {
+  gap: 3rem;
+}
+.rotaia.rotaia-intera > * {
+  flex-basis: 86%;
+}
+@media (min-width: 64rem) {
+  .rotaia.rotaia-intera > * {
+    flex-basis: 78%;
+  }
+}
+
+/* Virgolette come segno grafico: grandi, petrolio chiaro, appese sopra la citazione. */
+.virgolette {
+  display: block;
+  font-size: clamp(6rem, 4rem + 8vw, 11rem);
+  line-height: 0.6;
+  font-weight: 500;
+  color: var(--color-petrolio-chiaro);
+  user-select: none;
 }
 .rotaia-freccia {
   display: inline-grid;

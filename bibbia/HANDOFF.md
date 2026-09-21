@@ -1,7 +1,7 @@
 # Handoff
 
 > Prima lettura per una chat nuova. Workspace: `Michele_Novi_Website`.  
-> Aggiornato: **21 settembre 2026, pomeriggio**. Upgrade visivo «miaobau» sul ramo `versione-miaobau` (4 commit, è la direzione buona); «quaderno» sparito dal codice; in attesa di due sì per la «Lettura» dei paper.
+> Aggiornato: **21 settembre 2026, sera**. Upgrade visivo «miaobau» sul ramo `versione-miaobau` (è la direzione buona); «quaderno» sparito dal codice; pagina patologia con **sommario che segue**; recensioni come **citazioni tipografiche**. La «Lettura» dei paper è approvata (integrale per i 5 OA) ma **rimandata a dopo**.
 
 ## In una frase
 
@@ -43,6 +43,8 @@ Riferimento portato da Mauro: skyclinics.al. Preso il gesto, non il peso: **nien
 24. **Chi sono**: ritratto **a tutta altezza del testo** (colonna 23rem, `h-full`, min 28rem), fatti allineati al bordo basso della foto. Ritratto **in bianco e nero** (mezzo busto in posa, fondo neutro): a Mauro «fa impazzire» insieme allo stile editoriale, è la direzione anche per lo shooting vero. **Come valuto** = titolo forte + lastra del lavoro + **tre passi della visita** numerati (`profilo.comeValutoPassi`, campo Keystatic).
 25. **Cosa curo (hub)**: righe dense, poi tre colonne; **Dove (hub)**: `SchedaSede` riga compatta, tutto in una schermata; **Contatti**: sedi come lista compatta (`ModuloSede compatto`), non 2×2 con foto grandi.
 26. **La sezione si chiama Approfondimenti, punto.** Mauro (21/09): «non voglio che si chiami quaderno da nessuna parte». Rinominato nel codice, nel CMS, nelle cartelle. Non reintrodurre il nome nemmeno in un commento.
+27. **Pagina patologia = «la pagina che i pazienti leggono davvero»** (Mauro). Sommario **sticky a sinistra** (`Sommario`, `.sommario`), voci numerate 01… prese dagli H2 del corpo Markdoc più **Dove si tratta**, **Ne ho scritto qui**, **Domande frequenti**, che ora stanno nel flusso dell'articolo con ancora (`#dove`, `#pubblicazioni`, `#faq`, classe `.ancora`), non più in una colonna destra di scatoline. La voce **si accende** in petrolio e si sposta di mezzo rem quando il suo titolo passa a un terzo dello schermo (scroll listener puro, niente rAF: non serve e nel webview di Cursor non gira). Sotto 1024px il sommario sta in testa all'articolo, senza sticky. Le voci del sommario **le decide il contenuto**: se Michele struttura un corpo in Sintomi / Diagnosi / Cure / Chirurgia / Recupero, il sommario lo segue da solo.
+28. **Recensioni = citazioni tipografiche, una alla volta** (`FasciaRecensioni`, `Rotaia` con `.rotaia-intera`): virgolette grandi in **petrolio chiaro** come segno grafico (`.virgolette`, `--color-petrolio-chiaro`), a sinistra della citazione; **eyebrow con piattaforma e stelle** (`Stelle`, cinque stelline piene/vuote in petrolio; `aria-label` «5 stelle su 5»); citazione in `.citazione` (400); nome sotto. Ogni scheda è il 78% del contenitore in desktop, 86% in mobile: la successiva fa capolino, si scorre con snap o con le frecce, fino a sei. Nuovo campo Keystatic `recensioni.stelle` (1–5, default 5): **le 9 recensioni sono state messe a 5 senza verificare** una per una: controllare sulle schede Google/Doctolib/MioDottore prima del go-live.
 
 ### Header e albero
 
@@ -69,9 +71,9 @@ Riferimento portato da Mauro: skyclinics.al. Preso il gesto, non il peso: **nien
 - Shooting: ritratto (**in bianco e nero, mezzo busto in posa**, è la direzione) e foto delle sedi e del lavoro (`home.lavoro`). Oggi placeholder generati; nomi file e alt già pronti.
 - Scelta C vs D del 16/09: **superata come fork**; l’hero è già foto full-bleed, le fasce sono piatte + disegni-tappabuchi.
 
-### «Lettura» dei paper: proposta in attesa di due sì (21/09)
+### «Lettura» dei paper: approvata il 21/09, da fare dopo
 
-Idea di Mauro: per i paper con PDF, estrarre il testo e metterlo nella pagina dell’articolo «con stile universitario, font specifico, aspetto autorevole, come fosse un testo a sé». **Possibile**: i 7 PDF hanno testo estraibile pulito (provato con pypdf). Il paletto è il **copyright**, letto dentro ogni PDF:
+Mauro ha detto **sì ai testi integrali** per i 5 OA (abstract + link per i 2 con copyright dell'editore) ma «**poi**»: viene dopo sommario e recensioni, che sono fatti. Resta da scegliere il serif (Newsreader o Source Serif 4). Idea di Mauro: per i paper con PDF, estrarre il testo e metterlo nella pagina dell’articolo «con stile universitario, font specifico, aspetto autorevole, come fosse un testo a sé». **Possibile**: i 7 PDF hanno testo estraibile pulito (provato con pypdf). Il paletto è il **copyright**, letto dentro ogni PDF:
 
 | Paper | Rivista | Copyright | Cosa si può mettere |
 |---|---|---|---|
@@ -85,15 +87,15 @@ Idea di Mauro: per i paper con PDF, estrarre il testo e metterlo nella pagina de
 
 Progetto: sotto la testata esistente (titolo, autori, rivista, DOI, bottoni PDF/Articolo) una sezione **«Lettura»** impaginata come estratto da rivista: serif accademico self-hosted **solo lì** (candidati **Newsreader** o **Source Serif 4**, licenze libere), colonna ~62 caratteri, titoli di sezione in maiuscoletto (Abstract, Introduction, Methods, Results, Discussion, Conclusions), capolettera, bibliografia in coda, riga di attribuzione «© autori, licenza…, riprodotto da…» con DOI. In inglese com’è. Sopra resta il **«In breve, per chi non è medico»** in General Sans. Il testo va in Keystatic (campo `testoIntegrale`, markdown a sezioni), estratto con uno script e **ripulito a mano** (sillabazioni, didascalie, numeri di pagina, intestazioni di colonna, riferimenti): circa 30–40 pagine di rivista, lavoro editoriale.
 
-**Decisioni che servono da Mauro:** (1) integrale per i 5 OA + abstract per i 2 con copyright editore, oppure abstract per tutti; (2) Newsreader o Source Serif 4, o una pagina di prova con entrambi.
+**Deciso:** integrale per i 5 OA + abstract per i 2 con copyright editore. **Da decidere:** Newsreader o Source Serif 4 (o una pagina di prova con entrambi).
 
 ### Idee proposte il 21/09, non decise
 
+(Sommario in patologia e recensioni tipografiche: **fatte**, vedi 27 e 28.)
+
 - Pagina sede come luogo: foto grande a vivo, orari e come arrivare come «scheda di viaggio», mappa monocroma nei colori del sito al posto dell’embed Google colorato.
-- Pagina patologia con sommario sticky a sinistra (sintomi, diagnosi, cure, chirurgia, recupero, FAQ) e voce attiva che si accende, come il Percorso in home.
 - Cifre animate anche in Chi sono (stesso `Contatore`, misura `cifra-m`).
 - Transizioni di pagina con la View Transitions API (il titolo della scheda «vola» al titolo della pagina), solo CSS.
-- Recensioni come citazioni tipografiche: virgolette grandi in petrolio chiaro, una alla volta in orizzontale.
 - Piè di pagina con la firma: nome in display-l a tutta larghezza come chiusura editoriale.
 
 ## Deploy e repo
@@ -117,6 +119,7 @@ Progetto: sotto la testata esistente (titolo, autori, rivista, DOI, bottoni PDF/
 | 16/09 sera | Menu **Approfondimenti**. |
 | 17/09 | **Pubblicazioni** in menu. 14 paper da Drive; 7 PDF OA. Recensioni in Keystatic. Restyling Aesop/Odyssée: header a una riga, lastre piatte, petrolio `#1E6AA8`, Dove a due colonne, Maps + icone in sede, barre CV sistemate. **Trattini e cucitura via** (effetto quaderno). |
 | 21/09 mattina | Piano «upgrade awwwards» e prima passata (ramo `passata-visiva-schede`, poi in `main`): copy dei titoli come affermazioni, tre tipi di fascia, banda scura, hero a due colonne, Chi sono ristrutturata, placeholder generati. Correzioni di Mauro: hero rotta nel suo browser → CSS esplicito; Cabinet Grotesk «troppo femminile» → General Sans; pesi 600 «troppo pesanti» → 500 + `.citazione`; Cosa curo e Dove «più informazioni a colpo d’occhio» → righe dense; banda «non nera» → `#0f3a5a`; sedi in Contatti e ritratto in Chi sono «troppo grandi» → compatti. |
+| 21/09 sera | Mauro: «sì» a testi integrali (**poi**), sommario sticky in patologia, recensioni tipografiche. Fatti gli ultimi due: `Sommario` con voce che si accende e Dove/Ne ho scritto/FAQ nel flusso; `FasciaRecensioni` in rotaia intera con virgolette in petrolio chiaro, piattaforma e stelle in eyebrow; campo `stelle` in Keystatic. |
 | 21/09 pomeriggio | Ramo **`versione-miaobau`** («nuovo ramo principale»). Da skyclinics.al senza librerie: hero che si posa, cifre che si contano, Percorso sticky con lastra del lavoro, trama, frecce. Poi: cifre `cifra-m`; **Come si opera fuori da Cosa curo** (fascia «Il metodo»); Cosa curo a **tre colonne che fluttuano**; Chi sono con **ritratto b/n a tutta altezza** (Mauro: «mi fa impazzire»); **Come valuto** con lastra e tre passi; Approfondimenti in **rotaia** + «Vedi tutto in griglia»; **«quaderno» rinominato ovunque** in `approfondimenti`. Proposta «Lettura» dei paper con verifica copyright: in attesa. |
 
 ## Cosa fare adesso (ordine)
@@ -133,8 +136,9 @@ Progetto: sotto la testata esistente (titolo, autori, rivista, DOI, bottoni PDF/
 **Decisioni di Mauro in sospeso**
 
 7. Fast-forward di `main` su `versione-miaobau`.
-8. «Lettura» dei paper: integrale per i 5 OA + abstract per i 2, o abstract per tutti; Newsreader o Source Serif 4.
-9. Quale delle idee del 21/09 fare per prima (sede come luogo, sommario sticky in patologia, transizioni…).
+8. «Lettura» dei paper (approvata: integrale per i 5 OA + abstract per i 2): serif Newsreader o Source Serif 4, e **quando** farla (Mauro: «poi»).
+9. Quale delle idee del 21/09 fare per prima (sede come luogo, transizioni, cifre in Chi sono, firma nel piè di pagina).
+9b. **Verificare le stelle** delle 9 recensioni sulle piattaforme (oggi tutte a 5 per default).
 
 **Design (non bloccante, non mescolare)**
 

@@ -45,6 +45,7 @@
     "fiduciaLead": "Dirigente medico in ospedale pubblico dal 2021. Fellowship dove la spalla si studia da vicino: Harvard / MGH nel 2025.",
     "recensioniEyebrow": "Recensioni",
     "recensioniTitolo": "Dopo la visita.",
+    "stelleLabel": "{n} stelle su 5",
     "approfondimentiTitolo": "Quello che scrivo, per colleghi e per pazienti.",
     "approfondimentiLead": "Pubblicazioni su riviste con revisione. Note dal lavoro, scritte per chi viene in visita.",
     "contattoTitolo": "Il primo passo è una visita.",
@@ -75,6 +76,7 @@
   },
   "cosaCuro": {
     "titolo": "Cosa curo",
+    "inQuestaPagina": "In questa pagina",
     "metodoEyebrow": "Il metodo",
     "metodoLead": "Prima di dire come si opera, si decide se operare. Tre tecniche, un solo criterio: il problema che hai, non la moda.",
     "lead": "Specialista della spalla e dell'arto superiore. Traumatologia sportiva. In ospedale anche anca e ginocchio. L'ecografia è uno strumento della visita, non un servizio a parte.",

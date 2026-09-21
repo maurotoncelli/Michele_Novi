@@ -453,6 +453,7 @@ export default config({
         nome: fields.text({ label: "Nome e cognome", validation: { isRequired: true } }),
         testo: testo("Testo", { multiline: true }),
         piattaforma: fields.text({ label: "Piattaforma (Google, Doctolib, …)" }),
+        stelle: fields.integer({ label: "Stelle (1–5)", defaultValue: 5, validation: { min: 1, max: 5 } }),
         data: fields.date({ label: "Data" }),
         sede: fields.relationship({ label: "Sede", collection: "sedi" }),
         peso: fields.integer({ label: "Ordine in home (più basso = prima)", defaultValue: 10 }),

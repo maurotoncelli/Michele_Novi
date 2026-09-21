@@ -9,10 +9,10 @@ import { renderBody, headings } from "@/lib/markdoc";
 import { breadcrumbJsonLd, buildMetadata, faqItems, faqJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
-import { Segno } from "@/components/ui/Segno";
 import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
-import { SchedaPatologia } from "@/components/blocks/Schede";
+import { Sommario } from "@/components/blocks/Sommario";
+import { ModuloSede, SchedaPatologia } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export const dynamicParams = false;
@@ -61,6 +61,12 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
   const doveSiTratta = (p.sedi ?? []).map((sl) => sedi.find((x) => x.slug === sl)).filter(Boolean) as typeof sedi;
   const citati = (p.pubblicazioni ?? []).map((sl) => paper.find((x) => x.slug === sl)).filter(Boolean) as typeof paper;
   const pubSlug = slugPatologia(p, l);
+  const sommario = [
+    ...indice.map((h) => ({ id: h.id, label: h.text })),
+    ...(doveSiTratta.length ? [{ id: "dove", label: m.cosaCuro.doveSiTratta }] : []),
+    ...(citati.length ? [{ id: "pubblicazioni", label: m.cosaCuro.pubblicazioniCorrelate }] : []),
+    ...(faq.length ? [{ id: "faq", label: m.cosaCuro.faq }] : []),
+  ];
 
   return (
     <>
@@ -93,68 +99,57 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
         </Reveal>
       </header>
 
-      <div className="contenitore grid gap-10 py-12 lg:grid-cols-[1fr_18rem] lg:gap-16">
-        <article>
+      {/* Sommario sticky a sinistra che segue la lettura; a destra il corpo, poi Dove, Ne ho scritto, FAQ: tutto nel flusso, tutto con ancora. */}
+      <div className="contenitore grid gap-12 py-12 md:py-16 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-20 xl:grid-cols-[17rem_minmax(0,1fr)]">
+        <div className="lg:sticky lg:top-[calc(var(--header-h)+2.5rem)] lg:self-start">
+          <Sommario voci={sommario} eyebrow={m.cosaCuro.inQuestaPagina} />
+        </div>
+
+        <article className="min-w-0">
           <AvvisoLingua show={fallbackToIt} locale={l} />
-          <div className="testo max-w-[42rem]">{element}</div>
+          <div className="testo max-w-[44rem]">{element}</div>
+
+          {doveSiTratta.length > 0 && (
+            <section id="dove" className="ancora mt-20 max-w-[44rem]">
+              <p className="eyebrow">{m.nav.dove}</p>
+              <h2 className="mt-3 text-[1.75rem] leading-tight">{m.cosaCuro.doveSiTratta}</h2>
+              <ul className="mt-6 divide-y divide-linea border-y border-linea">
+                {doveSiTratta.map((sd) => (
+                  <li key={sd.slug} className="min-w-0">
+                    <ModuloSede s={sd} locale={l} compatto />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {citati.length > 0 && (
+            <section id="pubblicazioni" className="ancora mt-20 max-w-[44rem]">
+              <p className="eyebrow">{m.nav.pubblicazioni}</p>
+              <h2 className="mt-3 text-[1.75rem] leading-tight">{m.cosaCuro.pubblicazioniCorrelate}</h2>
+              <ul className="mt-6 divide-y divide-linea border-y border-linea">
+                {citati.map((x) => (
+                  <li key={x.slug}>
+                    <Link href={href(l, { kind: "paper", slug: x.slug })} className="group grid grid-cols-[3.5rem_minmax(0,1fr)] gap-4 py-4">
+                      <span className="pt-0.5 text-sm text-grafite">{x.anno}</span>
+                      <span className="min-w-0">
+                        <span className="block text-[1.05rem] leading-snug group-hover:text-petrolio">{pick(x.titoloBreve, l) || x.titolo}</span>
+                        <span className="mt-1 block text-sm text-grafite">{x.rivista}</span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {faq.length > 0 && (
-            <div className="mt-14 max-w-[42rem]">
+            <section id="faq" className="ancora mt-20 max-w-[44rem]">
               <Faq titolo={m.cosaCuro.faq} items={faq} />
-            </div>
+            </section>
           )}
           <Disclaimer testo={m.cosaCuro.disclaimer} />
         </article>
-
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          {indice.length > 1 && (
-            <nav aria-label="Indice" className="osso osso-sm p-5">
-              <ul className="space-y-2 text-sm">
-                {indice.map((h) => (
-                  <li key={h.id}>
-                    <a href={`#${h.id}`} className="text-grafite hover:text-petrolio">
-                      {h.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
-          {doveSiTratta.length > 0 && (
-            <div className="osso osso-sm p-5">
-              <p className="eyebrow mb-3">{m.cosaCuro.doveSiTratta}</p>
-              <ul className="space-y-2 text-[0.95rem]">
-                {doveSiTratta.map((sd) => (
-                  <li key={sd.slug}>
-                    <Link href={href(l, { kind: "dove", slug: sd.slug })} className="group flex items-start gap-2 hover:text-petrolio">
-                      <Segno nome="pin" size={16} className="mt-1 shrink-0 text-nebbia group-hover:text-petrolio" />
-                      <span>
-                        <span className="font-medium">{sd.citta}</span>
-                        <span className="block text-sm text-grafite">{sd.nome}</span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {citati.length > 0 && (
-            <div className="osso osso-sm p-5">
-              <p className="eyebrow mb-3">{m.cosaCuro.pubblicazioniCorrelate}</p>
-              <ul className="space-y-3 text-[0.95rem]">
-                {citati.map((x) => (
-                  <li key={x.slug}>
-                    <Link href={href(l, { kind: "paper", slug: x.slug })} className="hover:text-petrolio">
-                      <span className="serif block leading-snug">{pick(x.titoloBreve, l) || x.titolo}</span>
-                      <span className="text-xs text-grafite">
-                        {x.rivista}, {x.anno}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </aside>
       </div>
 
       {correlate.length > 0 && (

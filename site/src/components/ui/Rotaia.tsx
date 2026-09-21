@@ -7,7 +7,7 @@ import { Segno } from "@/components/ui/Segno";
  * Rotaia: schede in fila che scorrono in orizzontale, a scatti, a filo del bordo destro della finestra.
  * Sotto, una linea che mostra dove sei e due frecce. Il resto è scroll nativo: trackpad, dito, rotella.
  */
-export function Rotaia({ children, indietro, avanti }: { children: ReactNode; indietro: string; avanti: string }) {
+export function Rotaia({ children, indietro, avanti, className = "" }: { children: ReactNode; indietro: string; avanti: string; className?: string }) {
   const ref = useRef<HTMLUListElement>(null);
   const [stato, setStato] = useState({ pos: 0, frazione: 1 });
 
@@ -51,7 +51,7 @@ export function Rotaia({ children, indietro, avanti }: { children: ReactNode; in
 
   return (
     <div>
-      <ul ref={ref} className="rotaia">
+      <ul ref={ref} className={`rotaia ${className}`}>
         {children}
       </ul>
       {scorre && (

@@ -119,7 +119,9 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 - **Cosa curo a tre colonne**; **Come si opera** è metodo, fascia a sé.
 - **Ritratto in bianco e nero**, mezzo busto in posa, a tutta altezza del testo in Chi sono: direzione anche per lo shooting.
 - **Approfondimenti** è il solo nome della sezione: «quaderno» non esiste, nemmeno nel codice.
-- **Paper**: testo integrale solo se open access (5 su 7); con copyright dell’editore, solo abstract.
+- **Paper**: testo integrale solo se open access (5 su 7); con copyright dell’editore, solo abstract. Approvato da Mauro, da fare **dopo**.
+- **Pagina patologia**: sommario sticky a sinistra con voce che si accende; Dove, Ne ho scritto qui e FAQ nel flusso dell'articolo, non in colonna.
+- **Recensioni**: citazioni tipografiche una alla volta, virgolette in petrolio chiaro, piattaforma e stelle in eyebrow. Campo `stelle` in Keystatic.
 
 ## Fuori v1 (annotato, non costruito)
 

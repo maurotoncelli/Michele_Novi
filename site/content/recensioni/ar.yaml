@@ -4,6 +4,7 @@ testo:
   it: 'Che dire del dottor Michele Novi: il numero uno in tutto e per tutto.'
   en: 'What can I say about Dr Michele Novi: first-rate in every respect.'
 piattaforma: Doctolib
+stelle: 5
 data: null
 peso: 20
 mostra: true

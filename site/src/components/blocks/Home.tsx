@@ -12,6 +12,7 @@ import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
 import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
 import { Rotaia } from "@/components/ui/Rotaia";
+import { Stelle } from "@/components/ui/Stelle";
 import { Sezione } from "./Pagina";
 
 /* ------------------------------------------------------------------ Hero: due colonne, la foto è un ritratto, non uno sfondo */
@@ -193,41 +194,41 @@ export function FasciaPercorso({ profilo, home, locale }: { profilo: Profilo; ho
   );
 }
 
-/* ------------------------------------------------------------------ 04 Recensioni: una grande, due a lato */
+/* ------------------------------------------------------------------ 04 Recensioni: citazioni tipografiche, una alla volta in rotaia */
 export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recensione[]; locale: Locale }) {
   const m = getMessages(locale);
-  const voci = recensioni.slice(0, 3);
+  const voci = recensioni.slice(0, 6);
   if (!voci.length) return null;
-  const [prima, ...altre] = voci;
   const piattaforme = [...new Set(recensioni.map((r) => r.piattaforma).filter(Boolean))];
   const eyebrow = piattaforme.length ? `${m.home.recensioniEyebrow} · ${piattaforme.join(", ")}` : m.home.recensioniEyebrow;
   return (
     <Sezione indice="04" eyebrow={eyebrow} titolo={m.home.recensioniTitolo} misura="affermazione">
-      <div className="grid gap-14 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-24">
-        <Reveal as="figure" className="relative">
-          <span aria-hidden="true" className="absolute -left-2 -top-10 select-none text-[7rem] leading-none text-osso-3 md:-top-14 md:text-[10rem]">
-            “
-          </span>
-          <blockquote className="citazione relative text-inchiostro">{pick(prima.testo, locale)}</blockquote>
-          <figcaption className="mt-7 text-[0.95rem] text-grafite">
-            <span className="font-semibold text-inchiostro">{prima.nome}</span>
-            {prima.piattaforma ? ` · ${prima.piattaforma}` : ""}
-          </figcaption>
-        </Reveal>
-        {altre.length > 0 && (
-          <div className="grid content-start gap-10 lg:pt-3">
-            {altre.map((r, i) => (
-              <Reveal key={r.slug} as="figure" delay={120 + i * 90}>
-                <blockquote className="text-[1.08rem] leading-relaxed">“{pick(r.testo, locale)}”</blockquote>
-                <figcaption className="mt-3 text-sm text-grafite">
-                  <span className="font-semibold text-inchiostro">{r.nome}</span>
-                  {r.piattaforma ? ` · ${r.piattaforma}` : ""}
-                </figcaption>
-              </Reveal>
-            ))}
-          </div>
-        )}
-      </div>
+      <Reveal>
+        <Rotaia className="rotaia-intera" indietro={m.cta.indietro} avanti={m.cta.avanti}>
+          {voci.map((r) => {
+            const stelle = r.stelle ?? 5;
+            return (
+              <li key={r.slug} className="min-w-0">
+                <figure className="grid gap-4 md:grid-cols-[minmax(0,5.5rem)_minmax(0,1fr)] md:gap-8 lg:grid-cols-[minmax(0,7rem)_minmax(0,1fr)]">
+                  <span aria-hidden="true" className="virgolette md:pt-3">
+                    “
+                  </span>
+                  <div className="min-w-0">
+                    <p className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
+                      {r.piattaforma && <span>{r.piattaforma}</span>}
+                      <Stelle n={stelle} label={m.home.stelleLabel.replace("{n}", String(stelle))} className="text-petrolio" />
+                    </p>
+                    <blockquote className="citazione mt-5 max-w-3xl text-inchiostro">{pick(r.testo, locale)}</blockquote>
+                    <figcaption className="mt-7 text-[0.95rem] text-grafite">
+                      <span className="font-medium text-inchiostro">{r.nome}</span>
+                    </figcaption>
+                  </div>
+                </figure>
+              </li>
+            );
+          })}
+        </Rotaia>
+      </Reveal>
     </Sezione>
   );
 }

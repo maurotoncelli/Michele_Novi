@@ -42,6 +42,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Le rotaie al vivo usano 100vw: con la barra verticale sfonderebbero di qualche pixel. */
+  overflow-x: clip;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -305,10 +307,10 @@ p {
 }
 @keyframes fluttua {
   from {
-    transform: translateY(var(--fluttua-da, 7%)) scale(1.04);
+    transform: translateY(var(--fluttua-da, 7%)) scale(var(--fluttua-scala, 1.04));
   }
   to {
-    transform: translateY(var(--fluttua-a, -7%)) scale(1.04);
+    transform: translateY(var(--fluttua-a, -7%)) scale(var(--fluttua-scala, 1.04));
   }
 }
 
@@ -676,6 +678,56 @@ a.osso:hover,
   .binario {
     column-gap: 3rem;
   }
+}
+
+/* Rotaia: fila orizzontale a filo dei bordi della finestra, dentro un contenitore centrato.
+   Il margine negativo la porta al vivo; il padding riporta la prima scheda in colonna col titolo. */
+.rotaia {
+  /* Distanza dal bordo della finestra al contenuto del .contenitore (max 76rem, gutter clamp). */
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --sbordo: max(var(--gutter), calc((100vw - 76rem) / 2 + var(--gutter)));
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--sbordo));
+  padding-inline: var(--sbordo);
+  scroll-padding-inline: var(--sbordo);
+  padding-bottom: 0.25rem;
+}
+.rotaia::-webkit-scrollbar {
+  display: none;
+}
+.rotaia > * {
+  flex: 0 0 clamp(16rem, 76vw, 20rem);
+  scroll-snap-align: start;
+}
+@media (min-width: 40rem) {
+  .rotaia > * {
+    flex-basis: clamp(17rem, 23vw, 20rem);
+  }
+}
+.rotaia-freccia {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-linea);
+  color: var(--color-inchiostro);
+  transition:
+    border-color 0.3s var(--ease-osso),
+    color 0.3s var(--ease-osso),
+    opacity 0.3s var(--ease-osso);
+}
+.rotaia-freccia:hover:not(:disabled) {
+  border-color: var(--color-petrolio);
+  color: var(--color-petrolio);
+}
+.rotaia-freccia:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 /* Hub Dove: due colonne della stessa misura, righe allineate (subgrid). */

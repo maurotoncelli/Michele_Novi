@@ -182,6 +182,13 @@ export default config({
           itemLabel: (p) => p.value,
         }),
         comeValuto: testo("Come valuto (paragrafo)", { multiline: true }),
+        comeValutoPassi: fields.array(
+          fields.object({
+            titolo: testo("Titolo"),
+            testo: testo("Una riga", { multiline: true }),
+          }),
+          { label: "Come valuto: i passi della visita (tre)", itemLabel: (p) => p.fields.titolo.fields.it.value },
+        ),
         territorio: testo("Territorio e didattica (paragrafo)", { multiline: true }),
         lingue: fields.array(fields.text({ label: "Lingua" }), { label: "Lingue", itemLabel: (p) => p.value }),
         seo,

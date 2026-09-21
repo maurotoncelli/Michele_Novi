@@ -3,7 +3,7 @@ import Image from "next/image";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import type { Home, Nota, Patologia, Profilo, Pubblicazione, Recensione, Sede, Settings } from "@/lib/content";
-import { slugNota, slugPatologia, telHref, waHref } from "@/lib/content";
+import { slugPatologia, telHref, waHref } from "@/lib/content";
 import { srcMedia } from "@/lib/media";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
@@ -11,6 +11,7 @@ import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
 import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
+import { Rotaia } from "@/components/ui/Rotaia";
 import { Sezione } from "./Pagina";
 
 /* ------------------------------------------------------------------ Hero: due colonne, la foto è un ritratto, non uno sfondo */
@@ -231,56 +232,25 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
   );
 }
 
-/* ------------------------------------------------------------------ 05 Approfondimenti: un pezzo grande, gli altri in lista */
+/* ------------------------------------------------------------------ 05 Approfondimenti: sette schede in rotaia */
 type Voce = { tipo: "paper"; item: Pubblicazione } | { tipo: "nota"; item: Nota };
-
-function RigaVoce({ v, locale }: { v: Voce; locale: Locale }) {
-  const m = getMessages(locale);
-  if (v.tipo === "paper") {
-    const p = v.item;
-    return (
-      <Link href={href(locale, { kind: "paper", slug: p.slug })} className="group grid grid-cols-[4rem_minmax(0,1fr)] gap-4 py-6 first:pt-0">
-        <span className="pt-1 text-sm text-grafite">{p.anno}</span>
-        <span className="min-w-0">
-          <span className="tag tag-petrolio">{m.quaderno.paper}</span>
-          <span className="mt-3 block text-[1.15rem] leading-snug group-hover:text-petrolio">{pick(p.titoloBreve, locale) || p.titolo}</span>
-          <span className="mt-1.5 block truncate text-sm text-grafite">{p.rivista}</span>
-        </span>
-      </Link>
-    );
-  }
-  const n = v.item;
-  return (
-    <Link href={href(locale, { kind: "nota", slug: slugNota(n, locale) })} className="group grid grid-cols-[4rem_minmax(0,1fr)] gap-4 py-6 first:pt-0">
-      <span className="pt-1 text-sm text-grafite">{n.data ? new Date(n.data).getFullYear() : ""}</span>
-      <span className="min-w-0">
-        <span className="tag tag-rame">{m.quaderno.nota}</span>
-        <span className="mt-3 block text-[1.15rem] leading-snug group-hover:text-petrolio">{pick(n.titolo, locale)}</span>
-        {pick(n.lead, locale) && <span className="mt-1.5 line-clamp-2 block text-sm text-grafite">{pick(n.lead, locale)}</span>}
-      </span>
-    </Link>
-  );
-}
 
 export function FasciaQuaderno({ voci, locale }: { voci: Voce[]; locale: Locale }) {
   const m = getMessages(locale);
   if (!voci.length) return null;
-  const grande = voci.find((v) => v.tipo === "nota") ?? voci[0];
-  const resto = voci.filter((v) => v !== grande).slice(0, 4);
+  // Le note dal lavoro davanti, poi i paper: sette schede in fila, il resto nell'hub a griglia.
+  const fila = [...voci.filter((v) => v.tipo === "nota"), ...voci.filter((v) => v.tipo === "paper")].slice(0, 7);
   return (
-    <Sezione indice="05" eyebrow={m.nav.quaderno} titolo={m.home.quadernoTitolo} lead={m.home.quadernoLead} azione={{ href: href(locale, { kind: "quaderno" }), label: m.cta.tutte }} tinta="osso">
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-20">
-        <Reveal className="min-w-0">
-          {grande.tipo === "paper" ? <SchedaPaper p={grande.item} locale={locale} grande /> : <SchedaNota n={grande.item} locale={locale} grande />}
-        </Reveal>
-        {resto.length > 0 && (
-          <Reveal delay={120} className="divide-y divide-linea self-start">
-            {resto.map((v) => (
-              <RigaVoce key={v.item.slug} v={v} locale={locale} />
-            ))}
-          </Reveal>
-        )}
-      </div>
+    <Sezione indice="05" eyebrow={m.nav.quaderno} titolo={m.home.quadernoTitolo} lead={m.home.quadernoLead} azione={{ href: href(locale, { kind: "quaderno" }), label: m.cta.vediGriglia }} tinta="osso">
+      <Reveal>
+        <Rotaia indietro={m.cta.indietro} avanti={m.cta.avanti}>
+          {fila.map((v) => (
+            <li key={`${v.tipo}-${v.item.slug}`} className="min-w-0">
+              {v.tipo === "paper" ? <SchedaPaper p={v.item} locale={locale} /> : <SchedaNota n={v.item} locale={locale} />}
+            </li>
+          ))}
+        </Rotaia>
+      </Reveal>
     </Sezione>
   );
 }

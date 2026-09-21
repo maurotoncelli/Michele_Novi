@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { annoPercorso, getProfilo, getPubblicazioni, getSedi, getSettings, tipoPercorso } from "@/lib/content";
+import { annoPercorso, getHome, getProfilo, getPubblicazioni, getSedi, getSettings, tipoPercorso } from "@/lib/content";
+import { VideoLastra } from "@/components/ui/VideoLastra";
 import { breadcrumbJsonLd, buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
@@ -38,7 +40,7 @@ function spezza(testo: string): { titolo: string; resto: string } {
 export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-sono">) {
   const { locale } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [s, p, paper, sedi] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni(), getSedi()]);
+  const [s, p, paper, sedi, home] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni(), getSedi(), getHome()]);
   const m = getMessages(l);
   const principali = paper.filter((x) => x.principale);
   const listaPaper = (principali.length ? principali : paper).map((x) => ({
@@ -66,6 +68,9 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
 
   const ritratto = srcMedia(p.ritratto?.src, "profilo");
   const manifesto = pick(p.comeValuto, l) ? spezza(pick(p.comeValuto, l)) : null;
+  const passi = (p.comeValutoPassi ?? []).filter((v) => pick(v.titolo, l));
+  const lavoroFoto = srcMedia(home.lavoro?.foto?.src, "home");
+  const lavoroVideo = home.lavoro?.video ? (home.lavoro.video.startsWith("/") ? home.lavoro.video : `/videos/${home.lavoro.video}`) : null;
   const tappe = (p.inEvidenza ?? []).filter((v) => pick(v.titolo, l));
   const [prima, ...altre] = tappe;
 
@@ -92,26 +97,26 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
       />
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.chiSono.titolo }]} />
 
-      {/* 1. Apertura: ritratto 4:5 a sinistra, il testo pesa. */}
+      {/* 1. Apertura: il ritratto a sinistra prende tutta l'altezza del testo; i fatti chiudono in basso, allineati al bordo della foto. */}
       <section className="contenitore pb-16 pt-8 md:pb-24 md:pt-12">
         <Reveal immediate>
-          <div className="grid gap-10 md:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] md:items-start md:gap-14 lg:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] lg:gap-20">
-            <div className="relative aspect-[4/5] w-full max-w-[13rem] overflow-hidden bg-osso-2 md:max-w-none">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] md:items-stretch md:gap-14 lg:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] lg:gap-20">
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-osso-2 md:aspect-auto md:h-full md:min-h-[28rem]">
               {ritratto ? (
-                <Image src={ritratto} alt={pick(p.ritratto?.alt, l) || m.a11y.ritrattoDi} fill priority sizes="(min-width: 1024px) 16rem, 13rem" className="object-cover object-top" />
+                <Image src={ritratto} alt={pick(p.ritratto?.alt, l) || m.a11y.ritrattoDi} fill priority sizes="(min-width: 1024px) 23rem, (min-width: 768px) 19rem, 100vw" className="object-cover object-top" />
               ) : (
                 <div className="absolute inset-0 grid place-items-center text-petrolio/50">
                   <Segno nome="spalla" size={80} strokeWidth={1} />
                 </div>
               )}
             </div>
-            <div className="min-w-0">
+            <div className="flex min-w-0 flex-col">
               <p className="eyebrow mb-5">{m.chiSono.titolo}</p>
               <h1 className="display-l">{p.nome}</h1>
               {pick(p.titolo, l) && <p className="mt-5 max-w-lg text-[1.15rem] leading-snug text-grafite md:text-[1.25rem]">{pick(p.titolo, l)}</p>}
               <p className="lead mt-8 max-w-2xl text-inchiostro">{pick(p.apertura, l)}</p>
               {fatti.length > 0 && (
-                <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-linea pt-6 text-sm text-grafite">
+                <ul className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-linea pt-6 text-sm text-grafite max-md:mt-10 md:pt-6">
                   {fatti.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
@@ -122,9 +127,36 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
         </Reveal>
       </section>
 
-      {/* 2. Manifesto: la frase più forte della pagina, da sola. */}
+      {/* 2. Come valuto: la frase forte come titolo; sotto, la lastra del lavoro e i tre passi della visita. */}
       {manifesto && (
-        <Sezione eyebrow={m.chiSono.comeValuto} titolo={manifesto.titolo} lead={manifesto.resto || undefined} tinta="osso" misura="affermazione" />
+        <Sezione eyebrow={m.chiSono.comeValuto} titolo={manifesto.titolo} lead={(passi.length && manifesto.resto ? spezza(manifesto.resto).titolo : manifesto.resto) || undefined} tinta="osso" misura="varco">
+          {(passi.length > 0 || lavoroFoto) && (
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-24">
+              {lavoroFoto && (
+                <Reveal className="self-start">
+                  <div className="fluttua" style={{ "--fluttua-da": "5%", "--fluttua-a": "-5%", "--fluttua-scala": "1" } as CSSProperties}>
+                    <VideoLastra video={lavoroVideo} foto={lavoroFoto} alt={pick(home.lavoro?.foto?.alt, l) || m.chiSono.comeValuto} ratio="4/5" sizes="(min-width: 1024px) 34vw, 100vw" />
+                  </div>
+                </Reveal>
+              )}
+              {passi.length > 0 && (
+                <ol className="divide-y divide-linea self-start">
+                  {passi.map((v, i) => (
+                    <Reveal key={i} as="li" delay={i * 130} className="grid grid-cols-[4rem_minmax(0,1fr)] gap-6 py-9 first:pt-0 last:pb-0 md:grid-cols-[5.5rem_minmax(0,1fr)] md:py-11">
+                      <span className="cifra-m pt-1 text-rame" aria-hidden="true">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="text-[1.5rem] leading-tight md:text-[1.9rem]">{pick(v.titolo, l)}</h3>
+                        {pick(v.testo, l) && <p className="lead mt-4 max-w-xl">{pick(v.testo, l)}</p>}
+                      </div>
+                    </Reveal>
+                  ))}
+                </ol>
+              )}
+            </div>
+          )}
+        </Sezione>
       )}
 
       {/* 3. Cinque tappe: Harvard grande, le altre in colonna. */}

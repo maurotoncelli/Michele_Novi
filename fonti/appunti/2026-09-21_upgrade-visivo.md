@@ -85,6 +85,12 @@ Riferimento portato dal cliente: skyclinics.al (Vite, Lenis, WebGL, cinque video
 - **Tre colonne** (`SchedaPatologia colonna`): Spalla, Gomito e mano, Traumatologia sportiva una accanto all'altra. Lastra 4/5 alta, indice 01–03, titolo grande, lead intero, città, «Scopri» con freccia. Entrano a scatti di 130ms. Il disegno **fluttua** dentro la lastra mentre la si attraversa (`animation-timeline: view()`, `.fluttua`, velocità diverse per colonna via `--fluttua-da/--fluttua-a`); all'hover la lastra vira al petrolio chiaro e il disegno cresce.
 - **Binario su mobile** (`.binario`): sotto 640px le tre colonne scorrono in orizzontale a scatti (76vw ciascuna, snap, gutter rispettato con `scroll-padding-inline`); da sm in su è griglia a tre.
 
+### Chi sono e Approfondimenti
+
+- **Apertura Chi sono**: il ritratto prende tutta l'altezza del testo (colonna 19rem/23rem, `h-full`, minimo 28rem); la riga dei fatti chiude in basso col `mt-auto`, allineata al bordo della foto. Ritratto provvisorio **in bianco e nero** generato (`profilo/ritratto-bn.jpg`, mezzo busto in posa, fondo neutro): da sostituire con lo shooting, alt già scritto.
+- **Come valuto** non è più una frase sola: `misura="varco"` con titolo display-l, sotto la lastra del lavoro (stessa `home.lavoro`, video se c'è) che fluttua allo scroll, e i **tre passi della visita** numerati 01–03 in rame (`profilo.comeValutoPassi`, campo nuovo in Keystatic: titolo + una riga, IT/EN). Il lead mostra solo la seconda frase del paragrafo, la terza è diventata i passi.
+- **Approfondimenti in rotaia** (`ui/Rotaia.tsx` + `.rotaia`): sette schede in fila orizzontale a filo del bordo destro della finestra, snap, linea di avanzamento e due frecce tonde; scroll nativo con trackpad e dito. Note dal lavoro prima, poi i paper. Il bottone della fascia diventa «Vedi tutto in griglia» e porta all'hub `/quaderno`, già a tre colonne con i tab. Per farla sbordare dentro il contenitore centrato: `--sbordo = max(gutter, (100vw − 76rem)/2 + gutter)` usato per margine, padding e `scroll-padding`; `html { overflow-x: clip }` assorbe la barra verticale.
+
 ## Cosa resta
 
 - Shooting: sostituire i placeholder (ritratto, quattro sedi). Nomi file e alt già predisposti.

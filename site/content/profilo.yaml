@@ -14,10 +14,10 @@ apertura:
     limb, with the shoulder at its centre. At the first visit I try to understand one thing only: which path is
     right for that person, not which operation could be done.
 ritratto:
-  src: ritratto-placeholder.jpg
+  src: ritratto-bn.jpg
   alt:
-    it: Placeholder — da sostituire con il ritratto del Dott. Michele Novi
-    en: Placeholder — replace with Dr Michele Novi's portrait
+    it: Ritratto in bianco e nero del Dott. Michele Novi (immagine provvisoria, da sostituire con lo shooting)
+    en: Black and white portrait of Dr Michele Novi (temporary image, to be replaced after the shoot)
 inEvidenza:
   - anno: '2025'
     titolo:
@@ -169,6 +169,25 @@ comeValuto:
     The first visit can change the path. Often someone who arrives with a "replacement" diagnosis can be
     treated another way, and someone who has postponed for years finds surgery is simpler than feared.
     We look at the images together, I explain what I see and what I do not, and we decide the path.
+comeValutoPassi:
+  - titolo:
+      it: Guardo le immagini con te
+      en: We look at the images together
+    testo:
+      it: Radiografie, risonanza, ecografia fatta in visita. Sullo schermo, insieme, non in un referto da leggere a casa.
+      en: X-rays, MRI, ultrasound done during the visit. On the screen, together, not in a report to read at home.
+  - titolo:
+      it: Ti dico cosa vedo e cosa non vedo
+      en: I tell you what I see and what I do not
+    testo:
+      it: Una diagnosi ha sempre un margine. Lo dico chiaro, con le parole che servono a decidere.
+      en: Every diagnosis has a margin. I say it plainly, in the words needed to decide.
+  - titolo:
+      it: Decidiamo il percorso
+      en: We decide the path
+    testo:
+      it: "Curare, aspettare o operare. E se operare, come. Con i tempi di recupero già chiari prima di uscire."
+      en: "Treat, wait or operate. And if operate, how. With recovery times clear before you leave."
 territorio:
   it: >-
     In Valdera partecipo a iniziative di prevenzione e screening ortopedico per il territorio, e tengo lezioni

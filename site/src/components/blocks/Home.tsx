@@ -7,6 +7,9 @@ import { slugNota, slugPatologia, telHref, waHref } from "@/lib/content";
 import { srcMedia } from "@/lib/media";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
+import { Contatore } from "../ui/Contatore";
+import { VideoLastra } from "../ui/VideoLastra";
+import { PercorsoScorrevole } from "./PercorsoScorrevole";
 import { ModuloSede, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
 import { Sezione } from "./Pagina";
 
@@ -94,7 +97,7 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
           <Reveal key={f.label} as="li" delay={i * 90} className="min-w-0">
             <p className="cifra flex items-baseline gap-2">
               {f.prefisso && <span className="text-[0.32em] font-medium tracking-normal text-grafite">{f.prefisso}</span>}
-              {f.valore}
+              <Contatore valore={f.valore} />
             </p>
             <p className="mt-4 max-w-[13rem] text-[0.95rem] leading-snug text-grafite">{f.label}</p>
           </Reveal>
@@ -153,38 +156,27 @@ export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
 }
 
 /* ------------------------------------------------------------------ 03 Percorso: luoghi e anni, non aggettivi */
-export function FasciaPercorso({ profilo, locale }: { profilo: Profilo; locale: Locale }) {
+export function FasciaPercorso({ profilo, home, locale }: { profilo: Profilo; home?: Home; locale: Locale }) {
   const m = getMessages(locale);
-  const tappe = (profilo.inEvidenza ?? []).filter((v) => pick(v.titolo, locale));
+  const tappe = (profilo.inEvidenza ?? [])
+    .filter((v) => pick(v.titolo, locale))
+    .map((v) => ({ anno: v.anno ?? "", titolo: pick(v.titolo, locale), testo: pick(v.testo, locale) }));
   if (!tappe.length) return null;
-  const [prima, ...altre] = tappe;
+  const lavoro = home?.lavoro;
+  const foto = srcMedia(lavoro?.foto?.src, "home");
+  const video = lavoro?.video ? (lavoro.video.startsWith("/") ? lavoro.video : `/videos/${lavoro.video}`) : null;
   return (
     <Sezione indice="03" eyebrow={m.home.fiduciaEyebrow} titolo={m.home.fiduciaTitolo} lead={m.home.fiduciaLead} azione={{ href: href(locale, { kind: "chiSono" }), label: m.nav.chiSono }} tinta="osso" misura="varco">
-      <div className="grid gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-24">
-        <Reveal className="relative">
-          <span aria-hidden="true" className="cifra-fondo">
-            {prima.anno}
-          </span>
-          <div className="relative pt-[clamp(4rem,10vw,9rem)]">
-            <p className="eyebrow text-rame">{prima.anno}</p>
-            <h3 className="display-m mt-4">{pick(prima.titolo, locale)}</h3>
-            <p className="lead mt-5 max-w-xl">{pick(prima.testo, locale)}</p>
-          </div>
-        </Reveal>
-        {altre.length > 0 && (
-          <ol className="divide-y divide-linea lg:pt-[clamp(4rem,10vw,9rem)]">
-            {altre.map((v, i) => (
-              <Reveal key={i} as="li" delay={i * 90} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-4 py-6 first:pt-0">
-                <span className="eyebrow pt-1.5">{v.anno}</span>
-                <div className="min-w-0">
-                  <h3 className="text-[1.2rem] leading-snug">{pick(v.titolo, locale)}</h3>
-                  {pick(v.testo, locale) && <p className="mt-1.5 text-[0.95rem] leading-relaxed text-grafite">{pick(v.testo, locale)}</p>}
-                </div>
-              </Reveal>
-            ))}
-          </ol>
-        )}
-      </div>
+      <PercorsoScorrevole
+        tappe={tappe}
+        media={
+          foto || video ? (
+            <Reveal>
+              <VideoLastra video={video} foto={foto} alt={pick(lavoro?.foto?.alt, locale) || m.a11y.ritrattoDi} ratio="4/5" sizes="(min-width: 1024px) 34vw, 24rem" />
+            </Reveal>
+          ) : undefined
+        }
+      />
     </Sezione>
   );
 }

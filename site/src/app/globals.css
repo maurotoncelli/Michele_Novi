@@ -248,6 +248,67 @@ p {
     transform: translate3d(0, 9%, 0) scale(1.06);
   }
 }
+
+/* Hero che si posa: scendendo, il ritratto a vivo rientra nei margini e il testo sale.
+   Solo CSS scroll-driven, solo desktop, solo senza reduced-motion. Altrove resta fermo. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .hero-media {
+      animation: hero-posa linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 85vh;
+    }
+    .hero-testo > * {
+      animation: hero-sale linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 85vh;
+    }
+  }
+}
+@keyframes hero-posa {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(9% 7% 9% 7%);
+  }
+}
+@keyframes hero-sale {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-2.5rem);
+    opacity: 0.35;
+  }
+}
+
+/* Trama: griglia di punti appena percettibile sulle fasce osso. Dà profondità senza rumore. */
+.trama {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-inchiostro) 7%, transparent) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+}
+
+/* Cifra che cambia (Percorso sticky): entra dal basso. */
+.anno-entra {
+  animation: anno-entra 0.5s var(--ease-osso) both;
+}
+@keyframes anno-entra {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anno-entra {
+    animation: none;
+  }
+}
 }
 
 /* Classi componente: in @layer components, così le utility Tailwind (hidden, md:flex…) vincono sempre. */
@@ -351,6 +412,18 @@ a.osso:hover,
 }
 .btn-ghost:hover {
   background: var(--color-petrolio-3);
+}
+/* La freccia nei bottoni scorre di poco all'hover. */
+.btn svg[data-segno="freccia"] {
+  transition: transform 0.45s var(--ease-osso);
+}
+.btn:hover svg[data-segno="freccia"] {
+  transform: translateX(4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover svg[data-segno="freccia"] {
+    transform: none;
+  }
 }
 
 /* Tag / etichette */

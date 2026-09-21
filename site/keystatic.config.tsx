@@ -197,6 +197,16 @@ export default config({
         titolo: testo("Titolo (H1)", { required: true }),
         sottotitolo: testo("Sottotitolo", { multiline: true }),
         ritratto: immagine("Ritratto hero", "home"),
+        lavoro: fields.object(
+          {
+            foto: immagine("Foto del lavoro (ambulatorio, sala, ecografo)", "home"),
+            video: fields.text({
+              label: "Video breve (opzionale)",
+              description: "File in public/videos, es. «sala.mp4». Muto, in loop, 8–10 secondi. Se vuoto si usa la foto.",
+            }),
+          },
+          { label: "Fascia Percorso: lastra a sinistra" },
+        ),
         fiducia: fields.array(
           fields.object({ testo: testo("Voce"), segno: fields.select({ label: "Segno", options: SEGNI, defaultValue: "ospedale" }) }),
           { label: "Perché fidarsi (4–5 voci)", itemLabel: (p) => p.fields.testo.fields.it.value },

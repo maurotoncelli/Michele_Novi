@@ -49,7 +49,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           case "sedi":
             return <FasciaSedi key={tipo} sedi={sedi} locale={l} />;
           case "fiducia":
-            return <FasciaPercorso key={tipo} profilo={profilo} locale={l} />;
+            return <FasciaPercorso key={tipo} profilo={profilo} home={home} locale={l} />;
           case "recensioni":
             return <FasciaRecensioni key={tipo} recensioni={recensioni} locale={l} />;
           case "quaderno":

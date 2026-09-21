@@ -12,6 +12,13 @@ ritratto:
   alt:
     it: Placeholder — da sostituire con il ritratto del Dott. Michele Novi
     en: Placeholder — replace with Dr Michele Novi's portrait
+lavoro:
+  foto:
+    src: lavoro-placeholder.jpg
+    alt:
+      it: Placeholder — da sostituire con una foto del lavoro in ambulatorio o in sala
+      en: Placeholder — replace with a photo of the work in clinic or theatre
+  video: ''
 fiducia:
   - testo:
       it: Dirigente medico, Ortopedia Protesica — Ospedale San Pietro Igneo, Fucecchio

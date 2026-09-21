@@ -67,6 +67,17 @@ Apertura (ritratto 4:5, nome display-l, apertura come lead, riga fatti: albo · 
 - Contatti: sedi come lista compatta con miniatura (`ModuloSede compatto`), non più 2×2 con foto grandi.
 - Chi sono: ritratto a 13rem/16rem, non più 19/24.
 
+## Terza passata: movimento in home (ramo `versione-miaobau`)
+
+Riferimento portato dal cliente: skyclinics.al (Vite, Lenis, WebGL, cinque video). Preso il gesto, lasciato il peso: niente librerie, niente canvas, niente smooth-scroll dirottato.
+
+- **Hero che si posa**: scendendo, il ritratto a vivo rientra nei margini (`clip-path` inset) e il testo sale e si attenua. `animation-timeline: scroll(root)`, solo ≥1024px e senza reduced-motion. Altrove sta fermo. In `globals.css`: `hero-posa`, `hero-sale`.
+- **Cifre che si contano** (`ui/Contatore.tsx`): la riga dei fatti parte da zero (gli anni da 24 prima) quando entra in vista, ~1.1s ease-out. Il server rende il valore finale: senza JS non cambia niente.
+- **Percorso a scorrimento** (`blocks/PercorsoScorrevole.tsx`): a sinistra sticky l'anno grande (cambia con `anno-entra`) e la lastra del lavoro; a destra le tappe, quella a metà schermo accesa, le altre al 35%. Sotto 1024px scorre normale, tutto a piena opacità.
+- **Lastra del lavoro** (`ui/VideoLastra.tsx`): video muto in loop se c'è (`home.lavoro.video`, file in `public/videos`), altrimenti la foto (`home.lavoro.foto`). Parte solo in vista, `preload="none"`. Oggi c'è il placeholder `lavoro-placeholder.jpg`.
+- **Trama**: griglia di punti al 7% sulle fasce osso (`.trama`, un `radial-gradient`).
+- **Frecce**: nei bottoni la freccia scorre di 4px all'hover (`svg[data-segno="freccia"]`).
+
 ## Cosa resta
 
 - Shooting: sostituire i placeholder (ritratto, quattro sedi). Nomi file e alt già predisposti.

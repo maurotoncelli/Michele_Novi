@@ -68,7 +68,7 @@ export function Sezione({
   const passo = grande ? "py-20 md:py-32" : "py-16 md:py-24";
   const sotto = children ? (grande ? "mb-14 md:mb-20" : "mb-10 md:mb-14") : "";
   return (
-    <section id={id} className={tinta === "osso" ? "bg-osso-3" : undefined}>
+    <section id={id} className={tinta === "osso" ? "bg-osso-3 trama" : undefined}>
       <div className={`contenitore ${passo} ${className}`}>
         {(titolo || eyebrow) && (
           <div className={`${sotto} grid gap-x-10 gap-y-6 ${grande ? "lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end" : "md:grid-cols-[minmax(0,1fr)_auto] md:items-end"}`}>

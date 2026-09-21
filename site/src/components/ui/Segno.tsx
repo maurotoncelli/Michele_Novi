@@ -270,6 +270,7 @@ export function Segno({ nome, size = 24, ...rest }: { nome: NomeSegno; size?: nu
       strokeLinejoin="round"
       aria-hidden="true"
       focusable="false"
+      data-segno={nome}
       {...rest}
     >
       {paths[nome] ?? paths.doc}

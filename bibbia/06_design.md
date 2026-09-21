@@ -109,7 +109,16 @@ Aperti: mano dei disegni, font con spina. Il ramo `restyling-osseo` (sagome) è 
 | Ritratto | `home.ritratto` → foto a tutto schermo. Oggi placeholder in `public/images/home/`. |
 | Disegni | `public/images/disegni/` + singleton Keystatic `disegni`. Nelle card ossee, non al posto delle card. |
 
+## Riferimenti visivi (in ordine di arrivo)
+
+| Data | Sito | Cosa prendere |
+|------|------|---------------|
+| 17/09 | Odyssée, Aesop | Presenza, lastre piatte, editoriale. |
+| 21/09 | [skyclinics.al](https://skyclinics.al) | Il gesto del movimento (hero che si posa, cifre, sticky), non lo stack. |
+| 21/09 sera | [grigoriak.doctor](https://grigoriak.doctor) (chirurgo plastico, Dubai; sito di Vide Infra) | **Fotografia**, non il tono: Mauro vuole prendere alcune immagini come riferimento per lo shooting, in particolare **il dottore con cuffia chirurgica e occhiali da lavoro** (loupe). Utile anche il modo in cui le foto entrano a tutto schermo e la sequenza «7 passi» con foto dedicata a ogni passo. Da ignorare: nero, oro, nudo, copy aspirazionale — il nostro registro resta osso, petrolio, fatti. |
+
 ## Shooting (incluso)
 
 Ritratto, studio, **foto di tutte e 4 le sedi** (lui: «da capire, foto di tutte»). Ingresso, come si arriva, parcheggio, scalini.  
+Riferimento per le pose da sala operatoria (cuffia, occhiali, mani): grigoriak.doctor, vedi tabella sopra.  
 Video: proposto in call come extra vantaggioso nel pacchetto; non è scritto chiaro nei 1.500 € — da chiudere in [10_offerta.md](10_offerta.md).

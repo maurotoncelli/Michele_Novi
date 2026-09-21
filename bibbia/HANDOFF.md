@@ -129,7 +129,7 @@ Il campo `abstract` è ora compilato per tutti e sette (prima era vuoto). Per ag
 1. Far **ricontrollare il cellulare** (348 4332733 detto vs 348 4331733 online). Poi `settings.telefono` / `whatsapp`.
 2. Dominio (cliente) → `settings.dominio`. Orari segreteria → `settings.orari`.
 3. 7 PDF paywall da Michele, se li vuole sul sito.
-4. URL delle 4 schede Google. Shooting ritratto (b/n, mezzo busto) + sedi + lavoro.
+4. URL delle 4 schede Google. Shooting ritratto (b/n, mezzo busto) + sedi + lavoro. Riferimento fotografico per le pose in sala (cuffia, occhiali da lavoro): **grigoriak.doctor**, annotato in [06_design.md](06_design.md#riferimenti-visivi-in-ordine-di-arrivo); Mauro vuole prenderne alcune immagini.
 5. Far validare le bozze `site/content/patologie/*`.
 6. **Far validare a Michele i testi in prima persona scritti il 21/09** (sono in Keystatic/messages, non nel codice): titoli-affermazione delle fasce home (`home.*Titolo`), i tre **passi della visita** (`profilo.comeValutoPassi`), la riga del **metodo** (`cosaCuro.metodoLead`: «Prima di dire come si opera, si decide se operare…»), la chiusura di Cosa curo, le tappe del Percorso.
 

@@ -32,7 +32,7 @@ Copia `.env.example` in `.env.local`. Nessuna variabile ù obbligatoria per il bu
 ```
 content/            dati (YAML + Markdoc) gestiti da Keystatic ù unica fonte dei contenuti
 public/images/disegni/  disegni del catalogo (singleton Keystatic `disegni`)
-keystatic.config.tsx  schema: settings, profilo, home ó sedi, patologie, pubblicazioni, approfondimenti (collection `quaderno`), faq, recensioni
+keystatic.config.tsx  schema: settings, profilo, home ó sedi, patologie, pubblicazioni, approfondimenti, faq, recensioni
 src/i18n/           routing.ts (slug tradotti), messages/{it,en}.json (stringhe UI), legale.ts
 src/lib/content.ts  unico punto di lettura dei dati (reader Keystatic + cache)
 src/lib/seo.ts      metadata, hreflang, JSON-LD

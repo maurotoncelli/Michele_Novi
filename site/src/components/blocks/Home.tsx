@@ -235,13 +235,13 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
 /* ------------------------------------------------------------------ 05 Approfondimenti: sette schede in rotaia */
 type Voce = { tipo: "paper"; item: Pubblicazione } | { tipo: "nota"; item: Nota };
 
-export function FasciaQuaderno({ voci, locale }: { voci: Voce[]; locale: Locale }) {
+export function FasciaApprofondimenti({ voci, locale }: { voci: Voce[]; locale: Locale }) {
   const m = getMessages(locale);
   if (!voci.length) return null;
   // Le note dal lavoro davanti, poi i paper: sette schede in fila, il resto nell'hub a griglia.
   const fila = [...voci.filter((v) => v.tipo === "nota"), ...voci.filter((v) => v.tipo === "paper")].slice(0, 7);
   return (
-    <Sezione indice="05" eyebrow={m.nav.quaderno} titolo={m.home.quadernoTitolo} lead={m.home.quadernoLead} azione={{ href: href(locale, { kind: "quaderno" }), label: m.cta.vediGriglia }} tinta="osso">
+    <Sezione indice="05" eyebrow={m.nav.approfondimenti} titolo={m.home.approfondimentiTitolo} lead={m.home.approfondimentiLead} azione={{ href: href(locale, { kind: "approfondimenti" }), label: m.cta.vediGriglia }} tinta="osso">
       <Reveal>
         <Rotaia indietro={m.cta.indietro} avanti={m.cta.avanti}>
           {fila.map((v) => (

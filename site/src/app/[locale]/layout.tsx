@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     description: m.meta.homeDescription,
     applicationName: m.meta.siteName,
     alternates: {
-      types: { "application/rss+xml": `${href(locale, { kind: "quaderno" })}/feed.xml` },
+      types: { "application/rss+xml": `${href(locale, { kind: "approfondimenti" })}/feed.xml` },
     },
   };
 }
@@ -66,8 +66,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             { label: m.nav.chiSono, href: href(l, { kind: "chiSono" }) },
             { label: m.nav.cosaCuro, href: href(l, { kind: "cosaCuro" }) },
             { label: m.nav.dove, href: href(l, { kind: "dove" }) },
-            { label: m.nav.quaderno, href: href(l, { kind: "quaderno" }) },
-            { label: m.nav.pubblicazioni, href: href(l, { kind: "quadernoPubblicazioni" }) },
+            { label: m.nav.approfondimenti, href: href(l, { kind: "approfondimenti" }) },
+            { label: m.nav.pubblicazioni, href: href(l, { kind: "approfondimentiPubblicazioni" }) },
             { label: m.nav.contatti, href: href(l, { kind: "contatti" }) },
           ]}
           tel={tel ? { href: tel, label: m.cta.chiama } : null}

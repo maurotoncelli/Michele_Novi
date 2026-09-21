@@ -91,6 +91,10 @@ Riferimento portato dal cliente: skyclinics.al (Vite, Lenis, WebGL, cinque video
 - **Come valuto** non è più una frase sola: `misura="varco"` con titolo display-l, sotto la lastra del lavoro (stessa `home.lavoro`, video se c'è) che fluttua allo scroll, e i **tre passi della visita** numerati 01–03 in rame (`profilo.comeValutoPassi`, campo nuovo in Keystatic: titolo + una riga, IT/EN). Il lead mostra solo la seconda frase del paragrafo, la terza è diventata i passi.
 - **Approfondimenti in rotaia** (`ui/Rotaia.tsx` + `.rotaia`): sette schede in fila orizzontale a filo del bordo destro della finestra, snap, linea di avanzamento e due frecce tonde; scroll nativo con trackpad e dito. Note dal lavoro prima, poi i paper. Il bottone della fascia diventa «Vedi tutto in griglia» e porta all'hub `/quaderno`, già a tre colonne con i tab. Per farla sbordare dentro il contenitore centrato: `--sbordo = max(gutter, (100vw − 76rem)/2 + gutter)` usato per margine, padding e `scroll-padding`; `html { overflow-x: clip }` assorbe la barra verticale.
 
+### «Quaderno» non esiste più
+
+Mauro (21/09): la sezione si chiama **Approfondimenti** e basta, in nessun posto «quaderno». Rinominato tutto nel codice: cartella `app/[locale]/approfondimenti/`, collezione Keystatic `approfondimenti` (`content/approfondimenti/`), immagini `public/images/approfondimenti/`, video `public/video/approfondimenti/`, componenti `TabApprofondimenti`/`ListaApprofondimenti`, chiavi messaggi (`nav.approfondimenti`, `home.approfondimentiTitolo`…), route kind `approfondimenti*`, disegno `approfondimenti.png`. Gli URL pubblici erano già `/it/approfondimenti` e `/en/in-depth`; `/quaderno`, `/notebook`, `/insights` restano solo come alias 301.
+
 ## Cosa resta
 
 - Shooting: sostituire i placeholder (ritratto, quattro sedi). Nomi file e alt già predisposti.

@@ -39,11 +39,11 @@ voci:
     alt:
       it: Disegno di una clinica
       en: Clinic drawing
-  - id: quaderno
-    file: quaderno.png
+  - id: approfondimenti
+    file: approfondimenti.png
     alt:
-      it: Disegno di un quaderno
-      en: Notebook drawing
+      it: Disegno di un taccuino aperto con appunti
+      en: Drawing of an open notebook with notes
   - id: globo
     file: globo.png
     alt:

@@ -19,7 +19,7 @@ Stesso filo di **maurotoncelli.it**. Il piano tecnico del 29/08 lo ha già vendu
 | Analytics | GA4 + Search Console | Dopo consenso |
 | Repo | GitHub (da creare) | Keystatic in GitHub mode |
 | Motion | CSS + `motion` (ex Framer) solo dove serve | Giunti, strati, cucitura; rispetta `prefers-reduced-motion` |
-| Ricerca | Nessuna in v1 | Filtri sul Quaderno bastano |
+| Ricerca | Nessuna in v1 | Filtri sugli Approfondimenti bastano |
 
 Non copiare da Armellin: Stripe, Supabase, CRM, OTP, 11 lingue.  
 Non copiare da maurotoncelli: gallery moda, iris, dark mode.  
@@ -34,7 +34,7 @@ Il sito è un **renderer** di due sorgenti, mai un posto dove si scrive contenut
 
 | Sorgente | Cosa contiene | Chi la tocca |
 |----------|---------------|--------------|
-| **Keystatic** (`content/`) | Sedi, patologie, pubblicazioni, note del Quaderno, recensioni, profilo/CV, FAQ, foto, orari, telefono, impostazioni globali (dominio, social, WhatsApp) | Michele + Mauro |
+| **Keystatic** (`content/`) | Sedi, patologie, pubblicazioni, note degli Approfondimenti, recensioni, profilo/CV, FAQ, foto, orari, telefono, impostazioni globali (dominio, social, WhatsApp) | Michele + Mauro |
 | **i18n** (`messages/it.json`, `en.json`) | Navigazione, label, bottoni, microcopy, meta di default, testi legali brevi | Mauro |
 
 Regole:
@@ -42,7 +42,7 @@ Regole:
 - **Zero stringhe hardcoded** nei componenti. Se un testo appare a schermo, viene da Keystatic o da `messages/`. Lint rule su stringhe letterali in JSX.
 - **Zero numeri a mano**: telefono, indirizzi, orari, P. IVA, OMCeO stanno in `settings` e `sedi`. Header, footer, pagina sede, JSON-LD, `tel:` link li **leggono**.
 - **Una collezione → una rotta dinamica**: aggiungere una sede o una patologia è creare un file, non toccare codice.
-- Le fasce home che dipendono da dati (recensioni, Quaderno, video) **non si renderizzano** se la collezione è vuota.
+- Le fasce home che dipendono da dati (recensioni, Approfondimenti, video) **non si renderizzano** se la collezione è vuota.
 - Contenuti bilingue: ogni entry Keystatic ha campi `it` / `en` affiancati (o entry gemella con `locale`); mai file EN duplicati a mano.
 
 ### Modello contenuti Keystatic
@@ -58,7 +58,7 @@ Regole:
 - `sedi` — nome, struttura, indirizzo, città, coordinate, telefono proprio, orari, regime (SSN / privato / sport), servizi, foto, link Maps, `gbpUrl`.
 - `patologie` — titolo, area (spalla / arto superiore / sport / come si opera), lead, corpo MDX, FAQ, patologie correlate, sedi dove si tratta, pubblicazioni correlate.
 - `pubblicazioni` — titolo originale, autori, rivista, anno, DOI, PubMed ID, abstract, **riassunto per pazienti** (opzionale), PDF (se lecito), tag, patologie correlate. Ordine: anno desc.
-- `quaderno` (etichetta CMS: Approfondimenti) — titolo, data, lead, corpo MDX, copertina (anteprima), tag, `video` (file) e/o `youtube` (URL o ID), pubblicazioni correlate, autore (fisso: Michele), stato bozza/pubblicato.
+- `approfondimenti` (etichetta CMS: Approfondimenti — Dal lavoro) — titolo, data, lead, corpo MDX, copertina (anteprima), tag, `video` (file) e/o `youtube` (URL o ID), pubblicazioni correlate, autore (fisso: Michele), stato bozza/pubblicato.
 - `recensioni` — nome, testo, piattaforma, data, sede, mostra sì/no.
 - `faq` — domanda, risposta, contesto (spalla / prima visita / sede).
 
@@ -66,7 +66,7 @@ Ogni entry ha `seo: { title, description, ogImage }` opzionale con fallback gene
 
 ### Approfondimenti (blog / news)
 
-Nome della sezione: **Approfondimenti**. Rotta pubblica `/it/approfondimenti` (EN `/en/in-depth`). Cartella app: `quaderno/`.  
+Nome della sezione: **Approfondimenti**. Rotta pubblica `/it/approfondimenti` (EN `/en/in-depth`). Cartella app: `approfondimenti/`.  
 I vecchi slug `/quaderno` e `/notebook` fanno 301.
 
 Dentro, due binari con filtro, stesso hub:
@@ -105,7 +105,7 @@ Nome, email e/o telefono, sede (select dalla collezione `sedi`), messaggio «com
 
 ```
 site/
-  app/[locale]/            rotte (home, chi-sono, sedi/[slug], patologie/[slug], quaderno/..., contatti)
+  app/[locale]/            rotte (home, chi-sono, sedi/[slug], patologie/[slug], approfondimenti/..., contatti)
   components/ui/           osso, strati, giunto, docking, cucitura, tab
   components/blocks/       fasce home e pagina
   content/                 dati Keystatic (md/mdx/json/yaml)

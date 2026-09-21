@@ -14,7 +14,7 @@ export const segments = {
   chiSono: { it: "chi-sono", en: "about" },
   cosaCuro: { it: "cosa-curo", en: "conditions" },
   dove: { it: "dove", en: "locations" },
-  quaderno: { it: "approfondimenti", en: "in-depth" },
+  approfondimenti: { it: "approfondimenti", en: "in-depth" },
   pubblicazioni: { it: "pubblicazioni", en: "publications" },
   dalLavoro: { it: "dal-lavoro", en: "from-the-clinic" },
   tag: { it: "tag", en: "tag" },
@@ -30,7 +30,7 @@ const folders: Record<SegmentKey, string> = {
   chiSono: "chi-sono",
   cosaCuro: "cosa-curo",
   dove: "dove",
-  quaderno: "quaderno",
+  approfondimenti: "approfondimenti",
   pubblicazioni: "pubblicazioni",
   dalLavoro: "dal-lavoro",
   tag: "tag",
@@ -41,7 +41,7 @@ const folders: Record<SegmentKey, string> = {
 
 /** Vecchi slug pubblici → stessa chiave. 301 verso lo slug attuale. */
 const aliases: Partial<Record<SegmentKey, { it?: string[]; en?: string[] }>> = {
-  quaderno: { it: ["quaderno"], en: ["notebook", "insights"] },
+  approfondimenti: { it: ["quaderno"], en: ["notebook", "insights"] },
 };
 
 type Route =
@@ -49,9 +49,9 @@ type Route =
   | { kind: "chiSono" }
   | { kind: "cosaCuro"; slug?: string }
   | { kind: "dove"; slug?: string }
-  | { kind: "quaderno" }
-  | { kind: "quadernoPubblicazioni" }
-  | { kind: "quadernoDalLavoro" }
+  | { kind: "approfondimenti" }
+  | { kind: "approfondimentiPubblicazioni" }
+  | { kind: "approfondimentiDalLavoro" }
   | { kind: "paper"; slug: string }
   | { kind: "nota"; slug: string }
   | { kind: "tag"; tag: string }
@@ -78,18 +78,18 @@ export function href(locale: Locale, route: Route): string {
       return route.slug ? `${base}/${s("cosaCuro")}/${route.slug}` : `${base}/${s("cosaCuro")}`;
     case "dove":
       return route.slug ? `${base}/${s("dove")}/${route.slug}` : `${base}/${s("dove")}`;
-    case "quaderno":
-      return `${base}/${s("quaderno")}`;
-    case "quadernoPubblicazioni":
-      return `${base}/${s("quaderno")}/${s("pubblicazioni")}`;
-    case "quadernoDalLavoro":
-      return `${base}/${s("quaderno")}/${s("dalLavoro")}`;
+    case "approfondimenti":
+      return `${base}/${s("approfondimenti")}`;
+    case "approfondimentiPubblicazioni":
+      return `${base}/${s("approfondimenti")}/${s("pubblicazioni")}`;
+    case "approfondimentiDalLavoro":
+      return `${base}/${s("approfondimenti")}/${s("dalLavoro")}`;
     case "paper":
-      return `${base}/${s("quaderno")}/${s("pubblicazioni")}/${route.slug}`;
+      return `${base}/${s("approfondimenti")}/${s("pubblicazioni")}/${route.slug}`;
     case "nota":
-      return `${base}/${s("quaderno")}/${route.slug}`;
+      return `${base}/${s("approfondimenti")}/${route.slug}`;
     case "tag":
-      return `${base}/${s("quaderno")}/${s("tag")}/${route.tag}`;
+      return `${base}/${s("approfondimenti")}/${s("tag")}/${route.tag}`;
     case "contatti":
       return `${base}/${s("contatti")}`;
     case "privacy":
@@ -114,18 +114,18 @@ export function internalPath(locale: Locale, route: Route): string {
       return join(locale, route.slug ? [f("cosaCuro"), route.slug] : [f("cosaCuro")]);
     case "dove":
       return join(locale, route.slug ? [f("dove"), route.slug] : [f("dove")]);
-    case "quaderno":
-      return join(locale, [f("quaderno")]);
-    case "quadernoPubblicazioni":
-      return join(locale, [f("quaderno"), f("pubblicazioni")]);
-    case "quadernoDalLavoro":
-      return join(locale, [f("quaderno"), f("dalLavoro")]);
+    case "approfondimenti":
+      return join(locale, [f("approfondimenti")]);
+    case "approfondimentiPubblicazioni":
+      return join(locale, [f("approfondimenti"), f("pubblicazioni")]);
+    case "approfondimentiDalLavoro":
+      return join(locale, [f("approfondimenti"), f("dalLavoro")]);
     case "paper":
-      return join(locale, [f("quaderno"), f("pubblicazioni"), route.slug]);
+      return join(locale, [f("approfondimenti"), f("pubblicazioni"), route.slug]);
     case "nota":
-      return join(locale, [f("quaderno"), route.slug]);
+      return join(locale, [f("approfondimenti"), route.slug]);
     case "tag":
-      return join(locale, [f("quaderno"), f("tag"), route.tag]);
+      return join(locale, [f("approfondimenti"), f("tag"), route.tag]);
     case "contatti":
       return join(locale, [f("contatti")]);
     case "privacy":
@@ -144,15 +144,15 @@ function pair(source: string, destination: string, list: { source: string; desti
 /**
  * Rewrites e redirect per next.config.ts: lo slug pubblico viene riscritto
  * sulla cartella, e la cartella (se raggiunta) fa 301 allo slug pubblico.
- * Gli slug vecchi (quaderno, notebook) fanno 301 al nome attuale.
+ * Gli slug vecchi (quaderno, notebook, insights) fanno 301 al nome attuale.
  */
 export function routingRules() {
   const rewrites: { source: string; destination: string }[] = [];
   const redirects: { source: string; destination: string; permanent: boolean }[] = [];
   const nested: [SegmentKey, SegmentKey][] = [
-    ["quaderno", "pubblicazioni"],
-    ["quaderno", "dalLavoro"],
-    ["quaderno", "tag"],
+    ["approfondimenti", "pubblicazioni"],
+    ["approfondimenti", "dalLavoro"],
+    ["approfondimenti", "tag"],
   ];
 
   for (const locale of locales) {

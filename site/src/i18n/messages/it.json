@@ -4,7 +4,7 @@
     "chiSono": "Chi sono",
     "cosaCuro": "Cosa curo",
     "dove": "Dove",
-    "quaderno": "Approfondimenti",
+    "approfondimenti": "Approfondimenti",
     "pubblicazioni": "Pubblicazioni",
     "contatti": "Contatti",
     "menu": "Menu",
@@ -45,8 +45,8 @@
     "fiduciaLead": "Dirigente medico in ospedale pubblico dal 2021. Fellowship dove la spalla si studia da vicino: Harvard / MGH nel 2025.",
     "recensioniEyebrow": "Recensioni",
     "recensioniTitolo": "Dopo la visita.",
-    "quadernoTitolo": "Quello che scrivo, per colleghi e per pazienti.",
-    "quadernoLead": "Pubblicazioni su riviste con revisione. Note dal lavoro, scritte per chi viene in visita.",
+    "approfondimentiTitolo": "Quello che scrivo, per colleghi e per pazienti.",
+    "approfondimentiLead": "Pubblicazioni su riviste con revisione. Note dal lavoro, scritte per chi viene in visita.",
     "contattoTitolo": "Il primo passo è una visita.",
     "contattoLead": "Un numero per tutte le sedi. La segreteria fissa l'appuntamento e ti dice cosa portare.",
     "fattiSedi": "sedi in Toscana",
@@ -109,7 +109,7 @@
     "altreSedi": "Altre sedi",
     "mappa": "Mappa"
   },
-  "quaderno": {
+  "approfondimenti": {
     "titolo": "Approfondimenti",
     "lead": "Due binari: le pubblicazioni scientifiche, impaginate da paper, e le note dal lavoro, scritte per chi viene in visita.",
     "tutto": "Tutto",
@@ -191,7 +191,7 @@
     "siteName": "Dott. Michele Novi",
     "homeTitle": "Dott. Michele Novi — Ortopedico, spalla e arto superiore",
     "homeDescription": "Chirurgo ortopedico specialista di spalla, gomito e arto superiore. Visite e interventi a Fucecchio, Pisa e Peccioli. Un numero per tutte le sedi.",
-    "quadernoDescription": "Pubblicazioni scientifiche e approfondimenti dal lavoro del Dott. Michele Novi, ortopedico della spalla.",
+    "approfondimentiDescription": "Pubblicazioni scientifiche e approfondimenti dal lavoro del Dott. Michele Novi, ortopedico della spalla.",
     "doveDescription": "Le strutture in cui il Dott. Michele Novi visita e opera in Toscana.",
     "cosaCuroDescription": "Spalla, gomito e mano, traumatologia sportiva, artroscopia. Cosa cura il Dott. Michele Novi.",
     "contattiDescription": "Segreteria unica per prenotare una visita con il Dott. Michele Novi."

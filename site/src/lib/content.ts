@@ -20,7 +20,7 @@ export type CatalogoDisegni = Record<string, { src: string; alt: { it: string; e
 export type Patologia = EntryOf<"patologie"> & { slug: string };
 export type Sede = EntryOf<"sedi"> & { slug: string };
 export type Pubblicazione = EntryOf<"pubblicazioni"> & { slug: string };
-export type Nota = EntryOf<"quaderno"> & { slug: string };
+export type Nota = EntryOf<"approfondimenti"> & { slug: string };
 export type Faq = EntryOf<"faq"> & { slug: string };
 export type Recensione = EntryOf<"recensioni"> & { slug: string };
 
@@ -95,7 +95,7 @@ export function idDisegnoDaTag(
     const hit = Object.keys(TAG_A_DISEGNO).find((k) => t.includes(k));
     if (hit) return TAG_A_DISEGNO[hit];
   }
-  return "quaderno";
+  return "approfondimenti";
 }
 
 export function srcDisegno(catalogo: CatalogoDisegni, id: string | null | undefined, locale: Locale): { src: string; alt: string } | null {
@@ -142,7 +142,7 @@ export const getPubblicazione = cache(async (slug: string): Promise<Pubblicazion
 });
 
 export const getNote = cache(async (): Promise<Nota[]> => {
-  const all = await reader.collections.quaderno.all();
+  const all = await reader.collections.approfondimenti.all();
   return all
     .map(({ slug, entry }) => ({ ...entry, slug }))
     .filter((n) => n.pubblicato)
@@ -192,13 +192,13 @@ export function annoPercorso(periodo: string): number {
 }
 
 /** Voce degli approfondimenti unificata per liste miste. */
-export type VoceQuaderno =
+export type VoceApprofondimenti =
   | { tipo: "paper"; data: string; slug: string; item: Pubblicazione }
   | { tipo: "nota"; data: string; slug: string; item: Nota };
 
-export const getQuaderno = cache(async (): Promise<VoceQuaderno[]> => {
+export const getApprofondimenti = cache(async (): Promise<VoceApprofondimenti[]> => {
   const [note, paper] = await Promise.all([getNote(), getPubblicazioni()]);
-  const voci: VoceQuaderno[] = [
+  const voci: VoceApprofondimenti[] = [
     ...note.map((n) => ({ tipo: "nota" as const, data: n.data ?? "", slug: n.slug, item: n })),
     ...paper.map((p) => ({ tipo: "paper" as const, data: `${p.anno}-01-01`, slug: p.slug, item: p })),
   ];

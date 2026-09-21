@@ -1,6 +1,6 @@
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getQuaderno, getSettings, slugNota } from "@/lib/content";
+import { getApprofondimenti, getSettings, slugNota } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -10,10 +10,10 @@ export function generateStaticParams() {
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-export async function GET(_req: Request, ctx: RouteContext<"/[locale]/quaderno/feed.xml">) {
+export async function GET(_req: Request, ctx: RouteContext<"/[locale]/approfondimenti/feed.xml">) {
   const { locale } = await ctx.params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [s, voci] = await Promise.all([getSettings(), getQuaderno()]);
+  const [s, voci] = await Promise.all([getSettings(), getApprofondimenti()]);
   const m = getMessages(l);
   const base = siteUrl(s);
 
@@ -29,7 +29,7 @@ export async function GET(_req: Request, ctx: RouteContext<"/[locale]/quaderno/f
     })
     .join("");
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${esc(`${m.quaderno.titolo} — ${s.nome}`)}</title><link>${base}${href(l, { kind: "quaderno" })}</link><description>${esc(m.meta.quadernoDescription)}</description><language>${l}</language><atom:link href="${base}${href(l, { kind: "quaderno" })}/feed.xml" rel="self" type="application/rss+xml"/>${items}</channel></rss>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${esc(`${m.approfondimenti.titolo} — ${s.nome}`)}</title><link>${base}${href(l, { kind: "approfondimenti" })}</link><description>${esc(m.meta.approfondimentiDescription)}</description><language>${l}</language><atom:link href="${base}${href(l, { kind: "approfondimenti" })}/feed.xml" rel="self" type="application/rss+xml"/>${items}</channel></rss>`;
 
   return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8" } });
 }

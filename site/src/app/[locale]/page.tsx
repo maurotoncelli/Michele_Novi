@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getHome, getPatologie, getProfilo, getPubblicazioni, getQuaderno, getRecensioni, getSedi, getSettings } from "@/lib/content";
+import { getHome, getPatologie, getProfilo, getPubblicazioni, getApprofondimenti, getRecensioni, getSedi, getSettings } from "@/lib/content";
 import { buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
-import { FasciaFatti, FasciaPatologie, FasciaPercorso, FasciaQuaderno, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
+import { FasciaFatti, FasciaPatologie, FasciaPercorso, FasciaApprofondimenti, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -24,14 +24,14 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [settings, home, profilo, patologie, sedi, recensioni, quaderno, paper] = await Promise.all([
+  const [settings, home, profilo, patologie, sedi, recensioni, approfondimenti, paper] = await Promise.all([
     getSettings(),
     getHome(),
     getProfilo(),
     getPatologie(),
     getSedi(),
     getRecensioni(),
-    getQuaderno(),
+    getApprofondimenti(),
     getPubblicazioni(),
   ]);
 
@@ -52,8 +52,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             return <FasciaPercorso key={tipo} profilo={profilo} home={home} locale={l} />;
           case "recensioni":
             return <FasciaRecensioni key={tipo} recensioni={recensioni} locale={l} />;
-          case "quaderno":
-            return <FasciaQuaderno key={tipo} voci={quaderno} locale={l} />;
+          case "approfondimenti":
+            return <FasciaApprofondimenti key={tipo} voci={approfondimenti} locale={l} />;
           case "contatto":
             return <FasciaContatto key={tipo} locale={l} />;
           default:

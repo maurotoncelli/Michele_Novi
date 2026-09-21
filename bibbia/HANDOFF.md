@@ -10,7 +10,7 @@ Sito vetrina **veloce, SEO, italiano + inglese, data-driven** per il Dott. Miche
 ## Stato del sito (`site/`)
 
 - **Stack**: Next.js 16 App Router, TypeScript, Tailwind v4, Keystatic (local ora, GitHub in produzione), i18n `/it` `/en` con slug tradotti, Resend per il form, Vercel (`michele-novi-sito`).
-- **Pagine**: home · chi-sono · cosa-curo (+ schede) · dove (+ 4 sedi) · **Approfondimenti** (`/it/approfondimenti`, EN `/en/in-depth`; cartella `quaderno/`) · **Pubblicazioni** in menu · contatti · privacy · cookie · 404. I vecchi `/quaderno` e `/notebook` fanno 301.
+- **Pagine**: home · chi-sono · cosa-curo (+ schede) · dove (+ 4 sedi) · **Approfondimenti** (`/it/approfondimenti`, EN `/en/in-depth`; cartella `approfondimenti/`) · **Pubblicazioni** in menu · contatti · privacy · cookie · 404. I vecchi `/quaderno` e `/notebook` fanno 301.
 - **Dev**: `cd site && npm run dev` → `:3000`, pannello `/keystatic`. Vedi `site/README.md`.
 - **Quando arrivano i dati** si compilano **solo in Keystatic** (o nei YAML): niente da toccare nel codice, salvo bug.
 

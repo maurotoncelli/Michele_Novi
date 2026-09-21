@@ -26,7 +26,7 @@ export async function generateStaticParams() {
   );
 }
 
-export async function generateMetadata({ params }: PageProps<"/[locale]/quaderno/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/[locale]/approfondimenti/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const [s, n] = await Promise.all([getSettings(), getNota(slug, l)]);
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/quaderno
     routeEn: { kind: "nota", slug: slugNota(n, "en") },
     title: pick(n.seo?.title, l) || pick(n.titolo, l),
     description: pick(n.seo?.description, l) || pick(n.lead, l),
-    image: n.seo?.ogImage ?? srcMedia(n.copertina?.src, "quaderno") ?? undefined,
+    image: n.seo?.ogImage ?? srcMedia(n.copertina?.src, "approfondimenti") ?? undefined,
     noindex: n.seo?.noindex,
     type: "article",
     publishedTime: n.data,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/quaderno
   });
 }
 
-export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno/[slug]">) {
+export default async function NotaPage({ params }: PageProps<"/[locale]/approfondimenti/[slug]">) {
   const { locale, slug } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const n = await getNota(slug, l);
@@ -57,7 +57,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
   const citati = (n.pubblicazioni ?? []).map((sl) => paper.find((x) => x.slug === sl)).filter(Boolean) as typeof paper;
   const altre = note.filter((x) => x.slug !== n.slug).slice(0, 3);
   const pubSlug = slugNota(n, l);
-  const copertina = srcMedia(n.copertina?.src, "quaderno");
+  const copertina = srcMedia(n.copertina?.src, "approfondimenti");
 
   return (
     <>
@@ -66,23 +66,23 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
           articleJsonLd(s, n, l, pubSlug),
           breadcrumbJsonLd(s, [
             { name: m.meta.siteName, path: href(l, { kind: "home" }) },
-            { name: m.quaderno.titolo, path: href(l, { kind: "quaderno" }) },
+            { name: m.approfondimenti.titolo, path: href(l, { kind: "approfondimenti" }) },
             { name: pick(n.titolo, l), path: href(l, { kind: "nota", slug: pubSlug }) },
           ]),
         ]}
       />
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) }, { label: pick(n.titolo, l) }]} />
+      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.approfondimenti.titolo, href: href(l, { kind: "approfondimenti" }) }, { label: pick(n.titolo, l) }]} />
 
       <article className="contenitore pt-8 md:pt-12">
         <Reveal immediate className="mx-auto max-w-3xl text-center">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="tag tag-rame">{m.quaderno.nota}</span>
+            <span className="tag tag-rame">{m.approfondimenti.nota}</span>
             <time dateTime={n.data ?? undefined} className="text-sm text-grafite">
               {formatDate(n.data, l)}
             </time>
             {n.aggiornato && (
               <span className="text-sm text-nebbia">
-                · {m.quaderno.aggiornato} {formatDate(n.aggiornato, l)}
+                · {m.approfondimenti.aggiornato} {formatDate(n.aggiornato, l)}
               </span>
             )}
           </div>
@@ -103,7 +103,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
           <VideoApprofondimento file={n.video} youtube={n.youtube} titolo={pick(n.titolo, l)} />
           {citati.length > 0 && (
             <div className="osso osso-sm mt-12 p-5">
-              <p className="eyebrow mb-3">{m.quaderno.paperCorrelati}</p>
+              <p className="eyebrow mb-3">{m.approfondimenti.paperCorrelati}</p>
               <ul className="space-y-3">
                 {citati.map((x) => (
                   <li key={x.slug}>
@@ -128,13 +128,13 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
               ))}
             </div>
           )}
-          <Disclaimer testo={m.quaderno.disclaimer} />
+          <Disclaimer testo={m.approfondimenti.disclaimer} />
         </div>
       </article>
 
       {correlate.length > 0 && (
         <section className="contenitore pb-6">
-          <p className="eyebrow mb-4">{m.quaderno.correlate}</p>
+          <p className="eyebrow mb-4">{m.approfondimenti.correlate}</p>
           <div className="grid items-stretch gap-10 md:grid-cols-3">
             {correlate.map((c, i) => (
               <Reveal key={c.slug} delay={i * 70} className="h-full min-w-0">
@@ -146,7 +146,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
       )}
       {altre.length > 0 && (
         <section className="contenitore pb-6">
-          <p className="eyebrow mb-4">{m.quaderno.dalLavoro}</p>
+          <p className="eyebrow mb-4">{m.approfondimenti.dalLavoro}</p>
           <div className="grid items-stretch gap-10 md:grid-cols-3">
             {altre.map((x, i) => (
               <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">

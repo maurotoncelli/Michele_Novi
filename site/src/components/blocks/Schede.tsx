@@ -258,7 +258,7 @@ export async function SchedaPaper({ p, locale, grande = false }: { p: Pubblicazi
         </Lastra>
         <div className="flex flex-1 flex-col pt-5">
           <div className="flex items-center justify-between gap-3">
-            <span className="tag tag-petrolio">{m.quaderno.paper}</span>
+            <span className="tag tag-petrolio">{m.approfondimenti.paper}</span>
             <span className="text-sm text-grafite">{p.anno}</span>
           </div>
           <h3 className={`leading-snug group-hover:text-petrolio ${grande ? "mt-4 text-[1.6rem] leading-tight md:text-[1.95rem]" : "mt-3 line-clamp-3 min-h-[3.6em] text-[1.3rem]"}`}>{titolo}</h3>
@@ -291,7 +291,7 @@ export async function SchedaPaper({ p, locale, grande = false }: { p: Pubblicazi
 /** Nota / approfondimento: copertina Keystatic, o disegno. */
 export async function SchedaNota({ n, locale, grande = false }: { n: Nota; locale: Locale; grande?: boolean }) {
   const m = getMessages(locale);
-  const copertina = srcMedia(n.copertina?.src, "quaderno");
+  const copertina = srcMedia(n.copertina?.src, "approfondimenti");
   const alt = pick(n.copertina?.alt, locale) || pick(n.titolo, locale);
   const catalogo = await getDisegni();
   const fallback = srcDisegno(catalogo, idDisegnoDaTag(n.tag), locale);
@@ -303,12 +303,12 @@ export async function SchedaNota({ n, locale, grande = false }: { n: Nota; local
         ) : fallback ? (
           <Disegno src={fallback.src} alt={alt} />
         ) : (
-          <Image src="/images/disegni/quaderno.png" alt={alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain p-8" />
+          <Image src="/images/disegni/approfondimenti.png" alt={alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain p-8" />
         )}
       </Lastra>
       <div className="flex flex-1 flex-col pt-5">
         <div className="flex items-center justify-between gap-3">
-          <span className="tag tag-rame">{m.quaderno.nota}</span>
+          <span className="tag tag-rame">{m.approfondimenti.nota}</span>
           <time dateTime={n.data ?? undefined} className="text-sm text-grafite">
             {formatDate(n.data, locale)}
           </time>

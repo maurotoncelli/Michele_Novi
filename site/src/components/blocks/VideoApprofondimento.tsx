@@ -9,7 +9,7 @@ export function VideoApprofondimento({
   youtube?: string | null;
   titolo: string;
 }) {
-  const src = file ? (file.startsWith("/") ? file : `/video/quaderno/${file}`) : null;
+  const src = file ? (file.startsWith("/") ? file : `/video/approfondimenti/${file}`) : null;
   const yt = idYoutube(youtube);
   if (!src && !yt) return null;
 

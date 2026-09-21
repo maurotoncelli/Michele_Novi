@@ -4,7 +4,7 @@
     "chiSono": "About",
     "cosaCuro": "What I treat",
     "dove": "Where",
-    "quaderno": "In depth",
+    "approfondimenti": "In depth",
     "pubblicazioni": "Publications",
     "contatti": "Contact",
     "menu": "Menu",
@@ -45,8 +45,8 @@
     "fiduciaLead": "Consultant in a public hospital since 2021. Fellowships where the shoulder is studied up close: Harvard / MGH in 2025.",
     "recensioniEyebrow": "Reviews",
     "recensioniTitolo": "After the visit.",
-    "quadernoTitolo": "What I write, for colleagues and for patients.",
-    "quadernoLead": "Peer-reviewed publications. Notes from the clinic, written for people coming to a visit.",
+    "approfondimentiTitolo": "What I write, for colleagues and for patients.",
+    "approfondimentiLead": "Peer-reviewed publications. Notes from the clinic, written for people coming to a visit.",
     "contattoTitolo": "The first step is a visit.",
     "contattoLead": "One number for every location. The office books the appointment and tells you what to bring.",
     "fattiSedi": "locations in Tuscany",
@@ -109,7 +109,7 @@
     "altreSedi": "Other locations",
     "mappa": "Map"
   },
-  "quaderno": {
+  "approfondimenti": {
     "titolo": "In depth",
     "lead": "Two tracks: peer-reviewed publications, laid out as papers, and notes from the clinic, written for patients.",
     "tutto": "All",
@@ -191,7 +191,7 @@
     "siteName": "Dr Michele Novi",
     "homeTitle": "Dr Michele Novi — Orthopaedic surgeon, shoulder and upper limb",
     "homeDescription": "Orthopaedic surgeon specialising in shoulder, elbow and upper limb. Consultations and surgery in Fucecchio, Pisa and Peccioli, Tuscany. One number for every location.",
-    "quadernoDescription": "Scientific publications and notes from the clinic by Dr Michele Novi, shoulder surgeon.",
+    "approfondimentiDescription": "Scientific publications and notes from the clinic by Dr Michele Novi, shoulder surgeon.",
     "doveDescription": "The facilities in Tuscany where Dr Michele Novi sees patients and operates.",
     "cosaCuroDescription": "Shoulder, elbow and hand, sports trauma, arthroscopy. What Dr Michele Novi treats.",
     "contattiDescription": "One office to book a consultation with Dr Michele Novi."

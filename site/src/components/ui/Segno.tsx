@@ -37,7 +37,7 @@ export type NomeSegno =
   | "auto"
   | "access"
   | "doc"
-  | "quaderno"
+  | "approfondimenti"
   | "piu"
   | "meno"
   | "globo";
@@ -240,7 +240,7 @@ const paths: Record<NomeSegno, React.ReactNode> = {
       <path d="M10 13h6M10 17h6" />
     </>
   ),
-  quaderno: (
+  approfondimenti: (
     <>
       <path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z" />
       <path d="M6 3v18" />

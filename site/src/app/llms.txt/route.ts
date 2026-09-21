@@ -25,7 +25,7 @@ export async function GET() {
     `## ${m.cosaCuro.titolo}`,
     ...patologie.map((x) => `- ${pick(x.titolo, "it")}: ${base}${href("it", { kind: "cosaCuro", slug: x.slug })}`),
     "",
-    `## ${m.quaderno.pubblicazioni}`,
+    `## ${m.approfondimenti.pubblicazioni}`,
     ...paper.map((x) => `- ${x.titolo} (${x.rivista}, ${x.anno})${x.doi ? ` https://doi.org/${x.doi}` : ""}`),
     "",
     `## ${m.chiSono.titolo}`,

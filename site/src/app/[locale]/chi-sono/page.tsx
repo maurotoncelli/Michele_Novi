@@ -199,7 +199,7 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
 
       {/* 5. Pubblicazioni principali. */}
       {listaPaper.length > 0 && (
-        <Sezione eyebrow={m.nav.pubblicazioni} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "quadernoPubblicazioni" }), label: m.chiSono.tuttePubblicazioni }}>
+        <Sezione eyebrow={m.nav.pubblicazioni} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "approfondimentiPubblicazioni" }), label: m.chiSono.tuttePubblicazioni }}>
           <ListaPubblicazioni voci={listaPaper} more={m.cta.mostraTutte} less={m.cta.mostraMeno} pdfLabel={m.cta.pdf} articoloLabel={m.cta.articolo} />
         </Sezione>
       )}

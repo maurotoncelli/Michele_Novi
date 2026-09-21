@@ -194,7 +194,7 @@ export function articleJsonLd(settings: Settings, n: Nota, locale: Locale, slug:
       datePublished: n.data,
       dateModified: n.aggiornato || n.data,
       author: { "@id": physicianId(settings) },
-      image: srcMedia(n.copertina?.src, "quaderno") ? `${base}${srcMedia(n.copertina?.src, "quaderno")}` : undefined,
+      image: srcMedia(n.copertina?.src, "approfondimenti") ? `${base}${srcMedia(n.copertina?.src, "approfondimenti")}` : undefined,
       inLanguage: locale,
       keywords: n.tag?.join(", ") || undefined,
     },

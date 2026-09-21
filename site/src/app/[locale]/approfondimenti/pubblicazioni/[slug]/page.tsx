@@ -19,7 +19,7 @@ export async function generateStaticParams() {
   return locales.flatMap((locale) => all.map((p) => ({ locale, slug: p.slug })));
 }
 
-export async function generateMetadata({ params }: PageProps<"/[locale]/quaderno/pubblicazioni/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/[locale]/approfondimenti/pubblicazioni/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const [s, p] = await Promise.all([getSettings(), getPubblicazione(slug)]);
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/quaderno
   });
 }
 
-export default async function PaperPage({ params }: PageProps<"/[locale]/quaderno/pubblicazioni/[slug]">) {
+export default async function PaperPage({ params }: PageProps<"/[locale]/approfondimenti/pubblicazioni/[slug]">) {
   const { locale, slug } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const p = await getPubblicazione(slug);
@@ -54,8 +54,8 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
           paperJsonLd(s, p, l),
           breadcrumbJsonLd(s, [
             { name: m.meta.siteName, path: href(l, { kind: "home" }) },
-            { name: m.quaderno.titolo, path: href(l, { kind: "quaderno" }) },
-            { name: m.quaderno.pubblicazioni, path: href(l, { kind: "quadernoPubblicazioni" }) },
+            { name: m.approfondimenti.titolo, path: href(l, { kind: "approfondimenti" }) },
+            { name: m.approfondimenti.pubblicazioni, path: href(l, { kind: "approfondimentiPubblicazioni" }) },
             { name: titoloBreve || p.titolo, path: href(l, { kind: "paper", slug: p.slug }) },
           ]),
         ]}
@@ -63,8 +63,8 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
       <Briciole
         items={[
           { label: m.meta.siteName, href: href(l, { kind: "home" }) },
-          { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) },
-          { label: m.quaderno.pubblicazioni, href: href(l, { kind: "quadernoPubblicazioni" }) },
+          { label: m.approfondimenti.titolo, href: href(l, { kind: "approfondimenti" }) },
+          { label: m.approfondimenti.pubblicazioni, href: href(l, { kind: "approfondimentiPubblicazioni" }) },
           { label: titoloBreve || p.titolo },
         ]}
       />
@@ -73,8 +73,8 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
         {/* Impaginato da paper: testata, titolo, autori, rivista, DOI */}
         <Reveal immediate className="relative max-w-3xl">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="tag tag-petrolio">{m.quaderno.paper}</span>
-              {p.principale && <span className="tag tag-rame">{m.quaderno.principale}</span>}
+              <span className="tag tag-petrolio">{m.approfondimenti.paper}</span>
+              {p.principale && <span className="tag tag-rame">{m.approfondimenti.principale}</span>}
               <span className="text-sm text-grafite">{p.anno}</span>
             </div>
             {titoloBreve && <p className="eyebrow mt-6">{titoloBreve}</p>}
@@ -84,13 +84,13 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
             <dl className="mt-6 grid gap-x-8 gap-y-3 text-[0.95rem] sm:grid-cols-2">
               {p.autori && (
                 <div>
-                  <dt className="eyebrow">{m.quaderno.autori}</dt>
+                  <dt className="eyebrow">{m.approfondimenti.autori}</dt>
                   <dd className="mt-1 text-grafite">{p.autori}</dd>
                 </div>
               )}
               {p.rivista && (
                 <div>
-                  <dt className="eyebrow">{m.quaderno.rivista}</dt>
+                  <dt className="eyebrow">{m.approfondimenti.rivista}</dt>
                   <dd className="mt-1 text-grafite">
                     <span className="italic">{p.rivista}</span>
                     {p.volume ? `, ${p.volume}` : ""} ({p.anno})
@@ -147,19 +147,19 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
           <div className="max-w-[42rem] space-y-10">
             {pick(p.riassunto, l) && (
               <Reveal>
-                <h2 className="text-[1.4rem]">{m.quaderno.riassunto}</h2>
+                <h2 className="text-[1.4rem]">{m.approfondimenti.riassunto}</h2>
                 <p className="mt-3 whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.riassunto, l)}</p>
               </Reveal>
             )}
             {p.abstract && (
               <Reveal>
-                <h2 className="text-[1.4rem]">{m.quaderno.abstract}</h2>
+                <h2 className="text-[1.4rem]">{m.approfondimenti.abstract}</h2>
                 <p className="abstract mt-3 whitespace-pre-line" lang="en">
                   {p.abstract}
                 </p>
               </Reveal>
             )}
-            <Disclaimer testo={m.quaderno.disclaimer} />
+            <Disclaimer testo={m.approfondimenti.disclaimer} />
           </div>
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             {(p.tag ?? []).length > 0 && (
@@ -173,7 +173,7 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
             )}
             {correlate.length > 0 && (
               <div className="osso osso-sm p-5">
-                <p className="eyebrow mb-3">{m.quaderno.correlate}</p>
+                <p className="eyebrow mb-3">{m.approfondimenti.correlate}</p>
                 <ul className="space-y-2">
                   {correlate.map((c) => (
                     <li key={c.slug}>
@@ -191,7 +191,7 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
 
       {altre.length > 0 && (
         <section className="contenitore pb-6">
-          <p className="eyebrow mb-4">{m.quaderno.pubblicazioni}</p>
+          <p className="eyebrow mb-4">{m.approfondimenti.pubblicazioni}</p>
           <div className="grid items-stretch gap-10 md:grid-cols-3">
             {altre.map((x, i) => (
               <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">

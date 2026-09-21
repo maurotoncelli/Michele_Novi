@@ -84,7 +84,7 @@ const SEGNI = [
   "frattura",
   "esercizio",
   "globo",
-  "quaderno",
+  "approfondimenti",
   "doc",
   "check",
 ].map((v) => ({ label: v, value: v }));
@@ -95,7 +95,7 @@ export default config({
     brand: { name: "Michele Novi — Sito" },
     navigation: {
       Sito: ["settings", "home", "profilo", "disegni"],
-      Contenuti: ["patologie", "sedi", "quaderno", "pubblicazioni", "faq", "recensioni"],
+      Contenuti: ["patologie", "sedi", "approfondimenti", "pubblicazioni", "faq", "recensioni"],
     },
   },
 
@@ -227,7 +227,7 @@ export default config({
                 { label: "Dove", value: "sedi" },
                 { label: "Perché fidarsi", value: "fiducia" },
                 { label: "Recensioni", value: "recensioni" },
-                { label: "Approfondimenti", value: "quaderno" },
+                { label: "Approfondimenti", value: "approfondimenti" },
                 { label: "Contatto", value: "contatto" },
               ],
               defaultValue: "patologie",
@@ -382,10 +382,10 @@ export default config({
       },
     }),
 
-    quaderno: collection({
+    approfondimenti: collection({
       label: "Approfondimenti — Dal lavoro",
       slugField: "slug",
-      path: "content/quaderno/*/",
+      path: "content/approfondimenti/*/",
       format: { contentField: "corpo" },
       entryLayout: "content",
       schema: {
@@ -395,15 +395,15 @@ export default config({
         data: fields.date({ label: "Data", validation: { isRequired: true } }),
         aggiornato: fields.date({ label: "Aggiornato il" }),
         lead: testo("Lead", { multiline: true }),
-        copertina: immagine("Immagine in anteprima", "quaderno"),
+        copertina: immagine("Immagine in anteprima", "approfondimenti"),
         corpo: fields.markdoc({ label: "Corpo (IT)" }),
         corpoEn: fields.markdoc({ label: "Corpo (EN)" }),
         tag: fields.array(fields.text({ label: "Tag" }), { label: "Tag", itemLabel: (p) => p.value }),
         video: fields.file({
           label: "Video (file)",
           description: "MP4 o WebM. Se c'è anche YouTube, il file ha la precedenza.",
-          directory: "public/video/quaderno",
-          publicPath: "/video/quaderno/",
+          directory: "public/video/approfondimenti",
+          publicPath: "/video/approfondimenti/",
         }),
         youtube: fields.text({
           label: "YouTube",

@@ -35,7 +35,7 @@ fiducia:
   - testo:
       it: Pubblicazioni su riviste internazionali con revisione
       en: Publications in peer-reviewed international journals
-    segno: quaderno
+    segno: approfondimenti
   - testo:
       it: Docente ai corsi di artroscopia di spalla, ICLO Verona
       en: Faculty at shoulder arthroscopy courses, ICLO Verona
@@ -49,7 +49,7 @@ fasce:
     attiva: true
   - tipo: recensioni
     attiva: true
-  - tipo: quaderno
+  - tipo: approfondimenti
     attiva: true
   - tipo: contatto
     attiva: true

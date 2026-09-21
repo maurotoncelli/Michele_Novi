@@ -111,6 +111,16 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 - Motion fluida. Non cursori o magnetismo che **rallentano**.
 - Recensioni e schede sede curate. Home più semplice del portfolio Mauro.
 
+### Chiuse il 21/09 (dettaglio in [HANDOFF.md](HANDOFF.md) §Movimento e ritmo)
+
+- **Font General Sans**, pesi 500 titoli / 400 corpo. Geist e Cabinet Grotesk fuori. Un serif solo per la «Lettura» dei paper, se approvata.
+- **Banda scura petrolio profondo `#0f3a5a`**, non nera.
+- **Movimento senza librerie**: CSS scroll-driven + componenti client piccoli, sempre dietro `prefers-reduced-motion`. Riferimento skyclinics.al per il gesto, non per lo stack.
+- **Cosa curo a tre colonne**; **Come si opera** è metodo, fascia a sé.
+- **Ritratto in bianco e nero**, mezzo busto in posa, a tutta altezza del testo in Chi sono: direzione anche per lo shooting.
+- **Approfondimenti** è il solo nome della sezione: «quaderno» non esiste, nemmeno nel codice.
+- **Paper**: testo integrale solo se open access (5 su 7); con copyright dell’editore, solo abstract.
+
 ## Fuori v1 (annotato, non costruito)
 
 - Prenotazione / calendario

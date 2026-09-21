@@ -55,8 +55,10 @@
   },
   "chiSono": {
     "titolo": "About",
-    "inEvidenza": "Where I learned.",
-    "inEvidenzaEyebrow": "Five milestones",
+    "inEvidenza": "Where I operate, where I learned.",
+    "inEvidenzaEyebrow": "Today and the milestones",
+    "inEvidenzaOggi": "Today",
+    "inEvidenzaTappe": "The milestones, in order",
     "percorso": "The path, year by year.",
     "percorsoEyebrow": "Training and work",
     "esperienze": "Work experience",

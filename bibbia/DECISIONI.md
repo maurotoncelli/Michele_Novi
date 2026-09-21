@@ -123,6 +123,7 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 - **Pagina patologia**: sommario sticky a sinistra con voce che si accende; Dove, Ne ho scritto qui e FAQ nel flusso dell'articolo, non in colonna.
 - **Recensioni**: citazioni tipografiche in misura da lettura (24rem, 1.2rem), virgolette piccole in petrolio chiaro, piattaforma e stelle in eyebrow, parole che si compongono. Campo `stelle` in Keystatic. La versione «una alla volta, gigante» è stata bocciata.
 - **Scorrimento orizzontale in home** (recensioni, approfondimenti): **niente frecce né snap**. Desktop: la sezione si appunta e le schede scorrono con lo scroll della pagina (CSS scroll-driven). Telefono: colonna. Mauro: «controlli scomodi; automatici su desktop, verticali su smartphone».
+- **Chi sono, «Dove opero, dove ho imparato»**: grande = **l'incarico di oggi** (Fucecchio, dal 2021; flag `attuale` in Keystatic), a destra le fellowship **in ordine cronologico**. Prima era grande la prima voce dell'elenco (Harvard 2025) senza un criterio leggibile e l'elenco non era in ordine: Mauro ha chiesto il senso della gerarchia. Regola: la dimensione deve dire qualcosa (presente vs percorso). `inEvidenza` va tenuto cronologico perché la home lo scorre in quell'ordine.
 
 ## Fuori v1 (annotato, non costruito)
 

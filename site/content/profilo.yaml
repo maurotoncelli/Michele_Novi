@@ -19,27 +19,6 @@ ritratto:
     it: Ritratto in bianco e nero del Dott. Michele Novi (immagine provvisoria, da sostituire con lo shooting)
     en: Black and white portrait of Dr Michele Novi (temporary image, to be replaced after the shoot)
 inEvidenza:
-  - anno: '2025'
-    titolo:
-      it: Massachusetts General Hospital — Harvard Medical School, Boston
-      en: Massachusetts General Hospital — Harvard Medical School, Boston
-    testo:
-      it: Fellowship con Bassem Elhassan sui transfer muscolari di spalla e sulla chirurgia complessa della cuffia.
-      en: Fellowship with Bassem Elhassan on shoulder tendon transfers and complex rotator cuff surgery.
-  - anno: dal 2021
-    titolo:
-      it: Dirigente medico, SOC Ortopedia Protesica — Ospedale San Pietro Igneo, Fucecchio
-      en: Consultant, Joint Replacement Unit — San Pietro Igneo Hospital, Fucecchio
-    testo:
-      it: ASL Toscana Centro. Chirurgia protesica e traumatologica in ospedale pubblico.
-      en: Tuscany Central Health Authority. Joint replacement and trauma surgery in a public hospital.
-  - anno: '2017'
-    titolo:
-      it: Charité — Universitätsmedizin Berlin
-      en: Charité — Universitätsmedizin Berlin
-    testo:
-      it: Fellowship in chirurgia di spalla e gomito con Markus Scheibel.
-      en: Shoulder and elbow surgery fellowship with Markus Scheibel.
   - anno: '2015'
     titolo:
       it: University of Washington Hand Center, Seattle
@@ -47,6 +26,15 @@ inEvidenza:
     testo:
       it: Mano, microchirurgia e ricostruzione con Nicholas Vedder.
       en: Hand, microsurgery and reconstruction with Nicholas Vedder.
+    attuale: false
+  - anno: '2017'
+    titolo:
+      it: Charité — Universitätsmedizin Berlin
+      en: Charité — Universitätsmedizin Berlin
+    testo:
+      it: Fellowship in chirurgia di spalla e gomito con Markus Scheibel.
+      en: Shoulder and elbow surgery fellowship with Markus Scheibel.
+    attuale: false
   - anno: '2018'
     titolo:
       it: Ospedale Cervesi, Cattolica
@@ -54,6 +42,23 @@ inEvidenza:
     testo:
       it: Chirurgia della spalla con Giuseppe Porcellini.
       en: Shoulder surgery with Giuseppe Porcellini.
+    attuale: false
+  - anno: dal 2021
+    titolo:
+      it: Dirigente medico, SOC Ortopedia Protesica — Ospedale San Pietro Igneo, Fucecchio
+      en: Consultant, Joint Replacement Unit — San Pietro Igneo Hospital, Fucecchio
+    testo:
+      it: ASL Toscana Centro. Chirurgia protesica e traumatologica in ospedale pubblico.
+      en: Tuscany Central Health Authority. Joint replacement and trauma surgery in a public hospital.
+    attuale: true
+  - anno: '2025'
+    titolo:
+      it: Massachusetts General Hospital — Harvard Medical School, Boston
+      en: Massachusetts General Hospital — Harvard Medical School, Boston
+    testo:
+      it: Fellowship con Bassem Elhassan sui transfer muscolari di spalla e sulla chirurgia complessa della cuffia.
+      en: Fellowship with Bassem Elhassan on shoulder tendon transfers and complex rotator cuff surgery.
+    attuale: false
 timeline:
   - periodo: 2006–2012
     tipo: formazione

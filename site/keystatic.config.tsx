@@ -153,8 +153,9 @@ export default config({
             anno: fields.text({ label: "Anno" }),
             titolo: testo("Titolo"),
             testo: testo("Una riga", { multiline: true }),
+            attuale: fields.checkbox({ label: "Incarico attuale (in Chi sono va in grande)", defaultValue: false }),
           }),
-          { label: "In evidenza (fellowship, incarichi)", itemLabel: (p) => `${p.fields.anno.value} — ${p.fields.titolo.fields.it.value}` },
+          { label: "In evidenza (fellowship, incarichi)", description: "In ordine cronologico: la home le scorre così.", itemLabel: (p) => `${p.fields.anno.value} — ${p.fields.titolo.fields.it.value}` },
         ),
         timeline: fields.array(
           fields.object({

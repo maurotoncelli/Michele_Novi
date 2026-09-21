@@ -71,8 +71,12 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
   const passi = (p.comeValutoPassi ?? []).filter((v) => pick(v.titolo, l));
   const lavoroFoto = srcMedia(home.lavoro?.foto?.src, "home");
   const lavoroVideo = home.lavoro?.video ? (home.lavoro.video.startsWith("/") ? home.lavoro.video : `/videos/${home.lavoro.video}`) : null;
+  // In grande va l'incarico di oggi (flag in Keystatic; in mancanza, l'anno che inizia con "dal", poi l'ultima).
+  // Le altre restano nell'ordine del contenuto, cioè cronologico.
   const tappe = (p.inEvidenza ?? []).filter((v) => pick(v.titolo, l));
-  const [prima, ...altre] = tappe;
+  const oggi = tappe.find((v) => v.attuale) ?? tappe.find((v) => /^(dal|since)\s/i.test(v.anno ?? "")) ?? tappe.at(-1);
+  const altre = tappe.filter((v) => v !== oggi);
+  const oggiAnno = oggi?.anno?.match(/\d{4}/)?.[0] ?? oggi?.anno ?? "";
 
   // Riga dei fatti sotto l'apertura: cose verificabili, non aggettivi.
   const lavoroAttuale = (p.timeline ?? [])
@@ -159,32 +163,37 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
         </Sezione>
       )}
 
-      {/* 3. Cinque tappe: Harvard grande, le altre in colonna. */}
-      {prima && (
+      {/* 3. Oggi in grande (dove opera), le tappe di formazione in colonna, in ordine cronologico. */}
+      {oggi && (
         <Sezione eyebrow={m.chiSono.inEvidenzaEyebrow} titolo={m.chiSono.inEvidenza} misura="varco">
           <div className="grid gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-24">
             <Reveal className="relative">
               <span aria-hidden="true" className="cifra-fondo">
-                {prima.anno}
+                {oggiAnno}
               </span>
               <div className="relative pt-[clamp(4rem,10vw,9rem)]">
-                <p className="eyebrow text-rame">{prima.anno}</p>
-                <h3 className="display-m mt-4">{pick(prima.titolo, l)}</h3>
-                <p className="lead mt-5 max-w-xl">{pick(prima.testo, l)}</p>
+                <p className="eyebrow text-rame">
+                  {m.chiSono.inEvidenzaOggi} · {oggi.anno}
+                </p>
+                <h3 className="display-m mt-4">{pick(oggi.titolo, l)}</h3>
+                <p className="lead mt-5 max-w-xl">{pick(oggi.testo, l)}</p>
               </div>
             </Reveal>
             {altre.length > 0 && (
-              <ol className="divide-y divide-linea lg:pt-[clamp(4rem,10vw,9rem)]">
-                {altre.map((v, i) => (
-                  <Reveal key={i} as="li" delay={i * 90} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-4 py-6 first:pt-0">
-                    <span className="eyebrow pt-1.5">{v.anno}</span>
-                    <div className="min-w-0">
-                      <h3 className="text-[1.2rem] leading-snug">{pick(v.titolo, l)}</h3>
-                      {pick(v.testo, l) && <p className="mt-1.5 text-[0.95rem] leading-relaxed text-grafite">{pick(v.testo, l)}</p>}
-                    </div>
-                  </Reveal>
-                ))}
-              </ol>
+              <div className="lg:pt-[clamp(4rem,10vw,9rem)]">
+                <p className="eyebrow mb-5">{m.chiSono.inEvidenzaTappe}</p>
+                <ol className="divide-y divide-linea border-t border-linea">
+                  {altre.map((v, i) => (
+                    <Reveal key={i} as="li" delay={i * 90} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-4 py-6">
+                      <span className="eyebrow pt-1.5 text-rame">{v.anno}</span>
+                      <div className="min-w-0">
+                        <h3 className="text-[1.2rem] leading-snug">{pick(v.titolo, l)}</h3>
+                        {pick(v.testo, l) && <p className="mt-1.5 text-[0.95rem] leading-relaxed text-grafite">{pick(v.testo, l)}</p>}
+                      </div>
+                    </Reveal>
+                  ))}
+                </ol>
+              </div>
             )}
           </div>
         </Sezione>

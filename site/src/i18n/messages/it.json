@@ -55,8 +55,10 @@
   },
   "chiSono": {
     "titolo": "Chi sono",
-    "inEvidenza": "Dove ho imparato.",
-    "inEvidenzaEyebrow": "Cinque tappe",
+    "inEvidenza": "Dove opero, dove ho imparato.",
+    "inEvidenzaEyebrow": "Oggi e le tappe",
+    "inEvidenzaOggi": "Oggi",
+    "inEvidenzaTappe": "Le tappe, in ordine",
     "percorso": "Il percorso, anno per anno.",
     "percorsoEyebrow": "Formazione e lavoro",
     "esperienze": "Esperienze lavorative",

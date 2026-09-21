@@ -10,7 +10,7 @@ import { Segno } from "../ui/Segno";
 import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
-import { ModuloSede, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
+import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
 import { Sezione } from "./Pagina";
 
 /* ------------------------------------------------------------------ Hero: due colonne, la foto è un ritratto, non uno sfondo */
@@ -95,7 +95,7 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
       <ul className="contenitore grid grid-cols-2 gap-x-8 gap-y-12 py-12 md:py-16 lg:grid-cols-4">
         {fatti.map((f, i) => (
           <Reveal key={f.label} as="li" delay={i * 90} className="min-w-0">
-            <p className="cifra flex items-baseline gap-2">
+            <p className="cifra-m flex items-baseline gap-2">
               {f.prefisso && <span className="text-[0.32em] font-medium tracking-normal text-grafite">{f.prefisso}</span>}
               <Contatore valore={f.valore} />
             </p>
@@ -107,25 +107,27 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
   );
 }
 
-/* ------------------------------------------------------------------ 01 Cosa curo: quattro righe dense, tutto a colpo d'occhio */
+/* ------------------------------------------------------------------ 01 Cosa curo: tre colonne, poi il metodo a sé */
 export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[]; locale: Locale }) {
   const m = getMessages(locale);
-  const principali = patologie.filter((p) => !p.secondaria);
+  const metodo = patologie.find((p) => p.area === "metodo");
+  const principali = patologie.filter((p) => !p.secondaria && p !== metodo);
   const centro = principali.find((p) => p.principale) ?? principali[0];
-  const ordinate = centro ? [centro, ...principali.filter((p) => p !== centro)].slice(0, 4) : [];
+  const colonne = centro ? [centro, ...principali.filter((p) => p !== centro)].slice(0, 3) : [];
   const secondarie = patologie.filter((p) => p.secondaria);
-  if (!ordinate.length) return null;
+  if (!colonne.length) return null;
   return (
-    <Sezione indice="01" eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} lead={m.home.cosaCuroLead} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso">
-      <ul className="grid items-stretch gap-x-12 gap-y-10 md:grid-cols-2 lg:gap-x-16 lg:gap-y-12">
-        {ordinate.map((p, i) => (
-          <Reveal key={p.slug} as="li" delay={i * 70} className="h-full min-w-0">
-            <SchedaPatologia p={p} locale={locale} riga />
-          </Reveal>
-        ))}
-      </ul>
-      {secondarie.length > 0 && (
-        <Reveal className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-linea pt-6 text-[0.95rem] text-grafite">
+    <>
+      <Sezione indice="01" eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} lead={m.home.cosaCuroLead} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso">
+        <ul className="binario items-stretch">
+          {colonne.map((p, i) => (
+            <Reveal key={p.slug} as="li" delay={i * 130} className="h-full min-w-0">
+              <SchedaPatologia p={p} locale={locale} index={i} colonna />
+            </Reveal>
+          ))}
+        </ul>
+        {secondarie.length > 0 && (
+          <Reveal className="mt-14 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-linea pt-6 text-[0.95rem] text-grafite">
           <span>{m.cosaCuro.secondarie}:</span>
           {secondarie.map((p) => (
             <Link key={p.slug} href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio">
@@ -134,7 +136,16 @@ export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[];
           ))}
         </Reveal>
       )}
-    </Sezione>
+      </Sezione>
+
+      {metodo && (
+        <section className="border-b border-linea">
+          <Reveal className="contenitore py-16 md:py-24">
+            <SchedaMetodo p={metodo} locale={locale} />
+          </Reveal>
+        </section>
+      )}
+    </>
   );
 }
 

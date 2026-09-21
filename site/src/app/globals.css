@@ -114,9 +114,17 @@ p {
 }
 .cifra {
   font-weight: 500;
-  font-size: clamp(2.8rem, 1.5rem + 4.5vw, 5.25rem);
+  font-size: clamp(2.6rem, 1.4rem + 3.8vw, 4.6rem);
   line-height: 0.9;
   letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+/* Cifra media: la riga dei fatti. Si legge, non urla. */
+.cifra-m {
+  font-weight: 500;
+  font-size: clamp(2rem, 1.2rem + 2.2vw, 3.3rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
 }
 /* Cifra di fondo: l'anno dietro al pezzo grande (Harvard). */
@@ -281,6 +289,26 @@ p {
   to {
     transform: translateY(-2.5rem);
     opacity: 0.35;
+  }
+}
+
+/* Fluttua: il disegno dentro la lastra scorre più lento della pagina mentre la attraversa.
+   Timeline di vista, solo CSS. Velocità diverse per colonna (--fluttua-da/--fluttua-a). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fluttua {
+      animation: fluttua linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+@keyframes fluttua {
+  from {
+    transform: translateY(var(--fluttua-da, 7%)) scale(1.04);
+  }
+  to {
+    transform: translateY(var(--fluttua-a, -7%)) scale(1.04);
   }
 }
 
@@ -610,6 +638,44 @@ a.osso:hover,
   max-width: 76rem;
   margin-inline: auto;
   padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Binario: su mobile le colonne scorrono in orizzontale a scatti, da sm in su tornano griglia. */
+.binario {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * clamp(1rem, 4vw, 2.5rem));
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  scroll-padding-inline: clamp(1rem, 4vw, 2.5rem);
+  padding-bottom: 0.5rem;
+}
+.binario::-webkit-scrollbar {
+  display: none;
+}
+.binario > * {
+  flex: 0 0 76vw;
+  scroll-snap-align: start;
+}
+@media (min-width: 40rem) {
+  .binario {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3.5rem 2rem;
+    overflow: visible;
+    margin-inline: 0;
+    padding: 0;
+  }
+  .binario > * {
+    flex: none;
+  }
+}
+@media (min-width: 64rem) {
+  .binario {
+    column-gap: 3rem;
+  }
 }
 
 /* Hub Dove: due colonne della stessa misura, righe allineate (subgrid). */

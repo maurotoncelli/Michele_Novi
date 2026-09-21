@@ -78,6 +78,13 @@ Riferimento portato dal cliente: skyclinics.al (Vite, Lenis, WebGL, cinque video
 - **Trama**: griglia di punti al 7% sulle fasce osso (`.trama`, un `radial-gradient`).
 - **Frecce**: nei bottoni la freccia scorre di 4px all'hover (`svg[data-segno="freccia"]`).
 
+### Ritocchi dopo la revisione del cliente
+
+- **Cifre più piccole**: la riga dei fatti usa `.cifra-m` (tetto 3.3rem, non più 5.25). `.cifra` resta per l'anno sticky del Percorso, ridotto a 4.6rem.
+- **Come si opera esce da Cosa curo**: è `area: metodo` nel contenuto, non una patologia. Sta in una fascia sua (`SchedaMetodo`), bianca, tra Cosa curo e Dove: disegno 5/4 a sinistra, eyebrow «Il metodo», titolo display, lead e una riga di copy in più (`cosaCuro.metodoLead`). Stessa cosa nell'hub `/cosa-curo`, prima della chiusura.
+- **Tre colonne** (`SchedaPatologia colonna`): Spalla, Gomito e mano, Traumatologia sportiva una accanto all'altra. Lastra 4/5 alta, indice 01–03, titolo grande, lead intero, città, «Scopri» con freccia. Entrano a scatti di 130ms. Il disegno **fluttua** dentro la lastra mentre la si attraversa (`animation-timeline: view()`, `.fluttua`, velocità diverse per colonna via `--fluttua-da/--fluttua-a`); all'hover la lastra vira al petrolio chiaro e il disegno cresce.
+- **Binario su mobile** (`.binario`): sotto 640px le tre colonne scorrono in orizzontale a scatti (76vw ciascuna, snap, gutter rispettato con `scroll-padding-inline`); da sm in su è griglia a tre.
+
 ## Cosa resta
 
 - Shooting: sostituire i placeholder (ritratto, quattro sedi). Nomi file e alt già predisposti.

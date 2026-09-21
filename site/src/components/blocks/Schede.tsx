@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick, formatDate } from "@/i18n";
 import { getDisegni, getSedi, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Pubblicazione, type Sede } from "@/lib/content";
@@ -14,12 +14,13 @@ function Lastra({
   className = "",
   children,
 }: {
-  ratio?: "4/3" | "5/4";
+  ratio?: "4/3" | "5/4" | "4/5";
   className?: string;
   children: ReactNode;
 }) {
+  const forma = ratio === "5/4" ? "aspect-[5/4]" : ratio === "4/5" ? "aspect-[4/5]" : "aspect-[4/3]";
   return (
-    <div className={`relative overflow-hidden bg-osso-2 ${ratio === "5/4" ? "aspect-[5/4]" : "aspect-[4/3]"} ${className}`}>
+    <div className={`relative overflow-hidden bg-osso-2 ${forma} ${className}`}>
       <div className="absolute inset-0 origin-center transition-transform duration-700 ease-osso group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none">
         {children}
       </div>
@@ -37,8 +38,8 @@ function ChipSede({ s, locale }: { s: Sede; locale: Locale }) {
   );
 }
 
-/** Card patologia: 5/4, titolo e lead a altezza riservata. `riga` = disegno piccolo a sinistra, lead intero, sedi dove si tratta. */
-export async function SchedaPatologia({ p, locale, riga = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean }) {
+/** Card patologia. Default: 5/4 compatta (correlate). `riga` = disegno piccolo a sinistra, lead intero. `colonna` = colonna alta con disegno che fluttua. */
+export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
@@ -69,6 +70,34 @@ export async function SchedaPatologia({ p, locale, riga = false }: { p: Patologi
     );
   }
 
+  if (colonna) {
+    // Tre colonne alte: il disegno fluttua allo scroll, la freccia arriva all'hover.
+    const tutte = await getSedi();
+    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
+    const velocita = [["9%", "-9%"], ["5%", "-5%"], ["12%", "-12%"]][(index ?? 0) % 3] as [string, string];
+    return (
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col">
+        <Lastra ratio="4/5" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
+          <div className="fluttua absolute inset-0" style={{ "--fluttua-da": velocita[0], "--fluttua-a": velocita[1] } as CSSProperties}>
+            {media}
+          </div>
+        </Lastra>
+        <div className="flex flex-1 flex-col pt-6">
+          {index !== undefined && <p className="eyebrow">{String(index + 1).padStart(2, "0")}</p>}
+          <h3 className="mt-2 text-[1.6rem] leading-tight transition-colors duration-500 group-hover:text-petrolio md:text-[1.9rem]">{pick(p.titolo, locale)}</h3>
+          <p className="mt-3 text-[0.98rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
+          <div className="mt-auto flex items-end justify-between gap-4 pt-5">
+            {dove.length > 0 ? <p className="text-[0.8rem] text-grafite">{dove.join(" · ")}</p> : <span />}
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-[0.85rem] font-medium text-petrolio">
+              {m.cta.scopri}
+              <Segno nome="freccia" size={16} className="transition-transform duration-500 ease-osso group-hover:translate-x-1" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col">
       <Lastra ratio="5/4" className="mb-5 w-full">
@@ -78,6 +107,41 @@ export async function SchedaPatologia({ p, locale, riga = false }: { p: Patologi
         <h3 className="line-clamp-2 min-h-[2.55em] text-[1.28rem] leading-tight group-hover:text-petrolio">{pick(p.titolo, locale)}</h3>
         <p className="mt-2 line-clamp-3 min-h-[4.5em] text-[0.92rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
         <span className="sr-only">{m.cta.scopri}</span>
+      </div>
+    </Link>
+  );
+}
+
+/** Il metodo (Come si opera): non una patologia, uno spazio a sé. Disegno largo a sinistra, testo a destra. */
+export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale }) {
+  const m = getMessages(locale);
+  const segno = isSegno(p.segno) ? p.segno : "artroscopia";
+  const catalogo = await getDisegni();
+  const disegno = p.immagine?.src
+    ? { src: p.immagine.src, alt: pick(p.immagine.alt, locale) || pick(p.titolo, locale) }
+    : srcDisegno(catalogo, segno, locale);
+  return (
+    <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-24">
+      <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
+        <div className="fluttua absolute inset-0" style={{ "--fluttua-da": "6%", "--fluttua-a": "-6%" } as CSSProperties}>
+          {disegno ? (
+            <Disegno src={disegno.src} alt={disegno.alt} />
+          ) : (
+            <span className="absolute inset-0 grid place-items-center text-petrolio">
+              <Segno nome={segno} size={56} />
+            </span>
+          )}
+        </div>
+      </Lastra>
+      <div className="min-w-0">
+        <p className="eyebrow">{m.cosaCuro.metodoEyebrow}</p>
+        <h3 className="display-m mt-4 transition-colors duration-500 group-hover:text-petrolio">{pick(p.titolo, locale)}</h3>
+        <p className="lead mt-5 max-w-xl">{pick(p.lead, locale)}</p>
+        <p className="mt-4 max-w-xl text-[0.98rem] leading-relaxed text-grafite">{m.cosaCuro.metodoLead}</p>
+        <span className="btn btn-ghost -ml-3 mt-6">
+          {m.cta.scopri}
+          <Segno nome="freccia" size={18} />
+        </span>
       </div>
     </Link>
   );

@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { isSegno, Segno } from "@/components/ui/Segno";
 import { Disclaimer, Intestazione, Sezione } from "@/components/blocks/Pagina";
-import { SchedaPatologia } from "@/components/blocks/Schede";
+import { SchedaMetodo, SchedaPatologia } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/cosa-curo">): Promise<Metadata> {
@@ -24,7 +24,8 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const [s, patologie] = await Promise.all([getSettings(), getPatologie()]);
   const m = getMessages(l);
-  const principali = patologie.filter((p) => !p.secondaria);
+  const metodo = patologie.find((p) => p.area === "metodo");
+  const principali = patologie.filter((p) => !p.secondaria && p !== metodo);
   const secondarie = patologie.filter((p) => p.secondaria);
 
   return (
@@ -44,15 +45,15 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
       />
 
       <Sezione>
-        <div className="grid items-stretch gap-x-12 gap-y-10 md:grid-cols-2 lg:gap-x-16 lg:gap-y-12">
+        <div className="binario items-stretch">
           {principali.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 70} className="h-full min-w-0">
-              <SchedaPatologia p={p} locale={l} index={i} riga />
+            <Reveal key={p.slug} delay={i * 130} className="h-full min-w-0">
+              <SchedaPatologia p={p} locale={l} index={i} colonna />
             </Reveal>
           ))}
         </div>
         {secondarie.length > 0 && (
-          <Reveal className="mt-12 border-t border-linea pt-6">
+          <Reveal className="mt-14 border-t border-linea pt-6">
             <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
             <ul className="flex flex-wrap gap-2">
               {secondarie.map((p) => (
@@ -67,6 +68,14 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
           </Reveal>
         )}
       </Sezione>
+
+      {metodo && (
+        <section className="border-t border-linea">
+          <Reveal className="contenitore py-16 md:py-24">
+            <SchedaMetodo p={metodo} locale={l} />
+          </Reveal>
+        </section>
+      )}
 
       <Sezione tinta="osso" misura="affermazione">
         <Reveal as="p" maschera className="citazione-l max-w-4xl">

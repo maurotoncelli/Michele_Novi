@@ -119,9 +119,10 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 - **Cosa curo a tre colonne**; **Come si opera** è metodo, fascia a sé.
 - **Ritratto in bianco e nero**, mezzo busto in posa, a tutta altezza del testo in Chi sono: direzione anche per lo shooting.
 - **Approfondimenti** è il solo nome della sezione: «quaderno» non esiste, nemmeno nel codice.
-- **Paper**: testo integrale solo se open access (5 su 7); con copyright dell’editore, solo abstract. Approvato da Mauro, da fare **dopo**.
+- **Paper**: testo integrale solo se open access (5 su 7); con copyright dell’editore, solo abstract. **Fatto** il 21/09 sera: campi `testoIntegrale` e `licenza`, serif Source Serif 4 solo nella Lettura, sommario sticky.
 - **Pagina patologia**: sommario sticky a sinistra con voce che si accende; Dove, Ne ho scritto qui e FAQ nel flusso dell'articolo, non in colonna.
-- **Recensioni**: citazioni tipografiche una alla volta, virgolette in petrolio chiaro, piattaforma e stelle in eyebrow. Campo `stelle` in Keystatic.
+- **Recensioni**: citazioni tipografiche in misura da lettura (24rem, 1.2rem), virgolette piccole in petrolio chiaro, piattaforma e stelle in eyebrow, parole che si compongono. Campo `stelle` in Keystatic. La versione «una alla volta, gigante» è stata bocciata.
+- **Scorrimento orizzontale in home** (recensioni, approfondimenti): **niente frecce né snap**. Desktop: la sezione si appunta e le schede scorrono con lo scroll della pagina (CSS scroll-driven). Telefono: colonna. Mauro: «controlli scomodi; automatici su desktop, verticali su smartphone».
 
 ## Fuori v1 (annotato, non costruito)
 

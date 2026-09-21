@@ -30,6 +30,7 @@ export function Reveal({
   delay = 0,
   immediate = false,
   maschera = false,
+  solo = false,
   style,
   ...rest
 }: {
@@ -41,6 +42,8 @@ export function Reveal({
   immediate?: boolean;
   /** Titoli display: maschera di riga invece del fade. */
   maschera?: boolean;
+  /** Nessun effetto proprio: mette solo `is-in`, e sono i figli (es. .parola) ad animarsi. */
+  solo?: boolean;
   style?: CSSProperties;
 } & Record<string, unknown>) {
   const ref = useRef<HTMLElement>(null);
@@ -59,7 +62,7 @@ export function Reveal({
   return (
     <Comp
       ref={ref}
-      className={immediate ? className : `${maschera ? "reveal-maschera" : "reveal"} ${className}`}
+      className={immediate ? className : `${maschera ? "reveal-maschera" : solo ? "reveal-solo" : "reveal"} ${className}`}
       style={immediate ? style : ({ ...style, "--reveal-delay": `${delay}ms` } as CSSProperties)}
       {...rest}
     >

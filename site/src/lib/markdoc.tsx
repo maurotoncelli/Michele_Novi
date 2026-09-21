@@ -18,6 +18,10 @@ const config: Config = {
       },
     },
   },
+  tags: {
+    // Numeri di citazione in apice nel testo dei paper: {% sup %}24{% /sup %}
+    sup: { render: "sup", inline: true },
+  },
 };
 
 function slugify(s: string) {
@@ -58,6 +62,25 @@ export async function renderBody(corpoIt: Body, corpoEn: Body | undefined, local
   }
   const content: RenderableTreeNode = Markdoc.transform(node, config);
   return { element: Markdoc.renderers.react(content, React, { components }), fallbackToIt: fallback };
+}
+
+/** Markdown puro (es. il testo integrale di un paper salvato come stringa in Keystatic). */
+export function renderMarkdown(testo: string) {
+  const node = Markdoc.parse(testo);
+  const content: RenderableTreeNode = Markdoc.transform(node, config);
+  return Markdoc.renderers.react(content, React, { components });
+}
+
+/** H2 di una stringa markdown, per il sommario. */
+export function headingsMarkdown(testo: string): { id: string; text: string }[] {
+  const out: { id: string; text: string }[] = [];
+  for (const child of Markdoc.parse(testo).walk()) {
+    if (child.type === "heading" && child.attributes.level <= 2) {
+      const text = [...child.walk()].filter((n) => n.type === "text").map((n) => String(n.attributes.content)).join("");
+      out.push({ id: slugify(text), text });
+    }
+  }
+  return out;
 }
 
 /** Estrae gli H2 del corpo per un indice. */

@@ -634,6 +634,107 @@ a.osso:hover,
   color: var(--color-grafite);
 }
 
+/* Lettura: il paper com'è uscito in rivista. Serif accademico (Source Serif 4) solo qui, colonna da ~65 caratteri,
+ titoli di sezione in maiuscoletto sans, capolettera sull'abstract, bibliografia piccola con numeri a margine. */
+.lettura {
+  font-family: var(--font-lettura), Georgia, "Times New Roman", serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--color-inchiostro);
+  max-width: 38rem;
+  font-feature-settings: "onum", "pnum", "kern", "liga";
+  text-wrap: pretty;
+  hyphens: auto;
+}
+.lettura > * + *,
+.lettura > article > * + * {
+  margin-top: 1em;
+}
+.lettura h2 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-petrolio);
+  margin-top: 2.8em;
+  padding-top: 1.2em;
+  border-top: 1px solid var(--color-linea);
+  scroll-margin-top: 6rem;
+}
+.lettura h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.lettura h3 {
+  font-family: inherit;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin-top: 1.8em;
+  scroll-margin-top: 6rem;
+}
+/* Capolettera solo sul primo paragrafo (l'abstract). */
+.lettura > h2:first-child + p::first-letter,
+.lettura > article > h2:first-child + p::first-letter {
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.08em;
+  margin-top: 0.06em;
+  font-weight: 500;
+  color: var(--color-petrolio);
+}
+.lettura strong {
+  font-weight: 600;
+}
+.lettura sup {
+  font-family: var(--font-sans);
+  font-size: 0.62em;
+  line-height: 0;
+  vertical-align: super;
+  color: var(--color-petrolio);
+  margin-left: 0.05em;
+}
+.lettura ol {
+  list-style: none;
+  counter-reset: rif;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--color-grafite);
+  padding: 0;
+}
+.lettura ol > li {
+  counter-increment: rif;
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  gap: 0.25rem;
+}
+.lettura ol > li::before {
+  content: counter(rif) ".";
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-nebbia);
+}
+.lettura ol > li + li {
+  margin-top: 0.45rem;
+}
+.lettura ol,
+.lettura ol > li {
+  max-width: none;
+}
+.scorri-sottile {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-linea) transparent;
+}
+.lettura-colophon {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-grafite);
+}
+
 /* Contenitore */
 .contenitore {
   width: 100%;
@@ -727,76 +828,146 @@ a.osso:hover,
   scroll-margin-top: 6rem;
 }
 
-/* Rotaia: fila orizzontale a filo dei bordi della finestra, dentro un contenitore centrato.
-   Il margine negativo la porta al vivo; il padding riporta la prima scheda in colonna col titolo. */
-.rotaia {
-  /* Distanza dal bordo della finestra al contenuto del .contenitore (max 76rem, gutter clamp). */
+/* Striscia: sezione che si appunta mentre le schede scorrono in orizzontale, guidate dallo scroll della pagina.
+ Solo CSS (scroll-driven animations). Sotto i 64rem, o dove il browser non le supporta, è una colonna. */
+.striscia {
   --gutter: clamp(1rem, 4vw, 2.5rem);
-  --sbordo: max(var(--gutter), calc((100vw - 76rem) / 2 + var(--gutter)));
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  margin-inline: calc(-1 * var(--sbordo));
-  padding-inline: var(--sbordo);
-  scroll-padding-inline: var(--sbordo);
-  padding-bottom: 0.25rem;
+  --n: 6;
+  --scheda: 24rem;
+  --gap: 3rem;
+  --binario: calc(var(--n) * (var(--scheda) + var(--gap)) - var(--gap));
 }
-.rotaia::-webkit-scrollbar {
-  display: none;
+.striscia-scena {
+  padding-block: 5rem 6rem;
 }
-.rotaia > * {
-  flex: 0 0 clamp(16rem, 76vw, 20rem);
-  scroll-snap-align: start;
+.striscia-testa {
+  margin-bottom: 3.5rem;
 }
-@media (min-width: 40rem) {
-  .rotaia > * {
-    flex-basis: clamp(17rem, 23vw, 20rem);
+.striscia-binario {
+  display: grid;
+  gap: 2.75rem;
+}
+/* Telefono: quattro voci bastano, il resto è nell'hub. */
+@media (max-width: 63.98rem) {
+  .striscia-binario > :nth-child(n + 5) {
+    display: none;
   }
 }
-/* Rotaia intera: una voce alla volta, la successiva fa capolino a destra. */
-.rotaia.rotaia-intera {
-  gap: 3rem;
-}
-.rotaia.rotaia-intera > * {
-  flex-basis: 86%;
-}
 @media (min-width: 64rem) {
-  .rotaia.rotaia-intera > * {
-    flex-basis: 78%;
+  .striscia-scena {
+    padding-block: 5rem 8rem;
+  }
+  .striscia-testa {
+    margin-bottom: 4rem;
+  }
+  /* Senza scroll-driven animations: griglia a tre colonne, senza orfane. */
+  .striscia-binario {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3rem 2.5rem;
+  }
+  .striscia-binario > :nth-child(n + 7) {
+    display: none;
+  }
+  /* Con "riduci movimento" resta la griglia: niente sezione appuntata. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .striscia {
+        view-timeline-name: --striscia;
+        view-timeline-axis: block;
+        /* Un viewport di scena più la corsa del binario oltre il contenitore: scroll e scorrimento vanno circa 1:1. */
+        height: calc(
+          100svh +
+            max(20rem, var(--binario) - min(100vw - 2 * var(--gutter), 76rem))
+        );
+      }
+      .striscia-fissa {
+        position: sticky;
+        top: var(--header-h);
+        height: calc(100svh - var(--header-h));
+        display: grid;
+        /* minmax(0,1fr): il binario, più largo del contenitore, non deve allargare la colonna. */
+        grid-template-columns: minmax(0, 1fr);
+        align-content: center;
+        overflow-x: clip;
+      }
+      .striscia-scena {
+        container-type: inline-size;
+        padding-block: 0;
+      }
+      .striscia-binario {
+        display: flex;
+        gap: var(--gap);
+        width: var(--binario);
+        max-width: none;
+        will-change: transform;
+        animation: striscia-scorri linear both;
+        animation-timeline: --striscia;
+        animation-range: contain 0% contain 100%;
+      }
+      .striscia-binario > * {
+        flex: 0 0 var(--scheda);
+        display: block !important;
+      }
+      @keyframes striscia-scorri {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          /* Fino a portare l'ultima scheda al bordo destro del contenitore (100cqw). */
+          transform: translateX(min(0px, calc(-100% + 100cqw)));
+        }
+      }
+    }
   }
 }
 
-/* Virgolette come segno grafico: grandi, petrolio chiaro, appese sopra la citazione. */
+/* Recensione: citazione tipografica in misura da lettura; le virgolette sono il segno grafico. */
+.recensione {
+  display: block;
+}
 .virgolette {
   display: block;
-  font-size: clamp(6rem, 4rem + 8vw, 11rem);
-  line-height: 0.6;
+  font-size: 4.5rem;
+  line-height: 0.55;
+  height: 0.55em;
+  margin-bottom: 1rem;
   font-weight: 500;
   color: var(--color-petrolio-chiaro);
   user-select: none;
 }
-.rotaia-freccia {
-  display: inline-grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-linea);
+.recensione-testo {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: -0.005em;
   color: var(--color-inchiostro);
+  text-wrap: pretty;
+}
+@media (min-width: 64rem) {
+  .recensione-testo {
+    font-size: 1.2rem;
+  }
+}
+/* Le parole si compongono: ognuna sale e appare col proprio ritardo quando l'antenato è .is-in. */
+.parola {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.3em);
   transition:
-    border-color 0.3s var(--ease-osso),
-    color 0.3s var(--ease-osso),
-    opacity 0.3s var(--ease-osso);
+    opacity 0.5s var(--ease-osso),
+    transform 0.7s var(--ease-osso);
+  transition-delay: var(--ritardo, 0ms);
 }
-.rotaia-freccia:hover:not(:disabled) {
-  border-color: var(--color-petrolio);
-  color: var(--color-petrolio);
+.is-in .parola {
+  opacity: 1;
+  transform: none;
 }
-.rotaia-freccia:disabled {
-  opacity: 0.3;
-  cursor: default;
+@media (prefers-reduced-motion: reduce) {
+  .parola {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Hub Dove: due colonne della stessa misura, righe allineate (subgrid). */

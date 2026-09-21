@@ -372,6 +372,12 @@ export default config({
         pdf: fields.file({ label: "PDF (solo se lecito)", directory: "public/paper", publicPath: "/paper/" }),
         abstract: fields.text({ label: "Abstract (originale, EN)", multiline: true }),
         riassunto: testo("Riassunto per pazienti", { multiline: true }),
+        licenza: fields.text({ label: "Riga di attribuzione (© autori, rivista, licenza)", description: "Compare sotto la Lettura o sotto l'abstract." }),
+        testoIntegrale: fields.text({
+          label: "Testo integrale (markdown: ## titoli, paragrafi, 1. bibliografia)",
+          description: "Solo se la licenza lo permette (open access CC BY / BY-NC). Per i paper con copyright dell'editore lasciare vuoto: si mostra l'abstract.",
+          multiline: true,
+        }),
         tag: fields.array(fields.text({ label: "Tag" }), { label: "Tag", itemLabel: (p) => p.value }),
         principale: fields.checkbox({ label: "Tra le principali (CV)", defaultValue: false }),
         patologie: fields.array(fields.relationship({ label: "Pagina", collection: "patologie" }), {

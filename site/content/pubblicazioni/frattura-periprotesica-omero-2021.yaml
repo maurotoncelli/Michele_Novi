@@ -10,7 +10,8 @@ volume: '12:1–9'
 doi: '10.1177/21514593211039908'
 pubmedId: '34595045'
 pdf: frattura-periprotesica-omero-2021.pdf
-abstract: ''
+abstract: |
+  Background: During the last decades, the growing number of shoulder replacement has increased the associated complications. Periprosthetic fractures have a low incidence but can be a severe clinical condition, especially in elderly population. There are still no guidelines to define the best treatment protocol for post-operative periprosthetic humeral fractures. Factors associated to these fractures and consequently the decision-making for the best treatment seem to be patient-related but also correlated with the type of implant. The aim of this study is to analyze the patient’s risk factors, fracture pattern, implant type and treatment, evaluating the outcome with a long-term follow-up. Methods: A retrospective study was performed on more than 2700 shoulder prostheses implanted over 10 years in two specialized centers, identifying 19 patients who underwent surgery for post-operative periprosthetic fracture. Gender, age, comorbidities, type of prosthetic implant, type of fracture, and cortical index of each patient were evaluated. All patients underwent surgery and were evaluated with a mean follow-up of 5 years with radiographic controls and functional assessment with the Constant–Murley score. Results: Complete healing was achieved in 18 of 19 patients. All patients presented a lower Constant–Murley score than the pre-fracture score, there were no significant differences between prosthetic implants, and the cortical index was lower than the threshold level in more than 60% of cases. Conclusion: The results of this study showed that a correct preoperative planning is essential to evaluate the type of implant and possible signs of stem mobilization. With a stable stem, it is preferable to maintain it and proceed to a synthesis. The decision process is more complex in periprosthetic fractures with a reduced cortical index, when some radiolucency lines are present in stems with high primary stability, because it is not always indicative of an unstable stem. Level of
 riassunto:
   it: 'Una caduta con una protesi di spalla già impiantata può fratturare l''omero attorno allo stelo. Il lavoro rivede come classificarle e quando trattarle con placca, con revisione della protesi o senza intervento.'
   en: 'A fall with a shoulder replacement already in place can fracture the humerus around the stem. The paper reviews how to classify these fractures and when to treat them with a plate, with revision of the implant, or without surgery.'
@@ -22,3 +23,204 @@ principale: true
 patologie:
   - spalla
 pubblicato: true
+licenza: '© 2021 the authors. Geriatric Orthopaedic Surgery & Rehabilitation (SAGE), licenza CC BY-NC 4.0. Riprodotto senza figure e tabelle.'
+testoIntegrale: |
+  ## Abstract
+
+  **Background**: During the last decades, the growing number of shoulder replacement has increased the associated complications. Periprosthetic fractures have a low incidence but can be a severe clinical condition, especially in elderly population. There are still no guidelines to define the best treatment protocol for post-operative periprosthetic humeral fractures. Factors associated to these fractures and consequently the decision-making for the best treatment seem to be patient-related but also correlated with the type of implant. The aim of this study is to analyze the patient’s risk factors, fracture pattern, implant type and treatment, evaluating the outcome with a long-term follow-up. **Methods**: A retrospective study was performed on more than 2700 shoulder prostheses implanted over 10 years in two specialized centers, identifying 19 patients who underwent surgery for post-operative periprosthetic fracture. Gender, age, comorbidities, type of prosthetic implant, type of fracture, and cortical index of each patient were evaluated. All patients underwent surgery and were evaluated with a mean follow-up of 5 years with radiographic controls and functional assessment with the Constant–Murley score. **Results**: Complete healing was achieved in 18 of 19 patients. All patients presented a lower Constant–Murley score than the pre-fracture score, there were no significant differences between prosthetic implants, and the cortical index was lower than the threshold level in more than 60% of cases. **Conclusion**: The results of this study showed that a correct preoperative planning is essential to evaluate the type of implant and possible signs of stem mobilization. With a stable stem, it is preferable to maintain it and proceed to a synthesis. The decision process is more complex in periprosthetic fractures with a reduced cortical index, when some radiolucency lines are present in stems with high primary stability, because it is not always indicative of an unstable stem. **Level of Evidence**: Therapeutic III.
+
+  ## Introduction
+
+  The number of shoulder replacements in recent years has grown exponentially, especially after the increased utilization of reverse total shoulder arthroplasty (RSA) in the last decade, both in USA and Europe.{% sup %}1–5{% /sup %}
+
+  RSA success and reliability has widened indications, from cuff tear arthropathy to rheumatoid arthritis, complex proximal humerus fractures and their sequelae, failed shoulder arthroplasty, tumors and revisions of primary implants.{% sup %}6–8{% /sup %}
+
+  An increasing number of shoulder implants has also resulted in an increase in the rate of associated complications. Complications that can occur after a shoulder replacement include instability, infection, scapular notching, and periprosthetic fractures.
+
+  Periprosthetic shoulder fractures represent an uncommon but severe complication.
+
+  The frequency of periprosthetic humeral fractures after shoulder arthroplasty ranges from 1.6 to 2.8% for total replacement and up to 2.3% for hemiarthroplasty.{% sup %}9–13{% /sup %}
+
+  Periprosthetic fractures in reverse shoulder arthroplasty (RSA) are three times more frequent than anatomic arthroplasty and account for approximately 20% of all complications,14 affecting the humerus, the glenoid, or the acromion.
+
+  Depending on the location and morphology of the fracture, different classifications have been proposed; however, best treatment protocols are still debated.{% sup %}10,15{% /sup %}
+
+  Risk factors associated with PHF are represented by a reduced bone stock, female sex, advanced age, higher Deyo-Charlson comorbidity index, and a history of rheumatoid arthritis.{% sup %}16{% /sup %}
+
+  In addition to biological factors, also the characteristics and design of the implants may influence the risk of periprosthetic fracture. For these reasons, further classification has been proposed according to typology of the prosthesis.{% sup %}17{% /sup %}
+
+  This study retrospectively analyzed all the periprosthetic humeral fractures (PHF) occurred in a period of 10 years treated surgically. We classified the different fractures in association with an analysis of risk factors, the radiographical cortical index, and the type of implant used. Analyzing the type of treatment performed, we then evaluated the functional outcomes, the healing rates, and the associated complications, with an average follow-up of 5 years.
+
+  ## Material and Methods
+
+  In a 10 years’ retrospective study, we enrolled all the postoperative periprosthetic humeral fracture treated surgically from January 2008 to January 2018 in two different institutions.
+
+  A total of 2704 shoulder prosthesis were implanted, 2143 and 561, respectively, in the two centers. Radiographs and medical records were collected for all the patients that underwent surgery for a periprosthetic humeral fracture. Preoperative radiographs were assessed to understand fracture pattern and the bone mineral density (BMD) of the humerus.
+
+  The ratio between the thickness of the cortical and the total diameter of the humeral diaphysis is called cortical index (CI), and it was calculated according the method proposed by Giannotti et al{% sup %}18{% /sup %} to evaluate the cortical thickness as a predictor of bone mineralization of the patients. Radiographic lucency around the stem and signs of implant loosening has assessed preoperatively with the method described by Sperling and Sanchez-Sotelo,19,20 for an accurate planning. CT scan was performed in all patients preoperatively. The traumatic event, past medical history, and risk factors
+
+  ## Population Study
+
+  We reported a total of 19 post-operative periprosthetic fractures of the humerus; of those, ten were primary implants for glenohumeral osteoarthritis (OA) or cuff tear arthropathy and nine were implants on acute proximal humeral fracture. Reverse shoulder arthroplasty (RSA) accounted 12 cases of PHF, in six cases fractures occurred in patients with hemiarthroplasty (HA) and one case was an anatomic total shoulder arthroplasty (TSA). The humeral stem resulted cemented in three cases of PHF (one RSA and two HA).
+
+  The average age of the patients at the time of the fracture was 71.5 years; 68.42% were female.
+
+  The mean time from primary implant and periprosthetic fracture is 3.9 (2.5 SD) years.
+
+  Significant underlying comorbidity reported in clinical records was rheumatoid arthritis in one case and dementia in three cases.
+
+  Seventeen periprosthetic fractures were the result of a fall and in two cases fractures occurred even without an efficient direct trauma.
+
+  The fractures were classified according to Worland’s classification{% sup %}10{% /sup %}: 13 type B2 (10 RSA and 3 HA), 2 type B3 (1 RSA and 1HA), and 4 type C (1 RSA, 2 HA and 1 TSA) (Figure 1).
+
+  We also considered associated injuries and post-operative complications that could affect functional recovery during the follow-up period, reporting two cases of transient radial nerve neuropathies following an acute neurapraxia, one case of superficial infection, and one case of nonunion (Table 1).
+
+  ## Operative Technique
+
+  Patient was placed in beach-chair position and cephalosporine preoperative prophylaxis was adopted. Deltopectoral approach was used in all 19 shoulders. Intraoperative evaluation of the stability of all the components of the implant has been always done in the very first phase of the procedure.
+
+  Intraoperative periprosthetic tissue samples for histopathology and rapid cultural test were collected in each patient.
+
+  In one case of PHF with partially mobilized HA, an anterior cortical window as described by Sperling et al.{% sup %}21{% /sup %} has been performed, to facilitate the removal of the stem. The cortical window was then fixed with cerclage; a longer humeral cemented stem has been implanted and a bone graft was used.
+
+  In one case of a cemented RSA with a Worland B2 fracture and a stable stem, the old cement was removed from the distal apex and a new cementation was performed without removing the original implant; two cortical bone grafts were used as well.
+
+  A humeral or tibial cortical allograft from the bone bank of IOR (Istituti Ortopedici Rizzoli, Bologna, Italy) was used in all but six cases, three C and three B2 Worland fractures, where plates provided a good stability (Figure 2).
+
+  In five cases, we observed intraoperatively that the stem was not stable and therefore was revised, and in two of these cases, a cortical bone graft was used (Table 2).
+
+  The allograft was shaped as long as possible for better mechanical stability, without creating impingement, especially when a bone bridge is present between the tip of the stem and an ipsilateral elbow implant.
+
+  Patients were immobilized in a sling for 6 weeks. Then patients underwent a rehabilitation program for at least 2 months.
+
+  ## Follow-up
+
+  Patients underwent clinical and radiological follow-up at one month post-operatively, then at 3, 6, and 12 months; subsequently, the patients underwent annual follow-up.
+
+  Conventional shoulder radiographs were analyzed by radiologists and surgeons to assess the healing process.
+
+  Sixteen of 19 patients returned to our institution at the final follow-up in December 2020; one patient was lost affected by severe dementia and other two patients passed away.
+
+  Functional evaluation was performed with the Constant–Murley score.{% sup %}22{% /sup %} The patients’ subjective assessments of shoulder function before periprosthetic fracture and after revision surgery were then compared.
+
+  Descriptive statistics (frequency, mean, standard deviation, and range) were calculated for all variables.
+
+  ## Results
+
+  Radiographic follow-up showed a complete healing in 18 of the 19 periprosthetic fractures analyzed. One case of PHF occurred in a patient with rheumatoid arthritis as associated risk factor. This patient was treated with ORIF associated to allograft and reported a nonunion and refracture within 4 months after surgery and required a revision surgery.
+
+  We reported an associate rick factor, an incidence of dementia from mild to severe clinical presentation, in 3 out of 19 patients with PHF.
+
+  The rate of neurological complications was 12.5% (2 cases) with radial neuropathy, with satisfactory recovery of both at the last follow-up. Post-operative infection occurred in one case. Delayed wound healing and positive cultural test showed a superficial infection, cleared with large spectrum antibiotics.
+
+  For each patient, assessment of BMD and cortical thickness as well as radiographic lucency lines was performed on preoperative X-rays. Having cortical index as reference and the IC = .231 as fracture risk threshold,18 it turned out that 63.16% of our patients had lower values (Table 1). Diaphyseal radiolucency lines (in zone 2–6 and 3–5 according to Sanchez-Sotelo classification{% sup %}20{% /sup %}) were assessed in one case of PHF with a HA cemented stem, treated with a revision cemented stem.
+
+  Analysis of the clinical outcome obtained with the Constant–Murley score showed that 100% of patients reported a general worsening in relation to functional recovery compared with the first prosthetic implant. Loss of lateral abduction and anterior elevation was the main aspect of clinical worsening, with an average value of 80° (range 40–110°). This aspect can be considered even a consequence of a reduction of deltoid strength experimented in all the patients. During the last patient interview, a subjective worsening of activities of daily living (ADL) was reported (Table 3).
+
+  In detail, the average score obtained with the Constant– Murley is 59/100 points. In 81.25% of the cases, there was a level of pain from mild to absent; in the remaining cases,
+
+  moderate pain remained with an average score of 11.62/15. Basic daily activities, such as dressing, personal hygiene, and nutrition were satisfactory in 68.75% of cases; activities with greater functional demand, such as work and domestic activities were satisfactory in 37.5% of cases, with an overall average score of 13.25/20. As far as functional recovery is concerned, the highest success rates are recorded for anterior flexion of the limb, with 62.5% of patients reaching the 90° threshold. On the other hand, the worst rate is recorded in the internal-rotation movement with 12.5% of patients able to reach the lumbosacral junction. Regarding the ROM, the average score obtained is 18.19/40.
+
+  ## Discussion
+
+  The growing number of shoulder replacements has led to an increase of complications.
+
+  Periprosthetic humeral fractures (PHF) represent a rare but serious complication. A systematic review by Zumstein et al.{% sup %}23{% /sup %} reported an incidence of PHF in RTSA of 3.45%, of which 1.4% was post-operative. A lower incidence was reported by Singh et al. accounting .9% of PHF on 4019 shoulder arthroplasties.
+
+  We retrospectively analyzed the data of a 10 years’ period in two institutions, where a total of 2704 shoulder replacement were performed and we enrolled only postoperative PHF.
+
+  We reported a slightly lower incidence with respect to Singh, with 0.7% of cases (19 patients), over 60% of which is represented by RSA.
+
+  Several classification have been proposed,10,15,24,25 but there is no unique treatment protocol. Periprosthetic fractures can present a variety of different patterns indeed, and treatments have to take into account many factors reported in literature considering the evidence of results reported in the studies over the years.
+
+  Athwal et al.{% sup %}26{% /sup %} reported that the treatment of PHF in shoulder arthroplasty begins with prevention especially in patients with associated risk factors, to avoid increasing stress on the humerus.
+
+  Few studies analyzed specific risk factors associated with PHF.{% sup %}9{% /sup %} While older age seems no to be statistically associated with increased risk of PHF, female sex was more associated with intraoperative fractures. On the other hand, post-operative fractures are associated with greater comorbidity (with a high Deyo-Charlson index) because most of these patients are frail, under polypharmacologic therapy, and more prone to falls and fracture.{% sup %}27{% /sup %}
+
+  Rheumatoid arthritis (RA), for example, is reported as one of the greater comorbidity and the only case in our series of recurrent periprosthetic humeral fractures was a patient suffering from RA. Also dementia represents a significant risk factor with a 27% higher hazard ratio of post-operative humeral fracture compared with a patient without dementia.{% sup %}9{% /sup %} We reported an incidence of dementia from mild to severe clinical presentation, in 3 out of 19 patients with PHF.
+
+  A reduced bone mineral density (BMD) is one of the most important risk factors associated with fractures. We decided to evaluate the cortical index as a predictor of osteoporosis. The cortical index is the ratio between the thickness of the cortical and the total diameter of the humeral diaphysis,18 with a fracture risk limit value is .231.28
+
+  More than two-third of the patients in our series (63.16%) showed a cortical index lower than .231, confirming osteoporosis as one of the most important predictors of periprosthetic fractures.
+
+  However, it is not certain that if a decreased bone stock in periprosthetic fracture is present, the stem is always mobilized.
+
+  Assessment of the stability of the stem is a key point for an appropriate treatment. Radiolucency more than 2 mm in at least 3 of 8 humeral zones described by Sperling et al or where two or three independent observes identified migration or tilt of the components, a high risk of implant loosening is present.{% sup %}19,20{% /sup %}
+
+  Several authors recommend revision to long stem implant, extending at least two cortical diameters past the fracture site, with metallic cerclage fixation with or without a cortical allograft support, when fractures are proximal to the tip of the prosthesis.{% sup %}25,26{% /sup %}
+
+  However, when stem deemed stable intraoperatively, it can be retained and internal fixation with hybrid plate and cerclage wire construct can be utilized.{% sup %}29,30{% /sup %}
+
+  In our experience, conical uncemented finned stems yielded to a superior fixation and primary stability but with a high stress-shielding along the fins. Any attempt to remove highly integrated stems in patients with low cortical index could have led to a significant bone loss (Figure 3).
+
+  We revised only 5 out of 19 stems in our PHF series; 3 of them were RSA and in 2 cases hemi.
+
+  Other authors as Garcia-Fernandez et al. or Cameron et al., indicated to preserve stable stems in Wright–Cofield type B fractures performing osteosynthesis with DCP plates and cerclage wires.{% sup %}11,31{% /sup %}
+
+  Moreover, despite speculation about reduced periosteal blood perfusion with metallic cerclage, Angelini et al showed how cerclage wire may be used for temporary reduction during surgery or can be used as a definitive implant, and their damage to blood supply less than expected.{% sup %}32{% /sup %}
+
+  The cortical strut allograft is commonly adopted and we used in eight cases; in one patient, we performed a synthesis on a cemented stable stem after removing old cement from the tip, with two hemicylinders of tibial allograft to form a “sarcophagus,” fixed with cerclage wires without additional plate fixation as described by Thes et al.{% sup %}33{% /sup %}
+
+  The last risk factor to take into account is the presence of elbow prosthesis or hardware for previous elbow fractures. Worland type B and C fractures can occur for the potential high stress between the tip of the stem and the distal humeral implant.{% sup %}34{% /sup %} Although some authors report that the length of this bone bridge has little effect on the resultant stresses in the humerus,35 we always decided for longer implants and plates to cover the above mentioned bone bridge (Figure 4).
+
+  Worse of the clinical outcome resulted from our data are reported in literature by Wolf et al.{% sup %}35{% /sup %} Analysis of the Constant–Murley score showed that the outcome in fractured patients was lower than the outcome achieved prior to the fracture and remains so after some time, without showing substantial differences between the types of prosthetic implants.
+
+  Residual pain and reduced strength of the deltoid was experimented in the majority of the patients.
+
+  The strengths of this study are its large sample size from two different institutes with homogeneous treatment protocols and the long duration of the follow-up of all patients included in the registries.
+
+  Several weaknesses and limitations are present in this study, by the way: this study is retrospective, there is heterogeneity of underlying diseases and risk factors of the patients and clinical outcome cannot be comparable due to clinical conditions and age.
+
+  ## Conclusion
+
+  Post-operative periprosthetic humeral fractures represent a rare event but burdened by severe complications as they worsen the clinical outcome reached before the fracture.
+
+  The identification of the risk factors, especially related to underlying pathology and reduced bone mineral density are essential to prevent these injuries, also considering that PHF occurs in a population with a mean age over 70 years.
+
+  When post-operative fractures require surgical procedure, a correct planning and evaluation of the humeral stem is essential. Typology of the implant as well as radiographic signs of mobilization need to be assessed. The radiolucency lines must be evaluated and it is not taken for granted that a reduced stock of bones corresponds to a mobilization of the stem.
+
+  Decision-making becomes more difficult when we are faced with periprosthetic humeral fractures with a reduced cortical index, when some radiolucency lines are present in stems with high primary stability: these cases are not always indicative of an unstable stem and removal attempts could lead to an extensive bone loss. With stable stems it is therefore preferable to proceed with a synthesis possibly associated with graft, leading to good radiographic healing.
+
+  Further prospective studies and a large number of cases are necessary to reduce confounding factors and confirm our findings.
+
+  MN and GP designed the study. MN, GM, AG, and AD collected data. GP, LT, and FC contributed to interpretation of data. MN and AD drafted the manuscript. All authors critically revised the manuscript. All authors read and approved the final manuscript.
+
+  Michele Novi https://orcid.org/0000-0003-4867-463X
+
+  ## References
+
+  1. Schairer WW, Nwachukwu BU, Lyman S, Craig EV, Gulotta LV. National utilization of reverse total shoulder arthroplasty in the United States. J shoulder Elb Surg. 2015;24(1):91–97.
+  2. Day JS, Paxton ES, Lau E, Gordon VA, Abboud JA, Williams GR. Use of reverse total shoulder arthroplasty in the medicare population. J shoulder Elb Surg. 2015;24(5): 766–772.
+  3. Palsis JA, Simpson KN, Matthews JH, Traven S, Eichinger JK, Friedman RJ. Current trends in the use of shoulder arthroplasty in the United States. Orthopedics. 2018;41(3): e416–e423.
+  4. Kim SH, Wise BL, Zhang Y, Szabo RM. Increasing incidence of shoulder arthroplasty in the United States. J Bone Joint Surg Am. 2011;93(24):2249–2254.
+  5. Lübbeke A, Rees JL, Barea C, Combescure C, Carr AJ, Silman AJ. International variation in shoulder arthroplasty. Acta Orthop. 2017;88(6):592–599.
+  6. Hyun YS, Huri G, Garbis NG, McFarland EG. Uncommon indications for reverse total shoulder arthroplasty. Clin Orthop Surg. 2013;5(4):243–255.
+  7. Levy J, Frankle M, Mighell M, Pupello D. The use of the reverse shoulder prosthesis for the treatment of failed hemiarthroplasty for proximal humeral fracture. J Bone Joint Surg Am. 2007;89(2):292–300.
+  8. Raiss P, Edwards TB, da Silva MR, Bruckner T, Loew M, Walch G. Reverse shoulder arthroplasty for the treatment of nonunions of the surgical neck of the proximal part of the humerus (type-3 fracture sequelae). J Bone Joint Surg Am. 2014;96(24):2070–2076.
+  9. Singh JA, Sperling J, Schleck C, Harmsen W, Cofield R. Periprosthetic fractures associated with primary total shoulder arthroplasty and primary humeral head replacement: A thirty-three-year study. J Bone Joint Surg Am. 2012; 94(19):1777–1785.
+  10. Worland RL, Kim DY, Arredondo J. Periprosthetic humeral fractures: Management and classification. J shoulder Elb Surg. 1999;8(6):590–594.
+  11. Cameron B, Iannotti JP. Periprosthetic fractures of the humerus and scapula: Management and prevention. Orthop Clin North Am. 1999;30(2):305–318.
+  12. Tammachote N, Sperling JW, Vathana T, Cofield RH, Harmsen WS, Schleck CD. Long-term results of cemented metal-backed glenoid components for osteoarthritis of the shoulder. J Bone Joint Surg Am. 2009;91(1): 160–166.
+  13. Chin PYK, Sperling JW, Cofield RH, Schleck C. Complications of total shoulder arthroplasty: Are they fewer or different? J shoulder Elb Surg. 2006;15(1):19–22.
+  14. Bohsali KI, Bois AJ, Wirth MA. Complications of shoulder arthroplasty. J Bone Joint Surg Am. 2017;99(3):256–269.
+  15. Kirchhoff C, Beirer M, Brunner U, Buchholz A, Biberthaler P, Cr¨onlein M. Validation of a new classification for periprosthetic shoulder fractures. Int Orthop. 2018;42(6): 1371–1377.
+  16. McDonough EB, Crosby LA. Periprosthetic fractures of the humerus. Am J Orthop (Belle Mead NJ). 2005;34(12): 586–591.
+  17. Kirchhoff C, Kirchhoff S, Biberthaler P. [Classification of periprosthetic shoulder fractures]. Unfallchirurg. 2016; 119(4):264–272.
+  18. Giannotti S, Bottai V, Dell’osso G, et al. Indices of risk assessment of fracture of the proximal humerus. Clin cases Miner bone Metab. 2012;9(1):37–39.
+  19. Sperling JW, Cofield RH, O’Driscoll SW, Torchia ME, Rowland CM. Radiographic assessment of ingrowth total shoulder arthroplasty. J shoulder Elb Surg. 2000;9(6): 507–513.
+  20. Sanchez-Sotelo J, O’Driscoll SW, Torchia ME, Cofield RH, Rowland CM. Radiographic assessment of cemented humeral components in shoulder arthroplasty. J shoulder Elb Surg. 2001;10(6):526–531.
+  21. Sperling JW, Cofield RH. Humeral windows in revision shoulder arthroplasty. J shoulder Elb Surg. 2005;14(3): 258–263.
+  22. Constant CR, Murley AH. A clinical method of functional assessment of the shoulder. Clin Orthop Relat Res. 1987; 214:160–164.
+  23. Zumstein MA, Pinedo M, Old J, Boileau P. Problems, complications, reoperations, and revisions in reverse total shoulder arthroplasty: A systematic review. J shoulder Elb Surg. 2011;20(1):146–157.
+  24. Wright TW, Cofield RH. Humeral fractures after shoulder arthroplasty. J Bone Joint Surg Am. 1995;77(9):1340–1346.
+  25. Campbell JT, Moore RS, Iannotti JP, Norris TR, Williams GR. Periprosthetic humeral fractures: Mechanisms of fracture and treatment options. J shoulder Elb Surg. 1998; 7(4):406–413.
+  26. Athwal GS, Sperling JW, Rispoli DM, Cofield RH. Periprosthetic humeral fractures during shoulder arthroplasty. J Bone Joint Surg Am. 2009;91(3):594–603.
+  27. Ziere G, Dieleman JP, Hofman A, Pols HAP, van der Cammen TJM, Stricker BHC. Polypharmacy and falls in the middle age and elderly population. Br J Clin Pharmacol. 2006;61(2):218–223.
+  28. Marchetti S, Lioci G, Consoli V. Distribution of the cortical index of the humerus in the ageing population. Osteporosis Int 2003;14(Suppl. 4).
+  29. Groh GI, Heckman MM, Wirth MA, Curtis RJ, Rockwood CAJ. Treatment of fractures adjacent to humeral prostheses. J shoulder Elb Surg. 2008;17(1):85–89.
+  30. Williams GRJ, Iannotti JP. Management of periprosthetic fractures: The shoulder. J Arthroplasty. 2002;17(4 suppl 1): 14–16.
+  31. Garc´ıa-Fern´andez C, Lópiz-Morales Y, Rodr´ıguez A, López-Dur´an L, Mart´ınez FM. Periprosthetic humeral fractures associated with reverse total shoulder arthroplasty: Incidence and management. Int Orthop. 2015; 39(10):1965–1969.
+  32. Angelini A, Battiato C. Past and present of the use of cerclage wires in orthopedics. Eur J Orthop Surg Traumatol. 2015;25(4):623–635.
+  33. Th´es A, Klouche S, de Tienda M, Bauer T, Hardy P. Cortical onlay strut allograft with cerclage wiring of periprosthetic fractures of the humerus without stem loosening: Technique and preliminary results. Eur J Orthop Surg Traumatol. 2017; 27(4):553–557.
+  34. Plausinis D, Greaves C, Regan WD, Oxland TR. Ipsilateral shoulder and elbow replacements: On the risk of periprosthetic fracture. Clin Biomech (Bristol, Avon). 2005;20(10):1055–1063.
+  35. Wolf H, Pajenda G, Sarahrudi K. Analysis of factors predicting success and failure of treatment after type b periprosthetic humeral fractures: A case series study. Eur J trauma Emerg Surg Off Publ Eur Trauma Soc. 2012;38(2): 177–183.

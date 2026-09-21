@@ -1,17 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getPatologie, getPubblicazione, getPubblicazioni, getSettings, slugPatologia } from "@/lib/content";
 import { hrefArticolo, srcPaper } from "@/lib/media";
+import { headingsMarkdown, renderMarkdown } from "@/lib/markdoc";
 import { breadcrumbJsonLd, buildMetadata, paperJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
 import { Briciole, Disclaimer } from "@/components/blocks/Pagina";
+import { Sommario } from "@/components/blocks/Sommario";
 import { SchedaPatologia, SchedaPaper } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
+
+/* Serif accademico solo per la Lettura dei paper: Source Serif 4 (OFL), caricato solo su questa pagina. */
+const serifLettura = localFont({
+  src: [
+    { path: "../../../../fonts/SourceSerif4-Variable.woff2", style: "normal", weight: "200 900" },
+    { path: "../../../../fonts/SourceSerif4-VariableItalic.woff2", style: "italic", weight: "200 900" },
+  ],
+  variable: "--font-lettura",
+  display: "swap",
+});
 
 export const dynamicParams = false;
 export async function generateStaticParams() {
@@ -46,6 +59,12 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
   const titoloBreve = pick(p.titoloBreve, l);
   const articolo = hrefArticolo(p.doi, p.url);
   const pdf = srcPaper(p.pdf);
+  const testo = p.testoIntegrale?.trim();
+  const lettura = testo ? renderMarkdown(testo) : null;
+  const sommario = [
+    ...(pick(p.riassunto, l) ? [{ id: "in-breve", label: m.approfondimenti.riassunto }] : []),
+    ...(testo ? headingsMarkdown(testo).map((h) => ({ id: h.id, label: h.text })) : p.abstract ? [{ id: "abstract", label: m.approfondimenti.abstract }] : []),
+  ];
 
   return (
     <>
@@ -143,25 +162,13 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
             </div>
         </Reveal>
 
-        <div className="grid gap-8 py-10 lg:grid-cols-[1fr_18rem] lg:gap-16">
-          <div className="max-w-[42rem] space-y-10">
-            {pick(p.riassunto, l) && (
-              <Reveal>
-                <h2 className="text-[1.4rem]">{m.approfondimenti.riassunto}</h2>
-                <p className="mt-3 whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.riassunto, l)}</p>
-              </Reveal>
-            )}
-            {p.abstract && (
-              <Reveal>
-                <h2 className="text-[1.4rem]">{m.approfondimenti.abstract}</h2>
-                <p className="abstract mt-3 whitespace-pre-line" lang="en">
-                  {p.abstract}
-                </p>
-              </Reveal>
-            )}
-            <Disclaimer testo={m.approfondimenti.disclaimer} />
-          </div>
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        {/* Sommario sticky a sinistra (come la pagina patologia); a destra In breve, poi la Lettura o l'abstract. */}
+        <div className="grid gap-12 py-12 md:py-16 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-20 xl:grid-cols-[17rem_minmax(0,1fr)]">
+          <div className="space-y-10 lg:sticky lg:top-[calc(var(--header-h)+2.5rem)] lg:self-start">
+            {/* I paper lunghi hanno venti sezioni: il sommario scorre dentro la sua colonna, senza spingere giù il resto. */}
+            <div className="lg:max-h-[calc(100vh-var(--header-h)-9rem)] lg:overflow-y-auto lg:pr-3 scorri-sottile">
+              <Sommario voci={sommario} eyebrow={m.approfondimenti.inQuestaPagina} />
+            </div>
             {(p.tag ?? []).length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {p.tag!.map((t) => (
@@ -172,12 +179,12 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
               </div>
             )}
             {correlate.length > 0 && (
-              <div className="osso osso-sm p-5">
+              <div>
                 <p className="eyebrow mb-3">{m.approfondimenti.correlate}</p>
                 <ul className="space-y-2">
                   {correlate.map((c) => (
                     <li key={c.slug}>
-                      <Link href={href(l, { kind: "cosaCuro", slug: slugPatologia(c, l) })} className="serif text-[1.05rem] hover:text-petrolio">
+                      <Link href={href(l, { kind: "cosaCuro", slug: slugPatologia(c, l) })} className="text-[1.02rem] hover:text-petrolio">
                         {pick(c.titolo, l)}
                       </Link>
                     </li>
@@ -185,7 +192,53 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
                 </ul>
               </div>
             )}
-          </aside>
+          </div>
+
+          <div className="min-w-0">
+            {pick(p.riassunto, l) && (
+              <Reveal as="section" id="in-breve" className="ancora max-w-[42rem]">
+                <h2 className="text-[1.4rem]">{m.approfondimenti.riassunto}</h2>
+                <p className="mt-3 whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.riassunto, l)}</p>
+              </Reveal>
+            )}
+
+            {lettura ? (
+              <section id="lettura" className={`ancora mt-16 ${serifLettura.variable}`}>
+                <div className="max-w-[38rem] border-t border-inchiostro pt-5">
+                  <p className="eyebrow">{m.approfondimenti.letturaEyebrow}</p>
+                  <p className="mt-2 text-sm text-grafite">{m.approfondimenti.letturaNota}</p>
+                </div>
+                <div className="lettura mt-10" lang="en">
+                  {lettura}
+                </div>
+                {p.licenza && (
+                  <p className="lettura-colophon mt-10 max-w-[38rem] border-t border-linea pt-4">
+                    {p.licenza}
+                    {p.doi ? (
+                      <>
+                        {" · "}
+                        <a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer" className="text-petrolio underline underline-offset-2">
+                          doi.org/{p.doi}
+                        </a>
+                      </>
+                    ) : null}
+                  </p>
+                )}
+              </section>
+            ) : (
+              p.abstract && (
+                <Reveal as="section" id="abstract" className="ancora mt-16 max-w-[42rem]">
+                  <h2 className="text-[1.4rem]">{m.approfondimenti.abstract}</h2>
+                  <p className="abstract mt-3 whitespace-pre-line" lang="en">
+                    {p.abstract}
+                  </p>
+                  {p.licenza && <p className="mt-5 text-sm text-grafite">{p.licenza}</p>}
+                  <p className="mt-1 text-sm text-grafite">{m.approfondimenti.soloAbstractNota}</p>
+                </Reveal>
+              )
+            )}
+            <Disclaimer testo={m.approfondimenti.disclaimer} />
+          </div>
         </div>
       </article>
 

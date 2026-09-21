@@ -10,7 +10,8 @@ volume: '32(1):31–34'
 doi: '10.1007/s11639-018-0258-8'
 pubmedId: ''
 pdf: fratture-periprotesiche-spalla-2018.pdf
-abstract: ''
+abstract: |
+  Periprosthetic fractures in shoulder arthroplasty are a rare occurrence that has been rarely described in the literature. Most of them occur during the surgical procedure, either owing to the surgeon's inexperience or to poor bone quality. Traumatic fractures affect patients with prostheses who suffer a direct trauma of the operated limb. It is important to assess the clinical presentation of the patient and the radiological findings for correct decision making. The factors that prompt the choice of treatment are primarily the type of fracture and stem stability. Once the decision has been made to proceed with either ORIF or revision of the implant, it is important to consider the quality of the rotator cuff in patients with hemiarthroplasty or total anatomic prosthesis, in order to consider an inverse implant. A long revision stem, accompanied by bone and cerclage, is always the most appropriate choice to restore function.
 riassunto:
   it: 'Lavoro in italiano sulle fratture attorno alle protesi di spalla: classificazione e opzioni di trattamento.'
   en: 'Italian-language paper on fractures around shoulder replacements: classification and treatment options.'
@@ -22,3 +23,4 @@ principale: true
 patologie:
   - spalla
 pubblicato: true
+licenza: '© 2018 SIOT. Lo Scalpello (Springer). Solo abstract: il testo integrale è sulla rivista.'

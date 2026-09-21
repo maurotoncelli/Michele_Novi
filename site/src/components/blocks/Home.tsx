@@ -11,8 +11,9 @@ import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
 import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
-import { Rotaia } from "@/components/ui/Rotaia";
 import { Stelle } from "@/components/ui/Stelle";
+import { Parole } from "@/components/ui/Parole";
+import { Striscia } from "@/components/blocks/Striscia";
 import { Sezione } from "./Pagina";
 
 /* ------------------------------------------------------------------ Hero: due colonne, la foto è un ritratto, non uno sfondo */
@@ -202,34 +203,31 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
   const piattaforme = [...new Set(recensioni.map((r) => r.piattaforma).filter(Boolean))];
   const eyebrow = piattaforme.length ? `${m.home.recensioniEyebrow} · ${piattaforme.join(", ")}` : m.home.recensioniEyebrow;
   return (
-    <Sezione indice="04" eyebrow={eyebrow} titolo={m.home.recensioniTitolo} misura="affermazione">
-      <Reveal>
-        <Rotaia className="rotaia-intera" indietro={m.cta.indietro} avanti={m.cta.avanti}>
-          {voci.map((r) => {
-            const stelle = r.stelle ?? 5;
-            return (
-              <li key={r.slug} className="min-w-0">
-                <figure className="grid gap-4 md:grid-cols-[minmax(0,5.5rem)_minmax(0,1fr)] md:gap-8 lg:grid-cols-[minmax(0,7rem)_minmax(0,1fr)]">
-                  <span aria-hidden="true" className="virgolette md:pt-3">
-                    “
-                  </span>
-                  <div className="min-w-0">
-                    <p className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
-                      {r.piattaforma && <span>{r.piattaforma}</span>}
-                      <Stelle n={stelle} label={m.home.stelleLabel.replace("{n}", String(stelle))} className="text-petrolio" />
-                    </p>
-                    <blockquote className="citazione mt-5 max-w-3xl text-inchiostro">{pick(r.testo, locale)}</blockquote>
-                    <figcaption className="mt-7 text-[0.95rem] text-grafite">
-                      <span className="font-medium text-inchiostro">{r.nome}</span>
-                    </figcaption>
-                  </div>
-                </figure>
-              </li>
-            );
-          })}
-        </Rotaia>
-      </Reveal>
-    </Sezione>
+    <Striscia n={voci.length} scheda={24} gap={3} testa={{ indice: "04", eyebrow, titolo: m.home.recensioniTitolo, misura: "affermazione" }}>
+      {voci.map((r) => {
+        const stelle = r.stelle ?? 5;
+        return (
+          <li key={r.slug} className="min-w-0">
+            <figure className="recensione">
+              <span aria-hidden="true" className="virgolette">
+                “
+              </span>
+              <p className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
+                {r.piattaforma && <span>{r.piattaforma}</span>}
+                <Stelle n={stelle} label={m.home.stelleLabel.replace("{n}", String(stelle))} className="text-petrolio" />
+              </p>
+              {/* Le parole si compongono una dopo l'altra quando la scheda entra in vista. */}
+              <Reveal as="blockquote" solo className="recensione-testo mt-4">
+                <Parole testo={pick(r.testo, locale)} />
+              </Reveal>
+              <figcaption className="mt-5 text-[0.92rem] text-grafite">
+                <span className="font-medium text-inchiostro">{r.nome}</span>
+              </figcaption>
+            </figure>
+          </li>
+        );
+      })}
+    </Striscia>
   );
 }
 
@@ -242,16 +240,18 @@ export function FasciaApprofondimenti({ voci, locale }: { voci: Voce[]; locale: 
   // Le note dal lavoro davanti, poi i paper: sette schede in fila, il resto nell'hub a griglia.
   const fila = [...voci.filter((v) => v.tipo === "nota"), ...voci.filter((v) => v.tipo === "paper")].slice(0, 7);
   return (
-    <Sezione indice="05" eyebrow={m.nav.approfondimenti} titolo={m.home.approfondimentiTitolo} lead={m.home.approfondimentiLead} azione={{ href: href(locale, { kind: "approfondimenti" }), label: m.cta.vediGriglia }} tinta="osso">
-      <Reveal>
-        <Rotaia indietro={m.cta.indietro} avanti={m.cta.avanti}>
-          {fila.map((v) => (
-            <li key={`${v.tipo}-${v.item.slug}`} className="min-w-0">
-              {v.tipo === "paper" ? <SchedaPaper p={v.item} locale={locale} /> : <SchedaNota n={v.item} locale={locale} />}
-            </li>
-          ))}
-        </Rotaia>
-      </Reveal>
-    </Sezione>
+    <Striscia
+      n={fila.length}
+      scheda={20}
+      gap={1.5}
+      tinta="osso"
+      testa={{ indice: "05", eyebrow: m.nav.approfondimenti, titolo: m.home.approfondimentiTitolo, lead: m.home.approfondimentiLead, azione: { href: href(locale, { kind: "approfondimenti" }), label: m.cta.vediGriglia } }}
+    >
+      {fila.map((v) => (
+        <li key={`${v.tipo}-${v.item.slug}`} className="min-w-0">
+          {v.tipo === "paper" ? <SchedaPaper p={v.item} locale={locale} /> : <SchedaNota n={v.item} locale={locale} />}
+        </li>
+      ))}
+    </Striscia>
   );
 }

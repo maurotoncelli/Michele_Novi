@@ -41,6 +41,51 @@ export function Intestazione({
  * - varco: come affermazione, ma il contenuto è un solo oggetto grande.
  * `indice` ("01") dà l'ordine di lettura in home.
  */
+type Testa = {
+  eyebrow?: string;
+  indice?: string;
+  titolo?: string;
+  lead?: string;
+  azione?: { href: string; label: string };
+  misura?: "griglia" | "affermazione" | "varco";
+};
+
+/** Testata di sezione: eyebrow indicizzato, titolo a maschera, lead, azione a destra. Usata da Sezione e Striscia. */
+export function TestaSezione({ eyebrow, indice, titolo, lead, azione, misura = "griglia", className = "" }: Testa & { className?: string }) {
+  const grande = misura !== "griglia";
+  if (!titolo && !eyebrow) return null;
+  return (
+    <div className={`${className} grid gap-x-10 gap-y-6 ${grande ? "lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end" : "md:grid-cols-[minmax(0,1fr)_auto] md:items-end"}`}>
+      <div className={grande ? "max-w-4xl" : "max-w-3xl"}>
+        {eyebrow && (
+          <Reveal as="p" className="eyebrow mb-4">
+            {indice && <span className="indice">{indice}</span>}
+            {eyebrow}
+          </Reveal>
+        )}
+        {titolo && (
+          <Reveal as="h2" maschera className={grande ? "display-l" : "display-m"}>
+            {titolo}
+          </Reveal>
+        )}
+        {lead && (
+          <Reveal as="p" delay={120} className={`${grande ? "lead mt-6 max-w-2xl" : "mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-grafite md:text-[1.12rem]"}`}>
+            {lead}
+          </Reveal>
+        )}
+      </div>
+      {azione && (
+        <Reveal delay={160} className="justify-self-start md:justify-self-end">
+          <Link href={azione.href} className="btn btn-ghost -ml-3 md:-mr-3 md:ml-0">
+            {azione.label}
+            <Segno nome="freccia" size={18} />
+          </Link>
+        </Reveal>
+      )}
+    </div>
+  );
+}
+
 export function Sezione({
   id,
   eyebrow,
@@ -52,17 +97,11 @@ export function Sezione({
   azione,
   tinta,
   misura = "griglia",
-}: {
+}: Testa & {
   id?: string;
-  eyebrow?: string;
-  indice?: string;
-  titolo?: string;
-  lead?: string;
   children?: ReactNode;
   className?: string;
-  azione?: { href: string; label: string };
   tinta?: "campo" | "osso";
-  misura?: "griglia" | "affermazione" | "varco";
 }) {
   const grande = misura !== "griglia";
   const passo = grande ? "py-20 md:py-32" : "py-16 md:py-24";
@@ -70,36 +109,7 @@ export function Sezione({
   return (
     <section id={id} className={tinta === "osso" ? "bg-osso-3 trama" : undefined}>
       <div className={`contenitore ${passo} ${className}`}>
-        {(titolo || eyebrow) && (
-          <div className={`${sotto} grid gap-x-10 gap-y-6 ${grande ? "lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end" : "md:grid-cols-[minmax(0,1fr)_auto] md:items-end"}`}>
-            <div className={grande ? "max-w-4xl" : "max-w-3xl"}>
-              {eyebrow && (
-                <Reveal as="p" className="eyebrow mb-4">
-                  {indice && <span className="indice">{indice}</span>}
-                  {eyebrow}
-                </Reveal>
-              )}
-              {titolo && (
-                <Reveal as="h2" maschera className={grande ? "display-l" : "display-m"}>
-                  {titolo}
-                </Reveal>
-              )}
-              {lead && (
-                <Reveal as="p" delay={120} className={`${grande ? "lead mt-6 max-w-2xl" : "mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-grafite md:text-[1.12rem]"}`}>
-                  {lead}
-                </Reveal>
-              )}
-            </div>
-            {azione && (
-              <Reveal delay={160} className="justify-self-start md:justify-self-end">
-                <Link href={azione.href} className="btn btn-ghost -ml-3 md:-mr-3 md:ml-0">
-                  {azione.label}
-                  <Segno nome="freccia" size={18} />
-                </Link>
-              </Reveal>
-            )}
-          </div>
-        )}
+        <TestaSezione eyebrow={eyebrow} indice={indice} titolo={titolo} lead={lead} azione={azione} misura={misura} className={sotto} />
         {children}
       </div>
     </section>

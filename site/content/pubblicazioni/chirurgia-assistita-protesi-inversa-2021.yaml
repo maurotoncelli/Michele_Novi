@@ -11,7 +11,8 @@ doi: '10.1007/s43465-020-00344-8'
 pubmedId: '34194658'
 pdf: chirurgia-assistita-protesi-inversa-2021.pdf
 url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8192603/'
-abstract: ''
+abstract: |
+  Background: In the last decade, new technologies have been applied to shoulder arthroplasty. The aim of this work was to show that navigated RSA allows the surgeon to reach the planned version/inclination in all cases. In this article are shown preliminary data, advantages, disadvantages and limits of the technique. Methods: Eighteen computer-assisted reverse shoulder arthroplasty were performed. Preoperative glenoid version and inclination were evaluated with preoperative CT scan using Orthoblue® (Exactech, Gainesville, FL, USA) software, as well as baseplate type, planned glenoid component seating, planned postoperative version, planned postoperative inclination, intraoperative glenoid version/inclination, screw length and surgical time. A senior shoulder surgeon has analyzed the advantages, disadvantages and limitation of this kind of surgery. Results: Mean surgical time of the primary implants was 92 ± 12 min (min 75–max 110). Mean preoperative inclination was +2.6° ± 6.4, mean preoperative version was −7.6° ± 8.4. Mean planned postoperative inclination was −2.7° ± 2.3, mean planned postoperative version was −1.6° ± 2.9 and mean planned glenoid seating was 89% ± 8%. Planned settings were reached in all cases during surgery. Baseplate implanted were in nine cases 8° posterior augmented, in six cases standard and in three cases 10° superior augmented. Mean screw length was 33.5 mm ± 4.2 mm. No GPS system failure has been recorded. One coracoid fracture occurred during the first case. Discussion: Intraoperative navigation system is a reliable and user-friendly technology that allows the surgeon to reach planned glenoid positioning during surgery. Furthermore, this technology will allow the surgeon to compare clinical outcomes to component positioning data. The lack of humeral implant navigation is the main limit of this technique.
 riassunto:
   it: 'La pianificazione al computer e la navigazione aiutano a posizionare la componente glenoidea della protesi inversa con più precisione, soprattutto quando l''osso è consumato.'
   en: 'Computer planning and navigation help position the glenoid component of a reverse replacement more precisely, especially when bone is worn.'
@@ -24,3 +25,4 @@ patologie:
   - come-si-opera
   - spalla
 pubblicato: true
+licenza: '© 2021 Indian Orthopaedics Association. Indian Journal of Orthopaedics (Springer). Solo abstract: il testo integrale è sulla rivista.'

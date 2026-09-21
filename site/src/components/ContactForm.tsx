@@ -60,7 +60,7 @@ export function ContactForm({
     );
   }
 
-  const campo = "w-full rounded-2xl border border-linea bg-osso px-4 py-3 text-[0.98rem] shadow-[inset_0_1px_2px_rgba(26,30,34,.04)] placeholder:text-nebbia focus:border-petrolio-2";
+  const campo = "w-full border border-linea bg-osso px-4 py-3 text-[0.98rem] placeholder:text-nebbia focus:border-petrolio";
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-4" aria-busy={stato === "busy"}>

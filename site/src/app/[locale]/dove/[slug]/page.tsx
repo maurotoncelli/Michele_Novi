@@ -6,6 +6,7 @@ import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getPatologie, getSede, getSedi, getSettings, slugPatologia } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata, sedeJsonLd } from "@/lib/seo";
+import { srcMedia } from "@/lib/media";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno, type NomeSegno } from "@/components/ui/Segno";
@@ -29,9 +30,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/dove/[sl
   return buildMetadata(s, {
     locale: l,
     route: { kind: "dove", slug: sede.slug },
-    title: pick(sede.seo?.title, l) || `${sede.nome}, ${sede.citta} — ${m.dove.titolo}`,
+    title: pick(sede.seo?.title, l) || `${sede.nome}, ${sede.citta} — ${m.nav.dove}`,
     description: pick(sede.seo?.description, l) || pick(sede.ruolo, l),
-    image: sede.seo?.ogImage ?? sede.foto?.[0]?.src,
+    image: sede.seo?.ogImage ?? srcMedia(sede.foto?.[0]?.src, "sedi") ?? undefined,
     noindex: sede.seo?.noindex,
   });
 }
@@ -65,6 +66,7 @@ export default async function SedePage({ params }: PageProps<"/[locale]/dove/[sl
       ? `https://www.google.com/maps/search/?api=1&query=${sede.coordinate.lat},${sede.coordinate.lng}`
       : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`);
   const foto = sede.foto ?? [];
+  const fotoSrc = srcMedia(foto[0]?.src, "sedi");
 
   const fatti: { segno: NomeSegno; label: string }[] = [];
   if (sede.visite) fatti.push({ segno: "check", label: m.dove.visite });
@@ -94,7 +96,7 @@ export default async function SedePage({ params }: PageProps<"/[locale]/dove/[sl
           sedeJsonLd(s, sede, l),
           breadcrumbJsonLd(s, [
             { name: m.meta.siteName, path: href(l, { kind: "home" }) },
-            { name: m.dove.titolo, path: href(l, { kind: "dove" }) },
+            { name: m.nav.dove, path: href(l, { kind: "dove" }) },
             { name: sede.nome, path: href(l, { kind: "dove", slug: sede.slug }) },
           ]),
         ]}
@@ -102,13 +104,13 @@ export default async function SedePage({ params }: PageProps<"/[locale]/dove/[sl
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.nav.dove, href: href(l, { kind: "dove" }) }, { label: sede.citta || sede.nome }]} />
 
       <header className="contenitore pt-8 md:pt-12">
-        <Reveal>
+        <Reveal immediate>
           <p className="eyebrow mb-3">
             {sede.citta}
             {sede.provincia ? ` (${sede.provincia})` : ""}
             {pick(sede.regime, l) ? ` · ${pick(sede.regime, l)}` : ""}
           </p>
-          <h1 className="max-w-3xl text-[2.3rem] leading-[1.05] md:text-[3rem]">{sede.nome}</h1>
+          <h1 className="display-l max-w-4xl">{sede.nome}</h1>
           <p className="mt-5 flex items-start gap-2 text-grafite">
             <Segno nome="pin" size={18} className="mt-1 shrink-0 text-petrolio" />
             <span>{indirizzo}</span>
@@ -125,14 +127,18 @@ export default async function SedePage({ params }: PageProps<"/[locale]/dove/[sl
         </Reveal>
       </header>
 
-      <div className="contenitore grid gap-10 py-10 md:grid-cols-[1fr_minmax(0,1.1fr)] md:items-start md:gap-14">
+      {/* Varco: la foto della sede a vivo, sotto l'intestazione. */}
+      {fotoSrc && (
+        <Reveal immediate className="contenitore mt-10 md:mt-14">
+          <div className="relative aspect-[16/10] overflow-hidden bg-osso-2 md:aspect-[21/9]">
+            <Image src={fotoSrc} alt={pick(foto[0]?.alt, l) || sede.nome} fill priority sizes="(min-width: 1280px) 76rem, 100vw" className="object-cover" />
+          </div>
+        </Reveal>
+      )}
+
+      <div className="contenitore grid gap-10 py-12 md:grid-cols-[1fr_minmax(0,1.1fr)] md:items-start md:gap-14 md:py-16">
         <Reveal>
-          {foto[0]?.src && (
-            <div className="relative mb-8 aspect-[16/9] overflow-hidden bg-petrolio-3">
-              <Image src={foto[0].src} alt={pick(foto[0].alt, l)} fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover" />
-            </div>
-          )}
-          <h2 className="text-[1.4rem]">{m.dove.cosaFaccioQui}</h2>
+          <h2 className="display-m">{m.dove.cosaFaccioQui}</h2>
           <p className="mt-3 whitespace-pre-line text-[1.02rem] leading-relaxed text-grafite">{pick(sede.ruolo, l)}</p>
           <div className="mt-10 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-12">
             {info.map((x) => (
@@ -173,7 +179,7 @@ export default async function SedePage({ params }: PageProps<"/[locale]/dove/[sl
             <p className="eyebrow mb-6">{m.dove.patologieTipiche}</p>
             <div className="grid gap-8 md:grid-cols-3">
               {tipiche.map((p, i) => (
-                <Reveal key={p.slug} delay={i * 70}>
+                <Reveal key={p.slug} delay={i * 70} className="h-full min-w-0">
                   <SchedaPatologia p={p} locale={l} index={i} />
                 </Reveal>
               ))}
@@ -185,9 +191,9 @@ export default async function SedePage({ params }: PageProps<"/[locale]/dove/[sl
       {altre.length > 0 && (
         <section className="contenitore py-12">
           <p className="eyebrow mb-6">{m.dove.altreSedi}</p>
-          <ul className="grid gap-8 sm:grid-cols-3">
+          <ul className="grid items-stretch gap-8 sm:grid-cols-3">
             {altre.map((x) => (
-              <li key={x.slug}>
+              <li key={x.slug} className="h-full min-w-0">
                 <ModuloSede s={x} locale={l} />
               </li>
             ))}

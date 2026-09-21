@@ -1,94 +1,178 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick, formatDate } from "@/i18n";
-import { getDisegni, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Pubblicazione, type Sede } from "@/lib/content";
+import { getDisegni, getSedi, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Pubblicazione, type Sede } from "@/lib/content";
 import { hrefArticolo, srcMedia, srcPaper } from "@/lib/media";
 import { Disegno } from "../ui/Disegno";
 import { isSegno, Segno } from "../ui/Segno";
 
-/** Card patologia: immagine + titolo, niente lastra. */
-export async function SchedaPatologia({ p, locale, grande = false }: { p: Patologia; locale: Locale; index?: number; grande?: boolean; strato?: boolean }) {
+/** Superficie media delle lastre: stesso stampo, hover a crop lento. */
+function Lastra({
+  ratio = "4/3",
+  className = "",
+  children,
+}: {
+  ratio?: "4/3" | "5/4";
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className={`relative overflow-hidden bg-osso-2 ${ratio === "5/4" ? "aspect-[5/4]" : "aspect-[4/3]"} ${className}`}>
+      <div className="absolute inset-0 origin-center transition-transform duration-700 ease-osso group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ChipSede({ s, locale }: { s: Sede; locale: Locale }) {
+  const m = getMessages(locale);
+  return (
+    <span className="mt-auto flex min-h-8 flex-wrap content-start gap-1.5 pt-3">
+      {s.visite && <span className="tag tag-petrolio">{m.dove.visite}</span>}
+      {s.chirurgia && <span className="tag">{m.dove.chirurgia}</span>}
+    </span>
+  );
+}
+
+/** Card patologia: 5/4, titolo e lead a altezza riservata. `riga` = disegno piccolo a sinistra, lead intero, sedi dove si tratta. */
+export async function SchedaPatologia({ p, locale, riga = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
   const disegno = p.immagine?.src
     ? { src: p.immagine.src, alt: pick(p.immagine.alt, locale) || pick(p.titolo, locale) }
     : srcDisegno(catalogo, segno, locale);
+  const media = disegno ? (
+    <Disegno src={disegno.src} alt={disegno.alt} />
+  ) : (
+    <span className="absolute inset-0 grid place-items-center text-petrolio">
+      <Segno nome={segno} size={40} />
+    </span>
+  );
+
+  if (riga) {
+    const tutte = await getSedi();
+    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
+    return (
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid h-full grid-cols-[minmax(0,7.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] lg:gap-7">
+        <Lastra ratio="4/3" className="self-start">{media}</Lastra>
+        <div className="flex min-w-0 flex-col">
+          <h3 className="text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
+          <p className="mt-2 text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
+          {dove.length > 0 && <p className="mt-auto pt-3 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
+          <span className="sr-only">{m.cta.scopri}</span>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col">
-      <div className="relative mb-5 aspect-[5/4] w-full overflow-hidden bg-petrolio-3">
-        {disegno ? (
-          <Disegno src={disegno.src} alt={disegno.alt} />
-        ) : (
-          <span className="absolute inset-0 grid place-items-center text-petrolio">
-            <Segno nome={segno} size={40} />
-          </span>
-        )}
-      </div>
-      <div className="mt-auto">
-        <h3 className={`${grande ? "text-[1.7rem]" : "text-[1.28rem]"} leading-tight group-hover:text-petrolio`}>{pick(p.titolo, locale)}</h3>
-        <p className={`mt-2 text-grafite ${grande ? "text-[1.02rem]" : "text-[0.92rem]"} line-clamp-3`}>{pick(p.lead, locale)}</p>
+      <Lastra ratio="5/4" className="mb-5 w-full">
+        {media}
+      </Lastra>
+      <div className="flex flex-1 flex-col">
+        <h3 className="line-clamp-2 min-h-[2.55em] text-[1.28rem] leading-tight group-hover:text-petrolio">{pick(p.titolo, locale)}</h3>
+        <p className="mt-2 line-clamp-3 min-h-[4.5em] text-[0.92rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
         <span className="sr-only">{m.cta.scopri}</span>
       </div>
     </Link>
   );
 }
 
-/** Sede in home: città, non modulo tondo. */
-export async function ModuloSede({ s, locale }: { s: Sede; locale: Locale }) {
+/** Sede in home: città in evidenza, stesso 4/3 delle lastre hub. Foto se c’è, altrimenti disegno. `grande` = città in display; `compatto` = riga con miniatura. */
+export async function ModuloSede({ s, locale, grande = false, compatto = false }: { s: Sede; locale: Locale; grande?: boolean; compatto?: boolean }) {
   const m = getMessages(locale);
+  const catalogo = await getDisegni();
   const segno = s.tipo === "ospedale" ? "ospedale" : s.tipo === "studio" ? "studio" : "clinica";
-  const disegno = srcDisegno(await getDisegni(), segno, locale);
+  const disegno = srcDisegno(catalogo, segno, locale);
+  const foto = s.foto?.[0];
+  const fotoSrc = srcMedia(foto?.src, "sedi");
+  const media = fotoSrc ? (
+    <Image src={fotoSrc} alt={pick(foto?.alt, locale) || s.nome} fill sizes={compatto ? "8rem" : "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"} className="object-cover" />
+  ) : disegno ? (
+    <Disegno src={disegno.src} alt={disegno.alt} />
+  ) : (
+    <span className="absolute inset-0 grid place-items-center text-petrolio">
+      <Segno nome={segno} size={28} />
+    </span>
+  );
+
+  if (compatto) {
+    return (
+      <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-4 py-3">
+        <Lastra className="rounded-sm">{media}</Lastra>
+        <span className="min-w-0">
+          <span className="block text-[1.05rem] font-medium leading-tight group-hover:text-petrolio">{s.citta}</span>
+          <span className="mt-0.5 block truncate text-[0.85rem] text-grafite">{s.nome}</span>
+          <span className="mt-1 block text-[0.75rem] text-nebbia">
+            {[s.visite && m.dove.visite, s.chirurgia && m.dove.chirurgia].filter(Boolean).join(" · ")}
+          </span>
+        </span>
+      </Link>
+    );
+  }
+
   return (
-    <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group flex flex-col gap-4">
-      <span className="relative aspect-[4/3] w-full overflow-hidden bg-petrolio-3">
-        {disegno ? <Disegno src={disegno.src} alt={disegno.alt} /> : <span className="absolute inset-0 grid place-items-center text-petrolio"><Segno nome={segno} size={28} /></span>}
-      </span>
-      <span>
-        <span className="serif block text-[1.35rem] leading-tight group-hover:text-petrolio">{s.citta}</span>
-        <span className="mt-1 block text-[0.85rem] leading-snug text-grafite">{s.nome}</span>
-      </span>
-      <span className="flex flex-wrap gap-1">
-        {s.visite && <span className="tag tag-petrolio">{m.dove.visite}</span>}
-        {s.chirurgia && <span className="tag">{m.dove.chirurgia}</span>}
+    <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group flex h-full flex-col">
+      <Lastra>{media}</Lastra>
+      <span className={`flex flex-1 flex-col ${grande ? "mt-5" : "mt-4"}`}>
+        <span className={`serif block leading-tight group-hover:text-petrolio ${grande ? "line-clamp-2 text-[1.9rem] md:text-[2.2rem]" : "line-clamp-2 min-h-[2.4em] text-[1.35rem]"}`}>{s.citta}</span>
+        <span className={`line-clamp-1 block leading-snug text-grafite ${grande ? "mt-2 text-[0.95rem]" : "mt-1 text-[0.85rem]"}`}>{s.nome}</span>
+        <ChipSede s={s} locale={locale} />
       </span>
     </Link>
   );
 }
 
-/** Scheda sede completa (hub Dove). */
-export function SchedaSede({ s, locale }: { s: Sede; locale: Locale }) {
+/** Scheda sede (hub Dove): riga compatta, foto a sinistra, tutto leggibile in una schermata. */
+export async function SchedaSede({ s, locale }: { s: Sede; locale: Locale }) {
   const m = getMessages(locale);
   const foto = s.foto?.[0];
+  const fotoSrc = srcMedia(foto?.src, "sedi");
+  const catalogo = await getDisegni();
+  const segno = s.tipo === "ospedale" ? "ospedale" : s.tipo === "studio" ? "studio" : "clinica";
+  const disegno = srcDisegno(catalogo, segno, locale);
+  const regime = pick(s.regime, locale);
   return (
-    <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group block">
-      <div className="relative aspect-[16/9] overflow-hidden bg-petrolio-3">
-        {foto?.src ? (
-          <Image src={foto.src} alt={pick(foto.alt, locale)} fill sizes="(min-width: 1024px) 30vw, 100vw" className="object-cover" />
+    <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group grid h-full grid-cols-[minmax(0,7.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] lg:gap-7">
+      <Lastra className="self-start">
+        {fotoSrc ? (
+          <Image src={fotoSrc} alt={pick(foto?.alt, locale) || s.nome} fill sizes="10rem" className="object-cover" />
+        ) : disegno ? (
+          <Disegno src={disegno.src} alt={disegno.alt} />
         ) : (
-          <div className="absolute inset-0 grid place-items-center text-nebbia">
-            <Segno nome={s.tipo === "ospedale" ? "ospedale" : s.tipo === "studio" ? "studio" : "clinica"} size={40} />
-          </div>
+          <span className="absolute inset-0 grid place-items-center text-nebbia">
+            <Segno nome={segno} size={40} />
+          </span>
         )}
-      </div>
-      <div className="pt-4">
-        <p className="eyebrow">{s.citta}{s.provincia ? ` (${s.provincia})` : ""}</p>
-        <h3 className="mt-1 text-[1.35rem] leading-tight group-hover:text-petrolio">{s.nome}</h3>
-        <p className="mt-1 text-sm text-grafite">{s.indirizzo}</p>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {s.visite && <span className="tag tag-petrolio">{m.dove.visite}</span>}
-          {s.chirurgia && <span className="tag">{m.dove.chirurgia}</span>}
-          {s.infiltrazioni && s.visite && <span className="tag">{m.dove.infiltrazioni}</span>}
-          {s.ecografo && <span className="tag">{m.dove.ecografo}</span>}
-        </div>
+      </Lastra>
+      <div className="flex min-w-0 flex-col">
+        <p className="eyebrow">
+          {s.citta}
+          {s.provincia ? ` (${s.provincia})` : ""}
+        </p>
+        <h3 className="mt-1 text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{s.nome}</h3>
+        <p className="mt-1.5 text-sm text-grafite">
+          {s.indirizzo}
+          {s.cap ? `, ${s.cap}` : ""}
+        </p>
+        {regime && <p className="mt-1 text-sm text-grafite">{regime}</p>}
+        <p className="mt-auto pt-3 text-[0.78rem] text-nebbia">
+          {[s.visite && m.dove.visite, s.chirurgia && m.dove.chirurgia, s.infiltrazioni && m.dove.infiltrazioni, s.ecografo && m.dove.ecografo]
+            .filter(Boolean)
+            .join(" · ")}
+        </p>
       </div>
     </Link>
   );
 }
 
-/** Pubblicazione: sempre un’immagine (disegno dal tag). */
-export async function SchedaPaper({ p, locale }: { p: Pubblicazione; locale: Locale }) {
+/** Pubblicazione: stesso 4/3, meta su una riga. */
+export async function SchedaPaper({ p, locale, grande = false }: { p: Pubblicazione; locale: Locale; grande?: boolean }) {
   const m = getMessages(locale);
   const titolo = pick(p.titoloBreve, locale) || p.titolo;
   const catalogo = await getDisegni();
@@ -97,9 +181,9 @@ export async function SchedaPaper({ p, locale }: { p: Pubblicazione; locale: Loc
   const pdf = srcPaper(p.pdf);
   const articolo = hrefArticolo(p.doi, p.url);
   return (
-    <div>
-      <Link href={href(locale, { kind: "paper", slug: p.slug })} className="group block">
-        <div className="relative aspect-[16/9] overflow-hidden bg-petrolio-3">
+    <div className="flex h-full flex-col">
+      <Link href={href(locale, { kind: "paper", slug: p.slug })} className="group flex flex-1 flex-col">
+        <Lastra>
           {disegno ? (
             <Disegno src={disegno.src} alt={disegno.alt} />
           ) : (
@@ -107,15 +191,15 @@ export async function SchedaPaper({ p, locale }: { p: Pubblicazione; locale: Loc
               <Segno nome="doc" size={36} />
             </span>
           )}
-        </div>
-        <div className="pt-5">
+        </Lastra>
+        <div className="flex flex-1 flex-col pt-5">
           <div className="flex items-center justify-between gap-3">
             <span className="tag tag-petrolio">{m.quaderno.paper}</span>
             <span className="text-sm text-grafite">{p.anno}</span>
           </div>
-          <h3 className="mt-3 text-[1.3rem] leading-snug group-hover:text-petrolio">{titolo}</h3>
+          <h3 className={`leading-snug group-hover:text-petrolio ${grande ? "mt-4 text-[1.6rem] leading-tight md:text-[1.95rem]" : "mt-3 line-clamp-3 min-h-[3.6em] text-[1.3rem]"}`}>{titolo}</h3>
           {titolo !== p.titolo && <p className="mt-1 line-clamp-2 text-sm italic text-grafite">{p.titolo}</p>}
-          <p className="mt-3 text-sm text-grafite">
+          <p className="mt-3 line-clamp-1 text-sm text-grafite">
             {p.rivista}
             {p.autori ? ` · ${p.autori.split(",")[0]} et al.` : ""}
           </p>
@@ -141,15 +225,15 @@ export async function SchedaPaper({ p, locale }: { p: Pubblicazione; locale: Loc
 }
 
 /** Nota / approfondimento: copertina Keystatic, o disegno. */
-export async function SchedaNota({ n, locale }: { n: Nota; locale: Locale }) {
+export async function SchedaNota({ n, locale, grande = false }: { n: Nota; locale: Locale; grande?: boolean }) {
   const m = getMessages(locale);
   const copertina = srcMedia(n.copertina?.src, "quaderno");
   const alt = pick(n.copertina?.alt, locale) || pick(n.titolo, locale);
   const catalogo = await getDisegni();
   const fallback = srcDisegno(catalogo, idDisegnoDaTag(n.tag), locale);
   return (
-    <Link href={href(locale, { kind: "nota", slug: slugNota(n, locale) })} className="group block">
-      <div className="relative aspect-[16/9] overflow-hidden bg-petrolio-3">
+    <Link href={href(locale, { kind: "nota", slug: slugNota(n, locale) })} className="group flex h-full flex-col">
+      <Lastra>
         {copertina ? (
           <Image src={copertina} alt={alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
         ) : fallback ? (
@@ -157,16 +241,16 @@ export async function SchedaNota({ n, locale }: { n: Nota; locale: Locale }) {
         ) : (
           <Image src="/images/disegni/quaderno.png" alt={alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain p-8" />
         )}
-      </div>
-      <div className="pt-5">
+      </Lastra>
+      <div className="flex flex-1 flex-col pt-5">
         <div className="flex items-center justify-between gap-3">
           <span className="tag tag-rame">{m.quaderno.nota}</span>
           <time dateTime={n.data ?? undefined} className="text-sm text-grafite">
             {formatDate(n.data, locale)}
           </time>
         </div>
-        <h3 className="mt-3 text-[1.3rem] leading-snug group-hover:text-petrolio">{pick(n.titolo, locale)}</h3>
-        <p className="mt-2 line-clamp-3 text-[0.95rem] text-grafite">{pick(n.lead, locale)}</p>
+        <h3 className={`leading-snug group-hover:text-petrolio ${grande ? "mt-4 text-[1.6rem] leading-tight md:text-[1.95rem]" : "mt-3 line-clamp-3 min-h-[3.6em] text-[1.3rem]"}`}>{pick(n.titolo, locale)}</h3>
+        <p className={`text-grafite ${grande ? "mt-3 max-w-xl text-[1.05rem] leading-relaxed" : "mt-2 line-clamp-3 min-h-[4.4em] text-[0.95rem]"}`}>{pick(n.lead, locale)}</p>
       </div>
     </Link>
   );

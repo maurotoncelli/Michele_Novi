@@ -35,7 +35,7 @@ export function ListaQuaderno({
   }
 
   const card = (v: VoceQuaderno, i: number) => (
-    <Reveal key={`${v.tipo}-${v.slug}`} as="li" delay={(i % 3) * 70}>
+    <Reveal key={`${v.tipo}-${v.slug}`} as="li" delay={(i % 3) * 70} className="h-full min-w-0">
       {v.tipo === "paper" ? <SchedaPaper p={v.item} locale={locale} /> : <SchedaNota n={v.item} locale={locale} />}
     </Reveal>
   );
@@ -56,8 +56,8 @@ export function ListaQuaderno({
         <p className="py-16 text-center text-grafite">{m.quaderno.vuoto}</p>
       ) : (
         <ListaEspandibile more={`${m.cta.mostraTutte} (${voci.filter((v) => v.tipo === "paper").length})`} less={m.cta.mostraMeno}>
-          <ul className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">{preview.map(card)}</ul>
-          {resto.length > 0 ? <ul className="mt-10 grid gap-10 md:grid-cols-2 lg:grid-cols-3">{resto.map((v, i) => card(v, i + preview.length))}</ul> : null}
+          <ul className="grid items-stretch gap-10 md:grid-cols-2 lg:grid-cols-3">{preview.map(card)}</ul>
+          {resto.length > 0 ? <ul className="mt-10 grid items-stretch gap-10 md:grid-cols-2 lg:grid-cols-3">{resto.map((v, i) => card(v, i + preview.length))}</ul> : null}
         </ListaEspandibile>
       )}
     </div>

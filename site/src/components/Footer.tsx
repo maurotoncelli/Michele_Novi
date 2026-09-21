@@ -16,31 +16,31 @@ export async function Footer({ locale }: { locale: Locale }) {
   const orari = pick(s.orari, locale);
 
   return (
-    <footer className="relative mt-24 border-t border-linea bg-osso/60">
+    <footer className="fascia-scura relative border-t border-[var(--color-linea-chiara)]">
       <div className="contenitore grid gap-10 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <p className="serif text-2xl">{s.nome}</p>
-          <p className="mt-1 text-sm text-grafite">{pick(s.ruolo, locale)}</p>
+          <p className="mt-1 text-sm text-osso/60">{pick(s.ruolo, locale)}</p>
           <ul className="mt-6 space-y-2 text-[0.95rem]">
             {tel && (
               <li>
-                <a href={tel} className="inline-flex items-center gap-2 hover:text-petrolio">
-                  <Segno nome="telefono" size={18} className="text-nebbia" />
+                <a href={tel} className="inline-flex items-center gap-2 hover:text-[var(--color-petrolio-chiaro)]">
+                  <Segno nome="telefono" size={18} className="text-osso/45" />
                   {s.telefono}
                 </a>
               </li>
             )}
             {s.email && (
               <li>
-                <a href={`mailto:${s.email}`} className="inline-flex items-center gap-2 hover:text-petrolio">
-                  <Segno nome="mail" size={18} className="text-nebbia" />
+                <a href={`mailto:${s.email}`} className="inline-flex items-center gap-2 hover:text-[var(--color-petrolio-chiaro)]">
+                  <Segno nome="mail" size={18} className="text-osso/45" />
                   {s.email}
                 </a>
               </li>
             )}
             {orari && (
-              <li className="flex items-start gap-2 text-grafite">
-                <Segno nome="orologio" size={18} className="mt-0.5 shrink-0 text-nebbia" />
+              <li className="flex items-start gap-2 text-osso/60">
+                <Segno nome="orologio" size={18} className="mt-0.5 shrink-0 text-osso/45" />
                 <span className="whitespace-pre-line">{orari}</span>
               </li>
             )}
@@ -56,7 +56,7 @@ export async function Footer({ locale }: { locale: Locale }) {
                       target="_blank"
                       rel="noopener noreferrer me"
                       aria-label={x.label}
-                      className="incavo grid h-10 w-10 place-items-center text-grafite transition hover:text-petrolio"
+                      className="grid h-10 w-10 place-items-center bg-white/[0.06] text-osso/70 transition hover:text-[var(--color-petrolio-chiaro)]"
                     >
                       <Segno nome={x.nome} size={20} />
                     </a>
@@ -72,9 +72,9 @@ export async function Footer({ locale }: { locale: Locale }) {
           <ul className="mt-3 space-y-2">
             {sedi.map((sede) => (
               <li key={sede.slug}>
-                <Link href={href(locale, { kind: "dove", slug: sede.slug })} className="group inline-flex items-baseline gap-2 hover:text-petrolio">
+                <Link href={href(locale, { kind: "dove", slug: sede.slug })} className="group inline-flex items-baseline gap-2 hover:text-[var(--color-petrolio-chiaro)]">
                   <span className="font-medium">{sede.citta}</span>
-                  <span className="text-sm text-grafite group-hover:text-petrolio/80">{sede.nome}</span>
+                  <span className="text-sm text-osso/55 group-hover:text-[var(--color-petrolio-chiaro)]">{sede.nome}</span>
                 </Link>
               </li>
             ))}
@@ -85,17 +85,17 @@ export async function Footer({ locale }: { locale: Locale }) {
           <p className="eyebrow">{m.footer.legale}</p>
           <ul className="mt-3 space-y-2 text-[0.95rem]">
             <li>
-              <Link href={href(locale, { kind: "privacy" })} className="hover:text-petrolio">
+              <Link href={href(locale, { kind: "privacy" })} className="hover:text-[var(--color-petrolio-chiaro)]">
                 {m.footer.privacy}
               </Link>
             </li>
             <li>
-              <Link href={href(locale, { kind: "cookie" })} className="hover:text-petrolio">
+              <Link href={href(locale, { kind: "cookie" })} className="hover:text-[var(--color-petrolio-chiaro)]">
                 {m.footer.cookie}
               </Link>
             </li>
           </ul>
-          <dl className="mt-6 space-y-1 text-xs text-grafite">
+          <dl className="mt-6 space-y-1 text-xs text-osso/55">
             {s.piva && (
               <div className="flex gap-2">
                 <dt>{m.footer.piva}</dt>
@@ -111,8 +111,8 @@ export async function Footer({ locale }: { locale: Locale }) {
           </dl>
         </div>
       </div>
-      <div className="border-t border-linea">
-        <div className="contenitore flex flex-col gap-2 py-5 text-xs text-nebbia sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-t border-[var(--color-linea-chiara)]">
+        <div className="contenitore flex flex-col gap-2 py-5 text-xs text-osso/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             {`© ${new Date().getFullYear()} ${s.nome}. ${m.footer.diritti}`}
           </p>

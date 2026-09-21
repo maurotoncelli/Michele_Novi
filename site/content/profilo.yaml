@@ -14,9 +14,10 @@ apertura:
     limb, with the shoulder at its centre. At the first visit I try to understand one thing only: which path is
     right for that person, not which operation could be done.
 ritratto:
+  src: ritratto-placeholder.jpg
   alt:
-    it: Ritratto del Dott. Michele Novi
-    en: Portrait of Dr Michele Novi
+    it: Placeholder — da sostituire con il ritratto del Dott. Michele Novi
+    en: Placeholder — replace with Dr Michele Novi's portrait
 inEvidenza:
   - anno: '2025'
     titolo:

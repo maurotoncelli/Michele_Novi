@@ -15,7 +15,7 @@ export function NotFoundView({ testi }: { testi: Record<Locale, Testo> }) {
       <span className="incavo mx-auto grid h-16 w-16 place-items-center text-petrolio">
         <Segno nome="frattura" size={30} />
       </span>
-      <h1 className="mt-6 text-[2.4rem]">{t.titolo}</h1>
+      <h1 className="display-l mt-6">{t.titolo}</h1>
       <p className="mt-3 text-grafite">{t.testo}</p>
       <Link href={t.homeHref} className="btn btn-petrolio mt-8">
         <Segno nome="freccia-sx" size={18} />

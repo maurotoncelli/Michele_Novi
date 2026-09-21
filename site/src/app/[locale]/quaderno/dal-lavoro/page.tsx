@@ -4,7 +4,7 @@ import { getMessages } from "@/i18n";
 import { getQuaderno, getSettings } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
-import { Briciole, Intestazione } from "@/components/blocks/Pagina";
+import { Intestazione } from "@/components/blocks/Pagina";
 import { TabQuaderno } from "@/components/blocks/TabQuaderno";
 import { ListaQuaderno } from "@/components/blocks/ListaQuaderno";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
@@ -31,8 +31,17 @@ export default async function DalLavoroPage({ params }: PageProps<"/[locale]/qua
           { name: m.quaderno.dalLavoro, path: href(l, { kind: "quadernoDalLavoro" }) },
         ])}
       />
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) }, { label: m.quaderno.dalLavoro }]} />
-      <Intestazione eyebrow={m.quaderno.titolo} titolo={m.quaderno.dalLavoro} lead={m.quaderno.dalLavoroLead} compatta />
+      <Intestazione
+        eyebrow={m.quaderno.titolo}
+        titolo={m.quaderno.dalLavoro}
+        lead={m.quaderno.dalLavoroLead}
+        compatta
+        percorso={[
+          { label: m.meta.siteName, href: href(l, { kind: "home" }) },
+          { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) },
+          { label: m.quaderno.dalLavoro },
+        ]}
+      />
       <TabQuaderno locale={l} attiva="dalLavoro" feedHref={`${href(l, { kind: "quaderno" })}/feed.xml`} />
       <ListaQuaderno voci={voci.filter((v) => v.tipo === "nota")} locale={l} />
       <FasciaContatto locale={l} />

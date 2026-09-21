@@ -28,6 +28,8 @@ export function Reveal({
   as: Tag = "div",
   className = "",
   delay = 0,
+  immediate = false,
+  maschera = false,
   style,
   ...rest
 }: {
@@ -35,12 +37,16 @@ export function Reveal({
   as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   delay?: number;
+  /** Above-the-fold: visibile al paint, niente fade. */
+  immediate?: boolean;
+  /** Titoli display: maschera di riga invece del fade. */
+  maschera?: boolean;
   style?: CSSProperties;
 } & Record<string, unknown>) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || immediate) return;
     if (typeof IntersectionObserver === "undefined") {
       el.classList.add("is-in");
       return;
@@ -48,16 +54,17 @@ export function Reveal({
     const obs = getObserver();
     obs.observe(el);
     return () => obs.unobserve(el);
-  }, []);
+  }, [immediate]);
   const Comp = Tag as React.ElementType;
   return (
     <Comp
       ref={ref}
-      className={`reveal ${className}`}
-      style={{ ...style, "--reveal-delay": `${delay}ms` } as CSSProperties}
+      className={immediate ? className : `${maschera ? "reveal-maschera" : "reveal"} ${className}`}
+      style={immediate ? style : ({ ...style, "--reveal-delay": `${delay}ms` } as CSSProperties)}
       {...rest}
     >
-      {children}
+      {/* La maschera sta su un figlio: Chrome tiene conto del clip-path del target nell'IntersectionObserver. */}
+      {maschera && !immediate ? <span className="maschera-interno">{children}</span> : children}
     </Comp>
   );
 }

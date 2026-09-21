@@ -33,6 +33,11 @@ accessibilita:
 orari:
   it: ''
   en: ''
+foto:
+  - src: sede-sesto-placeholder.jpg
+    alt:
+      it: Placeholder — da sostituire con la foto di Villa Donatello, Sesto Fiorentino
+      en: Placeholder — replace with a photo of Villa Donatello, Sesto Fiorentino
 peso: 4
 sitoStruttura: https://www.villadonatello.com/
 patologie:

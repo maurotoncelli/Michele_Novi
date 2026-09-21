@@ -7,7 +7,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { isSegno, Segno } from "@/components/ui/Segno";
-import { Briciole, Disclaimer, Intestazione, Sezione } from "@/components/blocks/Pagina";
+import { Disclaimer, Intestazione, Sezione } from "@/components/blocks/Pagina";
 import { SchedaPatologia } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
@@ -35,19 +35,24 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
           { name: m.cosaCuro.titolo, path: href(l, { kind: "cosaCuro" }) },
         ])}
       />
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.cosaCuro.titolo }]} />
-      <Intestazione eyebrow={m.nav.cosaCuro} titolo={m.cosaCuro.titolo} lead={m.cosaCuro.lead} compatta />
+      <Intestazione
+        eyebrow={m.nav.cosaCuro}
+        titolo={m.cosaCuro.titolo}
+        lead={m.cosaCuro.lead}
+        compatta
+        percorso={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.cosaCuro.titolo }]}
+      />
 
       <Sezione>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-stretch gap-x-12 gap-y-10 md:grid-cols-2 lg:gap-x-16 lg:gap-y-12">
           {principali.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 70} className={p.principale ? "md:col-span-2 lg:col-span-2" : ""}>
-              <SchedaPatologia p={p} locale={l} index={i} grande={!!p.principale} />
+            <Reveal key={p.slug} delay={i * 70} className="h-full min-w-0">
+              <SchedaPatologia p={p} locale={l} index={i} riga />
             </Reveal>
           ))}
         </div>
         {secondarie.length > 0 && (
-          <Reveal className="mt-6">
+          <Reveal className="mt-12 border-t border-linea pt-6">
             <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
             <ul className="flex flex-wrap gap-2">
               {secondarie.map((p) => (
@@ -61,8 +66,11 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
             </ul>
           </Reveal>
         )}
-        <Reveal className="mt-12 max-w-2xl">
-          <p className="serif text-[1.5rem] leading-snug text-inchiostro md:text-[1.8rem]">{m.cosaCuro.chiusura}</p>
+      </Sezione>
+
+      <Sezione tinta="osso" misura="affermazione">
+        <Reveal as="p" maschera className="citazione-l max-w-4xl">
+          {m.cosaCuro.chiusura}
         </Reveal>
         <Disclaimer testo={m.cosaCuro.disclaimer} />
       </Sezione>

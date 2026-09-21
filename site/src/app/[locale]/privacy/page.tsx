@@ -3,7 +3,7 @@ import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages } from "@/i18n";
 import { getSettings } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
-import { Briciole, Intestazione } from "@/components/blocks/Pagina";
+import { Intestazione } from "@/components/blocks/Pagina";
 import { Legale } from "@/components/blocks/Legale";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/privacy">): Promise<Metadata> {
@@ -21,8 +21,7 @@ export default async function PrivacyPage({ params }: PageProps<"/[locale]/priva
   const m = getMessages(l);
   return (
     <>
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.legale.privacyTitolo }]} />
-      <Intestazione titolo={m.legale.privacyTitolo} compatta />
+      <Intestazione titolo={m.legale.privacyTitolo} compatta percorso={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.legale.privacyTitolo }]} />
       <Legale tipo="privacy" locale={l} settings={s} />
     </>
   );

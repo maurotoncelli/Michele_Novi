@@ -33,6 +33,11 @@ accessibilita:
 orari:
   it: ''
   en: ''
+foto:
+  - src: sede-pisa-placeholder.jpg
+    alt:
+      it: Placeholder — da sostituire con la foto della Casa di Cura San Rossore, Pisa
+      en: Placeholder — replace with a photo of Casa di Cura San Rossore, Pisa
 peso: 2
 sitoStruttura: https://www.sanrossorecuramedica.it/
 patologie:

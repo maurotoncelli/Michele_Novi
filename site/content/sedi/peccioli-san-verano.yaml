@@ -34,6 +34,11 @@ accessibilita:
 orari:
   it: ''
   en: ''
+foto:
+  - src: sede-peccioli-placeholder.jpg
+    alt:
+      it: Placeholder — da sostituire con la foto del Centro Medico San Verano, Peccioli
+      en: Placeholder — replace with a photo of Centro Medico San Verano, Peccioli
 peso: 3
 patologie:
   - spalla

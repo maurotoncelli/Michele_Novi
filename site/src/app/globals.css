@@ -19,9 +19,13 @@
   --color-grafite: #5b6470;
   --color-nebbia: #8d95a0;
   --color-linea: rgba(26, 30, 34, 0.1);
+  /* Fondo scuro (fascia di chiusura, footer): petrolio profondo, non nero. */
+  --color-profondo: #0f3a5a;
+  --color-petrolio-chiaro: #a8d0ee;
+  --color-linea-chiara: rgba(255, 255, 255, 0.16);
 
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sito), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-sito), ui-sans-serif, system-ui, sans-serif;
 
   --radius-osso: 1.75rem;
   --radius-osso-lg: 2.5rem;
@@ -49,7 +53,7 @@ body {
   background-color: var(--color-campo);
   color: var(--color-inchiostro);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -81,6 +85,168 @@ h3,
 
 p {
   text-wrap: pretty;
+}
+}
+
+/* ------------------------------------------------------------------ scala display
+   Una sola scala per tutto il sito. L'eyebrow nomina, il display afferma. */
+@layer components {
+.display-xl {
+  font-weight: 500;
+  font-size: clamp(2.9rem, 1rem + 5.4vw, 6.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.display-l {
+  font-weight: 500;
+  font-size: clamp(2.35rem, 1.1rem + 4vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.display-m {
+  font-weight: 500;
+  font-size: clamp(1.85rem, 1.1rem + 2vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.cifra {
+  font-weight: 500;
+  font-size: clamp(2.8rem, 1.5rem + 4.5vw, 5.25rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+/* Cifra di fondo: l'anno dietro al pezzo grande (Harvard). */
+.cifra-fondo {
+  position: absolute;
+  top: -0.18em;
+  left: -0.04em;
+  font-weight: 500;
+  font-size: clamp(6rem, 3rem + 14vw, 15rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--color-inchiostro);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+/* Citazione: testo grande che non è un titolo (recensione, affermazione di chiusura).
+   Peso normale, così sotto un display non pesa quanto lui. */
+.citazione {
+  font-weight: 400;
+  font-size: clamp(1.45rem, 1rem + 1.5vw, 2.15rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+.citazione-l {
+  font-weight: 400;
+  font-size: clamp(1.7rem, 1rem + 2.4vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.lead {
+  font-size: clamp(1.08rem, 0.95rem + 0.5vw, 1.32rem);
+  line-height: 1.5;
+  color: var(--color-grafite);
+  text-wrap: pretty;
+}
+.indice {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-nebbia);
+  margin-right: 0.9em;
+}
+
+/* Fascia scura: una sola per pagina, la chiusura. Petrolio profondo. */
+.fascia-scura {
+  background: var(--color-profondo);
+  color: var(--color-osso);
+}
+.fascia-scura .eyebrow {
+  color: var(--color-petrolio-chiaro);
+}
+.fascia-scura .btn-petrolio {
+  background: var(--color-osso);
+  color: var(--color-profondo);
+}
+.fascia-scura .btn-petrolio:hover {
+  background: var(--color-petrolio-chiaro);
+}
+.fascia-scura .btn-osso {
+  color: var(--color-osso);
+  border-color: var(--color-linea-chiara);
+}
+.fascia-scura .btn-osso:hover {
+  border-color: var(--color-petrolio-chiaro);
+  color: var(--color-petrolio-chiaro);
+}
+.fascia-scura ::selection {
+  background: var(--color-petrolio-chiaro);
+  color: var(--color-inchiostro);
+}
+
+/* Margine sinistro allineato al contenitore, per colonne a vivo (hero). */
+.margine-sx {
+  padding-left: max(clamp(1rem, 4vw, 2.5rem), calc((100vw - 76rem) / 2 + clamp(1rem, 4vw, 2.5rem)));
+  padding-right: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Hero: foto prima su mobile, due colonne da 1024px. In CSS puro, non dipende da classi generate. */
+.hero-griglia {
+  display: grid;
+}
+.hero-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-osso-2);
+  aspect-ratio: 4 / 5;
+}
+@media (min-width: 640px) {
+  .hero-media {
+    aspect-ratio: 3 / 2;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-griglia {
+    grid-template-columns: minmax(0, 47fr) minmax(0, 53fr);
+    /* Riempie la prima schermata, ma non oltre: su monitor alti non diventa un muro. */
+    min-height: min(calc(100svh - var(--header-h)), 54rem);
+  }
+  .hero-testo {
+    order: 1;
+  }
+  .hero-media {
+    order: 2;
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+}
+
+/* Parallasse leggera, solo CSS (scroll-driven), dove il browser la supporta. */
+.parallasse {
+  will-change: transform;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallasse {
+      animation: parallasse linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+}
+@keyframes parallasse {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+  to {
+    transform: translate3d(0, 9%, 0) scale(1.06);
+  }
 }
 }
 
@@ -233,9 +399,25 @@ a.osso:hover,
   opacity: 1;
   transform: none;
 }
+/* Titoli display: entrano da una maschera di riga, non da un fade. */
+.reveal-maschera > .maschera-interno {
+  display: block;
+  clip-path: inset(0 -0.1em 100% -0.1em);
+  transform: translateY(0.35em);
+  transition:
+    clip-path 1.1s var(--ease-osso),
+    transform 1.1s var(--ease-osso);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-maschera.is-in > .maschera-interno {
+  clip-path: inset(-0.2em -0.1em -0.3em -0.1em);
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal-maschera > .maschera-interno {
     opacity: 1;
+    clip-path: none;
     transform: none;
     transition: none;
   }
@@ -328,7 +510,7 @@ a.osso:hover,
   margin: 2.5em 0;
 }
 .testo img {
-  border-radius: var(--radius-osso);
+  border-radius: 0;
 }
 .testo table {
   width: 100%;
@@ -355,6 +537,42 @@ a.osso:hover,
   max-width: 76rem;
   margin-inline: auto;
   padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Hub Dove: due colonne della stessa misura, righe allineate (subgrid). */
+.dove-griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.dove-colonna {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+}
+.dove-divisore {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .dove-griglia {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+    grid-template-rows: auto repeat(var(--righe, 3), auto);
+    column-gap: 3.5rem;
+    row-gap: 2rem;
+  }
+  .dove-colonna {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / -1;
+    gap: 0;
+    row-gap: inherit;
+  }
+  .dove-divisore {
+    display: block;
+    grid-row: 1 / -1;
+    background: var(--color-linea);
+  }
 }
 
 /* Header solido, sticky, una riga: nome | voci al centro | azioni. */

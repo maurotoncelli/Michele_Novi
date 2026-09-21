@@ -1,14 +1,14 @@
 eyebrow:
-  it: Dott. Michele Novi · Ortopedico
-  en: Dr Michele Novi · Orthopaedic surgeon
+  it: Dott. Michele Novi · Ortopedico · Toscana
+  en: Dr Michele Novi · Orthopaedic surgeon · Tuscany
 titolo:
   it: Spalla e arto superiore.
   en: Shoulder and upper limb.
 sottotitolo:
-  it: Chirurgo ortopedico in Toscana. Ti dico dove ricevo, cosa curo e come raggiungermi. Il resto lo vediamo in visita.
-  en: Orthopaedic surgeon in Tuscany. Here is where I see patients, what I treat and how to reach me. The rest we discuss at the visit.
+  it: Chirurgo ortopedico. Visito a Fucecchio, Pisa e Peccioli; opero a Fucecchio, Pisa e Sesto Fiorentino. La prima visita serve a decidere la strada, non l'intervento.
+  en: Orthopaedic surgeon. I see patients in Fucecchio, Pisa and Peccioli; I operate in Fucecchio, Pisa and Sesto Fiorentino. The first visit is for deciding the path, not the operation.
 ritratto:
-  src: ritratto-placeholder.jpg
+  src: ritratto-verticale-placeholder.jpg
   alt:
     it: Placeholder — da sostituire con il ritratto del Dott. Michele Novi
     en: Placeholder — replace with Dr Michele Novi's portrait

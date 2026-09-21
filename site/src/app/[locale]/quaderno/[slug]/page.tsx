@@ -74,7 +74,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) }, { label: pick(n.titolo, l) }]} />
 
       <article className="contenitore pt-8 md:pt-12">
-        <Reveal className="mx-auto max-w-3xl text-center">
+        <Reveal immediate className="mx-auto max-w-3xl text-center">
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="tag tag-rame">{m.quaderno.nota}</span>
             <time dateTime={n.data ?? undefined} className="text-sm text-grafite">
@@ -86,13 +86,13 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
               </span>
             )}
           </div>
-          <h1 className="mt-5 text-[2.3rem] leading-[1.08] md:text-[3.2rem]">{pick(n.titolo, l)}</h1>
+          <h1 className="display-l mt-5">{pick(n.titolo, l)}</h1>
           {pick(n.lead, l) && <p className="mt-5 text-[1.15rem] leading-relaxed text-grafite">{pick(n.lead, l)}</p>}
           <p className="mt-5 text-sm text-grafite">{s.nome}</p>
         </Reveal>
 
         {copertina && (
-          <Reveal className="relative mx-auto mt-10 aspect-[16/9] max-w-4xl overflow-hidden bg-petrolio-3">
+          <Reveal className="relative mx-auto mt-10 aspect-[4/3] max-w-4xl overflow-hidden bg-osso-2">
             <Image src={copertina} alt={pick(n.copertina?.alt, l) || pick(n.titolo, l)} fill priority sizes="(min-width: 1024px) 60rem, 100vw" className="object-cover" />
           </Reveal>
         )}
@@ -135,9 +135,9 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
       {correlate.length > 0 && (
         <section className="contenitore pb-6">
           <p className="eyebrow mb-4">{m.quaderno.correlate}</p>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid items-stretch gap-10 md:grid-cols-3">
             {correlate.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 70}>
+              <Reveal key={c.slug} delay={i * 70} className="h-full min-w-0">
                 <SchedaPatologia p={c} locale={l} index={i} />
               </Reveal>
             ))}
@@ -147,9 +147,9 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/quaderno
       {altre.length > 0 && (
         <section className="contenitore pb-6">
           <p className="eyebrow mb-4">{m.quaderno.dalLavoro}</p>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid items-stretch gap-10 md:grid-cols-3">
             {altre.map((x, i) => (
-              <Reveal key={x.slug} delay={i * 70}>
+              <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">
                 <SchedaNota n={x} locale={l} />
               </Reveal>
             ))}

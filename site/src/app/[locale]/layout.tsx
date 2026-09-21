@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
@@ -10,9 +10,11 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
+/* Una sola famiglia, geometrica e asciutta: General Sans (bibbia/06_design: font, aperto → chiuso). */
+const carattere = localFont({
+  src: "../fonts/GeneralSans-Variable.woff2",
+  variable: "--font-sito",
+  weight: "100 900",
   display: "swap",
 });
 
@@ -53,7 +55,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang={l} className={`${geist.variable} h-full`}>
+    <html lang={l} className={`${carattere.variable} h-full`}>
       <body className="aloni flex min-h-full flex-col">
         <Header
           locale={l}

@@ -5,7 +5,7 @@ import { getMessages } from "@/i18n";
 import { getQuaderno, getSettings, getTags } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
-import { Briciole, Intestazione } from "@/components/blocks/Pagina";
+import { Intestazione } from "@/components/blocks/Pagina";
 import { TabQuaderno } from "@/components/blocks/TabQuaderno";
 import { ListaQuaderno } from "@/components/blocks/ListaQuaderno";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
@@ -42,8 +42,16 @@ export default async function TagPage({ params }: PageProps<"/[locale]/quaderno/
           { name: t, path: href(l, { kind: "tag", tag: t }) },
         ])}
       />
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) }, { label: t }]} />
-      <Intestazione eyebrow={m.quaderno.taggato} titolo={t} compatta />
+      <Intestazione
+        eyebrow={m.quaderno.taggato}
+        titolo={t}
+        compatta
+        percorso={[
+          { label: m.meta.siteName, href: href(l, { kind: "home" }) },
+          { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) },
+          { label: t },
+        ]}
+      />
       <TabQuaderno locale={l} attiva="tutto" feedHref={`${href(l, { kind: "quaderno" })}/feed.xml`} />
       <ListaQuaderno voci={filtrate} locale={l} tags={tags.filter((x) => x.tag !== t)} />
       <FasciaContatto locale={l} />

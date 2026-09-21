@@ -14,7 +14,7 @@ export function VideoApprofondimento({
   if (!src && !yt) return null;
 
   return (
-    <div className="incavo mt-10 overflow-hidden rounded-[1.75rem]">
+    <div className="incavo mt-10 overflow-hidden">
       {src ? (
         <video className="aspect-video w-full bg-inchiostro" controls playsInline preload="metadata" title={titolo}>
           <source src={src} />

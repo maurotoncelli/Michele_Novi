@@ -4,7 +4,7 @@ import { getMessages } from "@/i18n";
 import { getQuaderno, getSettings } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
-import { Briciole, Intestazione } from "@/components/blocks/Pagina";
+import { Intestazione } from "@/components/blocks/Pagina";
 import { TabQuaderno } from "@/components/blocks/TabQuaderno";
 import { ListaQuaderno } from "@/components/blocks/ListaQuaderno";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
@@ -31,8 +31,17 @@ export default async function PubblicazioniPage({ params }: PageProps<"/[locale]
           { name: m.quaderno.pubblicazioni, path: href(l, { kind: "quadernoPubblicazioni" }) },
         ])}
       />
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) }, { label: m.quaderno.pubblicazioni }]} />
-      <Intestazione eyebrow={m.quaderno.titolo} titolo={m.quaderno.pubblicazioni} lead={`${m.quaderno.pubblicazioniLead} ${m.quaderno.soloInglese}`} compatta />
+      <Intestazione
+        eyebrow={m.quaderno.titolo}
+        titolo={m.quaderno.pubblicazioni}
+        lead={`${m.quaderno.pubblicazioniLead} ${m.quaderno.soloInglese}`}
+        compatta
+        percorso={[
+          { label: m.meta.siteName, href: href(l, { kind: "home" }) },
+          { label: m.quaderno.titolo, href: href(l, { kind: "quaderno" }) },
+          { label: m.quaderno.pubblicazioni },
+        ]}
+      />
       <TabQuaderno locale={l} attiva="pubblicazioni" feedHref={`${href(l, { kind: "quaderno" })}/feed.xml`} />
       <ListaQuaderno voci={voci.filter((v) => v.tipo === "paper")} locale={l} />
       <FasciaContatto locale={l} />

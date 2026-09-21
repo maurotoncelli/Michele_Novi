@@ -71,16 +71,14 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
 
       <article className="contenitore pt-8 md:pt-12">
         {/* Impaginato da paper: testata, titolo, autori, rivista, DOI */}
-        <Reveal className="osso osso-lg cucitura relative overflow-hidden p-7 md:p-12">
-          <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-menta blur-3xl" aria-hidden="true" />
-          <div className="relative max-w-3xl">
+        <Reveal immediate className="relative max-w-3xl">
             <div className="flex flex-wrap items-center gap-2">
               <span className="tag tag-petrolio">{m.quaderno.paper}</span>
               {p.principale && <span className="tag tag-rame">{m.quaderno.principale}</span>}
               <span className="text-sm text-grafite">{p.anno}</span>
             </div>
             {titoloBreve && <p className="eyebrow mt-6">{titoloBreve}</p>}
-            <h1 className="mt-2 text-[1.9rem] leading-[1.15] md:text-[2.6rem]" lang="en">
+            <h1 className="display-m mt-2" lang="en">
               {p.titolo}
             </h1>
             <dl className="mt-6 grid gap-x-8 gap-y-3 text-[0.95rem] sm:grid-cols-2">
@@ -143,13 +141,12 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
                 )
               )}
             </div>
-          </div>
         </Reveal>
 
         <div className="grid gap-8 py-10 lg:grid-cols-[1fr_18rem] lg:gap-16">
           <div className="max-w-[42rem] space-y-10">
             {pick(p.riassunto, l) && (
-              <Reveal className="osso vetro vetro-pesca p-6 md:p-8">
+              <Reveal>
                 <h2 className="text-[1.4rem]">{m.quaderno.riassunto}</h2>
                 <p className="mt-3 whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.riassunto, l)}</p>
               </Reveal>
@@ -195,9 +192,9 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
       {altre.length > 0 && (
         <section className="contenitore pb-6">
           <p className="eyebrow mb-4">{m.quaderno.pubblicazioni}</p>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid items-stretch gap-10 md:grid-cols-3">
             {altre.map((x, i) => (
-              <Reveal key={x.slug} delay={i * 70}>
+              <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">
                 <SchedaPaper p={x} locale={l} />
               </Reveal>
             ))}
@@ -206,9 +203,9 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/quadern
       )}
       {correlate.length > 0 && altre.length === 0 && (
         <section className="contenitore pb-6">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid items-stretch gap-10 md:grid-cols-3">
             {correlate.slice(0, 3).map((c, i) => (
-              <Reveal key={c.slug} delay={i * 70}>
+              <Reveal key={c.slug} delay={i * 70} className="h-full min-w-0">
                 <SchedaPatologia p={c} locale={l} index={i} />
               </Reveal>
             ))}

@@ -78,15 +78,14 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.cosaCuro.titolo, href: href(l, { kind: "cosaCuro" }) }, { label: pick(p.titolo, l) }]} />
 
       <header className="contenitore pt-8 md:pt-12">
-        <Reveal className="osso osso-lg cucitura relative overflow-hidden">
-          <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-menta blur-3xl" aria-hidden="true" />
-          <div className="relative grid gap-6 p-7 md:grid-cols-[1.4fr_1fr] md:items-center md:p-12">
+        <Reveal immediate className="osso relative overflow-hidden">
+          <div className="relative grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-center">
             <div>
-              <h1 className="text-[2.4rem] leading-[1.05] md:text-[3.2rem]">{pick(p.titolo, l)}</h1>
+              <h1 className="display-l">{pick(p.titolo, l)}</h1>
               <p className="mt-4 max-w-2xl text-[1.1rem] leading-relaxed text-grafite">{pick(p.lead, l)}</p>
             </div>
             {disegno && (
-              <div className="relative aspect-[5/4] overflow-hidden rounded-[1.6rem] bg-osso-2">
+              <div className="relative aspect-[5/4] overflow-hidden bg-osso-2">
                 <Disegno src={disegno.src} alt={disegno.alt} />
               </div>
             )}
@@ -161,9 +160,9 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
       {correlate.length > 0 && (
         <section className="contenitore pb-6">
           <p className="eyebrow mb-4">{m.cosaCuro.correlate}</p>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3">
             {correlate.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 70}>
+              <Reveal key={c.slug} delay={i * 70} className="h-full min-w-0">
                 <SchedaPatologia p={c} locale={l} index={i} />
               </Reveal>
             ))}

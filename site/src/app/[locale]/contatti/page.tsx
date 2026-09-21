@@ -6,7 +6,7 @@ import { breadcrumbJsonLd, buildMetadata, faqItems, faqJsonLd } from "@/lib/seo"
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
-import { Briciole, Intestazione } from "@/components/blocks/Pagina";
+import { Intestazione } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { ModuloSede } from "@/components/blocks/Schede";
 import { ContactForm } from "@/components/ContactForm";
@@ -40,23 +40,26 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
           ]),
         ]}
       />
-      <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.contatti.titolo }]} />
-      <Intestazione eyebrow={m.nav.contatti} titolo={m.contatti.titolo} lead={m.contatti.lead} compatta />
+      <Intestazione
+        eyebrow={m.nav.contatti}
+        titolo={m.contatti.titolo}
+        lead={m.contatti.lead}
+        compatta
+        percorso={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.contatti.titolo }]}
+      />
 
-      <div className="contenitore grid gap-6 pb-12 lg:grid-cols-[1fr_1.3fr]">
-        {/* Canali */}
-        <div className="space-y-4">
-          <Reveal className="osso cucitura relative overflow-hidden p-6 md:p-8">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-menta blur-3xl" aria-hidden="true" />
-            <div className="relative space-y-5">
+      <div className="contenitore grid gap-12 pb-16 pt-4 md:pt-8 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+        {/* Canali: il numero è la cosa più grande della pagina. */}
+        <div className="space-y-10">
+          <Reveal className="relative space-y-6">
               <div>
                 <p className="eyebrow">{m.contatti.telefono}</p>
                 {tel ? (
-                  <a href={tel} className="serif mt-1 block text-[2rem] leading-none text-petrolio hover:text-petrolio-2">
+                  <a href={tel} className="display-l mt-3 block text-petrolio hover:text-petrolio-2">
                     {s.telefono}
                   </a>
                 ) : (
-                  <p className="mt-1 text-grafite">{m.contatti.telefonoMancante}</p>
+                  <p className="mt-3 max-w-md text-[1.15rem] leading-relaxed text-grafite">{m.contatti.telefonoMancante}</p>
                 )}
               </div>
               {orari ? (
@@ -76,7 +79,7 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
                 </div>
               )}
               {(tel || wa || s.email) && (
-              <div className="incavo flex flex-wrap gap-2 p-2">
+              <div className="flex flex-wrap gap-2 pt-1">
                 {tel && (
                   <a href={tel} className="btn btn-petrolio">
                     <Segno nome="telefono" size={18} />
@@ -98,14 +101,14 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
               </div>
               )}
               <p className="text-sm text-grafite">{m.contatti.costo}</p>
-            </div>
           </Reveal>
 
-          <Reveal delay={80} className="incavo p-2">
-            <ul className="grid grid-cols-2 gap-2">
+          <Reveal delay={80}>
+            <p className="eyebrow">{m.nav.dove}</p>
+            <ul className="mt-2 divide-y divide-linea border-y border-linea">
               {sedi.map((x) => (
-                <li key={x.slug}>
-                  <ModuloSede s={x} locale={l} />
+                <li key={x.slug} className="min-w-0">
+                  <ModuloSede s={x} locale={l} compatto />
                 </li>
               ))}
             </ul>
@@ -113,9 +116,9 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
         </div>
 
         {/* Form */}
-        <Reveal delay={120} className="osso relative p-6 md:p-8">
-          <h2 className="text-[1.6rem]">{m.contatti.formTitolo}</h2>
-          <p className="mt-1 mb-6 text-sm text-grafite">{m.contatti.formLead}</p>
+        <Reveal delay={120} className="relative">
+          <h2 className="display-m">{m.contatti.formTitolo}</h2>
+          <p className="mt-3 mb-8 text-[0.98rem] text-grafite">{m.contatti.formLead}</p>
           <ContactForm
             locale={l}
             sedi={sedi.map((x) => ({ slug: x.slug, nome: x.nome, citta: x.citta ?? "" }))}
@@ -139,7 +142,7 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
       </div>
 
       {domande.length > 0 && (
-        <section className="contenitore pb-16">
+        <section className="contenitore pb-24 md:pb-32">
           <div className="max-w-3xl">
             <Faq titolo={m.contatti.faq} items={domande} />
           </div>

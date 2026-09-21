@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getHome, getPatologie, getProfilo, getQuaderno, getRecensioni, getSedi, getSettings } from "@/lib/content";
+import { getHome, getPatologie, getProfilo, getPubblicazioni, getQuaderno, getRecensioni, getSedi, getSettings } from "@/lib/content";
 import { buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
-import { FasciaFiducia, FasciaPatologie, FasciaQuaderno, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
+import { FasciaFatti, FasciaPatologie, FasciaPercorso, FasciaQuaderno, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [settings, home, profilo, patologie, sedi, recensioni, quaderno] = await Promise.all([
+  const [settings, home, profilo, patologie, sedi, recensioni, quaderno, paper] = await Promise.all([
     getSettings(),
     getHome(),
     getProfilo(),
@@ -32,6 +32,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     getSedi(),
     getRecensioni(),
     getQuaderno(),
+    getPubblicazioni(),
   ]);
 
   const fasce = (home.fasce ?? []).filter((f) => f.attiva).map((f) => f.tipo);
@@ -40,6 +41,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <JsonLd data={physicianJsonLd(settings, profilo, sedi, l)} />
       <Hero home={home} settings={settings} locale={l} />
+      <FasciaFatti sedi={sedi} paper={paper} profilo={profilo} locale={l} />
       {fasce.map((tipo) => {
         switch (tipo) {
           case "patologie":
@@ -47,7 +49,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           case "sedi":
             return <FasciaSedi key={tipo} sedi={sedi} locale={l} />;
           case "fiducia":
-            return <FasciaFiducia key={tipo} home={home} locale={l} />;
+            return <FasciaPercorso key={tipo} profilo={profilo} locale={l} />;
           case "recensioni":
             return <FasciaRecensioni key={tipo} recensioni={recensioni} locale={l} />;
           case "quaderno":

@@ -46,7 +46,7 @@ Le lampade di sala a LED sfarfallano. Prima di tutto un test a 1/60, 1/100 e 1/1
         45° a sinistra della camera, poco sopra gli occhi
 ```
 
-- 85 mm, f/2.8. Occhi nitidi, la lampada diventa un disco.
+- 50 mm, f/2.8, un passo indietro. Occhi nitidi, la lampada diventa un disco. Non è un primo piano: si vede dai fianchi in su, la testa è piccola, la sala occupa il resto. L'85 mm solo se la sala non lascia spazio, e comunque senza avvicinarsi.
 - ISO 200–400. Tempo dal test sullo sfarfallio.
 - Bianco circa 5000 K. Pelle naturale, sala più fredda della pelle.
 - Chiave grande, a sinistra della camera, 45°, appena sopra la linea degli occhi. Circa due stop sopra il fondo.

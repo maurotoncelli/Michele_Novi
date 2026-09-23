@@ -37,7 +37,7 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
             priority
             quality={92}
             sizes="100vw"
-            className="parallasse object-cover object-[62%_32%]"
+            className="parallasse object-cover object-[72%_center]"
           />
         </div>
 

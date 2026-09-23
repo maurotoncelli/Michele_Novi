@@ -628,6 +628,71 @@ a.osso:hover,
   background: var(--color-linea);
   margin: 2.5em 0;
 }
+/* Capitoli numerati, poi un blocco a colonne (senza numero), poi la frase di chiusura. */
+.testo-metodo {
+  counter-reset: capitolo;
+}
+.testo-metodo > article > h2:nth-of-type(n + 2) {
+  border-top: 1px solid var(--color-linea);
+  padding-top: 1.6rem;
+  margin-top: 3.2rem;
+}
+.testo-metodo > article > h2:not(:last-of-type):not(:has(+ .affiancati)):not(:has(+ p + .affiancati)) {
+  counter-increment: capitolo;
+}
+.testo-metodo > article > h2:not(:last-of-type):not(:has(+ .affiancati)):not(:has(+ p + .affiancati))::before {
+  content: counter(capitolo, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-petrolio);
+}
+.testo-metodo > article > h2:last-of-type {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-petrolio);
+}
+.testo-metodo blockquote {
+  border-left: 0;
+  padding-left: 0;
+  margin-top: 0.55em;
+  color: var(--color-inchiostro);
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.25;
+  max-width: 28rem;
+}
+.testo-metodo > article > h2:last-of-type + blockquote {
+  font-size: 1.9rem;
+  line-height: 1.2;
+  max-width: 18rem;
+}
+.affiancati {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 640px) {
+  .affiancati {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 2.75rem;
+  }
+}
+.affiancati h3 {
+  margin-top: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-petrolio);
+}
+.affiancati p + p {
+  margin-top: 0.7em;
+}
 .testo img {
   border-radius: 0;
 }

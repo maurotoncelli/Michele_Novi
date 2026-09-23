@@ -113,7 +113,7 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
 
         <article className="min-w-0">
           <AvvisoLingua show={fallbackToIt} locale={l} />
-          <div className="testo max-w-[44rem]">{element}</div>
+          <div className={`testo max-w-[44rem]${p.area === "metodo" || p.area === "spalla" || p.area === "arto-superiore" || p.area === "sport" ? " testo-metodo" : ""}`}>{element}</div>
 
           {doveSiTratta.length > 0 && (
             <section id="dove" className="ancora mt-20 max-w-[44rem]">

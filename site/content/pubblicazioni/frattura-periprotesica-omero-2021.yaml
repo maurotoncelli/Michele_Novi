@@ -15,6 +15,11 @@ abstract: |
 riassunto:
   it: 'Una caduta con una protesi di spalla già impiantata può fratturare l''omero attorno allo stelo. Il lavoro rivede come classificarle e quando trattarle con placca, con revisione della protesi o senza intervento.'
   en: 'A fall with a shoulder replacement already in place can fracture the humerus around the stem. The paper reviews how to classify these fractures and when to treat them with a plate, with revision of the implant, or without surgery.'
+immagine:
+  src: periprotesica.jpg
+  alt:
+    it: 'Radiografia di omero prossimale sintetizzato con placca. Thomas Zimmermann, CC BY-SA 3.0, Wikimedia Commons.'
+    en: 'Radiograph of a proximal humerus fixed with a plate. Thomas Zimmermann, CC BY-SA 3.0, Wikimedia Commons.'
 tag:
   - spalla
   - protesi

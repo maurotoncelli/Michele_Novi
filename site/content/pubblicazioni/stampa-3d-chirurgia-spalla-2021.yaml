@@ -13,6 +13,11 @@ abstract: ''
 riassunto:
   it: 'Dalla TC si ricostruisce la spalla in tre dimensioni e si stampano modelli e guide su misura. Servono a pianificare le protesi e le ricostruzioni complesse prima di entrare in sala.'
   en: 'From the CT scan the shoulder is rebuilt in three dimensions and patient-specific models and guides are printed. They help plan replacements and complex reconstructions before entering theatre.'
+immagine:
+  src: stampa-3d.jpg
+  alt:
+    it: 'Ossa del piede stampate in 3D, con i segni degli strati. Cbonsig, CC BY-SA 3.0, Wikimedia Commons.'
+    en: '3D-printed foot bones, with the layer lines visible. Cbonsig, CC BY-SA 3.0, Wikimedia Commons.'
 tag:
   - spalla
   - protesi

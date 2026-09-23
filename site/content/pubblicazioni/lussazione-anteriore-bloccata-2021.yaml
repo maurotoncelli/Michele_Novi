@@ -13,6 +13,11 @@ abstract: ''
 riassunto:
   it: 'A volte la spalla resta lussata a lungo senza che nessuno se ne accorga. Ridurla e ricostruirla richiede tecniche diverse da quelle della lussazione recente: il lavoro le mette in ordine.'
   en: 'Sometimes the shoulder stays dislocated for a long time without anyone noticing. Reducing and reconstructing it needs different techniques from those for a fresh dislocation: the paper sets them out.'
+immagine:
+  src: lussazione.jpg
+  alt:
+    it: 'Radiografia di una lussazione anteriore di spalla. Hellerhoff, CC BY-SA 3.0, Wikimedia Commons.'
+    en: 'Radiograph of an anterior shoulder dislocation. Hellerhoff, CC BY-SA 3.0, Wikimedia Commons.'
 tag:
   - spalla
   - instabilità

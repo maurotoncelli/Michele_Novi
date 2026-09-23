@@ -8,16 +8,16 @@ sottotitolo:
   it: Chirurgo ortopedico. Visito a Fucecchio, Pisa e Peccioli; opero a Fucecchio, Pisa e Sesto Fiorentino. La prima visita serve a decidere la strada, non l'intervento.
   en: Orthopaedic surgeon. I see patients in Fucecchio, Pisa and Peccioli; I operate in Fucecchio, Pisa and Sesto Fiorentino. The first visit is for deciding the path, not the operation.
 ritratto:
-  src: hero-novi-v7.jpg
+  src: hero-novi-v6.jpeg
   alt:
-    it: Bozza — ritratto di Michele in sala, da sostituire con la foto dello shooting
-    en: Draft — portrait of Michele in theatre, replace with the shoot
+    it: Bozza — ritratto di Michele in sala operatoria, da sostituire con la foto dello shooting
+    en: Draft — portrait of Michele in the operating theatre, replace with the shoot
 lavoro:
   foto:
-    src: lavoro-placeholder.jpg
+    src: formazione-aula.jpg
     alt:
-      it: Placeholder — da sostituire con una foto del lavoro in ambulatorio o in sala
-      en: Placeholder — replace with a photo of the work in clinic or theatre
+      it: Aula universitaria durante una lezione, in bianco e nero. Foto di Dom Fou, Unsplash.
+      en: University lecture hall during a class, in black and white. Photo by Dom Fou, Unsplash.
   video: ''
 fiducia:
   - testo:

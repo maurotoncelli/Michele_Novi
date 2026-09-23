@@ -25,7 +25,8 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
   const [s, patologie] = await Promise.all([getSettings(), getPatologie()]);
   const m = getMessages(l);
   const metodo = patologie.find((p) => p.area === "metodo");
-  const principali = patologie.filter((p) => !p.secondaria && p !== metodo);
+  const spalla = patologie.find((p) => p.area === "spalla");
+  const resto = patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla);
   const secondarie = patologie.filter((p) => p.secondaria);
 
   return (
@@ -44,28 +45,42 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
         percorso={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.cosaCuro.titolo }]}
       />
 
-      <Sezione>
-        <div className="binario items-stretch">
-          {principali.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 130} className="h-full min-w-0">
-              <SchedaPatologia p={p} locale={l} index={i} colonna />
+      <Sezione compatta>
+        <h2 className="display-m max-w-3xl">{m.home.cosaCuroTitolo}</h2>
+        {spalla && (
+          <Reveal className="mt-8 md:mt-10">
+            <SchedaPatologia p={spalla} locale={l} ampia />
+          </Reveal>
+        )}
+        {resto.length > 0 && (
+          <div className="mt-10 border-t border-linea pt-8 md:mt-12 md:pt-10">
+            <Reveal>
+              <h2 className="max-w-3xl text-[1.65rem] leading-tight md:text-[1.85rem]">{m.home.cosaCuroRestoTitolo}</h2>
+              <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.home.cosaCuroRestoLead}</p>
             </Reveal>
-          ))}
-        </div>
-        {secondarie.length > 0 && (
-          <Reveal className="mt-14 border-t border-linea pt-6">
-            <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
-            <ul className="flex flex-wrap gap-2">
-              {secondarie.map((p) => (
-                <li key={p.slug}>
-                  <Link href={href(l, { kind: "cosaCuro", slug: slugPatologia(p, l) })} className="inline-flex items-center gap-2 py-2 text-[0.95rem] hover:text-petrolio">
-                    <Segno nome={isSegno(p.segno) ? p.segno : "anca"} size={18} className="text-petrolio" />
-                    {pick(p.titolo, l)}
-                  </Link>
-                </li>
+            <ul className="mt-6 grid items-start gap-x-10 gap-y-8 sm:grid-cols-2">
+              {resto.map((p, i) => (
+                <Reveal key={p.slug} as="li" delay={i * 80} className="min-w-0">
+                  <SchedaPatologia p={p} locale={l} riga />
+                </Reveal>
               ))}
             </ul>
-          </Reveal>
+            {secondarie.length > 0 && (
+              <Reveal className="mt-8">
+                <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
+                <ul className="flex flex-wrap gap-2">
+                  {secondarie.map((p) => (
+                    <li key={p.slug}>
+                      <Link href={href(l, { kind: "cosaCuro", slug: slugPatologia(p, l) })} className="inline-flex items-center gap-2 py-2 text-[0.95rem] hover:text-petrolio">
+                        <Segno nome={isSegno(p.segno) ? p.segno : "anca"} size={18} className="text-petrolio" />
+                        {pick(p.titolo, l)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
+          </div>
         )}
       </Sezione>
 

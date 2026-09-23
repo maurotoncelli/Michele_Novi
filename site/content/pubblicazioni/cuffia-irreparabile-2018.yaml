@@ -15,6 +15,11 @@ abstract: |
 riassunto:
   it: 'Quando il tendine è troppo retratto o degenerato per essere riattaccato, esistono comunque soluzioni: debridement, ricostruzione capsulare superiore, transfer muscolari, protesi inversa. La revisione spiega quando scegliere ciascuna.'
   en: 'When the tendon is too retracted or degenerated to be reattached, solutions still exist: debridement, superior capsular reconstruction, tendon transfers, reverse replacement. The review explains when to choose each.'
+immagine:
+  src: cuffia.jpg
+  alt:
+    it: 'Ecografia di una lesione della cuffia dei rotatori. Mme Mim, CC BY-SA 3.0, Wikimedia Commons.'
+    en: 'Ultrasound of a rotator cuff tear. Mme Mim, CC BY-SA 3.0, Wikimedia Commons.'
 tag:
   - spalla
   - cuffia

@@ -13,6 +13,11 @@ abstract: ''
 riassunto:
   it: 'Le fratture in cui la testa dell''omero si spacca in più parti sono tra le più difficili. Il lavoro confronta sintesi e protesi e propone criteri di scelta in base a età e qualità dell''osso.'
   en: 'Fractures in which the humeral head splits into several parts are among the hardest. The paper compares fixation and replacement and proposes selection criteria based on age and bone quality.'
+immagine:
+  src: omero.jpg
+  alt:
+    it: 'Radiografia di una frattura complessa dell''omero prossimale. Mattiassich et al., CC BY 2.0, Wikimedia Commons.'
+    en: 'Radiograph of a complex proximal humerus fracture. Mattiassich et al., CC BY 2.0, Wikimedia Commons.'
 tag:
   - spalla
   - frattura

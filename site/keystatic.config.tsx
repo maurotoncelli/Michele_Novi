@@ -381,6 +381,7 @@ export default config({
         }),
         tag: fields.array(fields.text({ label: "Tag" }), { label: "Tag", itemLabel: (p) => p.value }),
         principale: fields.checkbox({ label: "Tra le principali (CV)", defaultValue: false }),
+        immagine: immagine("Immagine in anteprima", "approfondimenti"),
         patologie: fields.array(fields.relationship({ label: "Pagina", collection: "patologie" }), {
           label: "Patologie correlate",
           itemLabel: (p) => p.value ?? "",

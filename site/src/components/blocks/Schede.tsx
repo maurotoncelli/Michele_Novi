@@ -38,8 +38,8 @@ function ChipSede({ s, locale }: { s: Sede; locale: Locale }) {
   );
 }
 
-/** Card patologia. Default: 5/4 compatta (correlate). `riga` = disegno piccolo a sinistra, lead intero. `colonna` = colonna alta con disegno che fluttua. */
-export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean }) {
+/** Card patologia. Default: 5/4 compatta (correlate). `riga` = disegno piccolo a sinistra, lead intero. `colonna` = colonna alta con disegno che fluttua. `ampia` = foto a sinistra, testo a destra. */
+export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false, ampia = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean; ampia?: boolean }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
@@ -67,6 +67,27 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
           <p className="mt-2 text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
           {dove.length > 0 && <p className="mt-auto pt-3 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
           <span className="sr-only">{m.cta.scopri}</span>
+        </div>
+      </Link>
+    );
+  }
+
+  if (ampia) {
+    const tutte = await getSedi();
+    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
+    return (
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-6 md:grid-cols-[18rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[22rem_minmax(0,1fr)]">
+        <Lastra ratio="4/3" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
+          {media}
+        </Lastra>
+        <div className="min-w-0">
+          <h3 className="sr-only">{pick(p.titolo, locale)}</h3>
+          <p className="lead max-w-xl">{pick(p.lead, locale)}</p>
+          {dove.length > 0 && <p className="mt-5 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
+          <span className="btn btn-ghost -ml-3 mt-6">
+            {m.cta.scopri}
+            <Segno nome="freccia" size={18} />
+          </span>
         </div>
       </Link>
     );
@@ -251,14 +272,18 @@ export async function SchedaPaper({ p, locale, grande = false }: { p: Pubblicazi
   const titolo = pick(p.titoloBreve, locale) || p.titolo;
   const catalogo = await getDisegni();
   const id = idDisegnoDaTag(p.tag, p.patologie);
-  const disegno = srcDisegno(catalogo, id, locale);
+  const foto = srcMedia(p.immagine?.src, "approfondimenti");
+  const disegno = foto ? null : srcDisegno(catalogo, id, locale);
+  const alt = pick(p.immagine?.alt, locale) || titolo;
   const pdf = srcPaper(p.pdf);
   const articolo = hrefArticolo(p.doi, p.url);
   return (
     <div className="flex h-full flex-col">
       <Link href={href(locale, { kind: "paper", slug: p.slug })} className="group flex flex-1 flex-col">
         <Lastra>
-          {disegno ? (
+          {foto ? (
+            <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 768px) 24rem, 80vw" className="object-cover" />
+          ) : disegno ? (
             <Disegno src={disegno.src} alt={disegno.alt} />
           ) : (
             <span className="absolute inset-0 grid place-items-center text-petrolio">
@@ -309,7 +334,7 @@ export async function SchedaNota({ n, locale, grande = false }: { n: Nota; local
     <Link href={href(locale, { kind: "nota", slug: slugNota(n, locale) })} className="group flex h-full flex-col">
       <Lastra>
         {copertina ? (
-          <Image src={copertina} alt={alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+          <Image src={copertina} alt={alt} fill quality={92} sizes="(min-width: 768px) 24rem, 80vw" className="object-cover" />
         ) : fallback ? (
           <Disegno src={fallback.src} alt={alt} />
         ) : (

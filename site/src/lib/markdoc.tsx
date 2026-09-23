@@ -21,6 +21,11 @@ const config: Config = {
   tags: {
     // Numeri di citazione in apice nel testo dei paper: {% sup %}24{% /sup %}
     sup: { render: "sup", inline: true },
+    affiancati: { render: "Affiancati" },
+    colonna: {
+      render: "Colonna",
+      attributes: { titolo: { type: String, required: true } },
+    },
   },
 };
 
@@ -46,7 +51,20 @@ function Heading({ level, children }: { level: number; children: React.ReactNode
   return <Tag id={slugify(textOf(children))}>{children}</Tag>;
 }
 
-const components = { Heading };
+function Affiancati({ children }: { children?: React.ReactNode }) {
+  return <div className="affiancati">{children}</div>;
+}
+
+function Colonna({ titolo, children }: { titolo: string; children?: React.ReactNode }) {
+  return (
+    <div>
+      <h3>{titolo}</h3>
+      {children}
+    </div>
+  );
+}
+
+const components = { Heading, Affiancati, Colonna };
 
 /** Sceglie il corpo nella lingua richiesta; se EN manca, ricade sull'IT. */
 export async function renderBody(corpoIt: Body, corpoEn: Body | undefined, locale: Locale) {

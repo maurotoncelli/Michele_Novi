@@ -112,35 +112,47 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
   );
 }
 
-/* ------------------------------------------------------------------ 01 Cosa curo: tre colonne, poi il metodo a sé */
+/* ------------------------------------------------------------------ 01 Cosa curo: la spalla da sola, poi gomito, mano e sport */
 export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[]; locale: Locale }) {
   const m = getMessages(locale);
   const metodo = patologie.find((p) => p.area === "metodo");
-  const principali = patologie.filter((p) => !p.secondaria && p !== metodo);
-  const centro = principali.find((p) => p.principale) ?? principali[0];
-  const colonne = centro ? [centro, ...principali.filter((p) => p !== centro)].slice(0, 3) : [];
+  const spalla = patologie.find((p) => p.area === "spalla");
+  const resto = patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla);
   const secondarie = patologie.filter((p) => p.secondaria);
-  if (!colonne.length) return null;
+  if (!spalla && !resto.length) return null;
   return (
     <>
-      <Sezione indice="01" eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} lead={m.home.cosaCuroLead} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso">
-        <ul className="binario items-stretch">
-          {colonne.map((p, i) => (
-            <Reveal key={p.slug} as="li" delay={i * 130} className="h-full min-w-0">
-              <SchedaPatologia p={p} locale={locale} index={i} colonna />
+      <Sezione indice="01" eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso" compatta>
+        {spalla && (
+          <Reveal>
+            <SchedaPatologia p={spalla} locale={locale} ampia />
+          </Reveal>
+        )}
+        {resto.length > 0 && (
+          <div className="mt-10 border-t border-linea pt-8 md:mt-12 md:pt-10">
+            <Reveal>
+              <h2 className="max-w-3xl text-[1.65rem] leading-tight md:text-[1.85rem]">{m.home.cosaCuroRestoTitolo}</h2>
+              <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.home.cosaCuroRestoLead}</p>
             </Reveal>
-          ))}
-        </ul>
-        {secondarie.length > 0 && (
-          <Reveal className="mt-14 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-linea pt-6 text-[0.95rem] text-grafite">
-          <span>{m.cosaCuro.secondarie}:</span>
-          {secondarie.map((p) => (
-            <Link key={p.slug} href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio">
-              {pick(p.titolo, locale)}
-            </Link>
-          ))}
-        </Reveal>
-      )}
+            <ul className="mt-6 grid items-start gap-x-10 gap-y-8 sm:grid-cols-2">
+              {resto.map((p, i) => (
+                <Reveal key={p.slug} as="li" delay={i * 80} className="min-w-0">
+                  <SchedaPatologia p={p} locale={locale} riga />
+                </Reveal>
+              ))}
+            </ul>
+            {secondarie.length > 0 && (
+              <Reveal className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.95rem] text-grafite">
+                <span>{m.cosaCuro.secondarie}:</span>
+                {secondarie.map((p) => (
+                  <Link key={p.slug} href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio">
+                    {pick(p.titolo, locale)}
+                  </Link>
+                ))}
+              </Reveal>
+            )}
+          </div>
+        )}
       </Sezione>
 
       {metodo && (

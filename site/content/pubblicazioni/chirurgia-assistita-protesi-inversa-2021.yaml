@@ -16,6 +16,11 @@ abstract: |
 riassunto:
   it: 'La pianificazione al computer e la navigazione aiutano a posizionare la componente glenoidea della protesi inversa con più precisione, soprattutto quando l''osso è consumato.'
   en: 'Computer planning and navigation help position the glenoid component of a reverse replacement more precisely, especially when bone is worn.'
+immagine:
+  src: protesi-inversa.jpg
+  alt:
+    it: 'Radiografia di una protesi inversa di spalla. Mattiassich et al., CC BY 2.0, Wikimedia Commons.'
+    en: 'Radiograph of a reverse shoulder replacement. Mattiassich et al., CC BY 2.0, Wikimedia Commons.'
 tag:
   - spalla
   - protesi

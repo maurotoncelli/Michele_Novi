@@ -15,6 +15,11 @@ abstract: |
 riassunto:
   it: 'Quando la spalla si lussa più volte, la testa dell''omero può avere un''impronta ossea (Hill-Sachs) che favorisce nuove lussazioni. Questa revisione racconta lo stato dell''arte del remplissage artroscopico negli atleti: si ''riempie'' il difetto con il tendine, insieme alla riparazione del labbro. Riduce le recidive; quanto conti la perdita di rotazione esterna, soprattutto negli sport overhead, è ancora dibattuto.'
   en: 'When the shoulder dislocates repeatedly, the humeral head can carry a bony dent (Hill-Sachs) that favours new dislocations. This review sets out the state of the art of arthroscopic remplissage in athletes: the defect is ''filled'' with tendon, together with labral repair. It lowers recurrence; how much the loss of external rotation matters, especially in overhead sports, is still debated.'
+immagine:
+  src: remplissage.jpg
+  alt:
+    it: 'Radiografia di spalla con lesione di Hill-Sachs. Mikael Häggström, CC0, Wikimedia Commons.'
+    en: 'Shoulder radiograph with a Hill-Sachs lesion. Mikael Häggström, CC0, Wikimedia Commons.'
 tag:
   - spalla
   - instabilità

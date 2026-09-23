@@ -167,32 +167,32 @@ societa:
   - EFORT
 comeValuto:
   it: >-
-    La prima visita può cambiare la strada. Spesso chi arriva con una diagnosi di "protesi" può essere curato
-    in altro modo, e chi ha rimandato per anni scopre che l'intervento è più semplice di quanto temeva.
-    Guardo le immagini insieme a te, ti spiego cosa vedo e cosa non vedo, e decidiamo il percorso.
+    La prima visita può modificare l'indicazione. Chi arriva con una diagnosi di protesi a volte si tratta
+    in modo conservativo; un intervento rimandato può risultare meno complesso del previsto. In visita si
+    rileggono gli esami, si precisa la diagnosi e si definisce il trattamento.
   en: >-
-    The first visit can change the path. Often someone who arrives with a "replacement" diagnosis can be
-    treated another way, and someone who has postponed for years finds surgery is simpler than feared.
-    We look at the images together, I explain what I see and what I do not, and we decide the path.
+    The first consultation can change the indication. A patient who arrives with a replacement diagnosis
+    can sometimes be treated non-operatively; surgery that has been postponed can turn out less complex
+    than expected. The imaging is reviewed, the diagnosis is stated and the treatment is decided.
 comeValutoPassi:
   - titolo:
-      it: Guardo le immagini con te
-      en: We look at the images together
+      it: Esami strumentali
+      en: Imaging
     testo:
-      it: Radiografie, risonanza, ecografia fatta in visita. Sullo schermo, insieme, non in un referto da leggere a casa.
-      en: X-rays, MRI, ultrasound done during the visit. On the screen, together, not in a report to read at home.
+      it: Radiografie, risonanza e ecografia eseguita in visita.
+      en: X-rays, MRI and ultrasound performed during the consultation.
   - titolo:
-      it: Ti dico cosa vedo e cosa non vedo
-      en: I tell you what I see and what I do not
+      it: Diagnosi
+      en: Diagnosis
     testo:
-      it: Una diagnosi ha sempre un margine. Lo dico chiaro, con le parole che servono a decidere.
-      en: Every diagnosis has a margin. I say it plainly, in the words needed to decide.
+      it: Cosa è documentato e dove resta un margine di incertezza.
+      en: What is documented, and where a margin of uncertainty remains.
   - titolo:
-      it: Decidiamo il percorso
-      en: We decide the path
+      it: Indicazione
+      en: Indication
     testo:
-      it: "Curare, aspettare o operare. E se operare, come. Con i tempi di recupero già chiari prima di uscire."
-      en: "Treat, wait or operate. And if operate, how. With recovery times clear before you leave."
+      it: Trattamento conservativo o chirurgico. Se si opera, tecnica e tempi di recupero.
+      en: Non-operative or surgical treatment. If surgery, the technique and the recovery time.
 territorio:
   it: >-
     In Valdera partecipo a iniziative di prevenzione e screening ortopedico per il territorio, e tengo lezioni

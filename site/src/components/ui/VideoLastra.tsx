@@ -57,7 +57,7 @@ export function VideoLastra({
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : foto ? (
-        <Image src={foto} alt={alt} fill sizes={sizes} className="object-cover" />
+        <Image src={foto} alt={alt} fill quality={92} sizes={sizes} className="object-cover" />
       ) : null}
     </div>
   );

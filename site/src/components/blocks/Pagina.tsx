@@ -97,15 +97,17 @@ export function Sezione({
   azione,
   tinta,
   misura = "griglia",
+  compatta = false,
 }: Testa & {
   id?: string;
   children?: ReactNode;
   className?: string;
   tinta?: "campo" | "osso";
+  compatta?: boolean;
 }) {
   const grande = misura !== "griglia";
-  const passo = grande ? "py-20 md:py-32" : "py-16 md:py-24";
-  const sotto = children ? (grande ? "mb-14 md:mb-20" : "mb-10 md:mb-14") : "";
+  const passo = compatta ? "py-10 md:py-14" : grande ? "py-20 md:py-32" : "py-16 md:py-24";
+  const sotto = children ? (compatta ? "mb-6 md:mb-8" : grande ? "mb-14 md:mb-20" : "mb-10 md:mb-14") : "";
   return (
     <section id={id} className={tinta === "osso" ? "bg-osso-3 trama" : undefined}>
       <div className={`contenitore ${passo} ${className}`}>

@@ -2,7 +2,7 @@
 
 Per il fotografo. 23 settembre 2026. Le bozze da guardare prima del set sono su `site/public/bozze.html` (in locale: `http://localhost:3000/bozze.html`). La posa giusta del ritratto è la prima, «rifatta»: di tre quarti, senza cuffia, una luce sola, mano in tasca.
 
-Il sito mette la cover in bianco e nero da solo. Si consegna a colori.
+La cover resta a colori. Si consegna a colori.
 
 ## Cosa deve uscire
 
@@ -82,7 +82,7 @@ Fondo grigio chiaro, né bianco né nero. Mezzo busto, in posa, braccia che arri
 - Chiave grande, 30° sopra gli occhi, luce a loop: ombra del naso corta, verso l'angolo della bocca.
 - Riempimento con il riflettore, non con una seconda luce. Rapporto circa 2:1.
 - Fondo uno stop, uno e mezzo sotto il volto.
-- Si consegna a colori. Il bianco e nero lo facciamo noi, per tenerlo uguale alla cover.
+- Si consegna a colori. Il bianco e nero di Chi sono lo facciamo noi in un secondo momento: la cover resta a colori.
 
 ## Consegna
 

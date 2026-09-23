@@ -35,8 +35,9 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
             alt={pick(immagine?.alt, locale) || ""}
             fill
             priority
+            quality={92}
             sizes="100vw"
-            className="parallasse object-cover object-[68%_50%] lg:object-center"
+            className="parallasse object-cover object-[62%_32%]"
           />
         </div>
 

@@ -34,10 +34,10 @@ orari:
   it: ''
   en: ''
 foto:
-  - src: sede-pisa-placeholder.jpg
+  - src: sede-pisa.jpg
     alt:
-      it: Placeholder — da sostituire con la foto della Casa di Cura San Rossore, Pisa
-      en: Placeholder — replace with a photo of Casa di Cura San Rossore, Pisa
+      it: Il Lungarno a Pisa
+      en: The Lungarno in Pisa
 peso: 2
 sitoStruttura: https://www.sanrossorecuramedica.it/
 patologie:

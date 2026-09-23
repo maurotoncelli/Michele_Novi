@@ -217,6 +217,9 @@ p {
   background: var(--color-osso-2);
   aspect-ratio: 5 / 4;
 }
+.hero-media img {
+  filter: grayscale(1);
+}
 @media (min-width: 640px) {
   .hero-media {
     aspect-ratio: 3 / 2;

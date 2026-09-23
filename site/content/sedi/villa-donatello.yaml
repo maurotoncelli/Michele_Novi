@@ -34,10 +34,10 @@ orari:
   it: ''
   en: ''
 foto:
-  - src: sede-sesto-placeholder.jpg
+  - src: sede-sesto.jpg
     alt:
-      it: Placeholder — da sostituire con la foto di Villa Donatello, Sesto Fiorentino
-      en: Placeholder — replace with a photo of Villa Donatello, Sesto Fiorentino
+      it: Piazza Vittorio Veneto a Sesto Fiorentino
+      en: Piazza Vittorio Veneto in Sesto Fiorentino
 peso: 4
 sitoStruttura: https://www.villadonatello.com/
 patologie:

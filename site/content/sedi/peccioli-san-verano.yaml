@@ -35,10 +35,10 @@ orari:
   it: ''
   en: ''
 foto:
-  - src: sede-peccioli-placeholder.jpg
+  - src: sede-peccioli.jpg
     alt:
-      it: Placeholder — da sostituire con la foto del Centro Medico San Verano, Peccioli
-      en: Placeholder — replace with a photo of Centro Medico San Verano, Peccioli
+      it: Peccioli, il paese sulla collina
+      en: Peccioli, the town on the hill
 peso: 3
 patologie:
   - spalla

@@ -60,6 +60,11 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
           {opero.length > 0 ? <div className="dove-divisore" aria-hidden="true" /> : null}
           {opero.length > 0 ? colonna(m.dove.opero, opero) : null}
         </div>
+        <p className="mt-10 text-[0.8rem] text-nebbia">
+          <a href="/images/sedi/ATTRIBUZIONI.txt" className="underline decoration-linea underline-offset-4 hover:text-petrolio">
+            {m.dove.fotoCitta}
+          </a>
+        </p>
       </Sezione>
 
       <FasciaContatto locale={l} />

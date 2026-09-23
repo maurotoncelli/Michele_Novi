@@ -166,6 +166,11 @@ export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
           </Reveal>
         ))}
       </ul>
+      <p className="mt-8 text-[0.8rem] text-nebbia">
+        <a href="/images/sedi/ATTRIBUZIONI.txt" className="underline decoration-linea underline-offset-4 hover:text-petrolio">
+          {m.dove.fotoCitta}
+        </a>
+      </p>
     </Sezione>
   );
 }

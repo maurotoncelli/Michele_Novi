@@ -35,10 +35,10 @@ orari:
   it: ''
   en: ''
 foto:
-  - src: sede-fucecchio-placeholder.jpg
+  - src: sede-fucecchio.jpg
     alt:
-      it: Placeholder — da sostituire con la foto dell'Ospedale San Pietro Igneo, Fucecchio
-      en: Placeholder — replace with a photo of San Pietro Igneo Hospital, Fucecchio
+      it: Piazza Montanelli a Fucecchio
+      en: Piazza Montanelli in Fucecchio
 peso: 1
 sitoStruttura: https://www.uslcentro.toscana.it/
 patologie:

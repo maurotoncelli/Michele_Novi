@@ -16,31 +16,32 @@ import { Parole } from "@/components/ui/Parole";
 import { Striscia } from "@/components/blocks/Striscia";
 import { Sezione } from "./Pagina";
 
-/* ------------------------------------------------------------------ Hero: due colonne, la foto è un ritratto, non uno sfondo */
+/* ------------------------------------------------------------------ Hero: immagine a tema a tutto schermo (desktop), testo sopra in basso a sinistra.
+   Su mobile: immagine sopra, testo sotto. Non è un ritratto: il dottore sta in Chi sono. */
 export function Hero({ home, settings, locale }: { home: Home; settings: Settings; locale: Locale }) {
   const m = getMessages(locale);
   const tel = telHref(settings.telefono);
   const wa = waHref(settings.whatsapp, pick(settings.whatsappTesto, locale));
-  const ritratto = home.ritratto;
-  const foto = srcMedia(ritratto?.src, "home") ?? "/images/home/ritratto-placeholder.jpg";
+  const immagine = home.ritratto;
+  const foto = srcMedia(immagine?.src, "home") ?? "/images/home/hero-sala-placeholder.jpg";
 
   return (
     <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-campo">
       <div className="hero-griglia">
-        {/* Ritratto a vivo: primo su mobile, a destra da desktop */}
+        {/* Immagine a vivo: sopra su mobile, a tutto schermo da desktop. Il soggetto sta a destra, il testo a sinistra. */}
         <div className="hero-media">
           <Image
             src={foto}
-            alt={pick(ritratto?.alt, locale) || m.a11y.ritrattoDi}
+            alt={pick(immagine?.alt, locale) || ""}
             fill
             priority
-            sizes="(min-width: 1024px) 53vw, 100vw"
-            className="parallasse object-cover object-[50%_20%]"
+            sizes="100vw"
+            className="parallasse object-cover object-[68%_50%] lg:object-center"
           />
         </div>
 
         {/* Testo */}
-        <div className="hero-testo margine-sx flex flex-col justify-end pb-12 pt-10 lg:py-16 lg:pr-12">
+        <div className="hero-testo margine-sx flex flex-col justify-end pb-12 pt-10 lg:pb-20 lg:pt-16 lg:pr-12">
           <Reveal immediate className="max-w-2xl">
             {pick(home.eyebrow, locale) && <p className="eyebrow mb-5">{pick(home.eyebrow, locale)}</p>}
             <h1 className="display-xl">{pick(home.titolo, locale)}</h1>

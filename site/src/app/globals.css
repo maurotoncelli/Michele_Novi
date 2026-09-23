@@ -206,7 +206,8 @@ p {
   padding-right: clamp(1rem, 4vw, 2.5rem);
 }
 
-/* Hero: foto prima su mobile, due colonne da 1024px. In CSS puro, non dipende da classi generate. */
+/* Hero: foto sopra e testo sotto su mobile; da 1024px la foto è a tutto schermo e il testo le sta sopra,
+   in basso a sinistra, su un velo di petrolio profondo. In CSS puro, non dipende da classi generate. */
 .hero-griglia {
   display: grid;
 }
@@ -214,7 +215,7 @@ p {
   position: relative;
   overflow: hidden;
   background: var(--color-osso-2);
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 5 / 4;
 }
 @media (min-width: 640px) {
   .hero-media {
@@ -223,17 +224,53 @@ p {
 }
 @media (min-width: 1024px) {
   .hero-griglia {
-    grid-template-columns: minmax(0, 47fr) minmax(0, 53fr);
+    grid-template-columns: minmax(0, 1fr);
     /* Riempie la prima schermata, ma non oltre: su monitor alti non diventa un muro. */
     min-height: min(calc(100svh - var(--header-h)), 54rem);
   }
+  .hero-media,
   .hero-testo {
-    order: 1;
+    grid-area: 1 / 1;
   }
   .hero-media {
-    order: 2;
     aspect-ratio: auto;
     min-height: 100%;
+  }
+  /* Velo per la leggibilità: più denso dove sta il testo, nullo a destra dove sta il soggetto. */
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(15, 58, 90, 0.72) 0%, rgba(15, 58, 90, 0.28) 45%, rgba(15, 58, 90, 0) 75%),
+      linear-gradient(to right, rgba(15, 58, 90, 0.55) 0%, rgba(15, 58, 90, 0) 60%);
+    pointer-events: none;
+  }
+  .hero-testo {
+    position: relative;
+    z-index: 1;
+    color: var(--color-osso);
+  }
+  .hero-testo .eyebrow {
+    color: var(--color-petrolio-chiaro);
+  }
+  .hero-testo .lead {
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .hero-testo .btn-petrolio {
+    background: var(--color-osso);
+    color: var(--color-profondo);
+  }
+  .hero-testo .btn-petrolio:hover {
+    background: var(--color-petrolio-chiaro);
+  }
+  .hero-testo .btn-osso {
+    color: var(--color-osso);
+    border-color: var(--color-linea-chiara);
+  }
+  .hero-testo .btn-osso:hover {
+    border-color: var(--color-petrolio-chiaro);
+    color: var(--color-petrolio-chiaro);
   }
 }
 
@@ -280,7 +317,8 @@ p {
     clip-path: inset(0 0 0 0);
   }
   to {
-    clip-path: inset(9% 7% 9% 7%);
+    /* Rientra meno del padding del testo, così il testo resta sempre sopra la foto mentre sale. */
+    clip-path: inset(6% 5% 6% 5%);
   }
 }
 @keyframes hero-sale {

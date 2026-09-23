@@ -204,7 +204,7 @@ export default config({
         eyebrow: testo("Riga sopra il titolo"),
         titolo: testo("Titolo (H1)", { required: true }),
         sottotitolo: testo("Sottotitolo", { multiline: true }),
-        ritratto: immagine("Ritratto hero", "home"),
+        ritratto: immagine("Immagine hero (a tutto schermo su desktop; a tema, non un ritratto)", "home"),
         lavoro: fields.object(
           {
             foto: immagine("Foto del lavoro (ambulatorio, sala, ecografo)", "home"),

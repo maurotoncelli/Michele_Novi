@@ -274,28 +274,6 @@ p {
   }
 }
 
-/* Parallasse leggera, solo CSS (scroll-driven), dove il browser la supporta. */
-.parallasse {
-  will-change: transform;
-}
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .parallasse {
-      animation: parallasse linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
-    }
-  }
-}
-@keyframes parallasse {
-  from {
-    transform: translate3d(0, 0, 0) scale(1.06);
-  }
-  to {
-    transform: translate3d(0, 9%, 0) scale(1.06);
-  }
-}
-
 /* Hero che si posa: scendendo, il ritratto a vivo rientra nei margini e il testo sale.
    Solo CSS scroll-driven, solo desktop, solo senza reduced-motion. Altrove resta fermo. */
 @supports (animation-timeline: scroll()) {

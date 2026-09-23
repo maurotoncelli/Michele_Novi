@@ -5,7 +5,11 @@ const { rewrites, redirects } = routingRules();
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
-  images: { formats: ["image/avif", "image/webp"] },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    // Senza questo elenco Next ignora quality={92} e ricomprime la hero a 75: diventa morbida.
+    qualities: [75, 92],
+  },
   async rewrites() {
     // Slug tradotti (EN) → cartelle IT in app/[locale]/
     return { beforeFiles: rewrites, afterFiles: [], fallback: [] };

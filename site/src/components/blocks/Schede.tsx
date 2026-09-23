@@ -43,11 +43,13 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
-  const disegno = p.immagine?.src
-    ? { src: p.immagine.src, alt: pick(p.immagine.alt, locale) || pick(p.titolo, locale) }
-    : srcDisegno(catalogo, segno, locale);
-  const media = disegno ? (
-    <Disegno src={disegno.src} alt={disegno.alt} />
+  const foto = srcMedia(p.immagine?.src, "patologie");
+  const disegno = foto ? null : srcDisegno(catalogo, segno, locale);
+  const alt = pick(p.immagine?.alt, locale) || pick(p.titolo, locale);
+  const media = foto ? (
+    <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" className="object-cover" />
+  ) : disegno ? (
+    <Disegno src={disegno.src} alt={disegno.alt || alt} />
   ) : (
     <span className="absolute inset-0 grid place-items-center text-petrolio">
       <Segno nome={segno} size={40} />
@@ -78,9 +80,13 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
     return (
       <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col">
         <Lastra ratio="4/5" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
-          <div className="fluttua absolute inset-0" style={{ "--fluttua-da": velocita[0], "--fluttua-a": velocita[1] } as CSSProperties}>
-            {media}
-          </div>
+          {foto ? (
+            media
+          ) : (
+            <div className="fluttua absolute inset-0" style={{ "--fluttua-da": velocita[0], "--fluttua-a": velocita[1] } as CSSProperties}>
+              {media}
+            </div>
+          )}
         </Lastra>
         <div className="flex flex-1 flex-col pt-6">
           {index !== undefined && <p className="eyebrow">{String(index + 1).padStart(2, "0")}</p>}

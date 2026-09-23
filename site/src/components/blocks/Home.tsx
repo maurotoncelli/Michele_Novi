@@ -35,7 +35,7 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
             alt={pick(immagine?.alt, locale) || ""}
             fill
             priority
-            quality={92}
+            unoptimized
             sizes="100vw"
             className="object-cover object-center"
           />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
@@ -12,6 +13,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { Sommario } from "@/components/blocks/Sommario";
+import { srcMedia } from "@/lib/media";
 import { ModuloSede, SchedaPatologia } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
@@ -38,7 +40,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/cosa-cur
     routeEn: { kind: "cosaCuro", slug: slugPatologia(p, "en") },
     title: pick(p.seo?.title, l) || pick(p.titolo, l),
     description: pick(p.seo?.description, l) || pick(p.lead, l),
-    image: p.seo?.ogImage ?? p.immagine?.src,
+    image: p.seo?.ogImage ?? srcMedia(p.immagine?.src, "patologie") ?? undefined,
     noindex: p.seo?.noindex,
   });
 }
@@ -49,9 +51,9 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
   const p = await getPatologia(slug, l);
   if (!p) notFound();
   const [s, tutte, sedi, paper, catalogo] = await Promise.all([getSettings(), getPatologie(), getSedi(), getPubblicazioni(), getDisegni()]);
-  const disegno = p.immagine?.src
-    ? { src: p.immagine.src, alt: pick(p.immagine.alt, l) || pick(p.titolo, l) }
-    : srcDisegno(catalogo, p.segno, l);
+  const foto = srcMedia(p.immagine?.src, "patologie");
+  const disegno = foto ? null : srcDisegno(catalogo, p.segno, l);
+  const mediaAlt = pick(p.immagine?.alt, l) || pick(p.titolo, l);
   const m = getMessages(l);
 
   const { element, fallbackToIt } = await renderBody(p.corpo, p.corpoEn, l);
@@ -90,9 +92,13 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
               <h1 className="display-l">{pick(p.titolo, l)}</h1>
               <p className="mt-4 max-w-2xl text-[1.1rem] leading-relaxed text-grafite">{pick(p.lead, l)}</p>
             </div>
-            {disegno && (
+            {(foto || disegno) && (
               <div className="relative aspect-[5/4] overflow-hidden bg-osso-2">
-                <Disegno src={disegno.src} alt={disegno.alt} />
+                {foto ? (
+                  <Image src={foto} alt={mediaAlt} fill sizes="(min-width: 768px) 36vw, 100vw" className="object-cover object-[50%_22%]" />
+                ) : (
+                  disegno && <Disegno src={disegno.src} alt={disegno.alt} />
+                )}
               </div>
             )}
           </div>

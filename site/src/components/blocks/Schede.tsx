@@ -112,26 +112,30 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
   );
 }
 
-/** Il metodo (Come si opera): non una patologia, uno spazio a sé. Disegno largo a sinistra, testo a destra. */
+/** Il metodo (Come si opera): non una patologia, uno spazio a sé. Foto a sinistra (se c'è), altrimenti disegno. */
 export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "artroscopia";
   const catalogo = await getDisegni();
-  const disegno = p.immagine?.src
-    ? { src: p.immagine.src, alt: pick(p.immagine.alt, locale) || pick(p.titolo, locale) }
-    : srcDisegno(catalogo, segno, locale);
+  const foto = srcMedia(p.immagine?.src, "patologie");
+  const disegno = foto ? null : srcDisegno(catalogo, segno, locale);
+  const alt = pick(p.immagine?.alt, locale) || pick(p.titolo, locale);
   return (
     <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-24">
       <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
-        <div className="fluttua absolute inset-0" style={{ "--fluttua-da": "6%", "--fluttua-a": "-6%" } as CSSProperties}>
-          {disegno ? (
-            <Disegno src={disegno.src} alt={disegno.alt} />
-          ) : (
-            <span className="absolute inset-0 grid place-items-center text-petrolio">
-              <Segno nome={segno} size={56} />
-            </span>
-          )}
-        </div>
+        {foto ? (
+          <Image src={foto} alt={alt} fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-[50%_22%]" />
+        ) : (
+          <div className="fluttua absolute inset-0" style={{ "--fluttua-da": "6%", "--fluttua-a": "-6%" } as CSSProperties}>
+            {disegno ? (
+              <Disegno src={disegno.src} alt={disegno.alt} />
+            ) : (
+              <span className="absolute inset-0 grid place-items-center text-petrolio">
+                <Segno nome={segno} size={56} />
+              </span>
+            )}
+          </div>
+        )}
       </Lastra>
       <div className="min-w-0">
         <p className="eyebrow">{m.cosaCuro.metodoEyebrow}</p>

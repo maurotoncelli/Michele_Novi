@@ -3,6 +3,15 @@
 > Prima lettura per una chat nuova. Workspace: `Michele_Novi_Website`.  
 > Aggiornato: **21 settembre 2026, notte**. Upgrade visivo «miaobau» su `main`; «quaderno» sparito dal codice; pagina patologia con **sommario che segue**; **«Lettura» dei paper fatta** (5 integrali + 2 abstract, serif Source Serif 4); recensioni e approfondimenti in home su **striscia guidata dallo scroll** (desktop) / colonna (telefono), niente più frecce; recensioni **ridimensionate**, parole che si compongono.
 
+## Prossima volta — segnato il 23/09, non affrontato
+
+Mauro: solo da segnare, non da fare in quella sessione.
+
+1. **Pubblicazioni e Approfondimenti.** Entrando in entrambe le pagine si vede tutto insieme. Chiarire come è organizzata la distinzione, e se passa da Keystatic.
+2. **Copy.** Rilettura dei testi vari.
+3. **Galleria negli approfondimenti.** Possibilità di inserire una galleria di foto dentro un approfondimento.
+4. **Controllo tecnico.** SEO e HTML, SEO per gli AI, cookie, analytics.
+
 ## In una frase
 
 Sito vetrina **veloce, SEO, italiano + inglese, data-driven** per il Dott. Michele Novi: chirurgo di **spalla e arto superiore**, riferimento in Toscana. Deve far capire **cosa fa, dove, come contattarlo**. Niente WordPress, niente prenotazione in v1. Il codice in `site/` **c’è**: v1 strutturale (16/09) + passata visiva (17/09) + upgrade editoriale in movimento (21/09, ramo `versione-miaobau`). Manca il contenuto che dipende da Michele (telefono, dominio, shooting, 7 PDF a pagamento, validazione dei testi in prima persona). Il prototipo HTML in `_archivio/demo-sito-2026-09/` **non si usa**.

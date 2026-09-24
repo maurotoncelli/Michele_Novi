@@ -222,6 +222,9 @@ p {
     aspect-ratio: 3 / 2;
   }
 }
+.hero-scorri {
+  display: none;
+}
 @media (min-width: 1024px) {
   .hero-griglia {
     grid-template-columns: minmax(0, 1fr);
@@ -271,6 +274,46 @@ p {
   .hero-testo .btn-osso:hover {
     border-color: var(--color-petrolio-chiaro);
     color: var(--color-petrolio-chiaro);
+  }
+  /* Freccia in basso al centro: porta alla riga dei fatti. Solo desktop. */
+  .hero-scorri {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 1.35rem;
+    display: flex;
+    transform: translateX(-50%);
+    color: var(--color-osso);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .hero-scorri-leva {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .hero-scorri:hover {
+    color: var(--color-petrolio-chiaro);
+  }
+}
+.hero-arrivo {
+  scroll-margin-top: var(--header-h);
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .hero-scorri-leva {
+    animation: hero-scorri 2.6s ease-in-out infinite;
+  }
+}
+@keyframes hero-scorri {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.4rem);
   }
 }
 
@@ -1070,8 +1113,8 @@ a.osso:hover,
     display: grid;
     grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
     grid-template-rows: auto repeat(var(--righe, 3), auto);
-    column-gap: 3.5rem;
-    row-gap: 2rem;
+    column-gap: 3rem;
+    row-gap: 0.5rem;
   }
   .dove-colonna {
     display: grid;

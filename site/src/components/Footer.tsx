@@ -3,6 +3,7 @@ import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getSedi, getSettings, telHref } from "@/lib/content";
 import { Segno } from "./ui/Segno";
+import { Telefono } from "./ui/Telefono";
 
 export async function Footer({ locale }: { locale: Locale }) {
   const [s, sedi] = await Promise.all([getSettings(), getSedi()]);
@@ -26,7 +27,7 @@ export async function Footer({ locale }: { locale: Locale }) {
               <li>
                 <a href={tel} className="inline-flex items-center gap-2 hover:text-[var(--color-petrolio-chiaro)]">
                   <Segno nome="telefono" size={18} className="text-osso/45" />
-                  {s.telefono}
+                  <Telefono numero={s.telefono ?? ""} />
                 </a>
               </li>
             )}

@@ -38,8 +38,16 @@ function ChipSede({ s, locale }: { s: Sede; locale: Locale }) {
   );
 }
 
-/** Card patologia. Default: 5/4 compatta (correlate). `riga` = disegno piccolo a sinistra, lead intero. `colonna` = colonna alta con disegno che fluttua. `ampia` = foto a sinistra, testo a destra. */
-export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false, ampia = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean; ampia?: boolean }) {
+/** Riga di credito sotto le card: numero di pubblicazioni e città in cui si tratta. */
+function credito(p: Patologia, dove: string[], locale: Locale) {
+  const m = getMessages(locale);
+  const n = p.pubblicazioni?.length ?? 0;
+  const paper = n === 1 ? m.cosaCuro.pubblicazioniUna : n > 1 ? m.cosaCuro.pubblicazioniN.replace("{n}", String(n)) : "";
+  return [paper, ...dove].filter(Boolean).join(" · ");
+}
+
+/** Card patologia. Default: 5/4 compatta (correlate). `riga` = disegno piccolo a sinistra, lead intero. `colonna` = colonna alta con disegno che fluttua. `ampia` = foto a sinistra, testo a destra. `apertura` = in home, la spalla occupa metà fascia con il titolo accanto. */
+export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false, ampia = false, apertura = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean; ampia?: boolean; apertura?: boolean }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
@@ -47,7 +55,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
   const disegno = foto ? null : srcDisegno(catalogo, segno, locale);
   const alt = pick(p.immagine?.alt, locale) || pick(p.titolo, locale);
   const media = foto ? (
-    <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" className="object-cover" />
+    <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" className={foto.includes("gomito-bn") ? "object-cover object-[center_78%]" : "object-cover"} />
   ) : disegno ? (
     <Disegno src={disegno.src} alt={disegno.alt || alt} />
   ) : (
@@ -65,8 +73,33 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
         <div className="flex min-w-0 flex-col">
           <h3 className="text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
-          {dove.length > 0 && <p className="mt-auto pt-3 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
+          {credito(p, dove, locale) && <p className="mt-auto pt-3 text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p>}
           <span className="sr-only">{m.cta.scopri}</span>
+        </div>
+      </Link>
+    );
+  }
+
+  if (apertura) {
+    const tutte = await getSedi();
+    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
+    return (
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-8 md:grid-cols-2 md:gap-x-12 lg:gap-x-20">
+        <Lastra ratio="4/5" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
+          {foto ? (
+            <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 768px) 38rem, 100vw" className="object-cover object-center" />
+          ) : (
+            media
+          )}
+        </Lastra>
+        <div className="min-w-0">
+          <h2 className="display-l transition-colors duration-500 group-hover:text-petrolio">{m.home.cosaCuroTitolo}</h2>
+          <p className="lead mt-6 max-w-xl">{pick(p.lead, locale)}</p>
+          {dove.length > 0 && <p className="mt-5 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
+          <span className="btn btn-ghost -ml-3 mt-6">
+            {m.cta.scopri}
+            <Segno nome="freccia" size={18} />
+          </span>
         </div>
       </Link>
     );
@@ -83,7 +116,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
         <div className="min-w-0">
           <h3 className="sr-only">{pick(p.titolo, locale)}</h3>
           <p className="lead max-w-xl">{pick(p.lead, locale)}</p>
-          {dove.length > 0 && <p className="mt-5 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
+          {credito(p, dove, locale) && <p className="mt-5 text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p>}
           <span className="btn btn-ghost -ml-3 mt-6">
             {m.cta.scopri}
             <Segno nome="freccia" size={18} />
@@ -135,6 +168,28 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
         <p className="mt-2 line-clamp-3 min-h-[4.5em] text-[0.92rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
         <span className="sr-only">{m.cta.scopri}</span>
       </div>
+    </Link>
+  );
+}
+
+/** Patologia secondaria (riga «Inoltre»): miniatura, titolo e lead, più piccola delle card. */
+export function SchedaSecondaria({ p, locale }: { p: Patologia; locale: Locale }) {
+  const foto = srcMedia(p.immagine?.src, "patologie");
+  return (
+    <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid max-w-xl grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-4 py-2 sm:grid-cols-[7rem_minmax(0,1fr)]">
+      <Lastra className="w-full">
+        {foto ? (
+          <Image src={foto} alt={pick(p.immagine?.alt, locale) || pick(p.titolo, locale)} fill sizes="7rem" className="object-cover" />
+        ) : (
+          <span className="absolute inset-0 grid place-items-center text-petrolio">
+            <Segno nome={isSegno(p.segno) ? p.segno : "anca"} size={24} />
+          </span>
+        )}
+      </Lastra>
+      <span className="min-w-0">
+        <span className="block text-[1rem] group-hover:text-petrolio">{pick(p.titolo, locale)}</span>
+        <span className="mt-0.5 block text-[0.88rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</span>
+      </span>
     </Link>
   );
 }
@@ -233,7 +288,7 @@ export async function SchedaSede({ s, locale }: { s: Sede; locale: Locale }) {
   const disegno = srcDisegno(catalogo, segno, locale);
   const regime = pick(s.regime, locale);
   return (
-    <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group grid h-full grid-cols-[minmax(0,7.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] lg:gap-7">
+    <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group grid h-full grid-cols-[minmax(0,6.5rem)_minmax(0,1fr)] items-center gap-4 sm:grid-cols-[minmax(0,7.5rem)_minmax(0,1fr)]">
       <Lastra className="self-start">
         {fotoSrc ? (
           <Image src={fotoSrc} alt={pick(foto?.alt, locale) || s.nome} fill sizes="10rem" className="object-cover" />
@@ -245,18 +300,18 @@ export async function SchedaSede({ s, locale }: { s: Sede; locale: Locale }) {
           </span>
         )}
       </Lastra>
-      <div className="flex min-w-0 flex-col">
+      <div className="flex min-w-0 flex-col gap-0.5">
         <p className="eyebrow">
           {s.citta}
           {s.provincia ? ` (${s.provincia})` : ""}
         </p>
-        <h3 className="mt-1 text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{s.nome}</h3>
-        <p className="mt-1.5 text-sm text-grafite">
+        <h3 className="text-[1.05rem] leading-tight group-hover:text-petrolio md:text-[1.15rem]">{s.nome}</h3>
+        <p className="text-sm leading-snug text-grafite">
           {s.indirizzo}
           {s.cap ? `, ${s.cap}` : ""}
         </p>
-        {regime && <p className="mt-1 text-sm text-grafite">{regime}</p>}
-        <p className="mt-auto pt-3 text-[0.78rem] text-nebbia">
+        {regime && <p className="text-sm leading-snug text-grafite">{regime}</p>}
+        <p className="text-[0.78rem] leading-snug text-nebbia">
           {[s.visite && m.dove.visite, s.chirurgia && m.dove.chirurgia, s.infiltrazioni && m.dove.infiltrazioni, s.ecografo && m.dove.ecografo]
             .filter(Boolean)
             .join(" · ")}

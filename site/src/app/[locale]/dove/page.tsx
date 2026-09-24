@@ -50,11 +50,11 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
         eyebrow={m.nav.dove}
         titolo={m.dove.titolo}
         lead={m.dove.lead}
-        compatta
+        stretta
         percorso={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.nav.dove }]}
       />
 
-      <Sezione>
+      <Sezione stretta>
         <div className="dove-griglia" style={{ "--righe": righe } as CSSProperties}>
           {colonna(m.dove.visito, visito)}
           {opero.length > 0 ? <div className="dove-divisore" aria-hidden="true" /> : null}

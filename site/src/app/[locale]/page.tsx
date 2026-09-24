@@ -3,6 +3,7 @@ import { isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getHome, getPatologie, getProfilo, getPubblicazioni, getApprofondimenti, getRecensioni, getSedi, getSettings } from "@/lib/content";
 import { buildMetadata, physicianJsonLd } from "@/lib/seo";
+import { getSintomi } from "@/lib/sintomi";
 import { JsonLd } from "@/components/JsonLd";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 import { FasciaFatti, FasciaPatologie, FasciaPercorso, FasciaApprofondimenti, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
@@ -36,6 +37,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   ]);
 
   const fasce = (home.fasce ?? []).filter((f) => f.attiva).map((f) => f.tipo);
+  const sintomi = fasce.includes("patologie") ? await getSintomi(patologie, l) : [];
 
   return (
     <>
@@ -45,7 +47,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {fasce.map((tipo) => {
         switch (tipo) {
           case "patologie":
-            return <FasciaPatologie key={tipo} patologie={patologie} locale={l} />;
+            return <FasciaPatologie key={tipo} patologie={patologie} sintomi={sintomi} locale={l} />;
           case "sedi":
             return <FasciaSedi key={tipo} sedi={sedi} locale={l} />;
           case "fiducia":

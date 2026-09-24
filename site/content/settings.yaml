@@ -2,8 +2,9 @@ nome: Dott. Michele Novi
 ruolo:
   it: Ortopedico — spalla e arto superiore
   en: Orthopaedic surgeon — shoulder and upper limb
-# Telefono, WhatsApp, email e orari restano vuoti finché non sono confermati (bibbia/APERTI.md).
-telefono: ''
+# Il numero detto a voce (348 4332733) e quello online (348 4331733) non coincidevano.
+# Confermato: vale quello pubblicato online (Instagram, Doctolib, LinkedIn).
+telefono: '348 4331733'
 whatsapp: ''
 whatsappTesto:
   it: Vorrei informazioni per una visita.

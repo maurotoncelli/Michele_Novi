@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { getMessages } from "@/i18n";
+import { isLocale } from "@/i18n/routing";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
 
@@ -10,6 +12,7 @@ export function Intestazione({
   lead,
   children,
   compatta = false,
+  stretta = false,
   percorso,
 }: {
   eyebrow?: string;
@@ -17,16 +20,28 @@ export function Intestazione({
   lead?: string;
   children?: ReactNode;
   compatta?: boolean;
+  /** Ancora più bassa di `compatta`: la pagina Dove deve mostrare le sedi senza scroll. */
+  stretta?: boolean;
   percorso?: { label: string; href?: string }[];
 }) {
+  const sotto = stretta ? "pb-4" : compatta ? "pb-10 md:pb-14" : "pb-12 md:pb-20";
+  const sopra = percorso?.length
+    ? stretta
+      ? "pt-4 md:pt-5"
+      : "pt-6 md:pt-10"
+    : stretta
+      ? "pt-8 md:pt-10"
+      : compatta
+        ? "pt-10 md:pt-14"
+        : "pt-12 md:pt-20";
   return (
     <header className="bg-osso-3">
       {percorso && percorso.length > 0 ? <Briciole items={percorso} dentro /> : null}
-      <div className={`contenitore ${compatta ? "pb-10 md:pb-14" : "pb-12 md:pb-20"} ${percorso?.length ? "pt-6 md:pt-10" : compatta ? "pt-10 md:pt-14" : "pt-12 md:pt-20"}`}>
+      <div className={`contenitore ${sotto} ${sopra}`}>
         <Reveal immediate className="max-w-4xl">
-          {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
+          {eyebrow && <p className={`eyebrow ${stretta ? "mb-2" : "mb-4"}`}>{eyebrow}</p>}
           <h1 className="display-l">{titolo}</h1>
-          {lead && <p className="lead mt-6 max-w-2xl">{lead}</p>}
+          {lead && <p className={`lead ${stretta ? "mt-3 max-w-4xl" : "mt-6 max-w-2xl"}`}>{lead}</p>}
           {children}
         </Reveal>
       </div>
@@ -98,15 +113,18 @@ export function Sezione({
   tinta,
   misura = "griglia",
   compatta = false,
+  stretta = false,
 }: Testa & {
   id?: string;
   children?: ReactNode;
   className?: string;
   tinta?: "campo" | "osso";
   compatta?: boolean;
+  /** Padding minimo: usata dove le schede devono stare in una schermata. */
+  stretta?: boolean;
 }) {
   const grande = misura !== "griglia";
-  const passo = compatta ? "py-10 md:py-14" : grande ? "py-20 md:py-32" : "py-16 md:py-24";
+  const passo = stretta ? "py-4" : compatta ? "py-10 md:py-14" : grande ? "py-20 md:py-32" : "py-16 md:py-24";
   const sotto = children ? (compatta ? "mb-6 md:mb-8" : grande ? "mb-14 md:mb-20" : "mb-10 md:mb-14") : "";
   return (
     <section id={id} className={tinta === "osso" ? "bg-osso-3 trama" : undefined}>
@@ -119,8 +137,11 @@ export function Sezione({
 }
 
 export function Briciole({ items, dentro = false }: { items: { label: string; href?: string }[]; dentro?: boolean }) {
+  // Il primo elemento è sempre la home: /it o /en.
+  const lingua = items[0]?.href?.split("/")[1] ?? "";
+  const m = getMessages(isLocale(lingua) ? lingua : "it");
   return (
-    <nav aria-label="Percorso" className={`contenitore text-sm text-grafite ${dentro ? "pt-5" : "pt-6"}`}>
+    <nav aria-label={m.a11y.briciole} className={`contenitore text-sm text-grafite ${dentro ? "pt-5" : "pt-6"}`}>
       <ol className="flex flex-wrap items-center gap-1.5">
         {items.map((it, i) => (
           <li key={i} className="flex items-center gap-1.5">
@@ -150,11 +171,11 @@ export function Disclaimer({ testo }: { testo: string }) {
 
 /** Nota sulla lingua quando il corpo EN non esiste ancora. */
 export function AvvisoLingua({ show, locale }: { show: boolean; locale: string }) {
-  if (!show || locale === "it") return null;
+  if (!show || locale === "it" || !isLocale(locale)) return null;
   return (
     <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-pesca px-3 py-1.5 text-sm text-[#8d4a30]">
       <Segno nome="globo" size={16} />
-      This page is not yet translated. The Italian text follows.
+      {getMessages(locale).a11y.nonTradotta}
     </p>
   );
 }

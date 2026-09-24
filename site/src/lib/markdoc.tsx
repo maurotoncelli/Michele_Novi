@@ -29,7 +29,7 @@ const config: Config = {
   },
 };
 
-function slugify(s: string) {
+export function slugify(s: string) {
   return s
     .toLowerCase()
     .normalize("NFD")
@@ -97,6 +97,27 @@ export function headingsMarkdown(testo: string): { id: string; text: string }[] 
       const text = [...child.walk()].filter((n) => n.type === "text").map((n) => String(n.attributes.content)).join("");
       out.push({ id: slugify(text), text });
     }
+  }
+  return out;
+}
+
+const testoDi = (n: Node) => [...n.walk()].filter((c) => c.type === "text").map((c) => String(c.attributes.content)).join("");
+
+/**
+ * I temi clinici di una scheda: i titoli iniziali seguiti da una frase in evidenza (blockquote).
+ * La serie si ferma al primo titolo senza frase (es. "Curare o operare", "In visita").
+ */
+export async function temi(corpo: Body): Promise<{ id: string; text: string; frase: string }[]> {
+  const { node } = await load(corpo);
+  const out: { id: string; text: string; frase: string }[] = [];
+  const figli = node.children;
+  for (let i = 0; i < figli.length; i++) {
+    const h = figli[i];
+    if (h.type !== "heading" || h.attributes.level > 2) continue;
+    const q = figli[i + 1];
+    if (q?.type !== "blockquote") break;
+    const text = testoDi(h);
+    out.push({ id: slugify(text), text, frase: testoDi(q) });
   }
   return out;
 }

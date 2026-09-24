@@ -94,7 +94,7 @@ export default config({
   ui: {
     brand: { name: "Michele Novi — Sito" },
     navigation: {
-      Sito: ["settings", "home", "profilo", "disegni"],
+      Sito: ["settings", "home", "profilo", "cosaCuro", "disegni"],
       Contenuti: ["patologie", "sedi", "approfondimenti", "pubblicazioni", "faq", "recensioni"],
     },
   },
@@ -182,6 +182,7 @@ export default config({
           label: "Società scientifiche",
           itemLabel: (p) => p.value,
         }),
+        visita: immagine("Foto della visita (accanto ai passi, non la lastra del percorso)", "profilo"),
         comeValuto: testo("Come valuto (paragrafo)", { multiline: true }),
         comeValutoPassi: fields.array(
           fields.object({
@@ -241,6 +242,32 @@ export default config({
       },
     }),
 
+    cosaCuro: singleton({
+      label: "Cosa curo — pagina",
+      path: "content/cosa-curo",
+      format: { data: "yaml" },
+      schema: {
+        sintomi: fields.array(
+          fields.object({
+            testo: testo("Frase, come la direbbe un paziente", { required: true }),
+            patologia: fields.relationship({ label: "Scheda", collection: "patologie" }),
+            tema: fields.text({
+              label: "Capitolo della scheda",
+              description: "Il titolo italiano del capitolo, es. «Cuffia dei rotatori». Vuoto o non trovato = inizio della scheda. In inglese si apre il capitolo corrispondente.",
+            }),
+          }),
+          { label: "Parti da quello che senti (6–8 frasi)", itemLabel: (p) => p.fields.testo.fields.it.value || "frase" },
+        ),
+        percorso: fields.array(
+          fields.object({
+            titolo: testo("Titolo"),
+            testo: testo("Una riga", { multiline: true }),
+          }),
+          { label: "Come funziona: i passi (quattro)", itemLabel: (p) => p.fields.titolo.fields.it.value || "passo" },
+        ),
+      },
+    }),
+
     disegni: singleton({
       label: "Disegni",
       path: "content/disegni",
@@ -277,7 +304,7 @@ export default config({
         segno: fields.select({ label: "Segno", options: SEGNI, defaultValue: "spalla" }),
         peso: fields.integer({ label: "Ordine (1 = primo)", defaultValue: 10 }),
         principale: fields.checkbox({ label: "Card grande in home", defaultValue: false }),
-        secondaria: fields.checkbox({ label: "Secondaria (riga, non card)", defaultValue: false }),
+        secondaria: fields.checkbox({ label: "Secondaria (riga «Inoltre» con miniatura, non card)", defaultValue: false }),
         lead: testo("Lead", { multiline: true }),
         corpo: fields.markdoc({ label: "Corpo (IT)" }),
         corpoEn: fields.markdoc({ label: "Corpo (EN)" }),
@@ -458,10 +485,11 @@ export default config({
       format: { data: "yaml" },
       schema: {
         slug: fields.slug({ name: { label: "Slug" } }),
-        nome: fields.text({ label: "Nome e cognome", validation: { isRequired: true } }),
+        nome: fields.text({ label: "Nome e cognome", description: "Vuoto se chi scrive resta anonimo: compare solo la firma." }),
+        firma: testo("Firma", { description: "Facoltativa, accanto o al posto del nome. Es. «Paziente operato alla spalla»." }),
         testo: testo("Testo", { multiline: true }),
-        piattaforma: fields.text({ label: "Piattaforma (Google, Doctolib, …)" }),
-        stelle: fields.integer({ label: "Stelle (1–5)", defaultValue: 5, validation: { min: 1, max: 5 } }),
+        piattaforma: fields.text({ label: "Piattaforma (Google, Doctolib, WhatsApp, …)" }),
+        stelle: fields.integer({ label: "Stelle (1–5)", description: "Vuoto = nessuna stella (es. un messaggio privato, che non ha un voto).", defaultValue: 5, validation: { min: 1, max: 5 } }),
         data: fields.date({ label: "Data" }),
         sede: fields.relationship({ label: "Sede", collection: "sedi" }),
         peso: fields.integer({ label: "Ordine in home (più basso = prima)", defaultValue: 10 }),

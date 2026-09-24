@@ -4,6 +4,7 @@ import { getMessages, pick } from "@/i18n";
 import { getSedi, getSettings, telHref, waHref } from "@/lib/content";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
+import { Telefono } from "../ui/Telefono";
 
 /**
  * Chiusura: l'unica fascia scura del sito. Telefono in display quando c'è, tre azioni, le città.
@@ -34,7 +35,7 @@ export async function FasciaContatto({ locale, titolo, lead }: { locale: Locale;
             {tel && (
               <Reveal delay={200} className="mt-10">
                 <a href={tel} className="display-m inline-block text-osso transition-colors hover:text-[var(--color-petrolio-chiaro)]">
-                  {s.telefono}
+                  <Telefono numero={s.telefono ?? ""} />
                 </a>
               </Reveal>
             )}

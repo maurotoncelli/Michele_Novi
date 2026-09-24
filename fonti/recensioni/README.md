@@ -13,6 +13,6 @@ Screenshot da Mauro. Testi sul sito in `site/content/recensioni/` (Keystatic, fl
 | `rossella-doctolib.jpg` | Rossella | Doctolib | sì |
 | `nancy-colon-doctolib.jpg` | Nancy Colon | Doctolib | sì |
 | `ar-doctolib.jpg` | A.R. | Doctolib | sì, in fondo |
-| `whatsapp-spalla-nuoto.jpg` | (privato) | WhatsApp | **no** — messaggio privato, non è una recensione pubblica |
+| `whatsapp-spalla-nuoto.jpg` | (anonimo) | WhatsApp | sì dal 24/09, senza nome e senza stelle, firma «Paziente operato alla spalla» — **serve il consenso scritto del paziente prima del go-live** |
 
-WhatsApp: un anno dopo intervento di spalla, tornato alle attività, nuoto utile al recupero. Si può usare come tema per una nota «dal lavoro» solo con consenso.
+WhatsApp: un anno dopo intervento di spalla, tornato alle attività, nuoto utile al recupero. Messaggio privato: sul sito senza saluto e senza P.S. Se il consenso non arriva, in Keystatic togliere «Mostra sul sito».

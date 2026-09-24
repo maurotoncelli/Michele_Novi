@@ -1,0 +1,66 @@
+sintomi:
+  - testo:
+      it: Dolore di notte, fatica ad alzare il braccio
+      en: Night pain, difficulty lifting the arm
+    patologia: spalla
+    tema: Cuffia dei rotatori
+  - testo:
+      it: La spalla è uscita, anche solo una volta
+      en: My shoulder has come out, even just once
+    patologia: spalla
+    tema: Instabilità e lussazione
+  - testo:
+      it: Dolore e movimento sempre più ridotto
+      en: Pain and ever less movement
+    patologia: spalla
+    tema: Artrosi e protesi
+  - testo:
+      it: Una caduta sulla spalla
+      en: A fall onto the shoulder
+    patologia: spalla
+    tema: Fratture
+  - testo:
+      it: Dolore al gomito sotto sforzo
+      en: Elbow pain under load
+    patologia: arto-superiore
+    tema: Epicondilite
+  - testo:
+      it: Una caduta sulla mano
+      en: A fall onto the hand
+    patologia: arto-superiore
+    tema: Polso e scafoide
+  - testo:
+      it: Formicolio alle dita, un dito che scatta
+      en: Tingling fingers, a finger that catches
+    patologia: arto-superiore
+    tema: Tendini e nervi
+  - testo:
+      it: Dolore da sovraccarico nello sport
+      en: Overuse pain from sport
+    patologia: traumatologia-sportiva
+    tema: Lesioni da overuse
+percorso:
+  - titolo:
+      it: La prima visita
+      en: The first visit
+    testo:
+      it: Mi racconti cosa succede, ti visito e guardiamo insieme le immagini che hai.
+      en: You tell me what is happening, I examine you and we look at the images you have together.
+  - titolo:
+      it: La diagnosi
+      en: The diagnosis
+    testo:
+      it: Se serve un esame in più, ti dico quale e perché. Ti spiego cosa vedo, con parole semplici.
+      en: If another test is needed, I tell you which and why. I explain what I see, in plain words.
+  - titolo:
+      it: La scelta
+      en: The choice
+    testo:
+      it: Curare, aspettare o operare. Ti propongo un percorso; la decisione resta tua.
+      en: Treat, wait or operate. I propose a path; the decision stays with you.
+  - titolo:
+      it: Il recupero
+      en: Recovery
+    testo:
+      it: "Esci con un piano scritto: fisioterapia, tempi, controlli."
+      en: "You leave with a written plan: physiotherapy, timings, check-ups."

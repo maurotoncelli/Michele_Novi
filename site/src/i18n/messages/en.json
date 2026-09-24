@@ -52,7 +52,8 @@
     "fattiSedi": "locations in Tuscany",
     "fattiOspedale": "Joint Replacement Unit, Fucecchio",
     "fattiHarvard": "Harvard / MGH, Boston",
-    "fattiPaper": "peer-reviewed publications"
+    "fattiPaper": "peer-reviewed publications",
+    "scorri": "Scroll"
   },
   "chiSono": {
     "titolo": "About",
@@ -77,10 +78,19 @@
   },
   "cosaCuro": {
     "titolo": "What I treat",
+    "eyebrow": "Orthopaedics and trauma",
     "inQuestaPagina": "On this page",
+    "sintomiEyebrow": "Where to start",
+    "sintomiTitolo": "Start from what you feel.",
+    "sintomiLead": "The name of the problem comes later. Pick the sentence closest to your situation.",
+    "temiEyebrow": "In detail",
+    "prenotaSpalla": "Book a shoulder consultation",
+    "pubblicazioniUna": "1 publication",
+    "pubblicazioniN": "{n} publications",
+    "percorsoEyebrow": "How it works",
     "metodoEyebrow": "The method",
     "metodoLead": "The indication comes before the technique. Arthroscopy, open surgery or replacement is chosen on the clinical picture.",
-    "lead": "Shoulder and upper-limb specialist. Sports trauma. In hospital, hip and knee as well. Ultrasound is a tool of the visit, not a separate service.",
+    "lead": "Shoulder and upper-limb specialist. Sports trauma. In hospital, hip and knee as well.",
     "chiusura": "The first visit decides the path: treat, wait or operate.",
     "secondarie": "Also",
     "faq": "Frequently asked questions",
@@ -149,7 +159,7 @@
   "contatti": {
     "titolo": "Contact",
     "lead": "One number for every location. The office books the visit and tells you what to bring.",
-    "telefono": "Phone",
+    "telefono": "Single booking line",
     "email": "Email",
     "orari": "Office hours",
     "orariMancanti": "Office hours will be published shortly.",
@@ -210,6 +220,8 @@
     "cambiaLingua": "Change language",
     "apriMenu": "Open menu",
     "chiudiMenu": "Close menu",
+    "briciole": "Breadcrumb",
+    "nonTradotta": "This page is not yet translated. The Italian text follows.",
     "ritrattoDi": "Portrait of Dr Michele Novi"
   },
   "date": { "locale": "en-GB" }

@@ -165,6 +165,11 @@ societa:
   - SICM
   - SECEC
   - EFORT
+visita:
+  src: visita.jpg
+  alt:
+    it: Bozza — visita alla spalla. Da sostituire con la foto dello shooting.
+    en: Draft — a shoulder consultation. Replace with the shoot.
 comeValuto:
   it: >-
     La prima visita può modificare l'indicazione. Chi arriva con una diagnosi di protesi a volte si tratta

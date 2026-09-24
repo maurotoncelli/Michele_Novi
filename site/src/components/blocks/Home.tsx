@@ -3,18 +3,20 @@ import Image from "next/image";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import type { Home, Nota, Patologia, Profilo, Pubblicazione, Recensione, Sede, Settings } from "@/lib/content";
-import { slugPatologia, telHref, waHref } from "@/lib/content";
+import { telHref, waHref } from "@/lib/content";
 import { srcMedia } from "@/lib/media";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
 import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
-import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
+import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia, SchedaSecondaria } from "./Schede";
 import { Stelle } from "@/components/ui/Stelle";
 import { Parole } from "@/components/ui/Parole";
 import { Striscia } from "@/components/blocks/Striscia";
 import { Sezione } from "./Pagina";
+import { ElencoSintomi } from "./Sintomi";
+import { sintomiVari, type Sintomo } from "@/lib/sintomi";
 
 /* ------------------------------------------------------------------ Hero: immagine a tema a tutto schermo (desktop), testo sopra in basso a sinistra.
    Su mobile: immagine sopra, testo sotto. Non è un ritratto: il dottore sta in Chi sono. */
@@ -74,6 +76,12 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
           </Reveal>
         </div>
       </div>
+      <a href="#fatti" className="hero-scorri">
+        <span className="hero-scorri-leva">
+          {m.home.scorri}
+          <Segno nome="freccia" size={18} className="rotate-90" />
+        </span>
+      </a>
     </section>
   );
 }
@@ -96,7 +104,7 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
   if (fatti.length < 2) return null;
 
   return (
-    <section className="border-y border-linea" aria-label={m.home.fiduciaEyebrow}>
+    <section id="fatti" className="hero-arrivo border-y border-linea" aria-label={m.home.fiduciaEyebrow}>
       <ul className="contenitore grid grid-cols-2 gap-x-8 gap-y-12 py-12 md:py-16 lg:grid-cols-4">
         {fatti.map((f, i) => (
           <Reveal key={f.label} as="li" delay={i * 90} className="min-w-0">
@@ -113,7 +121,7 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
 }
 
 /* ------------------------------------------------------------------ 01 Cosa curo: la spalla da sola, poi gomito, mano e sport */
-export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[]; locale: Locale }) {
+export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie: Patologia[]; sintomi?: Sintomo[]; locale: Locale }) {
   const m = getMessages(locale);
   const metodo = patologie.find((p) => p.area === "metodo");
   const spalla = patologie.find((p) => p.area === "spalla");
@@ -122,11 +130,28 @@ export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[];
   if (!spalla && !resto.length) return null;
   return (
     <>
-      <Sezione indice="01" eyebrow={m.nav.cosaCuro} titolo={m.home.cosaCuroTitolo} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso" compatta>
+      <Sezione indice="01" eyebrow={m.nav.cosaCuro} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso" compatta>
         {spalla && (
           <Reveal>
-            <SchedaPatologia p={spalla} locale={locale} ampia />
+            <SchedaPatologia p={spalla} locale={locale} apertura />
           </Reveal>
+        )}
+        {sintomi.length > 0 && (
+          <div className="mt-10 md:mt-12">
+            <Reveal className="mb-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-2">
+              <div>
+                <p className="eyebrow mb-2">{m.cosaCuro.sintomiEyebrow}</p>
+                <h3 className="text-[1.4rem] leading-tight md:text-[1.6rem]">{m.cosaCuro.sintomiTitolo}</h3>
+              </div>
+              {sintomi.length > 4 && (
+                <Link href={`${href(locale, { kind: "cosaCuro" })}#sintomi`} className="btn btn-ghost -ml-3 md:-mr-3 md:ml-0">
+                  {m.cta.tutte}
+                  <Segno nome="freccia" size={18} />
+                </Link>
+              )}
+            </Reveal>
+            <ElencoSintomi sintomi={sintomiVari(sintomi, 4)} />
+          </div>
         )}
         {resto.length > 0 && (
           <div className="mt-10 border-t border-linea pt-8 md:mt-12 md:pt-10">
@@ -142,13 +167,15 @@ export function FasciaPatologie({ patologie, locale }: { patologie: Patologia[];
               ))}
             </ul>
             {secondarie.length > 0 && (
-              <Reveal className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.95rem] text-grafite">
-                <span>{m.cosaCuro.secondarie}:</span>
-                {secondarie.map((p) => (
-                  <Link key={p.slug} href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio">
-                    {pick(p.titolo, locale)}
-                  </Link>
-                ))}
+              <Reveal className="mt-10">
+                <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
+                <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                  {secondarie.map((p) => (
+                    <li key={p.slug}>
+                      <SchedaSecondaria p={p} locale={locale} />
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
             )}
           </div>
@@ -224,7 +251,8 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
   return (
     <Striscia n={voci.length} scheda={24} gap={3} testa={{ indice: "04", eyebrow, titolo: m.home.recensioniTitolo, misura: "affermazione" }}>
       {voci.map((r) => {
-        const stelle = r.stelle ?? 5;
+        const stelle = r.stelle;
+        const firma = pick(r.firma, locale);
         return (
           <li key={r.slug} className="min-w-0">
             <figure className="recensione">
@@ -233,14 +261,16 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
               </span>
               <p className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
                 {r.piattaforma && <span>{r.piattaforma}</span>}
-                <Stelle n={stelle} label={m.home.stelleLabel.replace("{n}", String(stelle))} className="text-petrolio" />
+                {stelle ? <Stelle n={stelle} label={m.home.stelleLabel.replace("{n}", String(stelle))} className="text-petrolio" /> : null}
               </p>
               {/* Le parole si compongono una dopo l'altra quando la scheda entra in vista. */}
               <Reveal as="blockquote" solo className="recensione-testo mt-4">
                 <Parole testo={pick(r.testo, locale)} />
               </Reveal>
               <figcaption className="mt-5 text-[0.92rem] text-grafite">
-                <span className="font-medium text-inchiostro">{r.nome}</span>
+                {r.nome && <span className="font-medium text-inchiostro">{r.nome}</span>}
+                {r.nome && firma && <span aria-hidden="true"> · </span>}
+                {firma && <span className={r.nome ? undefined : "font-medium text-inchiostro"}>{firma}</span>}
               </figcaption>
             </figure>
           </li>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { href, locales, type Locale, type Route } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import type { Settings, Profilo, Sede, Pubblicazione, Nota, Patologia, Faq } from "./content";
+import { telHref, type Settings, type Profilo, type Sede, type Pubblicazione, type Nota, type Patologia, type Faq } from "./content";
 import { srcMedia } from "./media";
 
 /**
@@ -69,6 +69,8 @@ export function buildMetadata(settings: Settings, input: MetaInput): Metadata {
 
 /* ------------------------------------------------------------------ JSON-LD */
 
+const telefonoLd = (s: Settings) => telHref(s.telefono)?.replace(/^tel:/, "") || undefined;
+
 const sameAs = (s: Settings) => [s.instagram, s.linkedin, s.youtube].filter(Boolean) as string[];
 
 export function physicianId(settings: Settings) {
@@ -88,7 +90,7 @@ export function physicianJsonLd(settings: Settings, profilo: Profilo, sedi: Sede
     url: `${base}${href(locale, { kind: "home" })}`,
     image: profilo.ritratto?.src ? `${base}${profilo.ritratto.src}` : undefined,
     medicalSpecialty: "Orthopedic",
-    telephone: settings.telefono || undefined,
+    telephone: telefonoLd(settings),
     email: settings.email || undefined,
     sameAs: sameAs(settings),
     knowsLanguage: profilo.lingue ?? undefined,
@@ -129,7 +131,7 @@ export function sedeJsonLd(settings: Settings, sede: Sede, locale: Locale) {
       url,
       address: sedeAddress(sede),
       geo,
-      telephone: settings.telefono || undefined,
+      telephone: telefonoLd(settings),
       medicalSpecialty: "Orthopedic",
       employee: { "@id": physicianId(settings) },
       hasMap: sede.mapsUrl || undefined,
@@ -216,6 +218,26 @@ export function medicalWebPageJsonLd(settings: Settings, p: Patologia, locale: L
     about: { "@type": "MedicalSpecialty", name: "Orthopedic" },
     reviewedBy: { "@id": physicianId(settings) },
     audience: { "@type": "MedicalAudience", audienceType: "Patient" },
+  };
+}
+
+/** Hub Cosa curo: l'elenco delle aree trattate, ognuna come pagina medica. */
+export function patologieListJsonLd(settings: Settings, items: { name: string; path: string; description?: string }[]) {
+  const base = siteUrl(settings);
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "MedicalWebPage",
+        name: it.name,
+        description: it.description || undefined,
+        url: `${base}${it.path}`,
+        reviewedBy: { "@id": physicianId(settings) },
+      },
+    })),
   };
 }
 

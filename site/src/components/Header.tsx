@@ -60,7 +60,7 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
       className={
         grande
           ? `flex items-center justify-between border-b border-linea py-4 text-[1.45rem] last:border-0 ${isActive(n.href) ? "text-petrolio" : "text-inchiostro"}`
-          : `relative whitespace-nowrap py-3.5 text-[0.8rem] tracking-[0.02em] transition xl:text-[0.92rem] ${
+          : `relative whitespace-nowrap py-3.5 text-[0.86rem] tracking-[0.02em] transition xl:text-[0.92rem] ${
               isActive(n.href)
                 ? "text-petrolio after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-petrolio"
                 : "text-inchiostro/70 hover:text-inchiostro"
@@ -78,34 +78,35 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
         {a11y.salta}
       </a>
       <header className="header-solido sticky top-0 z-50">
-        <div className="contenitore flex min-h-[4.5rem] items-center gap-4 md:min-h-[5.25rem] lg:gap-6 xl:gap-10">
-          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-2.5 xl:gap-3" aria-label={nome}>
+        <div className="contenitore flex min-h-[4.5rem] items-center gap-4 md:min-h-[5.25rem] lg:gap-10">
+          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-3" aria-label={nome}>
             <span className="grid h-9 w-9 shrink-0 place-items-center border border-linea text-petrolio md:h-10 md:w-10">
               <Segno nome="spalla" size={18} />
             </span>
             <span className="min-w-0 leading-tight">
-              <span className="serif block truncate text-[1.05rem] text-inchiostro md:text-[1.15rem] xl:text-[1.25rem]">{nome}</span>
+              <span className="serif block truncate text-[1.05rem] text-inchiostro md:text-[1.15rem] xl:text-[1.2rem]">{nome}</span>
               <span className="mt-0.5 hidden truncate text-[0.68rem] font-medium tracking-[0.08em] text-grafite uppercase sm:block lg:hidden">{ruolo}</span>
             </span>
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-3.5 xl:gap-x-7 lg:flex" aria-label="Principale">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-6 xl:gap-x-7 lg:flex" aria-label="Principale">
             {nav.map((n) => voce(n))}
           </nav>
 
-          <div className="ml-auto flex shrink-0 items-center justify-end gap-2 xl:gap-3 lg:ml-0">
-            <div className="hidden md:block">
+          {/* Con il menu in riga lo spazio non basta per due bottoni con testo: Scrivi resta icona, Chiama prende il testo da xl. */}
+          <div className="ml-auto flex shrink-0 items-center justify-end gap-2 lg:ml-0 xl:gap-2.5">
+            <div className="hidden md:block lg:mr-2 xl:mr-3">
               <LanguageSwitcher locale={locale} label={a11y.cambiaLingua} />
             </div>
             {tel && (
-              <a href={tel.href} className="btn btn-petrolio hidden sm:inline-flex">
+              <a href={tel.href} className="btn btn-petrolio hidden sm:inline-flex lg:max-xl:!px-3" title={tel.label}>
                 <Segno nome="telefono" size={18} />
-                {tel.label}
+                <span className="lg:max-xl:sr-only">{tel.label}</span>
               </a>
             )}
-            <Link href={scrivi.href} className={`btn ${tel ? "btn-osso" : "btn-petrolio"} hidden sm:inline-flex`}>
+            <Link href={scrivi.href} className={`btn ${tel ? "btn-osso" : "btn-petrolio"} hidden sm:inline-flex ${tel ? "lg:!px-3" : ""}`} title={scrivi.label}>
               <Segno nome="mail" size={18} />
-              {scrivi.label}
+              <span className={tel ? "lg:sr-only" : ""}>{scrivi.label}</span>
             </Link>
             <button
               type="button"

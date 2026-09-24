@@ -1,6 +1,6 @@
 import { href } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getPatologie, getProfilo, getPubblicazioni, getSedi, getSettings } from "@/lib/content";
+import { getPatologie, getProfilo, getPubblicazioni, getSedi, getSettings, telVisibile } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -16,7 +16,7 @@ export async function GET() {
     `> ${pick(p.titolo, "it").replace(/\.$/, "")}. ${pick(p.apertura, "it")}`,
     "",
     `Sito: ${base}${href("it", { kind: "home" })} (EN: ${base}${href("en", { kind: "home" })})`,
-    s.telefono ? `Segreteria: ${s.telefono}` : "",
+    s.telefono ? `Segreteria: ${telVisibile(s.telefono)}` : "",
     s.email ? `Email: ${s.email}` : "",
     "",
     `## ${m.dove.titolo}`,

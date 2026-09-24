@@ -15,6 +15,7 @@ type EntryOf<K extends keyof Collections> = NonNullable<Awaited<ReturnType<Colle
 export type Settings = NonNullable<Awaited<ReturnType<typeof reader.singletons.settings.read>>>;
 export type Profilo = NonNullable<Awaited<ReturnType<typeof reader.singletons.profilo.read>>>;
 export type Home = NonNullable<Awaited<ReturnType<typeof reader.singletons.home.read>>>;
+export type PaginaCosaCuro = NonNullable<Awaited<ReturnType<typeof reader.singletons.cosaCuro.read>>>;
 export type Disegni = NonNullable<Awaited<ReturnType<typeof reader.singletons.disegni.read>>>;
 export type CatalogoDisegni = Record<string, { src: string; alt: { it: string; en: string } }>;
 export type Patologia = EntryOf<"patologie"> & { slug: string };
@@ -42,6 +43,11 @@ export const getHome = cache(async (): Promise<Home> => {
   const h = await reader.singletons.home.read();
   if (!h) throw new Error("content/home.yaml mancante");
   return h;
+});
+
+/** Facoltativo: senza il file la pagina Cosa curo nasconde sintomi e percorso. */
+export const getPaginaCosaCuro = cache(async (): Promise<PaginaCosaCuro> => {
+  return (await reader.singletons.cosaCuro.read()) ?? { sintomi: [], percorso: [] };
 });
 
 function publicDisegno(file: string | null | undefined, id: string) {
@@ -205,8 +211,18 @@ export const getApprofondimenti = cache(async (): Promise<VoceApprofondimenti[]>
   return voci.sort((a, b) => b.data.localeCompare(a.data));
 });
 
-/** Telefono in forma `tel:` (solo cifre e +). */
-export const telHref = (tel: string | null | undefined) => (tel ? `tel:${tel.replace(/[^\d+]/g, "")}` : null);
+/** Prefisso internazionale da mostrare: vuoto se il numero in Keystatic lo ha già (+… o 00…). */
+export const telPrefisso = (tel: string | null | undefined) => (tel && !/^\s*(\+|00)/.test(tel) ? "(+39)" : "");
+
+/** Numero da mostrare in testo semplice, con prefisso. */
+export const telVisibile = (tel: string | null | undefined) => (tel ? [telPrefisso(tel), tel.trim()].filter(Boolean).join(" ") : "");
+
+/** Telefono in forma `tel:` internazionale (solo cifre e +), così funziona anche da un cellulare estero. */
+export const telHref = (tel: string | null | undefined) => {
+  if (!tel) return null;
+  const cifre = tel.replace(/[^\d+]/g, "").replace(/^00/, "+");
+  return `tel:${cifre.startsWith("+") ? cifre : `+39${cifre}`}`;
+};
 
 export const waHref = (numero: string | null | undefined, testo: string) =>
   numero ? `https://wa.me/${numero.replace(/\D/g, "")}${testo ? `?text=${encodeURIComponent(testo)}` : ""}` : null;

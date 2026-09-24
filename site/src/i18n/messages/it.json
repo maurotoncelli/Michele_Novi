@@ -52,7 +52,8 @@
     "fattiSedi": "sedi in Toscana",
     "fattiOspedale": "SOC Ortopedia Protesica, Fucecchio",
     "fattiHarvard": "Harvard / MGH, Boston",
-    "fattiPaper": "pubblicazioni con revisione"
+    "fattiPaper": "pubblicazioni con revisione",
+    "scorri": "Scorri"
   },
   "chiSono": {
     "titolo": "Chi sono",
@@ -77,10 +78,19 @@
   },
   "cosaCuro": {
     "titolo": "Cosa curo",
+    "eyebrow": "Ortopedia e traumatologia",
     "inQuestaPagina": "In questa pagina",
+    "sintomiEyebrow": "Da dove parti",
+    "sintomiTitolo": "Parti da quello che senti.",
+    "sintomiLead": "Il nome del problema arriva dopo. Scegli la frase più vicina alla tua situazione.",
+    "temiEyebrow": "Nel dettaglio",
+    "prenotaSpalla": "Prenota una visita per la spalla",
+    "pubblicazioniUna": "1 pubblicazione",
+    "pubblicazioniN": "{n} pubblicazioni",
+    "percorsoEyebrow": "Come funziona",
     "metodoEyebrow": "Il metodo",
     "metodoLead": "L'indicazione precede la tecnica. Artroscopia, chirurgia aperta o protesi si scelgono sul quadro clinico.",
-    "lead": "Specialista della spalla e dell'arto superiore. Traumatologia sportiva. In ospedale anche anca e ginocchio. L'ecografia è uno strumento della visita, non un servizio a parte.",
+    "lead": "Specialista della spalla e dell'arto superiore. Traumatologia sportiva. In ospedale anche anca e ginocchio.",
     "chiusura": "La prima visita decide il percorso: curare, aspettare o operare.",
     "secondarie": "Inoltre",
     "faq": "Domande frequenti",
@@ -149,7 +159,7 @@
   "contatti": {
     "titolo": "Contatti",
     "lead": "Un solo numero per tutte le sedi. La segreteria fissa la visita e ti dice cosa portare.",
-    "telefono": "Telefono",
+    "telefono": "Segreteria unica",
     "email": "Email",
     "orari": "Orari della segreteria",
     "orariMancanti": "Gli orari saranno pubblicati a breve.",
@@ -210,7 +220,9 @@
     "cambiaLingua": "Cambia lingua",
     "apriMenu": "Apri il menu",
     "chiudiMenu": "Chiudi il menu",
-    "ritrattoDi": "Ritratto del Dott. Michele Novi"
+    "ritrattoDi": "Ritratto del Dott. Michele Novi",
+    "briciole": "Percorso",
+    "nonTradotta": "Questa pagina non è ancora tradotta. Segue il testo italiano."
   },
   "date": { "locale": "it-IT" }
 }

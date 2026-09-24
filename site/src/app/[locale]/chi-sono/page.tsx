@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { annoPercorso, getHome, getProfilo, getPubblicazioni, getSedi, getSettings, tipoPercorso } from "@/lib/content";
+import { annoPercorso, getProfilo, getPubblicazioni, getSedi, getSettings, tipoPercorso } from "@/lib/content";
 import { VideoLastra } from "@/components/ui/VideoLastra";
 import { breadcrumbJsonLd, buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
@@ -40,7 +39,7 @@ function spezza(testo: string): { titolo: string; resto: string } {
 export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-sono">) {
   const { locale } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [s, p, paper, sedi, home] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni(), getSedi(), getHome()]);
+  const [s, p, paper, sedi] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni(), getSedi()]);
   const m = getMessages(l);
   const principali = paper.filter((x) => x.principale);
   const listaPaper = (principali.length ? principali : paper).map((x) => ({
@@ -69,8 +68,7 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
   const ritratto = srcMedia(p.ritratto?.src, "profilo");
   const manifesto = pick(p.comeValuto, l) ? spezza(pick(p.comeValuto, l)) : null;
   const passi = (p.comeValutoPassi ?? []).filter((v) => pick(v.titolo, l));
-  const lavoroFoto = srcMedia(home.lavoro?.foto?.src, "home");
-  const lavoroVideo = home.lavoro?.video ? (home.lavoro.video.startsWith("/") ? home.lavoro.video : `/videos/${home.lavoro.video}`) : null;
+  const visitaFoto = srcMedia(p.visita?.src, "profilo");
   // In grande va l'incarico di oggi (flag in Keystatic; in mancanza, l'anno che inizia con "dal", poi l'ultima).
   // Le altre restano nell'ordine del contenuto, cioè cronologico.
   const tappe = (p.inEvidenza ?? []).filter((v) => pick(v.titolo, l));
@@ -131,28 +129,27 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
         </Reveal>
       </section>
 
-      {/* 2. Come valuto: la frase forte come titolo; sotto, la lastra del lavoro e i tre passi della visita. */}
+      {/* 2. Come valuto: la frase forte come titolo; sotto, una foto di visita (non la lastra del percorso in home) e i tre passi. */}
       {manifesto && (
-        <Sezione eyebrow={m.chiSono.comeValuto} titolo={manifesto.titolo} lead={(passi.length && manifesto.resto ? spezza(manifesto.resto).titolo : manifesto.resto) || undefined} tinta="osso" misura="varco">
-          {(passi.length > 0 || lavoroFoto) && (
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-24">
-              {lavoroFoto && (
-                <Reveal className="self-start">
-                  <div className="fluttua" style={{ "--fluttua-da": "5%", "--fluttua-a": "-5%", "--fluttua-scala": "1" } as CSSProperties}>
-                    <VideoLastra video={lavoroVideo} foto={lavoroFoto} alt={pick(home.lavoro?.foto?.alt, l) || m.chiSono.comeValuto} ratio="4/5" sizes="(min-width: 1024px) 34vw, 100vw" />
-                  </div>
+        <Sezione eyebrow={m.chiSono.comeValuto} titolo={manifesto.titolo} lead={(passi.length && manifesto.resto ? spezza(manifesto.resto).titolo : manifesto.resto) || undefined} tinta="osso">
+          {(passi.length > 0 || visitaFoto) && (
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+              {/* Da lg la foto prende l'altezza dei passi: bordo alto e basso allineati al testo. */}
+              {visitaFoto && (
+                <Reveal className="lg:h-full">
+                  <VideoLastra foto={visitaFoto} alt={pick(p.visita?.alt, l) || m.chiSono.comeValuto} ratio="4/3" sizes="(min-width: 1024px) 34vw, 100vw" className="lg:aspect-auto lg:h-full lg:min-h-[18rem]" />
                 </Reveal>
               )}
               {passi.length > 0 && (
-                <ol className="divide-y divide-linea self-start">
+                <ol className="divide-y divide-linea">
                   {passi.map((v, i) => (
-                    <Reveal key={i} as="li" delay={i * 130} className="grid grid-cols-[4rem_minmax(0,1fr)] gap-6 py-9 first:pt-0 last:pb-0 md:grid-cols-[5.5rem_minmax(0,1fr)] md:py-11">
-                      <span className="cifra-m pt-1 text-rame" aria-hidden="true">
+                    <Reveal key={i} as="li" delay={i * 130} className="grid grid-cols-[3rem_minmax(0,1fr)] gap-5 py-5 first:pt-0 last:pb-0 md:grid-cols-[4rem_minmax(0,1fr)] md:py-6">
+                      <span className="pt-0.5 text-[1.6rem] font-medium leading-none tracking-[-0.03em] text-rame md:text-[2rem]" aria-hidden="true">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <div className="min-w-0">
-                        <h3 className="text-[1.5rem] leading-tight md:text-[1.9rem]">{pick(v.titolo, l)}</h3>
-                        {pick(v.testo, l) && <p className="lead mt-4 max-w-xl">{pick(v.testo, l)}</p>}
+                        <h3 className="text-[1.25rem] leading-tight md:text-[1.4rem]">{pick(v.titolo, l)}</h3>
+                        {pick(v.testo, l) && <p className="mt-2 max-w-xl text-[0.98rem] leading-relaxed text-grafite">{pick(v.testo, l)}</p>}
                       </div>
                     </Reveal>
                   ))}

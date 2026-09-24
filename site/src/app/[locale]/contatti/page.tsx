@@ -6,6 +6,7 @@ import { breadcrumbJsonLd, buildMetadata, faqItems, faqJsonLd } from "@/lib/seo"
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
+import { Telefono } from "@/components/ui/Telefono";
 import { Intestazione } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { ModuloSede } from "@/components/blocks/Schede";
@@ -55,8 +56,8 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
               <div>
                 <p className="eyebrow">{m.contatti.telefono}</p>
                 {tel ? (
-                  <a href={tel} className="display-l mt-3 block text-petrolio hover:text-petrolio-2">
-                    {s.telefono}
+                  <a href={tel} className="mt-3 block text-[1.6rem] font-medium leading-tight tracking-[-0.02em] text-petrolio hover:text-petrolio-2 md:text-[1.9rem]">
+                    <Telefono numero={s.telefono} />
                   </a>
                 ) : (
                   <p className="mt-3 max-w-md text-[1.15rem] leading-relaxed text-grafite">{m.contatti.telefonoMancante}</p>

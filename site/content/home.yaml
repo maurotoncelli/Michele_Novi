@@ -51,5 +51,7 @@ fasce:
     attiva: true
   - tipo: approfondimenti
     attiva: true
+  - tipo: pubblicazioni
+    attiva: true
   - tipo: contatto
     attiva: true

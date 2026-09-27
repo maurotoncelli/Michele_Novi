@@ -10,13 +10,14 @@ import { Segno } from "../ui/Segno";
 import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
-import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
+import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPatologia } from "./Schede";
 import { Stelle } from "@/components/ui/Stelle";
 import { Parole } from "@/components/ui/Parole";
 import { Striscia } from "@/components/blocks/Striscia";
 import { Sezione } from "./Pagina";
 import { ElencoSintomi } from "./Sintomi";
 import { sintomiVari, type Sintomo } from "@/lib/sintomi";
+import { ArchivioPubblicazioni } from "./ListaPubblicazioni";
 
 /* ------------------------------------------------------------------ Hero: immagine a tema a tutto schermo (desktop), testo sopra in basso a sinistra.
    Su mobile: immagine sopra, testo sotto. Non è un ritratto: il dottore sta in Chi sono. */
@@ -130,7 +131,7 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
   // In home anche le secondarie (anca e ginocchio) stanno nella stessa colonna: prima le principali, poi loro.
   const resto = [...patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla && p !== sport), ...patologie.filter((p) => p.secondaria)];
   if (!spalla && !resto.length && !sport) return null;
-  // Con due aree a destra la colonna segue le righe della spalla: la prima accanto alla foto, la seconda accanto al titolo.
+  // Con due aree a destra la colonna si divide a metà l'altezza della spalla, e le foto si allungano a riempirla.
   const allineate = !!spalla && resto.length === 2;
   return (
     <>
@@ -142,10 +143,10 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
             </Reveal>
           )}
           {resto.length > 0 && (
-            <ul className={`flex flex-col divide-y divide-linea border-t border-linea pt-6 lg:row-span-2 lg:border-t-0 lg:pt-0 ${allineate ? "lg:grid lg:grid-rows-subgrid" : ""}`}>
+            <ul className={`flex flex-col divide-y divide-linea border-t border-linea pt-6 lg:row-span-2 lg:border-t-0 lg:pt-0 ${allineate ? "lg:grid lg:grid-rows-2" : ""}`}>
               {resto.map((p, i) => (
-                <Reveal key={p.slug} as="li" delay={i * 80} className={`flex min-w-0 flex-col py-6 first:pt-0 last:pb-0 ${allineate ? "" : "flex-1 justify-center first:justify-start last:justify-end"}`}>
-                  <SchedaPatologia p={p} locale={locale} riga />
+                <Reveal key={p.slug} as="li" delay={i * 80} className={`flex min-w-0 flex-col py-6 first:pt-0 last:pb-0 ${allineate ? "lg:min-h-0" : "flex-1 justify-center first:justify-start last:justify-end"}`}>
+                  <SchedaPatologia p={p} locale={locale} riga alta={allineate} />
                 </Reveal>
               ))}
             </ul>
@@ -273,27 +274,44 @@ export function FasciaRecensioni({ recensioni, locale }: { recensioni: Recension
   );
 }
 
-/* ------------------------------------------------------------------ 05 Approfondimenti: sette schede in rotaia */
-type Voce = { tipo: "paper"; item: Pubblicazione } | { tipo: "nota"; item: Nota };
-
-export function FasciaApprofondimenti({ voci, locale }: { voci: Voce[]; locale: Locale }) {
+/* ------------------------------------------------------------------ 05 Approfondimenti: gli ultimi tre articoli per pazienti, in griglia */
+export function FasciaApprofondimenti({ note, locale }: { note: Nota[]; locale: Locale }) {
   const m = getMessages(locale);
-  if (!voci.length) return null;
-  // Le note dal lavoro davanti, poi i paper: sette schede in fila, il resto nell'hub a griglia.
-  const fila = [...voci.filter((v) => v.tipo === "nota"), ...voci.filter((v) => v.tipo === "paper")].slice(0, 7);
+  if (!note.length) return null;
   return (
-    <Striscia
-      n={fila.length}
-      scheda={20}
-      gap={1.5}
+    <Sezione
+      indice="05"
+      eyebrow={m.nav.approfondimenti}
+      titolo={m.home.approfondimentiTitolo}
+      lead={m.home.approfondimentiLead}
+      azione={{ href: href(locale, { kind: "approfondimenti" }), label: m.cta.tuttiApprofondimenti }}
       tinta="osso"
-      testa={{ indice: "05", eyebrow: m.nav.approfondimenti, titolo: m.home.approfondimentiTitolo, lead: m.home.approfondimentiLead, azione: { href: href(locale, { kind: "approfondimenti" }), label: m.cta.vediGriglia } }}
     >
-      {fila.map((v) => (
-        <li key={`${v.tipo}-${v.item.slug}`} className="min-w-0">
-          {v.tipo === "paper" ? <SchedaPaper p={v.item} locale={locale} /> : <SchedaNota n={v.item} locale={locale} />}
-        </li>
-      ))}
-    </Striscia>
+      <ul className="grid items-stretch gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {note.slice(0, 3).map((n, i) => (
+          <Reveal key={n.slug} as="li" delay={i * 80} className="h-full min-w-0">
+            <SchedaNota n={n} locale={locale} />
+          </Reveal>
+        ))}
+      </ul>
+    </Sezione>
+  );
+}
+
+/* ------------------------------------------------------------------ 06 Pubblicazioni: archivio scientifico, compatto e bibliografico */
+export function FasciaPubblicazioni({ pubblicazioni, locale }: { pubblicazioni: Pubblicazione[]; locale: Locale }) {
+  const m = getMessages(locale);
+  if (!pubblicazioni.length) return null;
+  return (
+    <Sezione
+      indice="06"
+      eyebrow={m.approfondimenti.archivioScientifico}
+      titolo={m.home.pubblicazioniTitolo}
+      lead={m.home.pubblicazioniLead}
+      azione={{ href: href(locale, { kind: "pubblicazioni" }), label: m.cta.tuttePubblicazioni }}
+      tinta="bianca"
+    >
+      <ArchivioPubblicazioni pubblicazioni={pubblicazioni.slice(0, 3)} totale={pubblicazioni.length} locale={locale} />
+    </Sezione>
   );
 }

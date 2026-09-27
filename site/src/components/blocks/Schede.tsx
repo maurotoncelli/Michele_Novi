@@ -3,8 +3,8 @@ import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick, formatDate } from "@/i18n";
-import { getDisegni, getSedi, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Pubblicazione, type Sede } from "@/lib/content";
-import { hrefArticolo, srcMedia, srcPaper } from "@/lib/media";
+import { getDisegni, getSedi, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Sede } from "@/lib/content";
+import { srcMedia } from "@/lib/media";
 import { Disegno } from "../ui/Disegno";
 import { IconaTecnica, isTecnica } from "../ui/IconaTecnica";
 import { isSegno, Segno } from "../ui/Segno";
@@ -49,17 +49,18 @@ function credito(p: Patologia, dove: string[], locale: Locale) {
 
 /** Punto di fuoco delle foto verticali quando la lastra le taglia in orizzontale. */
 const fuoco: Record<string, string> = {
-  "spalla-tenda": "object-[center_72%]",
-  "sport-volley": "object-[center_18%]",
-  "ginocchio-piegato": "object-[center_78%]",
+  "spalla-atleta": "object-[center_12%]",
+  "gomito-atleta": "object-[center_45%]",
+  "ginocchio-atleta": "object-[center_55%]",
+  "sport-volo": "object-[center_50%]",
 };
 function classeFuoco(src: string) {
   const chiave = Object.keys(fuoco).find((k) => src.includes(k));
   return chiave ? fuoco[chiave] : "object-center";
 }
 
-/** Card patologia. Default: 5/4 compatta (correlate). `riga` = in home, accanto alla spalla: foto 5/4 a sinistra, lead intero. `colonna` = in home, le aree dopo la spalla affiancate alla pari (foto sopra). `ampia` = foto a sinistra, testo a destra. `apertura` = in home, la spalla grande (foto 3/2, titolo sotto) accanto alle altre aree. `fascia` = in home, un'area a tutta larghezza e bassa: foto 16/9 a sinistra, testo a destra. */
-export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false, ampia = false, apertura = false, fascia = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean; ampia?: boolean; apertura?: boolean; fascia?: boolean }) {
+/** Card patologia. Default: 5/4 compatta (correlate). `riga` = in home, accanto alla spalla: foto 5/4 a sinistra, lead intero; con `alta`, da desktop la foto si allunga a tutta l'altezza della riga. `colonna` = in home, le aree dopo la spalla affiancate alla pari (foto sopra). `ampia` = foto a sinistra, larga una colonna della griglia a tre come le schede `colonna`, testo a destra. `apertura` = in home, la spalla grande (foto 3/2, titolo sotto) accanto alle altre aree. `fascia` = in home, un'area a tutta larghezza e bassa: foto 16/9 a sinistra, testo a destra. */
+export async function SchedaPatologia({ p, locale, index, riga = false, alta = false, colonna = false, ampia = false, apertura = false, fascia = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; alta?: boolean; colonna?: boolean; ampia?: boolean; apertura?: boolean; fascia?: boolean }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
@@ -80,8 +81,8 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
-        <Lastra ratio="5/4" className="self-start">{media}</Lastra>
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className={`group grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] ${alta ? "lg:flex-1" : ""}`}>
+        <Lastra ratio="5/4" className={`self-start ${alta ? "lg:aspect-auto lg:self-stretch" : ""}`}>{media}</Lastra>
         <div className="flex min-w-0 flex-col">
           <h3 className="text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
@@ -96,8 +97,8 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-5 bg-petrolio-3/70 p-4 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-6 md:p-5 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-10">
-        <Lastra ratio="16/9" className="w-full">
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-5 bg-petrolio-3/70 p-4 sm:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] sm:gap-6 md:p-5 lg:grid-cols-[minmax(0,30rem)_minmax(0,1fr)] lg:gap-10">
+        <Lastra ratio="3/2" className="w-full">
           {media}
         </Lastra>
         <div className="min-w-0">
@@ -146,11 +147,11 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-6 md:grid-cols-[18rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[22rem_minmax(0,1fr)]">
-        <Lastra ratio="4/3" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-6 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-3">
+        <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
           {media}
         </Lastra>
-        <div className="min-w-0">
+        <div className="min-w-0 lg:col-span-2">
           <h3 className="sr-only">{pick(p.titolo, locale)}</h3>
           <p className="lead max-w-xl">{pick(p.lead, locale)}</p>
           {credito(p, dove, locale) && <p className="mt-5 text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p>}
@@ -348,65 +349,11 @@ export async function SchedaSede({ s, locale }: { s: Sede; locale: Locale }) {
   );
 }
 
-/** Pubblicazione: stesso 4/3, meta su una riga. */
-export async function SchedaPaper({ p, locale, grande = false }: { p: Pubblicazione; locale: Locale; grande?: boolean }) {
-  const m = getMessages(locale);
-  const titolo = pick(p.titoloBreve, locale) || p.titolo;
-  const catalogo = await getDisegni();
-  const id = idDisegnoDaTag(p.tag, p.patologie);
-  const foto = srcMedia(p.immagine?.src, "approfondimenti");
-  const disegno = foto ? null : srcDisegno(catalogo, id, locale);
-  const alt = pick(p.immagine?.alt, locale) || titolo;
-  const pdf = srcPaper(p.pdf);
-  const articolo = hrefArticolo(p.doi, p.url);
-  return (
-    <div className="flex h-full flex-col">
-      <Link href={href(locale, { kind: "paper", slug: p.slug })} className="group flex flex-1 flex-col">
-        <Lastra>
-          {foto ? (
-            <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 768px) 24rem, 80vw" className="object-cover" />
-          ) : disegno ? (
-            <Disegno src={disegno.src} alt={disegno.alt} />
-          ) : (
-            <span className="absolute inset-0 grid place-items-center text-petrolio">
-              <Segno nome="doc" size={36} />
-            </span>
-          )}
-        </Lastra>
-        <div className="flex flex-1 flex-col pt-5">
-          <div className="flex items-center justify-between gap-3">
-            <span className="tag tag-petrolio">{m.approfondimenti.paper}</span>
-            <span className="text-sm text-grafite">{p.anno}</span>
-          </div>
-          <h3 className={`leading-snug group-hover:text-petrolio ${grande ? "mt-4 text-[1.6rem] leading-tight md:text-[1.95rem]" : "mt-3 line-clamp-3 min-h-[3.6em] text-[1.3rem]"}`}>{titolo}</h3>
-          {titolo !== p.titolo && <p className="mt-1 line-clamp-2 text-sm italic text-grafite">{p.titolo}</p>}
-          <p className="mt-3 line-clamp-1 text-sm text-grafite">
-            {p.rivista}
-            {p.autori ? ` · ${p.autori.split(",")[0]} et al.` : ""}
-          </p>
-        </div>
-      </Link>
-      {pdf ? (
-        <div className="mt-4">
-          <a href={pdf} target="_blank" rel="noopener noreferrer" className="btn btn-osso">
-            <Segno nome="doc" size={16} />
-            {m.cta.pdf}
-          </a>
-        </div>
-      ) : articolo ? (
-        <div className="mt-4">
-          <a href={articolo} target="_blank" rel="noopener noreferrer" className="btn btn-osso">
-            {m.cta.articolo}
-            <Segno nome="esterno" size={16} />
-          </a>
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
-/** Nota / approfondimento: copertina Keystatic, o disegno. */
-export async function SchedaNota({ n, locale, grande = false }: { n: Nota; locale: Locale; grande?: boolean }) {
+/**
+ * Nota / approfondimento: copertina Keystatic, o disegno.
+ * `sopraPiega` = la copertina è tra i primi contenuti visibili della pagina: si carica subito.
+ */
+export async function SchedaNota({ n, locale, sopraPiega = false }: { n: Nota; locale: Locale; sopraPiega?: boolean }) {
   const m = getMessages(locale);
   const copertina = srcMedia(n.copertina?.src, "approfondimenti");
   const alt = pick(n.copertina?.alt, locale) || pick(n.titolo, locale);
@@ -416,7 +363,7 @@ export async function SchedaNota({ n, locale, grande = false }: { n: Nota; local
     <Link href={href(locale, { kind: "nota", slug: slugNota(n, locale) })} className="group flex h-full flex-col">
       <Lastra>
         {copertina ? (
-          <Image src={copertina} alt={alt} fill quality={92} sizes="(min-width: 768px) 24rem, 80vw" className="object-cover" />
+          <Image src={copertina} alt={alt} fill quality={92} sizes="(min-width: 768px) 24rem, 80vw" loading={sopraPiega ? "eager" : undefined} className="object-cover" />
         ) : fallback ? (
           <Disegno src={fallback.src} alt={alt} />
         ) : (
@@ -430,8 +377,8 @@ export async function SchedaNota({ n, locale, grande = false }: { n: Nota; local
             {formatDate(n.data, locale)}
           </time>
         </div>
-        <h3 className={`leading-snug group-hover:text-petrolio ${grande ? "mt-4 text-[1.6rem] leading-tight md:text-[1.95rem]" : "mt-3 line-clamp-3 min-h-[3.6em] text-[1.3rem]"}`}>{pick(n.titolo, locale)}</h3>
-        <p className={`text-grafite ${grande ? "mt-3 max-w-xl text-[1.05rem] leading-relaxed" : "mt-2 line-clamp-3 min-h-[4.4em] text-[0.95rem]"}`}>{pick(n.lead, locale)}</p>
+        <h3 className="mt-3 line-clamp-3 min-h-[3.6em] text-[1.3rem] leading-snug group-hover:text-petrolio">{pick(n.titolo, locale)}</h3>
+        <p className="mt-2 line-clamp-3 min-h-[4.4em] text-[0.95rem] text-grafite">{pick(n.lead, locale)}</p>
       </div>
     </Link>
   );

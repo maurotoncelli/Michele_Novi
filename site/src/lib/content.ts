@@ -162,11 +162,11 @@ export const getNota = cache(async (slug: string, locale: Locale): Promise<Nota 
 
 export const slugNota = (n: Nota, locale: Locale) => (locale === "en" && n.slugEn ? n.slugEn : n.slug);
 
-/** Tutti i tag usati da note e pubblicazioni, con conteggio. */
+/** Tag degli approfondimenti divulgativi, con conteggio. Le pubblicazioni hanno un archivio separato. */
 export const getTags = cache(async (): Promise<{ tag: string; n: number }[]> => {
-  const [note, paper] = await Promise.all([getNote(), getPubblicazioni()]);
+  const note = await getNote();
   const m = new Map<string, number>();
-  for (const x of [...note, ...paper]) for (const t of x.tag ?? []) m.set(t, (m.get(t) ?? 0) + 1);
+  for (const x of note) for (const t of x.tag ?? []) m.set(t, (m.get(t) ?? 0) + 1);
   return [...m.entries()].map(([tag, n]) => ({ tag, n })).sort((a, b) => b.n - a.n || a.tag.localeCompare(b.tag));
 });
 
@@ -196,20 +196,6 @@ export function annoPercorso(periodo: string): number {
   const m = periodo.match(/(\d{4})/);
   return m ? Number(m[1]) : 0;
 }
-
-/** Voce degli approfondimenti unificata per liste miste. */
-export type VoceApprofondimenti =
-  | { tipo: "paper"; data: string; slug: string; item: Pubblicazione }
-  | { tipo: "nota"; data: string; slug: string; item: Nota };
-
-export const getApprofondimenti = cache(async (): Promise<VoceApprofondimenti[]> => {
-  const [note, paper] = await Promise.all([getNote(), getPubblicazioni()]);
-  const voci: VoceApprofondimenti[] = [
-    ...note.map((n) => ({ tipo: "nota" as const, data: n.data ?? "", slug: n.slug, item: n })),
-    ...paper.map((p) => ({ tipo: "paper" as const, data: `${p.anno}-01-01`, slug: p.slug, item: p })),
-  ];
-  return voci.sort((a, b) => b.data.localeCompare(a.data));
-});
 
 /** Prefisso internazionale da mostrare: vuoto se il numero in Keystatic lo ha già (+… o 00…). */
 export const telPrefisso = (tel: string | null | undefined) => (tel && !/^\s*(\+|00)/.test(tel) ? "(+39)" : "");

@@ -1,6 +1,6 @@
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getApprofondimenti, getSettings, slugNota } from "@/lib/content";
+import { getNote, getSettings, slugNota } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -13,19 +13,17 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 export async function GET(_req: Request, ctx: RouteContext<"/[locale]/approfondimenti/feed.xml">) {
   const { locale } = await ctx.params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [s, voci] = await Promise.all([getSettings(), getApprofondimenti()]);
+  const [s, note] = await Promise.all([getSettings(), getNote()]);
   const m = getMessages(l);
   const base = siteUrl(s);
 
-  const items = voci
+  const items = note
     .slice(0, 30)
-    .map((v) => {
-      const isPaper = v.tipo === "paper";
-      const title = isPaper ? pick(v.item.titoloBreve, l) || v.item.titolo : pick(v.item.titolo, l);
-      const link = isPaper ? `${base}${href(l, { kind: "paper", slug: v.slug })}` : `${base}${href(l, { kind: "nota", slug: slugNota(v.item, l) })}`;
-      const desc = isPaper ? pick(v.item.riassunto, l) || v.item.abstract || `${v.item.rivista}, ${v.item.anno}` : pick(v.item.lead, l);
-      const date = new Date(v.data).toUTCString();
-      return `<item><title>${esc(title)}</title><link>${link}</link><guid>${link}</guid><pubDate>${date}</pubDate><description>${esc(desc ?? "")}</description>${(v.item.tag ?? []).map((t) => `<category>${esc(t)}</category>`).join("")}</item>`;
+    .map((item) => {
+      const title = pick(item.titolo, l);
+      const link = `${base}${href(l, { kind: "nota", slug: slugNota(item, l) })}`;
+      const date = new Date(item.data ?? item.aggiornato ?? "1970-01-01").toUTCString();
+      return `<item><title>${esc(title)}</title><link>${link}</link><guid>${link}</guid><pubDate>${date}</pubDate><description>${esc(pick(item.lead, l))}</description>${(item.tag ?? []).map((t) => `<category>${esc(t)}</category>`).join("")}</item>`;
     })
     .join("");
 

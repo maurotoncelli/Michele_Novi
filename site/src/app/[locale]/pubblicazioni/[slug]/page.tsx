@@ -13,14 +13,15 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
 import { Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Sommario } from "@/components/blocks/Sommario";
-import { SchedaPatologia, SchedaPaper } from "@/components/blocks/Schede";
+import { SchedaPatologia } from "@/components/blocks/Schede";
+import { ListaPubblicazioni } from "@/components/blocks/ListaPubblicazioni";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 /* Serif accademico solo per la Lettura dei paper: Source Serif 4 (OFL), caricato solo su questa pagina. */
 const serifLettura = localFont({
   src: [
-    { path: "../../../../fonts/SourceSerif4-Variable.woff2", style: "normal", weight: "200 900" },
-    { path: "../../../../fonts/SourceSerif4-VariableItalic.woff2", style: "italic", weight: "200 900" },
+    { path: "../../../fonts/SourceSerif4-Variable.woff2", style: "normal", weight: "200 900" },
+    { path: "../../../fonts/SourceSerif4-VariableItalic.woff2", style: "italic", weight: "200 900" },
   ],
   variable: "--font-lettura",
   display: "swap",
@@ -32,7 +33,7 @@ export async function generateStaticParams() {
   return locales.flatMap((locale) => all.map((p) => ({ locale, slug: p.slug })));
 }
 
-export async function generateMetadata({ params }: PageProps<"/[locale]/approfondimenti/pubblicazioni/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/[locale]/pubblicazioni/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const [s, p] = await Promise.all([getSettings(), getPubblicazione(slug)]);
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/approfon
   });
 }
 
-export default async function PaperPage({ params }: PageProps<"/[locale]/approfondimenti/pubblicazioni/[slug]">) {
+export default async function PaperPage({ params }: PageProps<"/[locale]/pubblicazioni/[slug]">) {
   const { locale, slug } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const p = await getPubblicazione(slug);
@@ -73,8 +74,7 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
           paperJsonLd(s, p, l),
           breadcrumbJsonLd(s, [
             { name: m.meta.siteName, path: href(l, { kind: "home" }) },
-            { name: m.approfondimenti.titolo, path: href(l, { kind: "approfondimenti" }) },
-            { name: m.approfondimenti.pubblicazioni, path: href(l, { kind: "approfondimentiPubblicazioni" }) },
+            { name: m.nav.pubblicazioni, path: href(l, { kind: "pubblicazioni" }) },
             { name: titoloBreve || p.titolo, path: href(l, { kind: "paper", slug: p.slug }) },
           ]),
         ]}
@@ -82,8 +82,7 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
       <Briciole
         items={[
           { label: m.meta.siteName, href: href(l, { kind: "home" }) },
-          { label: m.approfondimenti.titolo, href: href(l, { kind: "approfondimenti" }) },
-          { label: m.approfondimenti.pubblicazioni, href: href(l, { kind: "approfondimentiPubblicazioni" }) },
+          { label: m.nav.pubblicazioni, href: href(l, { kind: "pubblicazioni" }) },
           { label: titoloBreve || p.titolo },
         ]}
       />
@@ -170,12 +169,15 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
               <Sommario voci={sommario} eyebrow={m.approfondimenti.inQuestaPagina} />
             </div>
             {(p.tag ?? []).length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {p.tag!.map((t) => (
-                  <Link key={t} href={href(l, { kind: "tag", tag: t })} className="tag hover:bg-petrolio-3 hover:text-petrolio">
-                    {t}
-                  </Link>
-                ))}
+              <div>
+                <p className="eyebrow mb-3">{m.approfondimenti.paroleChiave}</p>
+                <ul className="flex flex-wrap gap-1.5">
+                  {p.tag!.map((t) => (
+                    <li key={t} className="tag">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
             {correlate.length > 0 && (
@@ -243,15 +245,11 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/approfo
       </article>
 
       {altre.length > 0 && (
-        <section className="contenitore pb-6">
-          <p className="eyebrow mb-4">{m.approfondimenti.pubblicazioni}</p>
-          <div className="grid items-stretch gap-10 md:grid-cols-3">
-            {altre.map((x, i) => (
-              <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">
-                <SchedaPaper p={x} locale={l} />
-              </Reveal>
-            ))}
-          </div>
+        <section className="contenitore pb-12">
+          <p className="eyebrow mb-4">{m.approfondimenti.paperAffini}</p>
+          <Reveal>
+            <ListaPubblicazioni pubblicazioni={altre} locale={l} />
+          </Reveal>
         </section>
       )}
       {correlate.length > 0 && altre.length === 0 && (

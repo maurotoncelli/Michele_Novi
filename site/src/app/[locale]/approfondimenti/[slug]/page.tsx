@@ -146,7 +146,7 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/approfon
       )}
       {altre.length > 0 && (
         <section className="contenitore pb-6">
-          <p className="eyebrow mb-4">{m.approfondimenti.dalLavoro}</p>
+          <p className="eyebrow mb-4">{m.approfondimenti.altri}</p>
           <div className="grid items-stretch gap-10 md:grid-cols-3">
             {altre.map((x, i) => (
               <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">

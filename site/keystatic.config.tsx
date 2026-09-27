@@ -51,13 +51,13 @@ const seo = fields.object(
   { label: "SEO", description: "Opzionale. Il sito genera fallback da titolo e lead." },
 );
 
-const immagine = (label: string, dir: string) =>
+const immagine = (label: string, dir: string, description?: string) =>
   fields.object(
     {
       src: fields.image({ label, directory: `public/images/${dir}`, publicPath: `/images/${dir}/` }),
       alt: testo("Testo alternativo"),
     },
-    { label },
+    { label, description },
   );
 
 const AREE = [
@@ -229,7 +229,8 @@ export default config({
                 { label: "Dove", value: "sedi" },
                 { label: "Perché fidarsi", value: "fiducia" },
                 { label: "Recensioni", value: "recensioni" },
-                { label: "Approfondimenti", value: "approfondimenti" },
+                { label: "Approfondimenti (articoli per pazienti)", value: "approfondimenti" },
+                { label: "Pubblicazioni scientifiche", value: "pubblicazioni" },
                 { label: "Contatto", value: "contatto" },
               ],
               defaultValue: "patologie",
@@ -382,7 +383,7 @@ export default config({
     }),
 
     pubblicazioni: collection({
-      label: "Pubblicazioni",
+      label: "Pubblicazioni scientifiche",
       slugField: "slug",
       path: "content/pubblicazioni/*",
       format: { data: "yaml" },
@@ -406,9 +407,13 @@ export default config({
           description: "Solo se la licenza lo permette (open access CC BY / BY-NC). Per i paper con copyright dell'editore lasciare vuoto: si mostra l'abstract.",
           multiline: true,
         }),
-        tag: fields.array(fields.text({ label: "Tag" }), { label: "Tag", itemLabel: (p) => p.value }),
+        tag: fields.array(fields.text({ label: "Parola chiave" }), {
+          label: "Parole chiave",
+          description: "Mostrate nella pagina del paper e usate per suggerire le pubblicazioni sullo stesso tema. Non creano pagine tag.",
+          itemLabel: (p) => p.value,
+        }),
         principale: fields.checkbox({ label: "Tra le principali (CV)", defaultValue: false }),
-        immagine: immagine("Immagine in anteprima", "approfondimenti"),
+        immagine: immagine("Immagine", "approfondimenti", "Al momento non mostrata: le pubblicazioni sono impaginate come elenco bibliografico, senza foto."),
         patologie: fields.array(fields.relationship({ label: "Pagina", collection: "patologie" }), {
           label: "Patologie correlate",
           itemLabel: (p) => p.value ?? "",
@@ -418,7 +423,7 @@ export default config({
     }),
 
     approfondimenti: collection({
-      label: "Approfondimenti — Dal lavoro",
+      label: "Approfondimenti (articoli per pazienti)",
       slugField: "slug",
       path: "content/approfondimenti/*/",
       format: { contentField: "corpo" },
@@ -433,7 +438,11 @@ export default config({
         copertina: immagine("Immagine in anteprima", "approfondimenti"),
         corpo: fields.markdoc({ label: "Corpo (IT)" }),
         corpoEn: fields.markdoc({ label: "Corpo (EN)" }),
-        tag: fields.array(fields.text({ label: "Tag" }), { label: "Tag", itemLabel: (p) => p.value }),
+        tag: fields.array(fields.text({ label: "Tag" }), {
+          label: "Tag",
+          description: "Ogni tag crea una pagina in Approfondimenti con gli articoli che lo condividono.",
+          itemLabel: (p) => p.value,
+        }),
         video: fields.file({
           label: "Video (file)",
           description: "MP4 o WebM. Se c'è anche YouTube, il file ha la precedenza.",

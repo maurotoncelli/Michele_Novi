@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages } from "@/i18n";
-import { getApprofondimenti, getSettings, getTags } from "@/lib/content";
+import { getNote, getSettings, getTags } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Intestazione } from "@/components/blocks/Pagina";
-import { TabApprofondimenti } from "@/components/blocks/TabApprofondimenti";
 import { ListaApprofondimenti } from "@/components/blocks/ListaApprofondimenti";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
@@ -29,10 +28,10 @@ export default async function TagPage({ params }: PageProps<"/[locale]/approfond
   const { locale, tag } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const t = decodeURIComponent(tag);
-  const [s, voci, tags] = await Promise.all([getSettings(), getApprofondimenti(), getTags()]);
+  const [s, note, tags] = await Promise.all([getSettings(), getNote(), getTags()]);
   if (!tags.some((x) => x.tag === t)) notFound();
   const m = getMessages(l);
-  const filtrate = voci.filter((v) => (v.item.tag ?? []).includes(t));
+  const filtrate = note.filter((n) => (n.tag ?? []).includes(t));
   return (
     <>
       <JsonLd
@@ -52,8 +51,7 @@ export default async function TagPage({ params }: PageProps<"/[locale]/approfond
           { label: t },
         ]}
       />
-      <TabApprofondimenti locale={l} attiva="tutto" feedHref={`${href(l, { kind: "approfondimenti" })}/feed.xml`} />
-      <ListaApprofondimenti voci={filtrate} locale={l} tags={tags.filter((x) => x.tag !== t)} />
+      <ListaApprofondimenti note={filtrate} locale={l} tags={tags.filter((x) => x.tag !== t)} />
       <FasciaContatto locale={l} />
     </>
   );

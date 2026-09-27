@@ -32,8 +32,8 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
   const resto = patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla);
   const secondarie = patologie.filter((p) => p.secondaria);
   const principali = [spalla, ...resto].filter((p): p is Patologia => !!p);
-  // Dopo la spalla le altre aree stanno alla pari: le secondarie in coda, stessa scheda.
-  const altre = [...resto, ...secondarie];
+  // Dopo la spalla le altre aree stanno alla pari: poi le secondarie, e lo sport per ultimo perché le attraversa tutte (come in home).
+  const altre = [...resto.filter((p) => p.area !== "sport"), ...secondarie, ...resto.filter((p) => p.area === "sport")];
 
   const temiPer = new Map(await Promise.all([...principali, ...secondarie].map(async (p) => [p.slug, await temiDi(p, l)] as const)));
   const link = (p: Patologia, ancora?: string) => hrefPatologia(p, l, ancora);
@@ -62,34 +62,36 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
         eyebrow={m.cosaCuro.eyebrow}
         titolo={m.cosaCuro.titolo}
         lead={m.cosaCuro.lead}
-        compatta
+        stretta
         percorso={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.cosaCuro.titolo }]}
       />
 
       {sintomi.length > 0 && (
         <section id="sintomi" className="ancora border-b border-linea">
-          <div className="contenitore py-10 md:py-14">
-            <Reveal>
-              <p className="eyebrow mb-3">{m.cosaCuro.sintomiEyebrow}</p>
-              <h2 className="max-w-3xl text-[1.65rem] leading-tight md:text-[1.85rem]">{m.cosaCuro.sintomiTitolo}</h2>
-              <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.cosaCuro.sintomiLead}</p>
+          <div className="contenitore py-8 md:py-10">
+            <Reveal className="grid gap-x-10 gap-y-2 lg:grid-cols-[auto_minmax(0,26rem)] lg:items-end lg:justify-between">
+              <div>
+                <p className="eyebrow mb-2">{m.cosaCuro.sintomiEyebrow}</p>
+                <h2 className="text-[1.65rem] leading-tight md:text-[1.85rem]">{m.cosaCuro.sintomiTitolo}</h2>
+              </div>
+              <p className="max-w-2xl text-[1.02rem] leading-relaxed text-grafite lg:text-right">{m.cosaCuro.sintomiLead}</p>
             </Reveal>
-            <div className="mt-6">
-              <ElencoSintomi sintomi={sintomi} />
+            <div className="mt-5">
+              <ElencoSintomi sintomi={sintomi} compatto />
             </div>
           </div>
         </section>
       )}
 
-      <Sezione compatta>
+      <Sezione compatta className="pt-8 md:pt-10">
         <h2 className="display-m max-w-3xl">{m.home.cosaCuroTitolo}</h2>
         {spalla && (
           <>
-            <Reveal className="mt-8 md:mt-10">
+            <Reveal className="mt-6 md:mt-8">
               <SchedaPatologia p={spalla} locale={l} ampia />
             </Reveal>
             {(temiPer.get(spalla.slug)?.length ?? 0) > 0 && (
-              <div className="mt-10">
+              <div className="mt-8">
                 <p className="eyebrow mb-4">{m.cosaCuro.temiEyebrow}</p>
                 <ul className="grid gap-x-8 gap-y-6 border-t border-linea pt-6 sm:grid-cols-2 lg:grid-cols-4">
                   {temiPer.get(spalla.slug)!.map((t, i) => (
@@ -102,7 +104,7 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
                     </Reveal>
                   ))}
                 </ul>
-                <Link href={href(l, { kind: "contatti" })} className="btn btn-ghost -ml-3 mt-6">
+                <Link href={href(l, { kind: "contatti" })} className="btn btn-ghost -ml-3 mt-4">
                   {m.cosaCuro.prenotaSpalla}
                   <Segno nome="freccia" size={18} />
                 </Link>
@@ -111,13 +113,13 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
           </>
         )}
         {altre.length > 0 && (
-          <div className="mt-10 border-t border-linea pt-8 md:mt-12 md:pt-10">
+          <div className="mt-8 border-t border-linea pt-8">
             <Reveal>
               <h2 className="max-w-3xl text-[1.65rem] leading-tight md:text-[1.85rem]">{m.home.cosaCuroRestoTitolo}</h2>
               <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.home.cosaCuroRestoLead}</p>
             </Reveal>
             {/* Sottogriglia: schede alla stessa altezza, capitoli che partono dalla stessa riga. */}
-            <ul className="mt-8 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
               {altre.map((p, i) => (
                 <Reveal key={p.slug} as="li" delay={i * 80} className="row-span-2 grid min-w-0 grid-rows-subgrid pb-12 last:pb-0 lg:pb-0">
                   <SchedaPatologia p={p} locale={l} colonna />

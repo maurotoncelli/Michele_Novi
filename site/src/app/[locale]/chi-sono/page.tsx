@@ -11,7 +11,7 @@ import { Segno } from "@/components/ui/Segno";
 import { Briciole, Sezione } from "@/components/blocks/Pagina";
 import { BarrePercorso } from "@/components/blocks/BarrePercorso";
 import { ListaPubblicazioni } from "@/components/blocks/ListaPubblicazioni";
-import { hrefArticolo, srcMedia, srcPaper } from "@/lib/media";
+import { srcMedia } from "@/lib/media";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/chi-sono">): Promise<Metadata> {
@@ -42,14 +42,7 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
   const [s, p, paper, sedi] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni(), getSedi()]);
   const m = getMessages(l);
   const principali = paper.filter((x) => x.principale);
-  const listaPaper = (principali.length ? principali : paper).map((x) => ({
-    href: href(l, { kind: "paper", slug: x.slug }),
-    anno: x.anno,
-    titolo: pick(x.titoloBreve, l) || x.titolo,
-    rivista: x.rivista,
-    pdf: srcPaper(x.pdf),
-    articolo: hrefArticolo(x.doi, x.url),
-  }));
+  const listaPaper = principali.length ? principali : paper;
   const barre = (
     [
       { id: "lavoro" as const, titolo: m.chiSono.esperienze },
@@ -206,8 +199,8 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
 
       {/* 5. Pubblicazioni principali. */}
       {listaPaper.length > 0 && (
-        <Sezione eyebrow={m.nav.pubblicazioni} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "approfondimentiPubblicazioni" }), label: m.chiSono.tuttePubblicazioni }}>
-          <ListaPubblicazioni voci={listaPaper} more={m.cta.mostraTutte} less={m.cta.mostraMeno} pdfLabel={m.cta.pdf} articoloLabel={m.cta.articolo} />
+        <Sezione eyebrow={m.nav.pubblicazioni} titolo={m.chiSono.pubblicazioni} azione={{ href: href(l, { kind: "pubblicazioni" }), label: m.cta.tuttePubblicazioni }}>
+          <ListaPubblicazioni pubblicazioni={listaPaper} locale={l} espandibile />
         </Sezione>
       )}
 

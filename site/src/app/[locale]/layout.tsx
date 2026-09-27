@@ -67,7 +67,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             { label: m.nav.cosaCuro, href: href(l, { kind: "cosaCuro" }) },
             { label: m.nav.dove, href: href(l, { kind: "dove" }) },
             { label: m.nav.approfondimenti, href: href(l, { kind: "approfondimenti" }) },
-            { label: m.nav.pubblicazioni, href: href(l, { kind: "approfondimentiPubblicazioni" }) },
+            { label: m.nav.pubblicazioni, href: href(l, { kind: "pubblicazioni" }) },
             { label: m.nav.contatti, href: href(l, { kind: "contatti" }) },
           ]}
           tel={tel ? { href: tel, label: m.cta.chiama } : null}

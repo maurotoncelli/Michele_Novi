@@ -16,7 +16,6 @@ export const segments = {
   dove: { it: "dove", en: "locations" },
   approfondimenti: { it: "approfondimenti", en: "in-depth" },
   pubblicazioni: { it: "pubblicazioni", en: "publications" },
-  dalLavoro: { it: "dal-lavoro", en: "from-the-clinic" },
   tag: { it: "tag", en: "tag" },
   contatti: { it: "contatti", en: "contact" },
   privacy: { it: "privacy", en: "privacy" },
@@ -32,7 +31,6 @@ const folders: Record<SegmentKey, string> = {
   dove: "dove",
   approfondimenti: "approfondimenti",
   pubblicazioni: "pubblicazioni",
-  dalLavoro: "dal-lavoro",
   tag: "tag",
   contatti: "contatti",
   privacy: "privacy",
@@ -44,14 +42,22 @@ const aliases: Partial<Record<SegmentKey, { it?: string[]; en?: string[] }>> = {
   approfondimenti: { it: ["quaderno"], en: ["notebook", "insights"] },
 };
 
+/**
+ * Percorsi pubblici dismessi → nuova destinazione, con 301.
+ * `figli`: i sottopercorsi seguono (es. il dettaglio di un paper); altrimenti tutto va alla destinazione.
+ */
+const dismessi: { da: Record<Locale, string>; a: Route; figli: boolean }[] = [
+  { da: { it: "approfondimenti/pubblicazioni", en: "in-depth/publications" }, a: { kind: "pubblicazioni" }, figli: true },
+  { da: { it: "approfondimenti/dal-lavoro", en: "in-depth/from-the-clinic" }, a: { kind: "approfondimenti" }, figli: false },
+];
+
 type Route =
   | { kind: "home" }
   | { kind: "chiSono" }
   | { kind: "cosaCuro"; slug?: string }
   | { kind: "dove"; slug?: string }
   | { kind: "approfondimenti" }
-  | { kind: "approfondimentiPubblicazioni" }
-  | { kind: "approfondimentiDalLavoro" }
+  | { kind: "pubblicazioni" }
   | { kind: "paper"; slug: string }
   | { kind: "nota"; slug: string }
   | { kind: "tag"; tag: string }
@@ -80,12 +86,10 @@ export function href(locale: Locale, route: Route): string {
       return route.slug ? `${base}/${s("dove")}/${route.slug}` : `${base}/${s("dove")}`;
     case "approfondimenti":
       return `${base}/${s("approfondimenti")}`;
-    case "approfondimentiPubblicazioni":
-      return `${base}/${s("approfondimenti")}/${s("pubblicazioni")}`;
-    case "approfondimentiDalLavoro":
-      return `${base}/${s("approfondimenti")}/${s("dalLavoro")}`;
+    case "pubblicazioni":
+      return `${base}/${s("pubblicazioni")}`;
     case "paper":
-      return `${base}/${s("approfondimenti")}/${s("pubblicazioni")}/${route.slug}`;
+      return `${base}/${s("pubblicazioni")}/${route.slug}`;
     case "nota":
       return `${base}/${s("approfondimenti")}/${route.slug}`;
     case "tag":
@@ -116,12 +120,10 @@ export function internalPath(locale: Locale, route: Route): string {
       return join(locale, route.slug ? [f("dove"), route.slug] : [f("dove")]);
     case "approfondimenti":
       return join(locale, [f("approfondimenti")]);
-    case "approfondimentiPubblicazioni":
-      return join(locale, [f("approfondimenti"), f("pubblicazioni")]);
-    case "approfondimentiDalLavoro":
-      return join(locale, [f("approfondimenti"), f("dalLavoro")]);
+    case "pubblicazioni":
+      return join(locale, [f("pubblicazioni")]);
     case "paper":
-      return join(locale, [f("approfondimenti"), f("pubblicazioni"), route.slug]);
+      return join(locale, [f("pubblicazioni"), route.slug]);
     case "nota":
       return join(locale, [f("approfondimenti"), route.slug]);
     case "tag":
@@ -144,18 +146,21 @@ function pair(source: string, destination: string, list: { source: string; desti
 /**
  * Rewrites e redirect per next.config.ts: lo slug pubblico viene riscritto
  * sulla cartella, e la cartella (se raggiunta) fa 301 allo slug pubblico.
- * Gli slug vecchi (quaderno, notebook, insights) fanno 301 al nome attuale.
+ * Gli slug vecchi (quaderno, notebook, insights) e i percorsi dismessi fanno 301 al nome attuale.
  */
 export function routingRules() {
   const rewrites: { source: string; destination: string }[] = [];
   const redirects: { source: string; destination: string; permanent: boolean }[] = [];
-  const nested: [SegmentKey, SegmentKey][] = [
-    ["approfondimenti", "pubblicazioni"],
-    ["approfondimenti", "dalLavoro"],
-    ["approfondimenti", "tag"],
-  ];
+  const nested: [SegmentKey, SegmentKey][] = [["approfondimenti", "tag"]];
 
   for (const locale of locales) {
+    for (const { da, a, figli } of dismessi) {
+      const from = `/${locale}/${da[locale]}`;
+      const to = href(locale, a);
+      redirects.push({ source: from, destination: to, permanent: true });
+      redirects.push({ source: `${from}/:path*`, destination: figli ? `${to}/:path*` : to, permanent: true });
+    }
+
     for (const [a, b] of nested) {
       const pub = `/${locale}/${segments[a][locale]}/${segments[b][locale]}`;
       const int = `/${locale}/${folders[a]}/${folders[b]}`;
@@ -166,7 +171,7 @@ export function routingRules() {
       }
     }
     for (const key of Object.keys(segments) as SegmentKey[]) {
-      if (key === "pubblicazioni" || key === "dalLavoro" || key === "tag") continue;
+      if (key === "tag") continue;
       const pub = `/${locale}/${segments[key][locale]}`;
       const int = `/${locale}/${folders[key]}`;
       pair(pub, int, rewrites);

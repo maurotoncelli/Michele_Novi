@@ -40,3 +40,23 @@ omero.jpg
 cuffia.jpg
   Rotator cuff tear, ultrasound
   Mme Mim — CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Rotator_cuff_tear_ultrasound.jpg
+
+bicipite.jpg
+  Right distal bicipital tendon rupture (convertita in bianco e nero, ritagliata)
+  James Heilman, MD — CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Bicepstendon10.JPG
+
+protesi-anca.jpg
+  X-ray of pelvis with total arthroplasty
+  Mikael Häggström — CC0 — https://commons.wikimedia.org/wiki/File:X-ray_of_pelvis_with_total_arthroplasty.jpg
+
+gomito-capitello.jpg
+  Fracture of the capitulum humeri, intraoperative fluoroscopy
+  Thomas Zimmermann — CC BY 3.0 — https://commons.wikimedia.org/wiki/File:Capitulum_humeri_Fraktur_3.jpg
+
+periprotesica-spalla.jpg
+  Shoulder prosthesis after reduction
+  Hellerhoff — CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:44-04-Schulter-TEP_nach_Reposition.png
+
+tecnologia-protesi.jpg
+  Right reverse shoulder arthroplasty, Monoblock
+  KChri75 — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Right_RSP_Monoblock.jpg

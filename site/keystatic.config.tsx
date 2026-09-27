@@ -304,7 +304,7 @@ export default config({
         segno: fields.select({ label: "Segno", options: SEGNI, defaultValue: "spalla" }),
         peso: fields.integer({ label: "Ordine (1 = primo)", defaultValue: 10 }),
         principale: fields.checkbox({ label: "Card grande in home", defaultValue: false }),
-        secondaria: fields.checkbox({ label: "Secondaria (riga «Inoltre» con miniatura, non card)", defaultValue: false }),
+        secondaria: fields.checkbox({ label: "Secondaria (stessa scheda delle altre aree, messa in coda)", defaultValue: false }),
         lead: testo("Lead", { multiline: true }),
         corpo: fields.markdoc({ label: "Corpo (IT)" }),
         corpoEn: fields.markdoc({ label: "Corpo (EN)" }),

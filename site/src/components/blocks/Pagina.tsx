@@ -118,7 +118,7 @@ export function Sezione({
   id?: string;
   children?: ReactNode;
   className?: string;
-  tinta?: "campo" | "osso";
+  tinta?: "campo" | "osso" | "bianca";
   compatta?: boolean;
   /** Padding minimo: usata dove le schede devono stare in una schermata. */
   stretta?: boolean;
@@ -127,7 +127,7 @@ export function Sezione({
   const passo = stretta ? "py-4" : compatta ? "py-10 md:py-14" : grande ? "py-20 md:py-32" : "py-16 md:py-24";
   const sotto = children ? (compatta ? "mb-6 md:mb-8" : grande ? "mb-14 md:mb-20" : "mb-10 md:mb-14") : "";
   return (
-    <section id={id} className={tinta === "osso" ? "bg-osso-3 trama" : undefined}>
+    <section id={id} className={tinta === "osso" ? "bg-osso-3 trama" : tinta === "bianca" ? "fascia-bianca" : undefined}>
       <div className={`contenitore ${passo} ${className}`}>
         <TestaSezione eyebrow={eyebrow} indice={indice} titolo={titolo} lead={lead} azione={azione} misura={misura} className={sotto} />
         {children}

@@ -15,6 +15,11 @@ abstract: |
 riassunto:
   it: 'Lavoro in italiano sulle fratture attorno alle protesi di spalla: classificazione e opzioni di trattamento.'
   en: 'Italian-language paper on fractures around shoulder replacements: classification and treatment options.'
+immagine:
+  src: periprotesica-spalla.jpg
+  alt:
+    it: 'Radiografia di una protesi anatomica di spalla. Hellerhoff, CC BY-SA 3.0, Wikimedia Commons.'
+    en: 'Radiograph of an anatomic shoulder replacement. Hellerhoff, CC BY-SA 3.0, Wikimedia Commons.'
 tag:
   - spalla
   - protesi

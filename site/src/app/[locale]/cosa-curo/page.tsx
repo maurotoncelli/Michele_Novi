@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
 import { Disclaimer, Intestazione, Sezione } from "@/components/blocks/Pagina";
-import { SchedaMetodo, SchedaPatologia, SchedaSecondaria } from "@/components/blocks/Schede";
+import { SchedaMetodo, SchedaPatologia } from "@/components/blocks/Schede";
 import { Faq } from "@/components/blocks/Faq";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 import { ElencoSintomi } from "@/components/blocks/Sintomi";
@@ -32,8 +32,10 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
   const resto = patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla);
   const secondarie = patologie.filter((p) => p.secondaria);
   const principali = [spalla, ...resto].filter((p): p is Patologia => !!p);
+  // Dopo la spalla le altre aree stanno alla pari: le secondarie in coda, stessa scheda.
+  const altre = [...resto, ...secondarie];
 
-  const temiPer = new Map(await Promise.all(principali.map(async (p) => [p.slug, await temiDi(p, l)] as const)));
+  const temiPer = new Map(await Promise.all([...principali, ...secondarie].map(async (p) => [p.slug, await temiDi(p, l)] as const)));
   const link = (p: Patologia, ancora?: string) => hrefPatologia(p, l, ancora);
   const sintomi = await getSintomi(patologie, l);
   const percorso = pagina.percorso.map((x) => ({ titolo: pick(x.titolo, l), testo: pick(x.testo, l) })).filter((x) => x.titolo);
@@ -108,18 +110,19 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
             )}
           </>
         )}
-        {resto.length > 0 && (
+        {altre.length > 0 && (
           <div className="mt-10 border-t border-linea pt-8 md:mt-12 md:pt-10">
             <Reveal>
               <h2 className="max-w-3xl text-[1.65rem] leading-tight md:text-[1.85rem]">{m.home.cosaCuroRestoTitolo}</h2>
               <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.home.cosaCuroRestoLead}</p>
             </Reveal>
-            <ul className="mt-6 grid items-start gap-x-10 gap-y-10 sm:grid-cols-2">
-              {resto.map((p, i) => (
-                <Reveal key={p.slug} as="li" delay={i * 80} className="min-w-0">
-                  <SchedaPatologia p={p} locale={l} riga />
+            {/* Sottogriglia: schede alla stessa altezza, capitoli che partono dalla stessa riga. */}
+            <ul className="mt-8 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+              {altre.map((p, i) => (
+                <Reveal key={p.slug} as="li" delay={i * 80} className="row-span-2 grid min-w-0 grid-rows-subgrid pb-12 last:pb-0 lg:pb-0">
+                  <SchedaPatologia p={p} locale={l} colonna />
                   {(temiPer.get(p.slug)?.length ?? 0) > 0 && (
-                    <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-1 border-t border-linea pt-3 text-[0.88rem] text-grafite">
+                    <ul className="mt-5 flex flex-wrap content-start gap-x-3 gap-y-1 border-t border-linea pt-3 text-[0.88rem] text-grafite">
                       {temiPer.get(p.slug)!.map((t) => (
                         <li key={t.id}>
                           <Link href={link(p, t.id)} className="underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio">
@@ -132,18 +135,6 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
                 </Reveal>
               ))}
             </ul>
-            {secondarie.length > 0 && (
-              <Reveal className="mt-10">
-                <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
-                <ul className="flex flex-wrap gap-x-6 gap-y-2">
-                  {secondarie.map((p) => (
-                    <li key={p.slug}>
-                      <SchedaSecondaria p={p} locale={l} />
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            )}
           </div>
         )}
       </Sezione>

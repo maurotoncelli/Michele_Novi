@@ -34,7 +34,7 @@ export default async function PubblicazioniPage({ params }: PageProps<"/[locale]
       <Intestazione
         eyebrow={m.approfondimenti.titolo}
         titolo={m.approfondimenti.pubblicazioni}
-        lead={`${m.approfondimenti.pubblicazioniLead} ${m.approfondimenti.soloInglese}`}
+        lead={m.approfondimenti.pubblicazioniLead}
         compatta
         percorso={[
           { label: m.meta.siteName, href: href(l, { kind: "home" }) },

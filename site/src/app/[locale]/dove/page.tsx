@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages } from "@/i18n";
 import { getSedi, getSettings } from "@/lib/content";
@@ -23,20 +22,6 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const [s, sedi] = await Promise.all([getSettings(), getSedi()]);
   const m = getMessages(l);
-  const visito = sedi.filter((x) => x.visite);
-  const opero = sedi.filter((x) => x.chirurgia);
-  const righe = Math.max(visito.length, opero.length);
-
-  const colonna = (titolo: string, lista: typeof sedi) => (
-    <div className="dove-colonna">
-      <p className="eyebrow">{titolo}</p>
-      {lista.map((x, i) => (
-        <Reveal key={x.slug} delay={i * 70} className="h-full min-w-0">
-          <SchedaSede s={x} locale={l} />
-        </Reveal>
-      ))}
-    </div>
-  );
 
   return (
     <>
@@ -55,11 +40,13 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
       />
 
       <Sezione stretta>
-        <div className="dove-griglia" style={{ "--righe": righe } as CSSProperties}>
-          {colonna(m.dove.visito, visito)}
-          {opero.length > 0 ? <div className="dove-divisore" aria-hidden="true" /> : null}
-          {opero.length > 0 ? colonna(m.dove.opero, opero) : null}
-        </div>
+        <ul className="grid gap-x-12 gap-y-8 pt-4 md:grid-cols-2 md:gap-y-10">
+          {sedi.map((x, i) => (
+            <Reveal key={x.slug} as="li" delay={i * 70} className="min-w-0">
+              <SchedaSede s={x} locale={l} />
+            </Reveal>
+          ))}
+        </ul>
         <p className="mt-10 text-[0.8rem] text-nebbia">
           <a href="/images/sedi/ATTRIBUZIONI.txt" className="underline decoration-linea underline-offset-4 hover:text-petrolio">
             {m.dove.fotoCitta}

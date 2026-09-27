@@ -121,11 +121,11 @@ p {
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
-/* Cifra media: la riga dei fatti. Si legge, non urla. */
-.cifra-m {
+/* Cifra piccola: la riga dei fatti è di passaggio tra hero e Cosa curo. */
+.cifra-s {
   font-weight: 500;
-  font-size: clamp(2rem, 1.2rem + 2.2vw, 3.3rem);
-  line-height: 0.95;
+  font-size: clamp(1.45rem, 1.1rem + 0.9vw, 1.9rem);
+  line-height: 1;
   letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
 }
@@ -198,6 +198,16 @@ p {
 .fascia-scura ::selection {
   background: var(--color-petrolio-chiaro);
   color: var(--color-inchiostro);
+}
+
+/* Fascia bianca: Cosa curo in home, deve staccare dal crema. Fondo bianco, segni in blu: titoli in petrolio profondo,
+   testo grigio-azzurro, fili azzurri. Dentro si ridefiniscono i token, così utility e componenti seguono da soli. */
+.fascia-bianca {
+  background: var(--color-osso);
+  color: var(--color-profondo);
+  --color-inchiostro: var(--color-profondo);
+  --color-grafite: color-mix(in srgb, var(--color-profondo) 72%, white);
+  --color-linea: color-mix(in srgb, var(--color-petrolio) 28%, transparent);
 }
 
 /* Margine sinistro allineato al contenitore, per colonne a vivo (hero). */
@@ -1091,42 +1101,6 @@ a.osso:hover,
     opacity: 1;
     transform: none;
     transition: none;
-  }
-}
-
-/* Hub Dove: due colonne della stessa misura, righe allineate (subgrid). */
-.dove-griglia {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-}
-.dove-colonna {
-  display: grid;
-  gap: 2rem;
-  min-width: 0;
-}
-.dove-divisore {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .dove-griglia {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
-    grid-template-rows: auto repeat(var(--righe, 3), auto);
-    column-gap: 3rem;
-    row-gap: 0.5rem;
-  }
-  .dove-colonna {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: 1 / -1;
-    gap: 0;
-    row-gap: inherit;
-  }
-  .dove-divisore {
-    display: block;
-    grid-row: 1 / -1;
-    background: var(--color-linea);
   }
 }
 

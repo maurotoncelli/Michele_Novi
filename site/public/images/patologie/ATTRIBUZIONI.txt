@@ -1,21 +1,43 @@
-Foto delle schede Spalla e Gomito e mano. Libere da pubblicare. Da tenere finché le foto stanno sul sito.
+Foto delle schede Cosa curo. Libere da pubblicare. Da tenere finché le foto stanno sul sito.
+Licenza Unsplash: uso libero, anche commerciale, credito non obbligatorio ma dato qui e negli alt.
+https://unsplash.com/license
+
+spalla-tenda.jpg (Spalla)
+  Uomo di spalle vicino a una tenda bianca, la mano sulla spalla.
+  Adrian "Rosco" Stef — Unsplash License
+  https://unsplash.com/photos/EO1_9Z2yPQQ
+
+gomito-piegato.jpg (Gomito e mano)
+  Braccio piegato al gomito su fondo grigio chiaro.
+  莎莉 彭 (shali) — Unsplash License
+  https://unsplash.com/photos/5W2WbZhc2oY
+
+sport-volley.jpg (Traumatologia sportiva)
+  Schiacciata a beach volley al tramonto.
+  Colton Duke — Unsplash License
+  https://unsplash.com/photos/V5qPDfTTVL8
+
+ginocchio-piegato.jpg (Anca e ginocchio)
+  Gambe piegate alle ginocchia su fondo chiaro.
+  Semen Zhuravlev — Unsplash License
+  https://unsplash.com/photos/_XxH_mV8dnk
+
+Non più in uso (restano in cartella):
 
 spalla-dorso.jpg
   Rear view of a person in stark black and white
   Diego Sánchez — Unsplash License — https://unsplash.com/license
   https://unsplash.com/photos/v2DcotrNxLU
 
-gomito-bn.jpg
-  Braccio, gomito e mano su fondo chiaro, bianco e nero.
-  Fonte da confermare prima della pubblicazione. Il file era già in cartella, senza credito.
+gomito-bn.jpg, sport-bn.jpg, spalla-bn.jpg, spalla-bn-2.jpg, gomito-bn-3.jpg
+  Bozze generate, in bianco e nero.
 
 anca-ginocchio-bn.jpg
-  Ginocchio piegato, convertito in bianco e nero per la scheda Anca e ginocchio.
+  Ginocchio piegato, convertito in bianco e nero.
   Arnold Reinhold — CC BY-SA 3.0 — https://creativecommons.org/licenses/by-sa/3.0/
   https://commons.wikimedia.org/wiki/File:Knee.female.jpg
-  La versione in bianco e nero resta sotto la stessa licenza.
 
 gomito-mani.jpg
-  Non più in uso. Dramatic black and white of male arms and hands.
+  Dramatic black and white of male arms and hands.
   Eugene Golovesov — Pexels License — https://www.pexels.com/license/
   https://www.pexels.com/photo/11662256/

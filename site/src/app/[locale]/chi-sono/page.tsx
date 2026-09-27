@@ -134,20 +134,21 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
         <Sezione eyebrow={m.chiSono.comeValuto} titolo={manifesto.titolo} lead={(passi.length && manifesto.resto ? spezza(manifesto.resto).titolo : manifesto.resto) || undefined} tinta="osso">
           {(passi.length > 0 || visitaFoto) && (
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-              {/* Da lg la foto prende l'altezza dei passi: bordo alto e basso allineati al testo. */}
+              {/* Da lg la foto prende l'altezza dei passi: bordo alto e basso allineati ai fili dell'elenco. */}
               {visitaFoto && (
                 <Reveal className="lg:h-full">
                   <VideoLastra foto={visitaFoto} alt={pick(p.visita?.alt, l) || m.chiSono.comeValuto} ratio="4/3" sizes="(min-width: 1024px) 34vw, 100vw" className="lg:aspect-auto lg:h-full lg:min-h-[18rem]" />
                 </Reveal>
               )}
               {passi.length > 0 && (
-                <ol className="divide-y divide-linea">
+                <ol className="divide-y divide-linea border-y border-linea">
                   {passi.map((v, i) => (
-                    <Reveal key={i} as="li" delay={i * 130} className="grid grid-cols-[3rem_minmax(0,1fr)] gap-5 py-5 first:pt-0 last:pb-0 md:grid-cols-[4rem_minmax(0,1fr)] md:py-6">
-                      <span className="pt-0.5 text-[1.6rem] font-medium leading-none tracking-[-0.03em] text-rame md:text-[2rem]" aria-hidden="true">
+                    <Reveal key={i} as="li" delay={i * 130} className="group/passo relative isolate grid grid-cols-[3rem_minmax(0,1fr)] gap-5 px-4 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:px-5 md:py-6">
+                      <span aria-hidden="true" className="absolute inset-0 -z-10 origin-left scale-x-0 bg-osso/80 transition-transform duration-700 ease-osso group-hover/passo:scale-x-100 motion-reduce:transition-none" />
+                      <span className="pt-0.5 text-[1.6rem] font-medium leading-none tracking-[-0.03em] text-rame transition-transform duration-500 ease-osso group-hover/passo:translate-x-1.5 motion-reduce:transform-none md:text-[2rem]" aria-hidden="true">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <div className="min-w-0">
+                      <div className="min-w-0 transition-transform duration-500 ease-osso group-hover/passo:translate-x-1 motion-reduce:transform-none">
                         <h3 className="text-[1.25rem] leading-tight md:text-[1.4rem]">{pick(v.titolo, l)}</h3>
                         {pick(v.testo, l) && <p className="mt-2 max-w-xl text-[0.98rem] leading-relaxed text-grafite">{pick(v.testo, l)}</p>}
                       </div>

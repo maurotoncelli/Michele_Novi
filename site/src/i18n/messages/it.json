@@ -33,7 +33,7 @@
   },
   "home": {
     "cosaCuroTitolo": "La spalla.",
-    "cosaCuroRestoTitolo": "Gomito, mano e traumatologia sportiva.",
+    "cosaCuroRestoTitolo": "Gomito e mano, sport, anca e ginocchio.",
     "cosaCuroRestoLead": "Gomito e mano rientrano nella stessa pratica. Anca e ginocchio si trattano in ospedale.",
     "doveTitolo": "Dove visito e dove opero.",
     "doveLead": "Si prenota sempre dallo stesso numero, qualunque sia la struttura.",
@@ -90,9 +90,13 @@
     "percorsoEyebrow": "Come funziona",
     "metodoEyebrow": "Il metodo",
     "metodoLead": "L'indicazione precede la tecnica. Artroscopia, chirurgia aperta o protesi si scelgono sul quadro clinico.",
+    "tecniche": [
+      { "icona": "artroscopia", "nome": "Artroscopia", "nota": "Accessi di pochi millimetri" },
+      { "icona": "aperta", "nome": "Chirurgia aperta", "nota": "Fratture, innesti, transfer" },
+      { "icona": "protesi", "nome": "Protesi", "nota": "Anatomica o inversa" }
+    ],
     "lead": "Specialista della spalla e dell'arto superiore. Traumatologia sportiva. In ospedale anche anca e ginocchio.",
     "chiusura": "La prima visita decide il percorso: curare, aspettare o operare.",
-    "secondarie": "Inoltre",
     "faq": "Domande frequenti",
     "correlate": "Pagine correlate",
     "doveSiTratta": "Dove si tratta",
@@ -103,8 +107,6 @@
     "titolo": "Dove visito e dove opero.",
     "lead": "Quattro strutture in Toscana. Si prenota sempre tramite la segreteria, qualunque sia la sede.",
     "fotoCitta": "Foto delle città",
-    "visito": "Dove visito",
-    "opero": "Dove opero",
     "visite": "Visite",
     "chirurgia": "Chirurgia",
     "infiltrazioni": "Infiltrazioni",
@@ -129,7 +131,7 @@
     "tutto": "Tutto",
     "pubblicazioni": "Pubblicazioni",
     "dalLavoro": "Dal lavoro",
-    "pubblicazioniLead": "Articoli su riviste con revisione. In inglese, con link alla fonte.",
+    "pubblicazioniLead": "Le pubblicazioni scientifiche del Dott. Michele Novi su riviste con revisione tra pari. Per ogni lavoro, una sintesi in italiano e il collegamento all'articolo originale.",
     "dalLavoroLead": "Note in prima persona per pazienti. Un tema per pezzo.",
     "tag": "Tag",
     "taggato": "Con il tag",
@@ -153,7 +155,6 @@
     "vuoto": "Ancora nessun pezzo qui.",
     "disclaimer": "Queste note informano e non sostituiscono la visita. Non descrivono casi identificabili.",
     "feed": "Feed RSS",
-    "soloInglese": "I paper restano in inglese: è la lingua in cui sono stati pubblicati.",
     "video": "Video"
   },
   "contatti": {

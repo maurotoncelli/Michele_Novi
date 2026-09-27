@@ -10,7 +10,7 @@ import { Segno } from "../ui/Segno";
 import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
-import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia, SchedaSecondaria } from "./Schede";
+import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPaper, SchedaPatologia } from "./Schede";
 import { Stelle } from "@/components/ui/Stelle";
 import { Parole } from "@/components/ui/Parole";
 import { Striscia } from "@/components/blocks/Striscia";
@@ -105,14 +105,14 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
 
   return (
     <section id="fatti" className="hero-arrivo border-y border-linea" aria-label={m.home.fiduciaEyebrow}>
-      <ul className="contenitore grid grid-cols-2 gap-x-8 gap-y-12 py-12 md:py-16 lg:grid-cols-4">
+      <ul className="contenitore grid grid-cols-2 gap-x-6 gap-y-4 py-5 md:py-6 lg:grid-cols-4">
         {fatti.map((f, i) => (
-          <Reveal key={f.label} as="li" delay={i * 90} className="min-w-0">
-            <p className="cifra-m flex items-baseline gap-2">
-              {f.prefisso && <span className="text-[0.32em] font-medium tracking-normal text-grafite">{f.prefisso}</span>}
+          <Reveal key={f.label} as="li" delay={i * 90} className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+            <p className="cifra-s flex shrink-0 items-baseline gap-1.5">
+              {f.prefisso && <span className="text-[0.45em] font-medium tracking-normal text-grafite">{f.prefisso}</span>}
               <Contatore valore={f.valore} />
             </p>
-            <p className="mt-4 max-w-[13rem] text-[0.95rem] leading-snug text-grafite">{f.label}</p>
+            <p className="max-w-[11rem] text-[0.82rem] leading-snug text-grafite">{f.label}</p>
           </Reveal>
         ))}
       </ul>
@@ -120,22 +120,33 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
   );
 }
 
-/* ------------------------------------------------------------------ 01 Cosa curo: la spalla da sola, poi gomito, mano e sport */
+/* ------------------------------------------------------------------ 01 Cosa curo: spalla grande a sinistra, le altre aree alla pari a destra, tutto in una schermata */
 export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie: Patologia[]; sintomi?: Sintomo[]; locale: Locale }) {
   const m = getMessages(locale);
   const metodo = patologie.find((p) => p.area === "metodo");
   const spalla = patologie.find((p) => p.area === "spalla");
-  const resto = patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla);
-  const secondarie = patologie.filter((p) => p.secondaria);
+  // In home anche le secondarie (anca e ginocchio) stanno nella stessa colonna: prima le principali, poi loro.
+  const resto = [...patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla), ...patologie.filter((p) => p.secondaria)];
   if (!spalla && !resto.length) return null;
   return (
     <>
-      <Sezione indice="01" eyebrow={m.nav.cosaCuro} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="osso" compatta>
-        {spalla && (
-          <Reveal>
-            <SchedaPatologia p={spalla} locale={locale} apertura />
-          </Reveal>
-        )}
+      <Sezione indice="01" eyebrow={m.nav.cosaCuro} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="bianca" compatta>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
+          {spalla && (
+            <Reveal>
+              <SchedaPatologia p={spalla} locale={locale} apertura />
+            </Reveal>
+          )}
+          {resto.length > 0 && (
+            <ul className="flex flex-col divide-y divide-linea border-t border-linea pt-6 lg:border-t-0 lg:pt-0">
+              {resto.map((p, i) => (
+                <Reveal key={p.slug} as="li" delay={i * 80} className="flex min-w-0 flex-1 flex-col justify-center py-6 first:pt-0 last:pb-0">
+                  <SchedaPatologia p={p} locale={locale} riga />
+                </Reveal>
+              ))}
+            </ul>
+          )}
+        </div>
         {sintomi.length > 0 && (
           <div className="mt-10 md:mt-12">
             <Reveal className="mb-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-2">
@@ -151,33 +162,6 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
               )}
             </Reveal>
             <ElencoSintomi sintomi={sintomiVari(sintomi, 4)} />
-          </div>
-        )}
-        {resto.length > 0 && (
-          <div className="mt-10 border-t border-linea pt-8 md:mt-12 md:pt-10">
-            <Reveal>
-              <h2 className="max-w-3xl text-[1.65rem] leading-tight md:text-[1.85rem]">{m.home.cosaCuroRestoTitolo}</h2>
-              <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.home.cosaCuroRestoLead}</p>
-            </Reveal>
-            <ul className="mt-6 grid items-start gap-x-10 gap-y-8 sm:grid-cols-2">
-              {resto.map((p, i) => (
-                <Reveal key={p.slug} as="li" delay={i * 80} className="min-w-0">
-                  <SchedaPatologia p={p} locale={locale} riga />
-                </Reveal>
-              ))}
-            </ul>
-            {secondarie.length > 0 && (
-              <Reveal className="mt-10">
-                <p className="eyebrow mb-3">{m.cosaCuro.secondarie}</p>
-                <ul className="flex flex-wrap gap-x-6 gap-y-2">
-                  {secondarie.map((p) => (
-                    <li key={p.slug}>
-                      <SchedaSecondaria p={p} locale={locale} />
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            )}
           </div>
         )}
       </Sezione>

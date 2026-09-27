@@ -15,6 +15,11 @@ abstract: |
 riassunto:
   it: 'Una panoramica su pianificazione 3D, guide su misura, navigazione e realtà aumentata nella protesi di spalla: cosa funziona già e cosa è ancora ricerca.'
   en: 'An overview of 3D planning, patient-specific guides, navigation and augmented reality in shoulder replacement: what already works and what is still research.'
+immagine:
+  src: tecnologia-protesi.jpg
+  alt:
+    it: 'Radiografia di una protesi inversa di spalla. KChri75, CC BY-SA 4.0, Wikimedia Commons.'
+    en: 'Radiograph of a reverse shoulder replacement. KChri75, CC BY-SA 4.0, Wikimedia Commons.'
 tag:
   - spalla
   - protesi

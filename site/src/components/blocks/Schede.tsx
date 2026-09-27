@@ -15,11 +15,11 @@ function Lastra({
   className = "",
   children,
 }: {
-  ratio?: "4/3" | "5/4" | "4/5" | "3/2";
+  ratio?: "4/3" | "5/4" | "4/5" | "3/2" | "16/9";
   className?: string;
   children: ReactNode;
 }) {
-  const forma = ratio === "5/4" ? "aspect-[5/4]" : ratio === "4/5" ? "aspect-[4/5]" : ratio === "3/2" ? "aspect-[3/2]" : "aspect-[4/3]";
+  const forma = ratio === "5/4" ? "aspect-[5/4]" : ratio === "4/5" ? "aspect-[4/5]" : ratio === "3/2" ? "aspect-[3/2]" : ratio === "16/9" ? "aspect-[16/9]" : "aspect-[4/3]";
   return (
     <div className={`relative overflow-hidden bg-osso-2 ${forma} ${className}`}>
       <div className="absolute inset-0 origin-center transition-transform duration-700 ease-osso group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none">
@@ -58,8 +58,8 @@ function classeFuoco(src: string) {
   return chiave ? fuoco[chiave] : "object-center";
 }
 
-/** Card patologia. Default: 5/4 compatta (correlate). `riga` = disegno piccolo a sinistra, lead intero. `colonna` = in home, le aree dopo la spalla affiancate alla pari (foto sopra). `ampia` = foto a sinistra, testo a destra. `apertura` = in home, la spalla grande (foto 3/2, titolo sotto) accanto alle altre aree. */
-export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false, ampia = false, apertura = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean; ampia?: boolean; apertura?: boolean }) {
+/** Card patologia. Default: 5/4 compatta (correlate). `riga` = in home, accanto alla spalla: foto 5/4 a sinistra, lead intero. `colonna` = in home, le aree dopo la spalla affiancate alla pari (foto sopra). `ampia` = foto a sinistra, testo a destra. `apertura` = in home, la spalla grande (foto 3/2, titolo sotto) accanto alle altre aree. `fascia` = in home, un'area a tutta larghezza e bassa: foto 16/9 a sinistra, testo a destra. */
+export async function SchedaPatologia({ p, locale, index, riga = false, colonna = false, ampia = false, apertura = false, fascia = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; colonna?: boolean; ampia?: boolean; apertura?: boolean; fascia?: boolean }) {
   const m = getMessages(locale);
   const segno = isSegno(p.segno) ? p.segno : "spalla";
   const catalogo = await getDisegni();
@@ -80,8 +80,8 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid grid-cols-[minmax(0,7.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] lg:gap-7">
-        <Lastra ratio="4/3" className="self-start">{media}</Lastra>
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+        <Lastra ratio="5/4" className="self-start">{media}</Lastra>
         <div className="flex min-w-0 flex-col">
           <h3 className="text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
@@ -92,11 +92,34 @@ export async function SchedaPatologia({ p, locale, index, riga = false, colonna 
     );
   }
 
+  if (fascia) {
+    const tutte = await getSedi();
+    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
+    return (
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-5 bg-petrolio-3/70 p-4 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-6 md:p-5 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-10">
+        <Lastra ratio="16/9" className="w-full">
+          {media}
+        </Lastra>
+        <div className="min-w-0">
+          <h3 className="text-[1.3rem] leading-tight transition-colors duration-500 group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
+          <p className="mt-2 max-w-2xl text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            {credito(p, dove, locale) ? <p className="text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p> : <span />}
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-[0.85rem] font-medium text-petrolio">
+              {m.cta.scopri}
+              <Segno nome="freccia" size={16} className="transition-transform duration-500 ease-osso group-hover:translate-x-1" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
   if (apertura) {
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col">
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col lg:row-span-2 lg:grid lg:grid-rows-subgrid">
         <Lastra ratio="3/2" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
           {foto ? (
             <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 40rem, 100vw" className={`object-cover ${classeFuoco(foto)}`} />

@@ -120,33 +120,42 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
   );
 }
 
-/* ------------------------------------------------------------------ 01 Cosa curo: spalla grande a sinistra, le altre aree alla pari a destra, tutto in una schermata */
+/* ------------------------------------------------------------------ 01 Cosa curo: spalla grande a sinistra, le altre aree alla pari a destra, lo sport in una fascia sotto */
 export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie: Patologia[]; sintomi?: Sintomo[]; locale: Locale }) {
   const m = getMessages(locale);
   const metodo = patologie.find((p) => p.area === "metodo");
   const spalla = patologie.find((p) => p.area === "spalla");
+  // Lo sport attraversa le altre aree (anche la spalla): sta da solo, in una fascia a tutta larghezza.
+  const sport = patologie.find((p) => p.area === "sport");
   // In home anche le secondarie (anca e ginocchio) stanno nella stessa colonna: prima le principali, poi loro.
-  const resto = [...patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla), ...patologie.filter((p) => p.secondaria)];
-  if (!spalla && !resto.length) return null;
+  const resto = [...patologie.filter((p) => !p.secondaria && p !== metodo && p !== spalla && p !== sport), ...patologie.filter((p) => p.secondaria)];
+  if (!spalla && !resto.length && !sport) return null;
+  // Con due aree a destra la colonna segue le righe della spalla: la prima accanto alla foto, la seconda accanto al titolo.
+  const allineate = !!spalla && resto.length === 2;
   return (
     <>
       <Sezione indice="01" eyebrow={m.nav.cosaCuro} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="bianca" compatta>
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-12 lg:gap-y-0 xl:gap-x-16">
           {spalla && (
-            <Reveal>
+            <Reveal className="lg:row-span-2 lg:grid lg:grid-rows-subgrid">
               <SchedaPatologia p={spalla} locale={locale} apertura />
             </Reveal>
           )}
           {resto.length > 0 && (
-            <ul className="flex flex-col divide-y divide-linea border-t border-linea pt-6 lg:border-t-0 lg:pt-0">
+            <ul className={`flex flex-col divide-y divide-linea border-t border-linea pt-6 lg:row-span-2 lg:border-t-0 lg:pt-0 ${allineate ? "lg:grid lg:grid-rows-subgrid" : ""}`}>
               {resto.map((p, i) => (
-                <Reveal key={p.slug} as="li" delay={i * 80} className="flex min-w-0 flex-1 flex-col justify-center py-6 first:pt-0 last:pb-0">
+                <Reveal key={p.slug} as="li" delay={i * 80} className={`flex min-w-0 flex-col py-6 first:pt-0 last:pb-0 ${allineate ? "" : "flex-1 justify-center first:justify-start last:justify-end"}`}>
                   <SchedaPatologia p={p} locale={locale} riga />
                 </Reveal>
               ))}
             </ul>
           )}
         </div>
+        {sport && (
+          <Reveal className="mt-10 md:mt-12">
+            <SchedaPatologia p={sport} locale={locale} fascia />
+          </Reveal>
+        )}
         {sintomi.length > 0 && (
           <div className="mt-10 md:mt-12">
             <Reveal className="mb-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-2">

@@ -145,7 +145,7 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
                   {passi.map((v, i) => (
                     <Reveal key={i} as="li" delay={i * 130} className="group/passo relative isolate grid grid-cols-[3rem_minmax(0,1fr)] gap-5 px-4 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:px-5 md:py-6">
                       <span aria-hidden="true" className="absolute inset-0 -z-10 origin-left scale-x-0 bg-osso/80 transition-transform duration-700 ease-osso group-hover/passo:scale-x-100 motion-reduce:transition-none" />
-                      <span className="pt-0.5 text-[1.6rem] font-medium leading-none tracking-[-0.03em] text-rame transition-transform duration-500 ease-osso group-hover/passo:translate-x-1.5 motion-reduce:transform-none md:text-[2rem]" aria-hidden="true">
+                      <span className="pt-0.5 text-[1.6rem] font-medium leading-none tracking-[-0.03em] text-petrolio transition-transform duration-500 ease-osso group-hover/passo:translate-x-1.5 motion-reduce:transform-none md:text-[2rem]" aria-hidden="true">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <div className="min-w-0 transition-transform duration-500 ease-osso group-hover/passo:translate-x-1 motion-reduce:transform-none">

@@ -59,6 +59,10 @@ function classeFuoco(src: string) {
   return chiave ? fuoco[chiave] : "object-center";
 }
 
+/** In home, all'hover la scheda si accende con la tinta della fascia dello sport: il fondo sporge oltre i bordi senza spostare il layout. */
+const accesa =
+  "relative isolate before:absolute before:-inset-3 before:-z-10 before:bg-petrolio-3/70 before:opacity-0 before:transition-opacity before:duration-500 before:ease-osso hover:before:opacity-100 md:before:-inset-4";
+
 /** Card patologia. Default: 5/4 compatta (correlate). `riga` = in home, accanto alla spalla: foto 5/4 a sinistra, lead intero; con `alta`, da desktop la foto si allunga a tutta l'altezza della riga. `colonna` = in home, le aree dopo la spalla affiancate alla pari (foto sopra). `ampia` = foto a sinistra, larga una colonna della griglia a tre come le schede `colonna`, testo a destra. `apertura` = in home, la spalla grande (foto 3/2, titolo sotto) accanto alle altre aree. `fascia` = in home, un'area a tutta larghezza e bassa: foto 16/9 a sinistra, testo a destra. */
 export async function SchedaPatologia({ p, locale, index, riga = false, alta = false, colonna = false, ampia = false, apertura = false, fascia = false }: { p: Patologia; locale: Locale; index?: number; riga?: boolean; alta?: boolean; colonna?: boolean; ampia?: boolean; apertura?: boolean; fascia?: boolean }) {
   const m = getMessages(locale);
@@ -81,7 +85,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className={`group grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] ${alta ? "lg:flex-1" : ""}`}>
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className={`group ${accesa} grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] ${alta ? "lg:flex-1" : ""}`}>
         <Lastra ratio="5/4" className={`self-start ${alta ? "lg:aspect-auto lg:self-stretch" : ""}`}>{media}</Lastra>
         <div className="flex min-w-0 flex-col">
           <h3 className="text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
@@ -97,7 +101,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-5 bg-petrolio-3/70 p-4 sm:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] sm:gap-6 md:p-5 lg:grid-cols-[minmax(0,30rem)_minmax(0,1fr)] lg:gap-10">
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-5 bg-petrolio-3/70 p-4 transition-colors duration-500 ease-osso hover:bg-petrolio-3 sm:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] sm:gap-6 md:p-5 lg:grid-cols-[minmax(0,30rem)_minmax(0,1fr)] lg:gap-10">
         <Lastra ratio="3/2" className="w-full">
           {media}
         </Lastra>
@@ -120,7 +124,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
     const tutte = await getSedi();
     const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
-      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col lg:row-span-2 lg:grid lg:grid-rows-subgrid">
+      <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className={`group ${accesa} flex h-full flex-col lg:row-span-2 lg:grid lg:grid-rows-subgrid`}>
         <Lastra ratio="3/2" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
           {foto ? (
             <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 40rem, 100vw" className={`object-cover ${classeFuoco(foto)}`} />

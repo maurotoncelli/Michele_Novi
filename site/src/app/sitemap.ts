@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry(() => ({ kind: "approfondimenti" }), 0.7),
     entry(() => ({ kind: "pubblicazioni" }), 0.6),
     entry(() => ({ kind: "contatti" }), 0.9),
-    ...patologie.map((p) => entry((l) => ({ kind: "cosaCuro", slug: slugPatologia(p, l) }), p.principale ? 0.9 : 0.8)),
+    ...patologie.map((p) => entry((l) => ({ kind: "cosaCuro", slug: slugPatologia(p, l) }), p.area === "spalla" ? 0.9 : 0.8)),
     ...sedi.map((x) => entry(() => ({ kind: "dove", slug: x.slug }), 0.8)),
     ...paper.map((p) => entry(() => ({ kind: "paper", slug: p.slug }), 0.5, new Date(`${p.anno}-01-01`))),
     ...note.map((n) => entry((l) => ({ kind: "nota", slug: slugNota(n, l) }), 0.6, new Date(n.aggiornato ?? n.data ?? now))),

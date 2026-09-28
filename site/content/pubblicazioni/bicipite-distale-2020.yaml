@@ -15,11 +15,6 @@ abstract: |
 riassunto:
   it: 'Il tendine del bicipite si stacca dall''avambraccio. In 14 pazienti è stato reinserito con un solo accesso anteriore, bottone corticale e vite. A 18 mesi il movimento era quasi quello del lato sano e non c''è stata re-rottura. Due formicolii transitori, un caso di ossificazione senza conseguenze.'
   en: 'The biceps tendon tears off the forearm. In 14 patients it was reattached through a single anterior approach, with a cortical button and a screw. At 18 months motion was almost that of the uninjured side and there was no re-rupture. Two transient paraesthesias, one ossification without clinical effect.'
-immagine:
-  src: bicipite.jpg
-  alt:
-    it: 'Braccio destro con rottura del tendine distale del bicipite: il muscolo risale verso la spalla. James Heilman, CC BY-SA 3.0, Wikimedia Commons.'
-    en: 'Right arm with a distal biceps tendon rupture: the muscle retracts towards the shoulder. James Heilman, CC BY-SA 3.0, Wikimedia Commons.'
 tag:
   - gomito
   - tendine

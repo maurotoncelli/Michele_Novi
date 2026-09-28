@@ -13,11 +13,6 @@ abstract: ''
 riassunto:
   it: 'Analisi dei contenziosi dopo protesi d''anca: quali complicanze portano più spesso a reclamo e cosa insegnano su informazione al paziente e prevenzione.'
   en: 'Analysis of claims after hip replacement: which complications most often lead to litigation and what they teach about patient information and prevention.'
-immagine:
-  src: protesi-anca.jpg
-  alt:
-    it: 'Radiografia del bacino con una protesi totale d''anca. Mikael Häggström, CC0, Wikimedia Commons.'
-    en: 'Pelvic radiograph with a total hip replacement. Mikael Häggström, CC0, Wikimedia Commons.'
 tag:
   - anca
   - protesi

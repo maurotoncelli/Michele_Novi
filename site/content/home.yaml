@@ -19,27 +19,6 @@ lavoro:
       it: Aula universitaria durante una lezione, in bianco e nero. Foto di Dom Fou, Unsplash.
       en: University lecture hall during a class, in black and white. Photo by Dom Fou, Unsplash.
   video: ''
-fiducia:
-  - testo:
-      it: Dirigente medico, Ortopedia Protesica — Ospedale San Pietro Igneo, Fucecchio
-      en: Consultant, Joint Replacement Unit — San Pietro Igneo Hospital, Fucecchio
-    segno: ospedale
-  - testo:
-      it: Fellowship Harvard / Massachusetts General Hospital 2025, transfer muscolari di spalla
-      en: Harvard / Massachusetts General Hospital fellowship 2025, shoulder tendon transfers
-    segno: spalla
-  - testo:
-      it: Formazione a Berlino (Charité), Seattle, Londra e Cattolica
-      en: Trained in Berlin (Charité), Seattle, London and Cattolica
-    segno: globo
-  - testo:
-      it: Pubblicazioni su riviste internazionali con revisione
-      en: Publications in peer-reviewed international journals
-    segno: approfondimenti
-  - testo:
-      it: Docente ai corsi di artroscopia di spalla, ICLO Verona
-      en: Faculty at shoulder arthroscopy courses, ICLO Verona
-    segno: artroscopia
 fasce:
   - tipo: patologie
     attiva: true

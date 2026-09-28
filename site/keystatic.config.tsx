@@ -110,8 +110,7 @@ export default config({
         dominio: fields.url({ label: "Dominio (https://…)", description: "Senza slash finale." }),
         telefono: fields.text({
           label: "Telefono segreteria",
-          description:
-            "Formato internazionale, es. +39 348 0000000. VUOTO finché le due cifre non coincidono (bibbia/APERTI). Se vuoto, il sito non mostra nessun bottone Chiama.",
+          description: "Formato internazionale, es. +39 348 0000000. Un numero per tutte le sedi. Se vuoto, il sito non mostra nessun bottone Chiama.",
         }),
         whatsapp: fields.text({
           label: "WhatsApp (solo cifre, es. 39348…)",
@@ -216,10 +215,6 @@ export default config({
           },
           { label: "Fascia Percorso: lastra a sinistra" },
         ),
-        fiducia: fields.array(
-          fields.object({ testo: testo("Voce"), segno: fields.select({ label: "Segno", options: SEGNI, defaultValue: "ospedale" }) }),
-          { label: "Perché fidarsi (4–5 voci)", itemLabel: (p) => p.fields.testo.fields.it.value },
-        ),
         fasce: fields.array(
           fields.object({
             tipo: fields.select({
@@ -227,7 +222,7 @@ export default config({
               options: [
                 { label: "Cosa curo", value: "patologie" },
                 { label: "Dove", value: "sedi" },
-                { label: "Perché fidarsi", value: "fiducia" },
+                { label: "Percorso (incarico e fellowship)", value: "fiducia" },
                 { label: "Recensioni", value: "recensioni" },
                 { label: "Approfondimenti (articoli per pazienti)", value: "approfondimenti" },
                 { label: "Pubblicazioni scientifiche", value: "pubblicazioni" },
@@ -237,7 +232,11 @@ export default config({
             }),
             attiva: fields.checkbox({ label: "Attiva", defaultValue: true }),
           }),
-          { label: "Ordine delle fasce", itemLabel: (p) => `${p.fields.tipo.value}${p.fields.attiva.value ? "" : " (off)"}` },
+          {
+            label: "Ordine delle fasce",
+            description: "Accende e spegne le fasce. I numeri delle sezioni (01 Cosa curo, 02 Dove, 03 Percorso…) sono fissi: se cambi l'ordine, non lo seguono.",
+            itemLabel: (p) => `${p.fields.tipo.value}${p.fields.attiva.value ? "" : " (off)"}`,
+          },
         ),
         seo,
       },
@@ -304,7 +303,6 @@ export default config({
         area: fields.select({ label: "Area", options: AREE, defaultValue: "spalla" }),
         segno: fields.select({ label: "Segno", options: SEGNI, defaultValue: "spalla" }),
         peso: fields.integer({ label: "Ordine (1 = primo)", defaultValue: 10 }),
-        principale: fields.checkbox({ label: "Card grande in home", defaultValue: false }),
         secondaria: fields.checkbox({ label: "Secondaria (stessa scheda delle altre aree, messa in coda)", defaultValue: false }),
         lead: testo("Lead", { multiline: true }),
         corpo: fields.markdoc({ label: "Corpo (IT)" }),
@@ -413,7 +411,6 @@ export default config({
           itemLabel: (p) => p.value,
         }),
         principale: fields.checkbox({ label: "Tra le principali (CV)", defaultValue: false }),
-        immagine: immagine("Immagine", "approfondimenti", "Al momento non mostrata: le pubblicazioni sono impaginate come elenco bibliografico, senza foto."),
         patologie: fields.array(fields.relationship({ label: "Pagina", collection: "patologie" }), {
           label: "Patologie correlate",
           itemLabel: (p) => p.value ?? "",
@@ -477,10 +474,7 @@ export default config({
         risposta: testo("Risposta", { multiline: true }),
         contesto: fields.select({
           label: "Dove appare",
-          options: [
-            { label: "Contatti / prima visita", value: "contatti" },
-            { label: "Home", value: "home" },
-          ],
+          options: [{ label: "Contatti / prima visita", value: "contatti" }],
           defaultValue: "contatti",
         }),
         peso: fields.integer({ label: "Ordine", defaultValue: 10 }),
@@ -499,8 +493,6 @@ export default config({
         testo: testo("Testo", { multiline: true }),
         piattaforma: fields.text({ label: "Piattaforma (Google, Doctolib, WhatsApp, …)" }),
         stelle: fields.integer({ label: "Stelle (1–5)", description: "Vuoto = nessuna stella (es. un messaggio privato, che non ha un voto).", defaultValue: 5, validation: { min: 1, max: 5 } }),
-        data: fields.date({ label: "Data" }),
-        sede: fields.relationship({ label: "Sede", collection: "sedi" }),
         peso: fields.integer({ label: "Ordine in home (più basso = prima)", defaultValue: 10 }),
         mostra: fields.checkbox({ label: "Mostra sul sito", defaultValue: false }),
       },

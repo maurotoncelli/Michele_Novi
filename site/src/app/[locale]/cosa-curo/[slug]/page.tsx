@@ -14,7 +14,7 @@ import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { Sommario } from "@/components/blocks/Sommario";
 import { srcMedia } from "@/lib/media";
-import { ModuloSede, SchedaPatologia } from "@/components/blocks/Schede";
+import { classeFuoco, ModuloSede, SchedaPatologia } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export const dynamicParams = false;
@@ -95,7 +95,7 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
             {(foto || disegno) && (
               <div className="relative aspect-[5/4] overflow-hidden bg-osso-2">
                 {foto ? (
-                  <Image src={foto} alt={mediaAlt} fill quality={92} sizes="(min-width: 768px) 36vw, 100vw" className="object-cover object-[50%_22%]" />
+                  <Image src={foto} alt={mediaAlt} fill quality={92} sizes="(min-width: 768px) 36vw, 100vw" className={`object-cover ${classeFuoco(foto)}`} />
                 ) : (
                   disegno && <Disegno src={disegno.src} alt={disegno.alt} />
                 )}

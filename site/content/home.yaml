@@ -1,17 +1,21 @@
 eyebrow:
-  it: Dott. Michele Novi · Ortopedico · Toscana
-  en: Dr Michele Novi · Orthopaedic surgeon · Tuscany
+  it: Ortopedico e traumatologo · Toscana
+  en: Orthopaedic and trauma surgeon · Tuscany
 titolo:
-  it: Spalla e arto superiore.
-  en: Shoulder and upper limb.
+  it: Dott. Michele Novi
+  en: Dr Michele Novi
 sottotitolo:
-  it: Chirurgo ortopedico. Visito a Fucecchio, Pisa e Peccioli; opero a Fucecchio, Pisa e Sesto Fiorentino. La prima visita serve a decidere la strada, non l'intervento.
-  en: Orthopaedic surgeon. I see patients in Fucecchio, Pisa and Peccioli; I operate in Fucecchio, Pisa and Sesto Fiorentino. The first visit is for deciding the path, not the operation.
+  it: |-
+    Chirurgia della spalla, del gomito e dell'arto superiore.
+    Dirigente medico in ospedale pubblico e formatosi tra Berlino, Seattle e Boston (Harvard), si occupa di patologie dei tendini, instabilità, artrosi e fratture. Dalla diagnosi in visita con ecografia fino all'artroscopia e alla protesi, quando servono davvero.
+  en: |-
+    Shoulder, elbow and upper-limb surgery.
+    Public hospital consultant trained in Berlin, Seattle and Boston (Harvard), treating tendon conditions, instability, arthritis and fractures. From in-office ultrasound diagnosis to arthroscopy and joint replacement, when truly needed.
 ritratto:
-  src: hero-novi-v6.jpeg
+  src: hero-novi-v8.jpg
   alt:
-    it: Bozza — ritratto di Michele in sala operatoria, da sostituire con la foto dello shooting
-    en: Draft — portrait of Michele in the operating theatre, replace with the shoot
+    it: Dott. Michele Novi in sala operatoria
+    en: Dr Michele Novi in the operating theatre
 lavoro:
   foto:
     src: formazione-aula.jpg

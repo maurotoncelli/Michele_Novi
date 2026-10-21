@@ -53,8 +53,9 @@ const fuoco: Record<string, string> = {
   "gomito-atleta": "object-[center_45%]",
   "ginocchio-atleta": "object-[center_55%]",
   "sport-volo": "object-[center_50%]",
+  "come-si-opera": "object-[46%_center]",
 };
-function classeFuoco(src: string) {
+export function classeFuoco(src: string) {
   const chiave = Object.keys(fuoco).find((k) => src.includes(k));
   return chiave ? fuoco[chiave] : "object-center";
 }
@@ -226,7 +227,7 @@ export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale
     <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-24">
       <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
         {foto ? (
-          <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-[50%_22%]" />
+          <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 42vw, 100vw" className={`object-cover ${classeFuoco(foto)}`} />
         ) : (
           <div className="fluttua absolute inset-0" style={{ "--fluttua-da": "6%", "--fluttua-a": "-6%" } as CSSProperties}>
             {disegno ? (

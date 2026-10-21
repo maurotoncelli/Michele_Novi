@@ -27,6 +27,12 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
   const wa = waHref(settings.whatsapp, pick(settings.whatsappTesto, locale));
   const immagine = home.ritratto;
   const foto = srcMedia(immagine?.src, "home") ?? "/images/home/hero-sala-placeholder.jpg";
+  const righeSottotitolo = pick(home.sottotitolo, locale)
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const specializzazione = righeSottotitolo.length > 1 ? righeSottotitolo[0] : null;
+  const corpoSottotitolo = righeSottotitolo.length > 1 ? righeSottotitolo.slice(1).join(" ") : righeSottotitolo[0] ?? "";
 
   return (
     <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-campo">
@@ -47,9 +53,14 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
         {/* Testo */}
         <div className="hero-testo margine-sx flex flex-col justify-end pb-12 pt-10 lg:pb-20 lg:pt-16 lg:pr-12">
           <Reveal immediate className="max-w-2xl">
-            {pick(home.eyebrow, locale) && <p className="eyebrow mb-5">{pick(home.eyebrow, locale)}</p>}
+            {pick(home.eyebrow, locale) && <p className="eyebrow mb-4">{pick(home.eyebrow, locale)}</p>}
             <h1 className="display-xl">{pick(home.titolo, locale)}</h1>
-            <p className="lead mt-7 max-w-xl">{pick(home.sottotitolo, locale)}</p>
+            {specializzazione && (
+              <p className="mt-3 text-[clamp(1.3rem,1.05rem+0.9vw,1.8rem)] font-normal leading-snug tracking-[-0.025em] text-inchiostro lg:text-osso/95">
+                {specializzazione}
+              </p>
+            )}
+            {corpoSottotitolo && <p className={`lead max-w-xl ${specializzazione ? "mt-4" : "mt-7"}`}>{corpoSottotitolo}</p>}
             <div className="mt-10 flex flex-wrap items-center gap-2">
               {tel && (
                 <a href={tel} className="btn btn-petrolio">

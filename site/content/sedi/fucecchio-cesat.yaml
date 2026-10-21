@@ -35,10 +35,10 @@ orari:
   it: ''
   en: ''
 foto:
-  - src: sede-fucecchio.jpg
+  - src: sede-fucecchio-esterno.jpg
     alt:
-      it: Piazza Montanelli a Fucecchio
-      en: Piazza Montanelli in Fucecchio
+      it: Esterno della sede di Fucecchio
+      en: Exterior of the Fucecchio clinic
 peso: 1
 sitoStruttura: https://www.uslcentro.toscana.it/
 patologie:

@@ -14,10 +14,10 @@ apertura:
     limb, with the shoulder at its centre. At the first visit I try to understand one thing only: which path is
     right for that person, not which operation could be done.
 ritratto:
-  src: ritratto-bn.jpg
+  src: ritratto-michele-bn.jpg
   alt:
-    it: Ritratto in bianco e nero del Dott. Michele Novi (immagine provvisoria, da sostituire con lo shooting)
-    en: Black and white portrait of Dr Michele Novi (temporary image, to be replaced after the shoot)
+    it: Ritratto in bianco e nero del Dott. Michele Novi
+    en: Black and white portrait of Dr Michele Novi
 inEvidenza:
   - anno: '2015'
     titolo:

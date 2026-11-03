@@ -47,9 +47,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {fasce.map((tipo) => {
         switch (tipo) {
           case "patologie":
-            return <FasciaPatologie key={tipo} patologie={patologie} sintomi={sintomi} locale={l} />;
+            return <FasciaPatologie key={tipo} patologie={patologie} sintomi={sintomi} settings={settings} locale={l} />;
           case "sedi":
-            return <FasciaSedi key={tipo} sedi={sedi} locale={l} />;
+            return <FasciaSedi key={tipo} sedi={sedi} settings={settings} locale={l} />;
           case "fiducia":
             return <FasciaPercorso key={tipo} profilo={profilo} home={home} locale={l} />;
           case "recensioni":

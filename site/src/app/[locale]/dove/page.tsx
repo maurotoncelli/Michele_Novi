@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getSedi, getSettings } from "@/lib/content";
+import { getSedi, getSettings, telHref } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
+import { Segno } from "@/components/ui/Segno";
 import { Intestazione, Sezione } from "@/components/blocks/Pagina";
 import { SchedaSede } from "@/components/blocks/Schede";
 import { MappaToscanaVisite } from "@/components/blocks/MappaToscana";
@@ -23,6 +25,7 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const [s, sedi] = await Promise.all([getSettings(), getSedi()]);
   const m = getMessages(l);
+  const tel = telHref(s.telefono);
 
   const sediVisite = sedi
     .filter((x) => x.visite)
@@ -60,6 +63,23 @@ export default async function DovePage({ params }: PageProps<"/[locale]/dove">) 
         <Reveal>
           <MappaToscanaVisite sedi={sediVisite} locale={l} labelScopri={m.cta.scopri} />
         </Reveal>
+        {tel && (
+          <Reveal className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-linea pt-6 sm:flex-row sm:items-center">
+            <p className="max-w-xl text-[0.95rem] leading-snug text-grafite">
+              <strong className="font-medium text-inchiostro">{m.dove.prenota}.</strong> {m.dove.prenotaTesto}
+            </p>
+            <div className="flex shrink-0 flex-wrap items-center gap-2">
+              <a href={tel} className="btn btn-petrolio">
+                <Segno nome="telefono" size={18} />
+                {m.cta.chiamaSegreteria}
+              </a>
+              <Link href={href(l, { kind: "contatti" })} className="btn btn-osso">
+                <Segno nome="mail" size={18} />
+                {m.cta.scrivi}
+              </Link>
+            </div>
+          </Reveal>
+        )}
       </Sezione>
 
       {/* 2. DOVE OPERO: Le strutture chirurgiche con le foto reali */}

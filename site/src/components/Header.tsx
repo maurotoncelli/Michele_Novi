@@ -78,11 +78,11 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
         {a11y.salta}
       </a>
       <header className="header-solido sticky top-0 z-50">
-        <div className="contenitore flex min-h-[4.5rem] items-center gap-4 md:min-h-[5.25rem] lg:gap-9 xl:gap-11">
-          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-3.5" aria-label={nome}>
+        <div className="contenitore flex min-h-[4.5rem] items-center gap-2 sm:gap-4 md:min-h-[5.25rem] lg:gap-9 xl:gap-11">
+          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3.5" aria-label={nome}>
             <Logo width={30} height={36} className="h-8 w-[26px] shrink-0 text-petrolio transition-colors group-hover:text-profondo md:h-9 md:w-[30px]" />
             <span className="min-w-0 leading-tight">
-              <span className="serif block truncate text-[1.05rem] text-inchiostro md:text-[1.15rem] xl:text-[1.2rem]">{nome}</span>
+              <span className="serif block truncate text-[1rem] text-inchiostro sm:text-[1.05rem] md:text-[1.15rem] xl:text-[1.2rem]">{nome}</span>
               <span className="mt-0.5 hidden truncate text-[0.68rem] font-medium tracking-[0.08em] text-grafite uppercase sm:block lg:hidden">{ruolo}</span>
             </span>
           </Link>
@@ -91,14 +91,18 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
             {nav.map((n) => voce(n))}
           </nav>
 
-          {/* Con il menu in riga lo spazio non basta per due bottoni con testo: Scrivi resta icona, Chiama prende il testo da xl. */}
-          <div className="ml-auto flex shrink-0 items-center justify-end gap-2 lg:ml-0 xl:gap-2">
+          {/* Con il menu in riga lo spazio non basta per due bottoni con testo: Scrivi resta icona, Chiama prende il testo da xl. Su mobile Chiama resta sempre visibile accanto al menu. */}
+          <div className="ml-auto flex shrink-0 items-center justify-end gap-1.5 sm:gap-2 lg:ml-0 xl:gap-2">
             <div className="hidden md:block lg:mr-1 xl:mr-1.5">
               <LanguageSwitcher locale={locale} label={a11y.cambiaLingua} />
             </div>
             {tel && (
-              <a href={tel.href} className="btn btn-petrolio hidden sm:inline-flex lg:max-xl:!px-3" title={tel.label}>
-                <Segno nome="telefono" size={18} />
+              <a
+                href={tel.href}
+                className="btn btn-petrolio inline-flex max-sm:!min-h-[2.4rem] max-sm:!px-3 max-sm:!py-1.5 max-sm:text-[0.84rem] lg:max-xl:!px-3"
+                title={tel.label}
+              >
+                <Segno nome="telefono" size={16} className="sm:size-[18px]" />
                 <span className="lg:max-xl:sr-only">{tel.label}</span>
               </a>
             )}
@@ -108,7 +112,7 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
             </Link>
             <button
               type="button"
-              className="btn btn-osso !px-3 lg:hidden"
+              className="btn btn-osso !px-3 max-sm:!min-h-[2.4rem] lg:hidden"
               aria-expanded={open}
               aria-controls="menu-mobile"
               aria-label={open ? a11y.chiudiMenu : a11y.apriMenu}

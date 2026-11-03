@@ -168,8 +168,9 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
 }
 
 /* ------------------------------------------------------------------ 01 Cosa curo: spalla grande a sinistra, le altre aree alla pari a destra, lo sport in una fascia sotto */
-export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie: Patologia[]; sintomi?: Sintomo[]; locale: Locale }) {
+export function FasciaPatologie({ patologie, sintomi = [], settings, locale }: { patologie: Patologia[]; sintomi?: Sintomo[]; settings?: Settings; locale: Locale }) {
   const m = getMessages(locale);
+  const tel = telHref(settings?.telefono);
   const metodo = patologie.find((p) => p.area === "metodo");
   const spalla = patologie.find((p) => p.area === "spalla");
   // Lo sport attraversa le altre aree (anche la spalla): sta da solo, in una fascia a tutta larghezza.
@@ -218,6 +219,23 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
               )}
             </Reveal>
             <ElencoSintomi sintomi={sintomiVari(sintomi, 4)} />
+            {tel && (
+              <Reveal className="mt-8 flex flex-col items-start justify-between gap-4 bg-petrolio-3/70 p-5 sm:flex-row sm:items-center sm:p-6">
+                <p className="max-w-xl text-[0.98rem] font-medium leading-snug text-profondo sm:text-[1.05rem]">
+                  {m.cosaCuro.chiusura}
+                </p>
+                <div className="flex shrink-0 flex-wrap items-center gap-2">
+                  <a href={tel} className="btn btn-petrolio">
+                    <Segno nome="telefono" size={18} />
+                    {m.cta.chiamaSegreteria}
+                  </a>
+                  <Link href={href(locale, { kind: "contatti" })} className="btn btn-osso bg-osso/80">
+                    <Segno nome="mail" size={18} />
+                    {m.cta.scrivi}
+                  </Link>
+                </div>
+              </Reveal>
+            )}
           </div>
         )}
       </Sezione>
@@ -234,8 +252,9 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
 }
 
 /* ------------------------------------------------------------------ 02 Dove: diviso chiaramente in Dove visito (mappa Toscana) e Dove opero (strutture chirurgiche) */
-export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
+export function FasciaSedi({ sedi, settings, locale }: { sedi: Sede[]; settings?: Settings; locale: Locale }) {
   const m = getMessages(locale);
+  const tel = telHref(settings?.telefono);
   if (!sedi.length) return null;
   const sediVisite = sedi
     .filter((x) => x.visite)
@@ -261,6 +280,23 @@ export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
         <Reveal>
           <MappaToscanaVisite sedi={sediVisite} locale={locale} labelScopri={m.cta.scopri} />
         </Reveal>
+        {tel && (
+          <Reveal className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-linea pt-6 sm:flex-row sm:items-center">
+            <p className="max-w-xl text-[0.95rem] leading-snug text-grafite">
+              <strong className="font-medium text-inchiostro">{m.dove.prenota}.</strong> {m.dove.prenotaTesto}
+            </p>
+            <div className="flex shrink-0 flex-wrap items-center gap-2">
+              <a href={tel} className="btn btn-petrolio">
+                <Segno nome="telefono" size={18} />
+                {m.cta.chiamaSegreteria}
+              </a>
+              <Link href={href(locale, { kind: "contatti" })} className="btn btn-osso">
+                <Segno nome="mail" size={18} />
+                {m.cta.scrivi}
+              </Link>
+            </div>
+          </Reveal>
+        )}
       </div>
 
       {sediChirurgia.length > 0 && (

@@ -10,6 +10,7 @@ import { renderBody } from "@/lib/markdoc";
 import { articleJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
+import { TestoEspandibile } from "@/components/ui/TestoEspandibile";
 import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { SchedaNota, SchedaPatologia } from "@/components/blocks/Schede";
 import { VideoApprofondimento } from "@/components/blocks/VideoApprofondimento";
@@ -99,7 +100,9 @@ export default async function NotaPage({ params }: PageProps<"/[locale]/approfon
 
         <div className="mx-auto max-w-[42rem] py-12">
           <AvvisoLingua show={fallbackToIt} locale={l} />
-          <div className="testo">{element}</div>
+          <TestoEspandibile modo="blocco" sfondo="campo" more={m.cta.leggiTutto} less={m.cta.riduci}>
+            <div className="testo">{element}</div>
+          </TestoEspandibile>
           <VideoApprofondimento file={n.video} youtube={n.youtube} titolo={pick(n.titolo, l)} />
           {citati.length > 0 && (
             <div className="osso osso-sm mt-12 p-5">

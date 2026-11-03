@@ -8,6 +8,7 @@ import { srcMedia } from "@/lib/media";
 import { Disegno } from "../ui/Disegno";
 import { IconaTecnica, isTecnica } from "../ui/IconaTecnica";
 import { isSegno, Segno } from "../ui/Segno";
+import { TestoEspandibile } from "../ui/TestoEspandibile";
 
 /** Superficie media delle lastre: stesso stampo, hover a crop lento. */
 function Lastra({
@@ -200,27 +201,34 @@ export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale
   const foto = srcMedia(p.immagine?.src, "patologie");
   const disegno = foto ? null : srcDisegno(catalogo, segno, locale);
   const alt = pick(p.immagine?.alt, locale) || pick(p.titolo, locale);
+  const url = href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) });
   return (
-    <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-24">
-      <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
-        {foto ? (
-          <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 42vw, 100vw" className={`object-cover ${classeFuoco(foto)}`} />
-        ) : (
-          <div className="fluttua absolute inset-0" style={{ "--fluttua-da": "6%", "--fluttua-a": "-6%" } as CSSProperties}>
-            {disegno ? (
-              <Disegno src={disegno.src} alt={disegno.alt} />
-            ) : (
-              <span className="absolute inset-0 grid place-items-center text-petrolio">
-                <Segno nome={segno} size={56} />
-              </span>
-            )}
-          </div>
-        )}
-      </Lastra>
+    <div className="group grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-24">
+      <Link href={url} className="block w-full">
+        <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
+          {foto ? (
+            <Image src={foto} alt={alt} fill quality={92} sizes="(min-width: 1024px) 42vw, 100vw" className={`object-cover ${classeFuoco(foto)}`} />
+          ) : (
+            <div className="fluttua absolute inset-0" style={{ "--fluttua-da": "6%", "--fluttua-a": "-6%" } as CSSProperties}>
+              {disegno ? (
+                <Disegno src={disegno.src} alt={disegno.alt} />
+              ) : (
+                <span className="absolute inset-0 grid place-items-center text-petrolio">
+                  <Segno nome={segno} size={56} />
+                </span>
+              )}
+            </div>
+          )}
+        </Lastra>
+      </Link>
       <div className="min-w-0">
         <p className="eyebrow">{m.cosaCuro.metodoEyebrow}</p>
-        <h3 className="display-m mt-4 transition-colors duration-500 group-hover:text-petrolio">{pick(p.titolo, locale)}</h3>
-        <p className="lead mt-5 max-w-xl whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.lead, locale)}</p>
+        <h3 className="display-m mt-4 transition-colors duration-500 group-hover:text-petrolio">
+          <Link href={url}>{pick(p.titolo, locale)}</Link>
+        </h3>
+        <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={3} className="mt-5 max-w-xl">
+          <p className="lead whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.lead, locale)}</p>
+        </TestoEspandibile>
         <ul className="mt-7 grid max-w-xl grid-cols-4 gap-x-2 gap-y-4 sm:gap-x-4">
           {m.cosaCuro.tecniche.map((t) => (
             <li key={t.icona} className="flex min-w-0 flex-col items-center text-center">
@@ -233,12 +241,12 @@ export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale
           ))}
         </ul>
         <p className="mt-7 max-w-xl text-[0.98rem] leading-relaxed text-grafite">{m.cosaCuro.metodoLead}</p>
-        <span className="btn btn-ghost -ml-3 mt-6">
+        <Link href={url} className="btn btn-ghost -ml-3 mt-6">
           {m.cta.scopri}
           <Segno nome="freccia" size={18} />
-        </span>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 }
 

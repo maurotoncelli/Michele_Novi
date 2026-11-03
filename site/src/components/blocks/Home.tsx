@@ -8,6 +8,7 @@ import { srcMedia } from "@/lib/media";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
 import { Contatore } from "../ui/Contatore";
+import { TestoEspandibile } from "../ui/TestoEspandibile";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
 import { MappaToscanaVisite } from "./MappaToscana";
@@ -120,13 +121,13 @@ export function FasciaIntro({ home, locale }: { home: Home; locale: Locale }) {
               {titoloIntro}
             </h2>
           )}
-          <div className="mt-5 space-y-3.5">
+          <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={3} className="mt-5">
             {paragrafi.map((par, idx) => (
               <p key={idx} className="text-[1.06rem] leading-relaxed text-grafite md:text-[1.12rem]">
                 {par}
               </p>
             ))}
-          </div>
+          </TestoEspandibile>
         </Reveal>
       </div>
     </section>

@@ -10,6 +10,7 @@ import { renderBody, headings } from "@/lib/markdoc";
 import { breadcrumbJsonLd, buildMetadata, faqItems, faqJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
+import { TestoEspandibile } from "@/components/ui/TestoEspandibile";
 import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { Sommario } from "@/components/blocks/Sommario";
@@ -113,7 +114,9 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
 
         <article className="min-w-0">
           <AvvisoLingua show={fallbackToIt} locale={l} />
-          <div className={`testo max-w-[44rem]${p.area === "metodo" || p.area === "spalla" || p.area === "arto-superiore" || p.area === "sport" ? " testo-metodo" : ""}`}>{element}</div>
+          <TestoEspandibile modo="blocco" sfondo="campo" more={m.cta.leggiTutto} less={m.cta.riduci}>
+            <div className={`testo max-w-[44rem]${p.area === "metodo" || p.area === "spalla" || p.area === "arto-superiore" || p.area === "sport" ? " testo-metodo" : ""}`}>{element}</div>
+          </TestoEspandibile>
 
           {doveSiTratta.length > 0 && (
             <section id="dove" className="ancora mt-20 max-w-[44rem]">

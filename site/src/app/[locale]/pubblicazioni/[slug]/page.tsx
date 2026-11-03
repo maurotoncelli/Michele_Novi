@@ -11,6 +11,7 @@ import { breadcrumbJsonLd, buildMetadata, paperJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
+import { TestoEspandibile } from "@/components/ui/TestoEspandibile";
 import { Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Sommario } from "@/components/blocks/Sommario";
 import { SchedaPatologia } from "@/components/blocks/Schede";
@@ -210,9 +211,11 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/pubblic
                   <p className="eyebrow">{m.approfondimenti.letturaEyebrow}</p>
                   <p className="mt-2 text-sm text-grafite">{m.approfondimenti.letturaNota}</p>
                 </div>
-                <div className="lettura mt-10" lang="en">
-                  {lettura}
-                </div>
+                <TestoEspandibile modo="blocco" sfondo="campo" more={m.cta.leggiTutto} less={m.cta.riduci} className="mt-10">
+                  <div className="lettura" lang="en">
+                    {lettura}
+                  </div>
+                </TestoEspandibile>
                 {p.licenza && (
                   <p className="lettura-colophon mt-10 max-w-[38rem] border-t border-linea pt-4">
                     {p.licenza}
@@ -231,9 +234,11 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/pubblic
               p.abstract && (
                 <Reveal as="section" id="abstract" className="ancora mt-16 max-w-[42rem]">
                   <h2 className="text-[1.4rem]">{m.approfondimenti.abstract}</h2>
-                  <p className="abstract mt-3 whitespace-pre-line" lang="en">
-                    {p.abstract}
-                  </p>
+                  <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={4} className="mt-3">
+                    <p className="abstract whitespace-pre-line" lang="en">
+                      {p.abstract}
+                    </p>
+                  </TestoEspandibile>
                   {p.licenza && <p className="mt-5 text-sm text-grafite">{p.licenza}</p>}
                   <p className="mt-1 text-sm text-grafite">{m.approfondimenti.soloAbstractNota}</p>
                 </Reveal>

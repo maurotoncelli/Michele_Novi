@@ -8,6 +8,7 @@ import { breadcrumbJsonLd, buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Segno } from "@/components/ui/Segno";
+import { TestoEspandibile } from "@/components/ui/TestoEspandibile";
 import { Briciole, Sezione } from "@/components/blocks/Pagina";
 import { BarrePercorso } from "@/components/blocks/BarrePercorso";
 import { ListaPubblicazioni } from "@/components/blocks/ListaPubblicazioni";
@@ -109,7 +110,9 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
               <p className="eyebrow mb-5">{m.chiSono.titolo}</p>
               <h1 className="display-l">{p.nome}</h1>
               {pick(p.titolo, l) && <p className="mt-5 max-w-lg text-[1.15rem] leading-snug text-grafite md:text-[1.25rem]">{pick(p.titolo, l)}</p>}
-              <p className="lead mt-8 max-w-2xl text-inchiostro">{pick(p.apertura, l)}</p>
+              <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={3} className="mt-8 max-w-2xl">
+                <p className="lead text-inchiostro">{pick(p.apertura, l)}</p>
+              </TestoEspandibile>
               {fatti.length > 0 && (
                 <ul className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-linea pt-6 text-sm text-grafite max-md:mt-10 md:pt-6">
                   {fatti.map((f) => (
@@ -193,7 +196,9 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
       {/* 4. Il percorso, anno per anno: le tre barre. */}
       {barre.some((b) => b.voci.length > 0) && (
         <Sezione eyebrow={m.chiSono.percorsoEyebrow} titolo={m.chiSono.percorso} tinta="osso">
-          <BarrePercorso barre={barre} />
+          <TestoEspandibile modo="blocco" sfondo="campo" more={m.cta.leggiTutto} less={m.cta.riduci}>
+            <BarrePercorso barre={barre} />
+          </TestoEspandibile>
         </Sezione>
       )}
 

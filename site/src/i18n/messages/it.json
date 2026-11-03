@@ -201,7 +201,8 @@
     "cookie": "Cookie",
     "piva": "P. IVA",
     "albo": "Iscrizione",
-    "diritti": "Tutti i diritti riservati."
+    "diritti": "Tutti i diritti riservati.",
+    "realizzatoDa": "Sito realizzato da"
   },
   "cookie": {
     "testo": "Questo sito usa cookie tecnici e, solo con il tuo consenso, statistiche anonime.",

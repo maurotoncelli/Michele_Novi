@@ -120,9 +120,22 @@ export async function Footer({ locale }: { locale: Locale }) {
       </div>
       <div className="border-t border-[var(--color-linea-chiara)]">
         <div className="contenitore flex flex-col gap-2 py-5 text-xs text-osso/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            {`© ${new Date().getFullYear()} ${s.nome}. ${m.footer.diritti}`}
-          </p>
+          <div className="space-y-1">
+            <p>
+              {`© ${new Date().getFullYear()} ${s.nome}. ${m.footer.diritti}`}
+            </p>
+            <p>
+              {m.footer.realizzatoDa}{" "}
+              <a
+                href="https://www.maurotoncelli.it"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-osso/70 underline decoration-white/25 underline-offset-2 transition-colors hover:text-[var(--color-petrolio-chiaro)] hover:decoration-[var(--color-petrolio-chiaro)]"
+              >
+                Mauro Toncelli - maurotoncelli.it
+              </a>
+            </p>
+          </div>
           {pick(s.disclaimer, locale) && <p className="max-w-xl sm:text-right">{pick(s.disclaimer, locale)}</p>}
         </div>
       </div>

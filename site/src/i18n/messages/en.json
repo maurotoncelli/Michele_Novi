@@ -201,7 +201,8 @@
     "cookie": "Cookies",
     "piva": "VAT",
     "albo": "Registration",
-    "diritti": "All rights reserved."
+    "diritti": "All rights reserved.",
+    "realizzatoDa": "Website by"
   },
   "cookie": {
     "testo": "This site uses technical cookies and, only with your consent, anonymous statistics.",

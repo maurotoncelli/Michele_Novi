@@ -41,26 +41,40 @@
 
 ### 2. Piano operativo per il prossimo contatto con il Dott. Michele Novi (Dominio, Mail e Go-Live)
 
-1. **Scelta e acquisto del nuovo dominio (insieme a Michele):**
-   - Scegliere tra **`michelenovi.it`** (consigliato: corto, diretto, memorabile) o **`michelenoviortopedico.it`**.
-   - Registrare il dominio intestandolo direttamente al Dott. Michele Novi (con attivazione di almeno 1 casella email).
-2. **Casella email della segreteria e collegamento del modulo contatti (Resend):**
-   - Creare la casella **`info@michelenovi.it`** (letta dalla segreteria oppure con inoltro automatico a `michelenoviortopedico@gmail.com`).
-   - Verificare il dominio su **Resend** aggiungendo i 3 record DNS (`DKIM`, `SPF`, `DMARC`).
-   - Su Vercel (`michele-novi-sito` → *Settings → Environment Variables*) inserire:
-     - `RESEND_API_KEY` = chiave API di Resend
-     - `RESEND_FROM` = `Dott. Michele Novi <info@michelenovi.it>`
-   - In `site/content/settings.yaml` inserire `email: info@michelenovi.it` e `emailDestinazioneForm: info@michelenovi.it` (o lasciarlo su `michelenoviortopedico@gmail.com` se preferisce ricevere lì i form).
-3. **Ultime 2 conferme rapide da chiedere a Michele / segreteria:**
-   - **Numero di telefono unico:** confermare che il numero definitivo sia **`348 4331733`** (già inserito sul sito) e chiedere se vuole attivare anche il pulsante **WhatsApp** (`settings.whatsapp`).
+#### Situazione domini verificata via `whois` (03/11/2026)
+- **`michelenovi.it`**: **LIBERO** (`AVAILABLE`) — *scelta principale consigliata*.
+- **`michelenoviortopedico.it`**: **LIBERO** (`AVAILABLE`).
+- **`michelenovi.com`**: **LIBERO** (`No match`).
+- **`centrosaluteonline.it`** (vecchio sito): registrato su **Netsons S.r.l.** (`dns1–4.netsons.net`), intestato a **Michele Novi** (*Via Di Monti 73, Peccioli*), scadenza **`17/06/2027`**.
+
+#### Architettura consigliata «Zero-Sbatti» (gestita al 100% dall'agente AI via API / CLI)
+Per evitare di configurare manualmente record DNS, caselle e redirect nei pannelli dei provider, la combinazione ideale è **Netsons (solo registrazione `.it`) + Cloudflare Free (DNS, Email Routing e Redirect 301 via API) + Resend API + Vercel CLI**:
+
+1. **Acquisto del dominio su Netsons (5 minuti insieme a Michele):**
+   - Poiché Michele ha già un account **Netsons** (dove detiene `centrosaluteonline.it`), acquistare lì **`michelenovi.it`** (solo dominio base ~10–12 €/anno, intestato a lui).
+   - Nel pannello Netsons fare **una sola operazione** (sia su `michelenovi.it` sia su `centrosaluteonline.it`): sostituire i nameserver `dns1–4.netsons.net` con i **2 Nameserver di Cloudflare** (piano Free, come già fatto per *Successioni Armellin*). Non servirà più toccare il pannello di Netsons.
+   - *(Alternativa: se preferite usare la casella email nativa di Netsons anziché Cloudflare, si possono puntare i nameserver a **Vercel DNS** `ns1.vercel-dns.com` / `ns2.vercel-dns.com` o lasciare Cloudflare, e l'agente configurerà via `npx vercel dns add` o API Cloudflare i record MX di Netsons).*
+
+2. **Credenziali da passare all'agente AI in chat:**
+   - **API Token di Cloudflare** (con permessi *Zone:DNS:Edit*, *Zone:Email Routing Rules:Edit*, *Zone:Single Redirect:Edit*).
+   - **API Key di Resend** (`re_...`).
+   - *(La **Vercel CLI** è già autenticata sul Mac sotto il team `atstudio`).*
+
+3. **Cosa esegue in automatico l'agente AI in 60 secondi via API e CLI:**
+   - **Collegamento dominio e SSL su Vercel (`npx vercel domains` / `vercel env`):** aggancia `michelenovi.it` e `www.michelenovi.it` al progetto `michele-novi-sito`, emette il certificato SSL e imposta le variabili d'ambiente di produzione (`RESEND_API_KEY`, `RESEND_FROM="Dott. Michele Novi <info@michelenovi.it>"`, `NEXT_PUBLIC_GA_ID`).
+   - **Puntamento DNS del sito (API Cloudflare):** crea i record `A @ → 76.76.21.21` (DNS only) e `CNAME www → cname.vercel-dns.com` (DNS only).
+   - **Ricezione Email gratuita per la segreteria (API Cloudflare Email Routing):** crea l'indirizzo **`info@michelenovi.it`** con inoltro automatico istantaneo a **`michelenoviortopedico@gmail.com`** (zero canoni annui, nessuna password o IMAP da configurare sui telefoni della segreteria).
+   - **Invio Email dal modulo contatti (API Resend + API Cloudflare):** registra il dominio `michelenovi.it` su Resend via API, legge i record `DKIM`, `SPF` (`send`), `DMARC` richiesti, li scrive automaticamente nel DNS di Cloudflare e lancia la verifica del dominio su Resend.
+   - **Redirect 301 SEO dal vecchio sito `centrosaluteonline.it` (API Cloudflare Redirect Rules):** crea la regola di **Redirect 301 permanente** da `centrosaluteonline.it/*` a `https://www.michelenovi.it` direttamente a livello edge su Cloudflare (così alla scadenza di giugno 2027 Michele potrà anche disdire il vecchio hosting WordPress tenendo solo il dominio da ~10 €/anno per conservare tutta l'autorità SEO).
+   - **Sblocco SEO nel codice (`site/content/settings.yaml`):** imposta `dominio: https://www.michelenovi.it` ed `email: info@michelenovi.it`, sbloccando automaticamente `robots.txt` (`Allow: /` + `sitemap.xml`), canonical, `hreflang`, JSON-LD, OpenGraph e `/llms.txt`.
+
+4. **Ultime 2 conferme rapide da chiedere a Michele / segreteria durante il contatto:**
+   - **Numero di telefono unico:** confermare che il numero definitivo sia **`348 4331733`** (già attivo sul sito) e chiedere se vuole attivare anche il pulsante **WhatsApp** (`settings.whatsapp`).
    - **Orari della segreteria:** farsi dare la riga di orari da mostrare in Contatti e nel Footer (`settings.orari`, es. *"Lun–Ven 9:00–13:00 / 15:00–18:30"*).
-4. **Collegamento Dominio su Vercel, Sblocco SEO e Redirect 301 dal vecchio sito:**
-   - Aggiungere `michelenovi.it` e `www.michelenovi.it` in **Vercel → Settings → Domains** e configurare i DNS (`A @ → 76.76.21.21`, `CNAME www → cname.vercel-dns.com`).
-   - In `site/content/settings.yaml` impostare `dominio: https://www.michelenovi.it`: questo **sblocca automaticamente `robots.txt`** (`Allow: /` + `sitemap.xml`) e aggiorna tutti i tag canonical, `hreflang`, JSON-LD, OpenGraph e `/llms.txt`.
-   - Configurare il **Redirect 301** dal vecchio dominio **`centrosaluteonline.it`** (che resta acceso per almeno 12 mesi) verso il nuovo dominio per trasferire l'anzianità SEO su Google.
+
 5. **Attivazione Google Analytics 4, Search Console e Google Business Profile:**
-   - Creare lo stream **GA4** del nuovo dominio e inserire `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX` nelle variabili d'ambiente di Vercel.
-   - Verificare il nuovo dominio su **Google Search Console**, inviare `https://www.michelenovi.it/sitemap.xml` e avviare la procedura di *Cambio di indirizzo* da `centrosaluteonline.it`.
+   - Creare lo stream **GA4** del nuovo dominio e passare il `G-XXXXXXXXXX` all'agente (che lo inserisce in `NEXT_PUBLIC_GA_ID` su Vercel).
+   - Verificare il dominio su **Google Search Console** (tramite record TXT aggiunto via API dall'agente su Cloudflare), inviare `https://www.michelenovi.it/sitemap.xml` e avviare il *Cambio di indirizzo* da `centrosaluteonline.it`.
    - Aggiornare l'URL del sito web sulle 4 schede **Google Business Profile**, su Instagram e su LinkedIn.
 
 ### Segnati in precedenza (23/09)

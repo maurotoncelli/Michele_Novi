@@ -39,6 +39,11 @@ sintomi:
       en: Overuse pain from sport
     patologia: traumatologia-sportiva
     tema: Lesioni da overuse
+  - testo:
+      it: Ho sempre più difficoltà a camminare e fare le scale
+      en: Walking and climbing stairs is getting harder and harder
+    patologia: anca-e-ginocchio
+    tema: Ginocchio
 percorso:
   - titolo:
       it: La prima visita

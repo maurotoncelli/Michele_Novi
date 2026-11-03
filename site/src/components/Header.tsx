@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
+import { Logo } from "./ui/Logo";
 import { Segno } from "./ui/Segno";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -33,10 +34,8 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenPath(null);
     document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
     };
   }, [open]);
 
@@ -56,6 +55,7 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
     <Link
       key={n.href}
       href={n.href}
+      onClick={() => setOpenPath(null)}
       aria-current={isActive(n.href) ? "page" : undefined}
       className={
         grande
@@ -78,24 +78,22 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
         {a11y.salta}
       </a>
       <header className="header-solido sticky top-0 z-50">
-        <div className="contenitore flex min-h-[4.5rem] items-center gap-4 md:min-h-[5.25rem] lg:gap-10">
-          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-3" aria-label={nome}>
-            <span className="grid h-9 w-9 shrink-0 place-items-center border border-linea text-petrolio md:h-10 md:w-10">
-              <Segno nome="spalla" size={18} />
-            </span>
+        <div className="contenitore flex min-h-[4.5rem] items-center gap-4 md:min-h-[5.25rem] lg:gap-9 xl:gap-11">
+          <Link href={homeHref} className="group flex min-w-0 shrink-0 items-center gap-3.5" aria-label={nome}>
+            <Logo width={30} height={36} className="h-8 w-[26px] shrink-0 text-petrolio transition-colors group-hover:text-profondo md:h-9 md:w-[30px]" />
             <span className="min-w-0 leading-tight">
               <span className="serif block truncate text-[1.05rem] text-inchiostro md:text-[1.15rem] xl:text-[1.2rem]">{nome}</span>
               <span className="mt-0.5 hidden truncate text-[0.68rem] font-medium tracking-[0.08em] text-grafite uppercase sm:block lg:hidden">{ruolo}</span>
             </span>
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-6 xl:gap-x-7 lg:flex" aria-label="Principale">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center lg:flex lg:gap-x-6 xl:gap-x-8" aria-label="Principale">
             {nav.map((n) => voce(n))}
           </nav>
 
           {/* Con il menu in riga lo spazio non basta per due bottoni con testo: Scrivi resta icona, Chiama prende il testo da xl. */}
-          <div className="ml-auto flex shrink-0 items-center justify-end gap-2 lg:ml-0 xl:gap-2.5">
-            <div className="hidden md:block lg:mr-2 xl:mr-3">
+          <div className="ml-auto flex shrink-0 items-center justify-end gap-2 lg:ml-0 xl:gap-2">
+            <div className="hidden md:block lg:mr-1 xl:mr-1.5">
               <LanguageSwitcher locale={locale} label={a11y.cambiaLingua} />
             </div>
             {tel && (
@@ -121,7 +119,7 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
           </div>
         </div>
 
-        <div id="menu-mobile" hidden={!open} className="lg:hidden">
+        <div id="menu-mobile" hidden={!open} className="max-h-[calc(100svh-var(--header-h))] overflow-y-auto overscroll-contain bg-campo lg:hidden">
           <div className="contenitore border-t border-linea pb-8 pt-2">
             <nav className="flex flex-col" aria-label="Principale (mobile)">
               {nav.map((n) => voce(n, true))}
@@ -133,7 +131,7 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
                   {tel.label}
                 </a>
               )}
-              <Link href={scrivi.href} className={`btn ${tel ? "btn-osso" : "btn-petrolio"}`}>
+              <Link href={scrivi.href} onClick={() => setOpenPath(null)} className={`btn ${tel ? "btn-osso" : "btn-petrolio"}`}>
                 <Segno nome="mail" size={18} />
                 {scrivi.label}
               </Link>
@@ -144,6 +142,13 @@ export function Header({ locale, homeHref, nome, ruolo, nav, tel, scrivi, a11y }
           </div>
         </div>
       </header>
+      {open && (
+        <div
+          aria-hidden="true"
+          className="fixed inset-0 top-[var(--header-h)] z-40 bg-inchiostro/25 backdrop-blur-[1px] lg:hidden"
+          onClick={() => setOpenPath(null)}
+        />
+      )}
     </>
   );
 }

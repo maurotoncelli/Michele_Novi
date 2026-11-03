@@ -2,6 +2,7 @@ import Link from "next/link";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getSedi, getSettings, telHref } from "@/lib/content";
+import { Logo } from "./ui/Logo";
 import { Segno } from "./ui/Segno";
 import { Telefono } from "./ui/Telefono";
 
@@ -20,8 +21,13 @@ export async function Footer({ locale }: { locale: Locale }) {
     <footer className="fascia-scura relative border-t border-[var(--color-linea-chiara)]">
       <div className="contenitore grid gap-10 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
-          <p className="serif text-2xl">{s.nome}</p>
-          <p className="mt-1 text-sm text-osso/60">{pick(s.ruolo, locale)}</p>
+          <div className="flex items-center gap-4">
+            <Logo width={34} height={42} className="h-[42px] w-[34px] shrink-0 text-[var(--color-petrolio-chiaro)]" />
+            <div className="min-w-0">
+              <p className="serif text-2xl leading-tight">{s.nome}</p>
+              <p className="mt-1 text-sm text-osso/60">{pick(s.ruolo, locale)}</p>
+            </div>
+          </div>
           <ul className="mt-6 space-y-2 text-[0.95rem]">
             {tel && (
               <li>

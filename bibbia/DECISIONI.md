@@ -1,7 +1,7 @@
 # Decisioni
 
 In caso di dubbio **questo file prevale**.  
-Aggiornato: **17 settembre 2026** (restyling presenza + trattini aboliti).
+Aggiornato: **3 novembre 2026** (recepiti tutti i feedback del Dott. Novi dalla presentazione `MODIFICHE SITO MN.pptx`; dettaglio in `fonti/appunti/2026-11-03_feedback-pptx-michele.md`).
 
 Le voci **PROPOSTA** sono di Mauro, non firmate da Michele.
 
@@ -41,16 +41,19 @@ Le voci **PROPOSTA** sono di Mauro, non firmate da Michele.
 - Canone CV: file **Michele Novi CV 2026.docx**. Il PDF europeo 2019 è storico.
 - Albo OMCeO Pisa **n. 5749**. Inglese C1. Non pubblicare il tedesco A1 del PDF 2019.
 
-## Sedi (quattro, stop)
+## Sedi (divise in Dove visito e Dove opero — aggiornato 03/11/2026)
 
 | Sede | Visite | Chirurgia |
 |------|--------|-----------|
-| CESAT / San Pietro Igneo, Fucecchio | sì | sì |
-| Casa di Cura San Rossore, Pisa | sì | sì (esclusiva) |
-| Centro Medico San Verano, Via Cavour 13, Peccioli | sì | no |
-| Villa Donatello | no | sì (un po’ borderline rispetto all’esclusiva San Rossore) |
+| Casa di Cura San Rossore, Viale delle Cascine 152/F, Pisa | sì | sì (esclusiva) |
+| Studi Medici San Pietro, Piazza Toscanini 3, Fucecchio | sì | no |
+| Centro Medico San Verano, Viale Cavour 13, Peccioli | sì | no |
+| CESAT — Ospedale San Pietro Igneo, Piazza Lavagnini 5, Fucecchio | no | sì (SSN) |
+| Villa Donatello, Via Attilio Ragionieri 101, Sesto Fiorentino | no | sì |
 
-Tutto il resto online è **fuori** dal sito MN.
+- **Dove visito** mostra la mappa illustrata della Toscana nella palette del sito con i 3 pin (Pisa, Fucecchio Piazza Toscanini 3, Peccioli) e i loghi delle strutture (niente foto delle città).
+- **Dove opero** mostra le 3 strutture chirurgiche (San Rossore, CESAT Fucecchio, Villa Donatello) con le foto reali degli edifici fornite da Michele.
+- Tutto il resto online è **fuori** dal sito MN.
 
 Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sbandierare in home.
 
@@ -124,7 +127,19 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 - **Recensioni**: citazioni tipografiche in misura da lettura (24rem, 1.2rem), virgolette piccole in petrolio chiaro, piattaforma e stelle in eyebrow, parole che si compongono. Campo `stelle` in Keystatic. La versione «una alla volta, gigante» è stata bocciata.
 - **Scorrimento orizzontale in home** (recensioni, approfondimenti): **niente frecce né snap**. Desktop: la sezione si appunta e le schede scorrono con lo scroll della pagina (CSS scroll-driven). Telefono: colonna. Mauro: «controlli scomodi; automatici su desktop, verticali su smartphone».
 - **Chi sono, «Dove opero, dove ho imparato»**: grande = **l'incarico di oggi** (Fucecchio, dal 2021; flag `attuale` in Keystatic), a destra le fellowship **in ordine cronologico**. Prima era grande la prima voce dell'elenco (Harvard 2025) senza un criterio leggibile e l'elenco non era in ordine: Mauro ha chiesto il senso della gerarchia. Regola: la dimensione deve dire qualcosa (presente vs percorso). `inEvidenza` va tenuto cronologico perché la home lo scorre in quell'ordine.
-- **Titolo del percorso in home**: «Incarico ospedaliero e fellowship di spalla.» Boston, Berlino e Seattle restano nelle tappe, non nel titolo accanto a Fucecchio. Mauro: mettere Fucecchio al pari delle capitali è un assurdo comico per chi ci abita. «Poi» sarebbe falso: la fellowship di Boston è del 2025, l'incarico è dal 2021. «Tre fellowship, un ospedale» è stato scartato: suona come un titolo di film.
+- **Titolo del percorso in home** (aggiornato 03/11 su richiesta di Michele): eyebrow **«Percorso formativo»**, titolo **«Incarichi professionali e fellowship internazionali.»**, mantenendo lo **scorrimento sticky originale** (`PercorsoScorrevole.tsx`, con l'anno grande e la foto fermi a sinistra che si aggiornano scorrendo le tappe a destra).
+
+### Chiuse il 03/11 (presentazione `MODIFICHE SITO MN.pptx` di Michele)
+
+- **Hero Home e Fascia Profilo clinico**: gerarchia invertita (ispirazione `chirurgie-coude.fr`): sopra in piccolo elegante `Dott. Michele Novi`, sotto in grande (H1) **`Chirurgia della Spalla. Arto Superiore. Protesica`**. Il sottotitolo e i due paragrafi descrittivi di Michele stanno subito sotto la Hero in colonna singola (`FasciaIntro`, eyebrow `Profilo clinico`), al posto della vecchia `FasciaFatti` coi numeri (rimossa perché poco comprensibile per il paziente).
+- **Nomenclatura sezioni e menu**:
+  - La voce di menu e il titolo della pagina `/cosa-curo` diventano **«Percorsi di cura»** (non più «Cosa curo»), con nuovo lead scritto da Michele (*«Trattamenti personalizzati basati sulle evidenze scientifiche. L'ascolto del paziente porta ad una corretta diagnosi, la fiducia nel medico ad una rapidità nei risultati.»*).
+  - In Home la sezione `01` si intitola **«Patologie trattate»**.
+  - L'eyebrow dei sintomi diventa **«Per il paziente»** (con titolo «Parti da quello che senti.» e senza la frase a destra nell'hub); aggiunto il 9° sintomo sul ginocchio (*«Ho sempre più difficoltà a camminare e fare le scale»*); nell'hub `/cosa-curo` la fascia sintomi ha sfondo azzurro chiaro (`bg-petrolio-3`) e griglia 3×3 per staccare dal blocco bianco sottostante (*La spalla.*).
+  - Rimosse da tutte le card di patologia le caption inferiori con numero di pubblicazioni e città (`4 pubblicazioni · Pisa · Peccioli`, ecc.).
+- **Il metodo → «Attività chirurgica»**: titolo cambiato da «Come si opera» a **«Attività chirurgica»**, nuovo testo introduttivo di Michele, **4 icone senza sottotitoli** (`Artroscopia`, `Chirurgia open`, `Chirurgia protesica`, `Ecografia interventistica`) e chiusura *«L'indicazione precede la tecnica. Una corretta diagnosi è il punto da cui partire.»*. Foto del chirurgo sostituita con la versione modificata da Michele con il **camice sterile da sala operatoria** (compressa a `103.7 KB`).
+- **Dove visito / Dove opero ovunque**: divise in **Home**, **`/dove`**, **`/contatti`** e nelle schede patologia; in **Dove visito** mappa vettoriale reale ad alto dettaglio della Toscana (senza triangolo tratteggiato né linea FI-PI-LI/Arno) e 3 card con riquadri logo uniformi (`logo-san-rossore.png`, `logo-san-pietro.png` ricostruito in vettoriale dal cartello di Piazza Toscanini 3, `logo-san-verano.png`).
+- **Logo ufficiale del Dott. Michele Novi**: estratto in vettoriale da `fonti/pdf/logo_michele_novi.ai`/`.pdf` (`site/src/components/ui/Logo.tsx`, `site/public/images/logo-michele-novi.svg`/`.png`) e inserito in `Header.tsx` (al posto dell'icona provvisoria nel quadrato), `Footer.tsx`, `opengraph-image.tsx` e favicon (`icon.svg`, `apple-icon.png`, `favicon.ico`).
 
 ## Fuori v1 (annotato, non costruito)
 

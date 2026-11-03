@@ -9,9 +9,9 @@ coordinate:
   lng: 10.80754
 tipo: ospedale
 propria: false
-visite: true
+visite: false
 chirurgia: true
-infiltrazioni: true
+infiltrazioni: false
 ecografo: false
 regime:
   it: Ospedale pubblico · ricoveri e chirurgia in SSN
@@ -35,11 +35,11 @@ orari:
   it: ''
   en: ''
 foto:
-  - src: sede-fucecchio-esterno.jpg
+  - src: sede-cesat-fucecchio.jpg
     alt:
-      it: Esterno della sede di Fucecchio
-      en: Exterior of the Fucecchio clinic
-peso: 1
+      it: Ospedale San Pietro Igneo — CESAT, Fucecchio
+      en: San Pietro Igneo Hospital — CESAT, Fucecchio
+peso: 4
 sitoStruttura: https://www.uslcentro.toscana.it/
 patologie:
   - spalla

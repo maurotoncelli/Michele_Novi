@@ -4,7 +4,7 @@ import type { SVGProps } from "react";
  * Le tre tecniche di Come si opera. Stesso tratto dei Segni, con una campitura leggera:
  * stanno dentro il paragrafo e si devono leggere al primo sguardo.
  */
-export type NomeTecnica = "artroscopia" | "aperta" | "protesi";
+export type NomeTecnica = "artroscopia" | "aperta" | "protesi" | "ecografia";
 
 const disegni: Record<NomeTecnica, React.ReactNode> = {
   // Ottica con la telecamera fuori e la luce dentro l'articolazione; accanto, il portale dello strumento.
@@ -34,6 +34,17 @@ const disegni: Record<NomeTecnica, React.ReactNode> = {
       <circle cx="13" cy="11" r="4.8" fill="currentColor" fillOpacity={0.14} />
       <path d="M5.5 15.3A8 8 0 0 1 17.2 3.9" />
     </g>
+  ),
+  // Sonda ecografica e fasci acustici.
+  ecografia: (
+    <>
+      <path d="M12 4.5h8a1.5 1.5 0 0 1 1.5 1.5v4.5c0 2.2-1.8 4-4 4h-3c-2.2 0-4-1.8-4-4V6A1.5 1.5 0 0 1 12 4.5Z" fill="currentColor" fillOpacity={0.14} />
+      <path d="M11 10.5h10" />
+      <path d="M16 4.5V2.5" />
+      <path d="M11.5 18.5a7.5 7.5 0 0 0 9 0" />
+      <path d="M8.8 22.2a11.5 11.5 0 0 0 14.4 0" />
+      <path d="M6.2 26a15.5 15.5 0 0 0 19.6 0" />
+    </>
   ),
 };
 

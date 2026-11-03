@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick, formatDate } from "@/i18n";
-import { getDisegni, getSedi, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Sede } from "@/lib/content";
+import { getDisegni, idDisegnoDaTag, slugNota, slugPatologia, srcDisegno, type Nota, type Patologia, type Sede } from "@/lib/content";
 import { srcMedia } from "@/lib/media";
 import { Disegno } from "../ui/Disegno";
 import { IconaTecnica, isTecnica } from "../ui/IconaTecnica";
@@ -37,14 +37,6 @@ function ChipSede({ s, locale }: { s: Sede; locale: Locale }) {
       {s.chirurgia && <span className="tag">{m.dove.chirurgia}</span>}
     </span>
   );
-}
-
-/** Riga di credito sotto le card: numero di pubblicazioni e città in cui si tratta. */
-function credito(p: Patologia, dove: string[], locale: Locale) {
-  const m = getMessages(locale);
-  const n = p.pubblicazioni?.length ?? 0;
-  const paper = n === 1 ? m.cosaCuro.pubblicazioniUna : n > 1 ? m.cosaCuro.pubblicazioniN.replace("{n}", String(n)) : "";
-  return [paper, ...dove].filter(Boolean).join(" · ");
 }
 
 /** Punto di fuoco delle foto verticali quando la lastra le taglia in orizzontale. */
@@ -83,15 +75,12 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
   );
 
   if (riga) {
-    const tutte = await getSedi();
-    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
       <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className={`group ${accesa} grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] ${alta ? "lg:flex-1" : ""}`}>
         <Lastra ratio="5/4" className={`self-start ${alta ? "lg:aspect-auto lg:self-stretch" : ""}`}>{media}</Lastra>
         <div className="flex min-w-0 flex-col">
           <h3 className="text-[1.3rem] leading-tight group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
-          {credito(p, dove, locale) && <p className="mt-auto pt-3 text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p>}
           <span className="sr-only">{m.cta.scopri}</span>
         </div>
       </Link>
@@ -99,8 +88,6 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
   }
 
   if (fascia) {
-    const tutte = await getSedi();
-    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
       <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-5 bg-petrolio-3/70 p-4 transition-colors duration-500 ease-osso hover:bg-petrolio-3 sm:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] sm:gap-6 md:p-5 lg:grid-cols-[minmax(0,30rem)_minmax(0,1fr)] lg:gap-10">
         <Lastra ratio="3/2" className="w-full">
@@ -109,8 +96,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
         <div className="min-w-0">
           <h3 className="text-[1.3rem] leading-tight transition-colors duration-500 group-hover:text-petrolio md:text-[1.45rem]">{pick(p.titolo, locale)}</h3>
           <p className="mt-2 max-w-2xl text-[0.95rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-            {credito(p, dove, locale) ? <p className="text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p> : <span />}
+          <div className="mt-3 flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
             <span className="inline-flex shrink-0 items-center gap-1.5 text-[0.85rem] font-medium text-petrolio">
               {m.cta.scopri}
               <Segno nome="freccia" size={16} className="transition-transform duration-500 ease-osso group-hover:translate-x-1" />
@@ -122,8 +108,6 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
   }
 
   if (apertura) {
-    const tutte = await getSedi();
-    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
       <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className={`group ${accesa} flex h-full flex-col lg:row-span-2 lg:grid lg:grid-rows-subgrid`}>
         <Lastra ratio="3/2" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
@@ -137,7 +121,6 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
           <div className="min-w-0 max-w-xl">
             <h2 className="display-m transition-colors duration-500 group-hover:text-petrolio">{m.home.cosaCuroTitolo}</h2>
             <p className="mt-3 text-[1.05rem] leading-relaxed text-grafite md:text-[1.12rem]">{pick(p.lead, locale)}</p>
-            {dove.length > 0 && <p className="mt-3 text-[0.8rem] text-grafite">{dove.join(" · ")}</p>}
           </div>
           <span className="btn btn-ghost -ml-3 md:-mr-3 md:ml-0">
             {m.cta.scopri}
@@ -149,8 +132,6 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
   }
 
   if (ampia) {
-    const tutte = await getSedi();
-    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     return (
       <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group grid items-center gap-6 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-3">
         <Lastra ratio="5/4" className="w-full transition-colors duration-700 ease-osso group-hover:bg-petrolio-3">
@@ -159,7 +140,6 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
         <div className="min-w-0 lg:col-span-2">
           <h3 className="sr-only">{pick(p.titolo, locale)}</h3>
           <p className="lead max-w-xl">{pick(p.lead, locale)}</p>
-          {credito(p, dove, locale) && <p className="mt-5 text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p>}
           <span className="btn btn-ghost -ml-3 mt-6">
             {m.cta.scopri}
             <Segno nome="freccia" size={18} />
@@ -171,8 +151,6 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
 
   if (colonna) {
     // Senza foto il disegno fluttua allo scroll; la freccia arriva all'hover.
-    const tutte = await getSedi();
-    const dove = (p.sedi ?? []).map((slug) => tutte.find((s) => s.slug === slug)?.citta).filter((c): c is string => !!c);
     const velocita = [["9%", "-9%"], ["5%", "-5%"], ["12%", "-12%"]][(index ?? 0) % 3] as [string, string];
     return (
       <Link href={href(locale, { kind: "cosaCuro", slug: slugPatologia(p, locale) })} className="group flex h-full flex-col">
@@ -189,8 +167,7 @@ export async function SchedaPatologia({ p, locale, index, riga = false, alta = f
           {index !== undefined && <p className="eyebrow mb-2">{String(index + 1).padStart(2, "0")}</p>}
           <h3 className="text-[1.45rem] leading-tight transition-colors duration-500 group-hover:text-petrolio md:text-[1.6rem]">{pick(p.titolo, locale)}</h3>
           <p className="mt-2.5 text-[0.98rem] leading-relaxed text-grafite">{pick(p.lead, locale)}</p>
-          <div className="mt-auto flex items-end justify-between gap-4 pt-5">
-            {credito(p, dove, locale) ? <p className="text-[0.8rem] text-grafite">{credito(p, dove, locale)}</p> : <span />}
+          <div className="mt-auto flex items-end justify-end gap-4 pt-5">
             <span className="inline-flex shrink-0 items-center gap-1.5 text-[0.85rem] font-medium text-petrolio">
               {m.cta.scopri}
               <Segno nome="freccia" size={16} className="transition-transform duration-500 ease-osso group-hover:translate-x-1" />
@@ -243,15 +220,15 @@ export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale
       <div className="min-w-0">
         <p className="eyebrow">{m.cosaCuro.metodoEyebrow}</p>
         <h3 className="display-m mt-4 transition-colors duration-500 group-hover:text-petrolio">{pick(p.titolo, locale)}</h3>
-        <p className="lead mt-5 max-w-xl">{pick(p.lead, locale)}</p>
-        <ul className="mt-7 grid max-w-xl grid-cols-3 gap-x-4 gap-y-5">
+        <p className="lead mt-5 max-w-xl whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.lead, locale)}</p>
+        <ul className="mt-7 grid max-w-xl grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
           {m.cosaCuro.tecniche.map((t) => (
             <li key={t.icona} className="flex min-w-0 flex-col items-start">
               <span className="grid size-14 place-items-center rounded-full bg-petrolio-3 text-petrolio transition-colors duration-500 group-hover:bg-petrolio group-hover:text-osso">
                 {isTecnica(t.icona) && <IconaTecnica nome={t.icona} size={32} />}
               </span>
-              <span className="mt-3 text-[1rem] font-medium leading-tight">{t.nome}</span>
-              <span className="mt-1 text-[0.82rem] leading-snug text-grafite">{t.nota}</span>
+              <span className="mt-3 text-[0.98rem] font-medium leading-tight">{t.nome}</span>
+              {t.nota && <span className="mt-1 text-[0.82rem] leading-snug text-grafite">{t.nota}</span>}
             </li>
           ))}
         </ul>
@@ -265,15 +242,77 @@ export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale
   );
 }
 
-/** Sede in home: città in evidenza, stesso 4/3 delle lastre hub. Foto se c’è, altrimenti disegno. `grande` = città in display; `compatto` = riga con miniatura. */
-export async function ModuloSede({ s, locale, grande = false, compatto = false }: { s: Sede; locale: Locale; grande?: boolean; compatto?: boolean }) {
+/** Icona "casina / studio medico con arco" per gli Studi Medici San Pietro di Fucecchio. */
+function IconaStudioMedico({ size = 36 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true" className="text-petrolio">
+      <path d="M6 17.5L20 7L34 17.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.5 15.2V32H30.5V15.2" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M15.5 32V24.5C15.5 22.0147 17.5147 20 20 20C22.4853 20 24.5 22.0147 24.5 24.5V32"
+        fill="currentColor"
+        fillOpacity="0.14"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M20 11.5V15.5M18 13.5H22" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M5 32H35" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function logoSedeSrc(slug: string): string | null {
+  if (slug.includes("san-rossore")) return "/images/sedi/logo-san-rossore.png";
+  if (slug.includes("san-verano")) return "/images/sedi/logo-san-verano.png";
+  if (slug.includes("san-pietro")) return "/images/sedi/logo-san-pietro.png";
+  if (slug.includes("villa-donatello")) return "/images/sedi/logo-villa-donatello.jpg";
+  return null;
+}
+
+/** Sede in home / contatti / schede: città in evidenza, stesso 4/3 delle lastre hub. `modo="visite"` privilegia il logo/icona dello studio; `modo="chirurgia"` privilegia la foto della struttura. */
+export async function ModuloSede({
+  s,
+  locale,
+  grande = false,
+  compatto = false,
+  modo,
+}: {
+  s: Sede;
+  locale: Locale;
+  grande?: boolean;
+  compatto?: boolean;
+  modo?: "visite" | "chirurgia";
+}) {
   const m = getMessages(locale);
   const catalogo = await getDisegni();
   const segno = s.tipo === "ospedale" ? "ospedale" : s.tipo === "studio" ? "studio" : "clinica";
   const disegno = srcDisegno(catalogo, segno, locale);
   const foto = s.foto?.[0];
   const fotoSrc = srcMedia(foto?.src, "sedi");
-  const media = fotoSrc ? (
+  const logoSrc = logoSedeSrc(s.slug);
+  const isFucecchioStudio = s.slug.includes("san-pietro");
+
+  const usaLogo = modo === "visite" || (!fotoSrc && (logoSrc || isFucecchioStudio));
+
+  const media = usaLogo ? (
+    logoSrc ? (
+      <span className={`absolute inset-0 flex items-center justify-center bg-osso-2/70 ${compatto ? "p-2.5" : "p-8"}`}>
+        <Image
+          src={logoSrc}
+          alt={s.nome}
+          width={compatto ? 96 : 180}
+          height={compatto ? 54 : 110}
+          className={compatto ? "max-h-11 w-auto max-w-full object-contain" : "max-h-28 w-auto max-w-[75%] object-contain"}
+        />
+      </span>
+    ) : (
+      <span className="absolute inset-0 flex items-center justify-center bg-petrolio-3/60 text-petrolio">
+        <IconaStudioMedico size={compatto ? 30 : 42} />
+      </span>
+    )
+  ) : fotoSrc ? (
     <Image src={fotoSrc} alt={pick(foto?.alt, locale) || s.nome} fill sizes={compatto ? "8rem" : "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"} className="object-cover" />
   ) : disegno ? (
     <Disegno src={disegno.src} alt={disegno.alt} />
@@ -284,15 +323,16 @@ export async function ModuloSede({ s, locale, grande = false, compatto = false }
   );
 
   if (compatto) {
+    const meta = modo
+      ? [s.indirizzo, s.cap].filter(Boolean).join(", ")
+      : [s.visite && m.dove.visite, s.chirurgia && m.dove.chirurgia].filter(Boolean).join(" · ");
     return (
       <Link href={href(locale, { kind: "dove", slug: s.slug })} className="group grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-4 py-3">
-        <Lastra className="rounded-sm">{media}</Lastra>
+        <Lastra className="rounded-sm border border-linea/60">{media}</Lastra>
         <span className="min-w-0">
           <span className="block text-[1.05rem] font-medium leading-tight group-hover:text-petrolio">{s.citta}</span>
           <span className="mt-0.5 block truncate text-[0.85rem] text-grafite">{s.nome}</span>
-          <span className="mt-1 block text-[0.75rem] text-nebbia">
-            {[s.visite && m.dove.visite, s.chirurgia && m.dove.chirurgia].filter(Boolean).join(" · ")}
-          </span>
+          {meta && <span className="mt-1 block truncate text-[0.75rem] text-nebbia">{meta}</span>}
         </span>
       </Link>
     );

@@ -119,13 +119,36 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
             <section id="dove" className="ancora mt-20 max-w-[44rem]">
               <p className="eyebrow">{m.nav.dove}</p>
               <h2 className="mt-3 text-[1.75rem] leading-tight">{m.cosaCuro.doveSiTratta}</h2>
-              <ul className="mt-6 divide-y divide-linea border-y border-linea">
-                {doveSiTratta.map((sd) => (
-                  <li key={sd.slug} className="min-w-0">
-                    <ModuloSede s={sd} locale={l} compatto />
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-6 space-y-8">
+                {doveSiTratta.some((sd) => sd.visite) && (
+                  <div>
+                    <p className="eyebrow mb-2">{m.dove.doveVisitoTitolo}</p>
+                    <ul className="divide-y divide-linea border-y border-linea">
+                      {doveSiTratta
+                        .filter((sd) => sd.visite)
+                        .map((sd) => (
+                          <li key={`visite-${sd.slug}`} className="min-w-0">
+                            <ModuloSede s={sd} locale={l} compatto modo="visite" />
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
+                {doveSiTratta.some((sd) => sd.chirurgia) && (
+                  <div>
+                    <p className="eyebrow mb-2">{m.dove.doveOperoTitolo}</p>
+                    <ul className="divide-y divide-linea border-y border-linea">
+                      {doveSiTratta
+                        .filter((sd) => sd.chirurgia)
+                        .map((sd) => (
+                          <li key={`chirurgia-${sd.slug}`} className="min-w-0">
+                            <ModuloSede s={sd} locale={l} compatto modo="chirurgia" />
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </section>
           )}
 

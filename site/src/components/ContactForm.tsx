@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { tracciaEvento } from "./CookieBanner";
 import { Segno } from "./ui/Segno";
 
 export type ContactFormLabels = {
@@ -42,6 +43,7 @@ export function ContactForm({
     try {
       const res = await fetch("/api/contatto", { method: "POST", body: fd });
       if (!res.ok) throw new Error(String(res.status));
+      tracciaEvento("form_submit", { locale, sede: String(fd.get("sede") || "qualsiasi") });
       setStato("ok");
       form.reset();
     } catch {

@@ -6,7 +6,7 @@ import { buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { getSintomi } from "@/lib/sintomi";
 import { JsonLd } from "@/components/JsonLd";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
-import { FasciaFatti, FasciaPatologie, FasciaPercorso, FasciaApprofondimenti, FasciaPubblicazioni, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
+import { FasciaIntro, FasciaPatologie, FasciaPercorso, FasciaApprofondimenti, FasciaPubblicazioni, FasciaRecensioni, FasciaSedi, Hero } from "@/components/blocks/Home";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -43,7 +43,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <JsonLd data={physicianJsonLd(settings, profilo, sedi, l)} />
       <Hero home={home} settings={settings} locale={l} />
-      <FasciaFatti sedi={sedi} paper={paper} profilo={profilo} locale={l} />
+      <FasciaIntro home={home} locale={l} />
       {fasce.map((tipo) => {
         switch (tipo) {
           case "patologie":

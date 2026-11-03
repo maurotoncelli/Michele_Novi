@@ -34,11 +34,7 @@ accessibilita:
 orari:
   it: ''
   en: ''
-foto:
-  - src: sede-peccioli.jpg
-    alt:
-      it: Peccioli, il paese sulla collina
-      en: Peccioli, the town on the hill
+foto: []
 peso: 3
 patologie:
   - spalla

@@ -1,16 +1,24 @@
 eyebrow:
-  it: Ortopedico e traumatologo · Toscana
-  en: Orthopaedic and trauma surgeon · Tuscany
-titolo:
   it: Dott. Michele Novi
   en: Dr Michele Novi
+titolo:
+  it: |-
+    Chirurgia della Spalla.
+    Arto Superiore.
+    Protesica
+  en: |-
+    Shoulder Surgery.
+    Upper Limb.
+    Joint Replacement
 sottotitolo:
   it: |-
-    Chirurgia della spalla, del gomito e dell'arto superiore.
-    Dirigente medico in ospedale pubblico e formatosi tra Berlino, Seattle e Boston (Harvard), si occupa di patologie dei tendini, instabilità, artrosi e fratture. Dalla diagnosi in visita con ecografia fino all'artroscopia e alla protesi, quando servono davvero.
+    Chirurgia della spalla, trattamento delle patologie complesse e chirurgia ricostruttiva.
+    Mi occupo del trattamento chirurgico delle patologie della Spalla e dell'Arto Superiore, sia degenerative che traumatiche e sportive, con particolare attenzione alle condizioni complesse della cuffia dei rotatori, di instabilità articolare e alle procedure ricostruttive avanzate.
+    Svolgo inoltre attività chirurgica nell'ambito della patologia Ortopedica del ginocchio e dell'Anca. Formazione ed esperienza professionale maturate tra l'Italia e i centri internazionali.
   en: |-
-    Shoulder, elbow and upper-limb surgery.
-    Public hospital consultant trained in Berlin, Seattle and Boston (Harvard), treating tendon conditions, instability, arthritis and fractures. From in-office ultrasound diagnosis to arthroscopy and joint replacement, when truly needed.
+    Shoulder surgery, treatment of complex conditions and reconstructive surgery.
+    I treat degenerative, traumatic and sports-related conditions of the Shoulder and Upper Limb, with a focus on complex rotator cuff pathology, joint instability and advanced reconstructive procedures.
+    I also perform orthopaedic surgery of the Knee and Hip. Training and professional experience gained in Italy and at international centres.
 ritratto:
   src: hero-novi-v8.jpg
   alt:

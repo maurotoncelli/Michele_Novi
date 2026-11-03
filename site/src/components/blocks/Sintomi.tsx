@@ -9,8 +9,9 @@ import { Segno } from "../ui/Segno";
  */
 export function ElencoSintomi({ sintomi, compatto = false }: { sintomi: Sintomo[]; compatto?: boolean }) {
   if (!sintomi.length) return null;
+  const cols = sintomi.length % 3 === 0 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4";
   return (
-    <ul className="grid gap-x-10 border-t border-linea sm:grid-cols-2 lg:grid-cols-4">
+    <ul className={`grid gap-x-10 border-t border-linea ${cols}`}>
       {sintomi.map((x, i) => (
         <Reveal key={x.href} as="li" delay={(i % 4) * 60} className="min-w-0 border-b border-linea">
           <Link href={x.href} className={`group block h-full ${compatto ? "py-3" : "py-4"}`}>

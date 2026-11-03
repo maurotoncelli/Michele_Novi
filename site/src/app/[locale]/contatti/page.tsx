@@ -29,6 +29,8 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
   const wa = waHref(s.whatsapp, pick(s.whatsappTesto, l));
   const orari = pick(s.orari, l);
   const domande = faqItems(faq, l);
+  const sediVisite = sedi.filter((x) => x.visite);
+  const sediChirurgia = sedi.filter((x) => x.chirurgia);
 
   return (
     <>
@@ -104,15 +106,32 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
               <p className="text-sm text-grafite">{m.contatti.costo}</p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <p className="eyebrow">{m.nav.dove}</p>
-            <ul className="mt-2 divide-y divide-linea border-y border-linea">
-              {sedi.map((x) => (
-                <li key={x.slug} className="min-w-0">
-                  <ModuloSede s={x} locale={l} compatto />
-                </li>
-              ))}
-            </ul>
+          <Reveal delay={80} className="space-y-8">
+            {sediVisite.length > 0 && (
+              <div>
+                <p className="eyebrow">{m.dove.doveVisitoTitolo}</p>
+                <ul className="mt-2 divide-y divide-linea border-y border-linea">
+                  {sediVisite.map((x) => (
+                    <li key={x.slug} className="min-w-0">
+                      <ModuloSede s={x} locale={l} compatto modo="visite" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {sediChirurgia.length > 0 && (
+              <div>
+                <p className="eyebrow">{m.dove.doveOperoTitolo}</p>
+                <ul className="mt-2 divide-y divide-linea border-y border-linea">
+                  {sediChirurgia.map((x) => (
+                    <li key={x.slug} className="min-w-0">
+                      <ModuloSede s={x} locale={l} compatto modo="chirurgia" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </Reveal>
         </div>
 
@@ -122,7 +141,7 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
           <p className="mt-3 mb-8 text-[0.98rem] text-grafite">{m.contatti.formLead}</p>
           <ContactForm
             locale={l}
-            sedi={sedi.map((x) => ({ slug: x.slug, nome: x.nome, citta: x.citta ?? "" }))}
+            sedi={sediVisite.map((x) => ({ slug: x.slug, nome: x.nome, citta: x.citta ?? "" }))}
             privacyHref={href(l, { kind: "privacy" })}
             labels={{
               nome: m.contatti.nome,

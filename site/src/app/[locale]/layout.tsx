@@ -78,16 +78,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           {children}
         </main>
         <Footer locale={l} />
-        {gaId && (
-          <CookieBanner
-            gaId={gaId}
-            testo={m.cookie.testo}
-            accetta={m.cookie.accetta}
-            rifiuta={m.cookie.rifiuta}
-            cookieHref={href(l, { kind: "cookie" })}
-            cookieLabel={m.cookie.info}
-          />
-        )}
+        <CookieBanner
+          gaId={gaId}
+          testo={m.cookie.testo}
+          accetta={m.cookie.accetta}
+          rifiuta={m.cookie.rifiuta}
+          cookieHref={href(l, { kind: "cookie" })}
+          cookieLabel={m.cookie.info}
+        />
       </body>
     </html>
   );

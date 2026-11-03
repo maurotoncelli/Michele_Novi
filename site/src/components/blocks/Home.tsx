@@ -10,7 +10,8 @@ import { Segno } from "../ui/Segno";
 import { Contatore } from "../ui/Contatore";
 import { VideoLastra } from "../ui/VideoLastra";
 import { PercorsoScorrevole } from "./PercorsoScorrevole";
-import { ModuloSede, SchedaMetodo, SchedaNota, SchedaPatologia } from "./Schede";
+import { MappaToscanaVisite } from "./MappaToscana";
+import { SchedaMetodo, SchedaNota, SchedaPatologia, SchedaSede } from "./Schede";
 import { Stelle } from "@/components/ui/Stelle";
 import { Parole } from "@/components/ui/Parole";
 import { Striscia } from "@/components/blocks/Striscia";
@@ -27,12 +28,6 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
   const wa = waHref(settings.whatsapp, pick(settings.whatsappTesto, locale));
   const immagine = home.ritratto;
   const foto = srcMedia(immagine?.src, "home") ?? "/images/home/hero-sala-placeholder.jpg";
-  const righeSottotitolo = pick(home.sottotitolo, locale)
-    .split(/\n+/)
-    .map((s) => s.trim())
-    .filter(Boolean);
-  const specializzazione = righeSottotitolo.length > 1 ? righeSottotitolo[0] : null;
-  const corpoSottotitolo = righeSottotitolo.length > 1 ? righeSottotitolo.slice(1).join(" ") : righeSottotitolo[0] ?? "";
 
   return (
     <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-campo">
@@ -52,15 +47,21 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
 
         {/* Testo */}
         <div className="hero-testo margine-sx flex flex-col justify-end pb-12 pt-10 lg:pb-20 lg:pt-16 lg:pr-12">
-          <Reveal immediate className="max-w-2xl">
-            {pick(home.eyebrow, locale) && <p className="eyebrow mb-4">{pick(home.eyebrow, locale)}</p>}
-            <h1 className="display-xl">{pick(home.titolo, locale)}</h1>
-            {specializzazione && (
-              <p className="mt-3 text-[clamp(1.3rem,1.05rem+0.9vw,1.8rem)] font-normal leading-snug tracking-[-0.025em] text-inchiostro lg:text-osso/95">
-                {specializzazione}
+          <Reveal immediate className="max-w-4xl">
+            {pick(home.eyebrow, locale) && (
+              <p className="mb-3 text-[clamp(1.15rem,1rem+0.45vw,1.45rem)] font-normal tracking-[0.02em] text-inchiostro/85 lg:text-osso">
+                {pick(home.eyebrow, locale)}
               </p>
             )}
-            {corpoSottotitolo && <p className={`lead max-w-xl ${specializzazione ? "mt-4" : "mt-7"}`}>{corpoSottotitolo}</p>}
+            <h1 className="text-[clamp(2.05rem,0.9rem+3.8vw,4.35rem)] font-medium leading-[1.02] tracking-[-0.04em] [text-wrap:initial]">
+              {pick(home.titolo, locale)
+                .split(/\n+/)
+                .map((riga, idx) => (
+                  <span key={idx} className="block whitespace-nowrap">
+                    {riga.trim()}
+                  </span>
+                ))}
+            </h1>
             <div className="mt-10 flex flex-wrap items-center gap-2">
               {tel && (
                 <a href={tel} className="btn btn-petrolio">
@@ -94,6 +95,40 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
           <Segno nome="freccia" size={18} className="rotate-90" />
         </span>
       </a>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ Fascia introduttiva sotto la Hero (al posto dei numeri) */
+export function FasciaIntro({ home, locale }: { home: Home; locale: Locale }) {
+  const m = getMessages(locale);
+  const righe = pick(home.sottotitolo, locale)
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const titoloIntro = righe.length > 1 ? righe[0] : null;
+  const paragrafi = righe.length > 1 ? righe.slice(1) : righe;
+  if (!paragrafi.length) return null;
+
+  return (
+    <section id="fatti" className="hero-arrivo border-y border-linea bg-campo" aria-label={m.home.introEyebrow}>
+      <div className="contenitore py-12 md:py-16">
+        <Reveal className="max-w-3xl">
+          <p className="eyebrow mb-3">{m.home.introEyebrow}</p>
+          {titoloIntro && (
+            <h2 className="display-m">
+              {titoloIntro}
+            </h2>
+          )}
+          <div className="mt-5 space-y-3.5">
+            {paragrafi.map((par, idx) => (
+              <p key={idx} className="text-[1.06rem] leading-relaxed text-grafite md:text-[1.12rem]">
+                {par}
+              </p>
+            ))}
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -146,7 +181,7 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
   const allineate = !!spalla && resto.length === 2;
   return (
     <>
-      <Sezione indice="01" eyebrow={m.nav.cosaCuro} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="bianca" compatta>
+      <Sezione id="patologie" indice="01" eyebrow={m.home.patologieEyebrow} azione={{ href: href(locale, { kind: "cosaCuro" }), label: m.cta.tutte }} tinta="bianca" compatta className="hero-arrivo">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-12 lg:gap-y-0 xl:gap-x-16">
           {spalla && (
             <Reveal className="lg:row-span-2 lg:grid lg:grid-rows-subgrid">
@@ -198,29 +233,57 @@ export function FasciaPatologie({ patologie, sintomi = [], locale }: { patologie
   );
 }
 
-/* ------------------------------------------------------------------ 02 Dove: le città come titolo */
+/* ------------------------------------------------------------------ 02 Dove: diviso chiaramente in Dove visito (mappa Toscana) e Dove opero (strutture chirurgiche) */
 export function FasciaSedi({ sedi, locale }: { sedi: Sede[]; locale: Locale }) {
   const m = getMessages(locale);
   if (!sedi.length) return null;
+  const sediVisite = sedi
+    .filter((x) => x.visite)
+    .map((x) => ({
+      slug: x.slug,
+      citta: x.citta,
+      provincia: x.provincia || undefined,
+      nome: x.nome,
+      indirizzo: x.indirizzo,
+      cap: x.cap || undefined,
+      regime: pick(x.regime, locale) || undefined,
+      servizi: [x.infiltrazioni && m.dove.infiltrazioni, x.ecografo && m.dove.ecografo].filter((v): v is string => Boolean(v)),
+    }));
+  const sediChirurgia = sedi.filter((x) => x.chirurgia);
+
   return (
     <Sezione indice="02" eyebrow={m.nav.dove} titolo={m.home.doveTitolo} lead={m.home.doveLead} azione={{ href: href(locale, { kind: "dove" }), label: m.cta.tutte }} misura="affermazione">
-      <ul className="grid items-stretch gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-        {sedi.map((s, i) => (
-          <Reveal key={s.slug} as="li" delay={i * 80} className="h-full min-w-0">
-            <ModuloSede s={s} locale={locale} grande />
+      <div>
+        <Reveal className="mb-6">
+          <p className="eyebrow mb-2">{m.dove.visite}</p>
+          <h3 className="display-m">{m.dove.doveVisitoTitolo}</h3>
+        </Reveal>
+        <Reveal>
+          <MappaToscanaVisite sedi={sediVisite} locale={locale} labelScopri={m.cta.scopri} />
+        </Reveal>
+      </div>
+
+      {sediChirurgia.length > 0 && (
+        <div className="mt-16 border-t border-linea pt-12 md:mt-20 md:pt-14">
+          <Reveal className="mb-8">
+            <p className="eyebrow mb-2">{m.dove.chirurgia}</p>
+            <h3 className="display-m">{m.dove.doveOperoTitolo}</h3>
+            <p className="mt-2 max-w-2xl text-[1.02rem] leading-relaxed text-grafite">{m.dove.doveOperoLead}</p>
           </Reveal>
-        ))}
-      </ul>
-      <p className="mt-8 text-[0.8rem] text-nebbia">
-        <a href="/images/sedi/ATTRIBUZIONI.txt" className="underline decoration-linea underline-offset-4 hover:text-petrolio">
-          {m.dove.fotoCitta}
-        </a>
-      </p>
+          <ul className="grid items-stretch gap-x-10 gap-y-8 md:grid-cols-3">
+            {sediChirurgia.map((s, i) => (
+              <Reveal key={s.slug} as="li" delay={i * 80} className="h-full min-w-0">
+                <SchedaSede s={s} locale={locale} />
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      )}
     </Sezione>
   );
 }
 
-/* ------------------------------------------------------------------ 03 Percorso: luoghi e anni, non aggettivi */
+/* ------------------------------------------------------------------ 03 Percorso formativo: luoghi e anni con scorrimento sticky */
 export function FasciaPercorso({ profilo, home, locale }: { profilo: Profilo; home?: Home; locale: Locale }) {
   const m = getMessages(locale);
   const tappe = (profilo.inEvidenza ?? [])

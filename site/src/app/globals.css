@@ -285,12 +285,12 @@ p {
     border-color: var(--color-petrolio-chiaro);
     color: var(--color-petrolio-chiaro);
   }
-  /* Freccia in basso al centro: porta alla riga dei fatti. Solo desktop. */
+  /* Freccia in basso al centro: porta alla fascia introduttiva sotto la Hero. Solo desktop. */
   .hero-scorri {
     position: absolute;
     z-index: 2;
     left: 50%;
-    bottom: 1.35rem;
+    bottom: 2.5rem;
     display: flex;
     transform: translateX(-50%);
     color: var(--color-osso);

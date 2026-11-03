@@ -1,25 +1,24 @@
 import type { Locale } from "@/i18n/routing";
-import { getMessages } from "@/i18n";
 import { legale } from "@/i18n/legale";
 import type { Settings } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
+import { BottonePreferenzeCookie } from "../CookieBanner";
 import { Reveal } from "../ui/Reveal";
 
 export function Legale({ tipo, locale, settings }: { tipo: "privacy" | "cookie"; locale: Locale; settings: Settings }) {
-  const m = getMessages(locale);
   const vars: Record<string, string> = {
     titolare: settings.nome,
-    piva: settings.piva ?? "—",
-    pec: settings.pec ?? "—",
-    email: settings.email || "—",
+    piva: settings.piva || "02296540509",
+    albo: settings.albo || "OMCeO Pisa n. 5749",
+    pec: settings.pec || "michele.novi.w5is@pi.omceo.it",
+    email: settings.email || settings.pec || "michele.novi.w5is@pi.omceo.it",
     dominio: siteUrl(settings).replace(/^https?:\/\//, ""),
   };
   const fill = (s: string) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
   const blocchi = legale[tipo][locale];
   return (
-    <div className="contenitore pb-16">
-      <Reveal className="osso max-w-3xl p-7 md:p-10">
-        <p className="tag tag-rame mb-6">{m.legale.bozza}</p>
+    <div className="contenitore pb-16 pt-4 md:pb-24">
+      <Reveal className="max-w-3xl">
         <div className="testo">
           {blocchi.map((b, i) => (
             <section key={i}>
@@ -30,6 +29,11 @@ export function Legale({ tipo, locale, settings }: { tipo: "privacy" | "cookie";
             </section>
           ))}
         </div>
+        {tipo === "cookie" && (
+          <BottonePreferenzeCookie
+            label={locale === "en" ? "Review cookie preferences" : "Rivedi preferenze cookie"}
+          />
+        )}
       </Reveal>
     </div>
   );

@@ -1,0 +1,47 @@
+slug: Studi Medici San Pietro
+nome: Studi Medici San Pietro
+citta: Fucecchio
+provincia: FI
+indirizzo: Piazza Toscanini 3
+cap: '50054'
+coordinate:
+  lat: 43.7285
+  lng: 10.8105
+tipo: studio
+propria: false
+visite: true
+chirurgia: false
+infiltrazioni: true
+ecografo: false
+regime:
+  it: Studi medici · visite ambulatoriali
+  en: Medical practice · outpatient visits
+ruolo:
+  it: >-
+    A Fucecchio ricevo per le visite ambulatoriali presso gli Studi Medici San Pietro, in Piazza Toscanini 3:
+    prima visita, controlli dopo l'intervento e infiltrazioni. Gli interventi chirurgici si svolgono invece
+    presso l'Ospedale San Pietro Igneo (CESAT), la Casa di Cura San Rossore o Villa Donatello.
+  en: >-
+    In Fucecchio I hold outpatient consultations at Studi Medici San Pietro, Piazza Toscanini 3:
+    first visits, post-operative follow-ups and injections. Surgical procedures take place at
+    San Pietro Igneo Hospital (CESAT), Casa di Cura San Rossore or Villa Donatello.
+comeArrivare:
+  it: In Piazza Toscanini 3 a Fucecchio. Dalla FI-PI-LI uscita San Miniato / Fucecchio.
+  en: At Piazza Toscanini 3 in Fucecchio. From the FI-PI-LI motorway take the San Miniato / Fucecchio exit.
+accessibilita:
+  it: Ingresso accessibile. Parcheggio pubblico in piazza e nelle vie limitrofe.
+  en: Accessible entrance. Public parking on the square and nearby streets.
+orari:
+  it: ''
+  en: ''
+foto:
+  - src: sede-fucecchio-esterno.jpg
+    alt:
+      it: Esterno degli Studi Medici San Pietro a Fucecchio
+      en: Exterior of Studi Medici San Pietro in Fucecchio
+peso: 2
+patologie:
+  - spalla
+  - arto-superiore
+  - traumatologia-sportiva
+  - anca-e-ginocchio

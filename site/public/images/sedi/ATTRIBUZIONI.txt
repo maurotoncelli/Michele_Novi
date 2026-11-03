@@ -1,4 +1,23 @@
-Foto delle sedi e delle città nelle schede sede. Da Wikimedia Commons (salvo foto proprie). Da tenere finché le foto stanno sul sito.
+Foto e loghi delle sedi.
+
+In uso (fornite dal Dott. Michele Novi il 3 novembre 2026):
+
+sede-san-rossore.jpg, logo-san-rossore.png
+  Casa di Cura San Rossore, Pisa.
+
+sede-cesat-fucecchio.jpg
+  Ospedale San Pietro Igneo (CESAT), Fucecchio.
+
+sede-villa-donatello.jpg, logo-villa-donatello.jpg
+  Villa Donatello, Sesto Fiorentino.
+
+logo-san-verano.png
+  Centro Medico San Verano, Peccioli.
+
+logo-san-pietro.svg, logo-san-pietro.png
+  Studi Medici San Pietro, Piazza Toscanini 3, Fucecchio (ricostruito in vettoriale dall'insegna dello studio il 3 novembre 2026).
+
+Non più in uso (restano in cartella):
 
 sede-fucecchio-esterno.jpg
   Fotografia originale dell'esterno della sede di Fucecchio.

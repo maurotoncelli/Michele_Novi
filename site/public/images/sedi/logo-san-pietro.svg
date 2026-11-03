@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 220" width="420" height="220">
+  <!-- Top line: STUDI MEDICI spanning full width from left of icon (x=18) to right of SAN PIETRO (x=402) -->
+  <g transform="translate(210, 78) scale(1, 1.25)">
+    <text
+      x="0"
+      y="0"
+      text-anchor="middle"
+      textLength="384"
+      lengthAdjust="spacingAndGlyphs"
+      font-family="Arial Narrow, Helvetica Neue, Arial, sans-serif"
+      font-weight="800"
+      font-size="60"
+      fill="#0d6936"
+    >STUDI MEDICI</text>
+  </g>
+
+  <!-- Bottom line left: Wheelchair + Cupped Hands icon (x=18..98) -->
+  <g transform="translate(18, 102)">
+    <!-- Wheelchair symbol (Blue) -->
+    <g fill="#1c5aa6" stroke="#1c5aa6">
+      <circle cx="38" cy="13" r="6.2" stroke="none" />
+      <path
+        d="M 37,23 L 37,44 L 54,44 L 61,59"
+        fill="none"
+        stroke-width="5.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M 37,34 L 50,34"
+        fill="none"
+        stroke-width="4.4"
+        stroke-linecap="round"
+      />
+      <path
+        d="M 48,56 A 16.5,16.5 0 1 1 29,33"
+        fill="none"
+        stroke-width="4.8"
+        stroke-linecap="round"
+      />
+    </g>
+
+    <!-- Two cupped hands cradling from below (Orange/Terracotta) -->
+    <g fill="#df6d35">
+      <path d="M 6,53 C 5,67 15,81 32,88 C 35,89 36,95 34,97 C 28,96 14,87 6,72 C 1,63 1,53 4,48 C 5,46 8,48 6,53 Z" />
+      <path d="M 12,61 C 15,72 24,80 36,85 C 38,86 38,92 35,93 C 24,88 13,77 9,64 C 8,60 11,58 12,61 Z" opacity="0.88" />
+      <path d="M 74,53 C 75,67 65,81 48,88 C 45,89 44,95 46,97 C 52,96 66,87 74,72 C 79,63 79,53 76,48 C 75,46 72,48 74,53 Z" />
+      <path d="M 68,61 C 65,72 56,80 44,85 C 42,86 42,92 45,93 C 56,88 67,77 71,64 C 72,60 69,58 68,61 Z" opacity="0.88" />
+    </g>
+  </g>
+
+  <!-- Bottom line right: SAN PIETRO (from x=112 to x=402, width=290) -->
+  <g transform="translate(257, 182) scale(1, 1.25)">
+    <text
+      x="0"
+      y="0"
+      text-anchor="middle"
+      textLength="290"
+      lengthAdjust="spacingAndGlyphs"
+      font-family="Arial Narrow, Helvetica Neue, Arial, sans-serif"
+      font-weight="800"
+      font-size="56"
+      fill="#0d6936"
+    >SAN PIETRO</text>
+  </g>
+</svg>

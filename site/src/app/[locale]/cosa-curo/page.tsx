@@ -67,23 +67,25 @@ export default async function CosaCuroPage({ params }: PageProps<"/[locale]/cosa
       />
 
       {sintomi.length > 0 && (
-        <section id="sintomi" className="ancora border-b border-linea">
-          <div className="contenitore py-8 md:py-10">
+        <section id="sintomi" className="ancora border-y border-petrolio/25 bg-petrolio-3">
+          <div className="contenitore py-10 md:py-14">
             <Reveal className="grid gap-x-10 gap-y-2 lg:grid-cols-[auto_minmax(0,26rem)] lg:items-end lg:justify-between">
               <div>
                 <p className="eyebrow mb-2">{m.cosaCuro.sintomiEyebrow}</p>
-                <h2 className="text-[1.65rem] leading-tight md:text-[1.85rem]">{m.cosaCuro.sintomiTitolo}</h2>
+                <h2 className="text-[1.65rem] leading-tight text-profondo md:text-[1.85rem]">{m.cosaCuro.sintomiTitolo}</h2>
               </div>
-              <p className="max-w-2xl text-[1.02rem] leading-relaxed text-grafite lg:text-right">{m.cosaCuro.sintomiLead}</p>
+              {m.cosaCuro.sintomiLead && (
+                <p className="max-w-2xl text-[1.02rem] leading-relaxed text-grafite lg:text-right">{m.cosaCuro.sintomiLead}</p>
+              )}
             </Reveal>
-            <div className="mt-5">
+            <div className="mt-6">
               <ElencoSintomi sintomi={sintomi} compatto />
             </div>
           </div>
         </section>
       )}
 
-      <Sezione compatta className="pt-8 md:pt-10">
+      <Sezione compatta tinta="bianca" className="pt-10 md:pt-14">
         <h2 className="display-m max-w-3xl">{m.home.cosaCuroTitolo}</h2>
         {spalla && (
           <>

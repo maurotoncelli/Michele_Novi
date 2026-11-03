@@ -1,14 +1,71 @@
 # Handoff
 
-> Prima lettura per una chat nuova. Workspace: `Michele_Novi_Website`.  
-> Aggiornato: **27 settembre 2026**. Home: riga dei fatti bassa, **Cosa curo su fondo bianco con segni blu e in una schermata** (spalla grande + tre aree alla pari), **foto a colori** da Unsplash al posto del bianco e nero, **icone delle tre tecniche** in Come si opera. **Cosa curo (hub)**: tre aree alla pari, niente più «Inoltre». **Dove** con le quattro sedi una volta sola. **Chi sono**: foto vera di una visita e passi con animazione al passaggio del mouse. Sottotitolo di **Pubblicazioni** riscritto. Committato, `main` portato avanti e pubblicato su Vercel (vedi «Deploy e repo»).  
+> Prima lettura per una chat nuova. Workspace: `/Volumes/Siti web/Michele Novi/Hero 1` (e worktree `Hero 2`).  
+> Aggiornato: **3 novembre 2026**. Recepiti e implementati **tutti i feedback del Dott. Michele Novi** dalla presentazione `MODIFICHE SITO MN.pptx` (archiviata in `fonti/pdf/2026-11-03_MODIFICHE_SITO_MN.pptx`, dettaglio slide per slide in [`../fonti/appunti/2026-11-03_feedback-pptx-michele.md`](../fonti/appunti/2026-11-03_feedback-pptx-michele.md)):
+> - **Hero Home & Fascia Profilo clinico**: invertita gerarchia (`Dott. Michele Novi` piccolo elegante **in bianco** sopra, H1 grande su **3 righe distinte** `Chirurgia della Spalla.` / `Arto Superiore.` / `Protesica` sotto). Il sottotitolo (`Chirurgia della spalla, trattamento delle patologie complesse e chirurgia ricostruttiva.`) e i due paragrafi descrittivi di Michele (`Mi occupo del trattamento chirurgico…` / `Svolgo inoltre attività chirurgica…`) stanno subito sotto la Hero nella nuova fascia a colonna singola **`FasciaIntro`** (eyebrow `Profilo clinico`), al posto della vecchia `FasciaFatti` coi numeri (rimossa su richiesta del dottore).
+> - **Patologie trattate & Percorsi di cura**: voce di menu e pagina `/cosa-curo` rinominate in **«Percorsi di cura»** (con nuovo sottotitolo e rimozione della scritta a destra dei sintomi); in Home l'eyebrow `01` è **«Patologie trattate»**; aggiornati i lead di *La spalla* e *Anca e ginocchio*; **rimosse le caption** (`2 pubblicazioni · Pisa · Peccioli`, ecc.) sotto tutte le card; eyebrow dei sintomi cambiato in **«Per il paziente»**, aggiunto il 9° sintomo sul ginocchio (*«Ho sempre più difficoltà a camminare e fare le scale»*), griglia sintomi in `/cosa-curo` portata a **3×3** con sfondo distinto azzurro chiaro (`bg-petrolio-3`) per staccare da *La spalla* (su sfondo bianco).
+> - **Attività chirurgica (ex Come si opera)**: titolo cambiato in **«Attività chirurgica»**, nuovo copy introduttivo, **4 icone senza didascalia sotto il titoletto** (`Artroscopia`, `Chirurgia open`, `Chirurgia protesica`, `Ecografia interventistica`), nuova foto in sala col **camice sterile** (`come-si-opera-chirurgo.jpg`, compressa da 1.81 MB a 103.7 KB), più il 4° capitolo dedicato a `Ecografia interventistica` / `Interventional ultrasound` in `come-si-opera/index.mdoc` e `corpoEn.mdoc`.
+> - **Dove visito vs Dove opero**: divise nettamente in due sezioni in **Home**, **`/dove`**, **`/contatti`** e nelle schede patologia (oltre al menu a tendina del form contatti che ora propone solo le 3 sedi di visita). **Dove visito** usa `MappaToscana.tsx` (tracciato vettoriale reale ad alto dettaglio della Toscana e dell'Arcipelago preso da Novaterra, scalato a `0.71` per lasciare ampio mare blu tutto intorno ai confini, senza linee tratteggiate o tracciato stradale/fluviale, con intestazione `TOSCANA · SEDI DI VISITA` con attributo nativo `fill="#ffffff"`, 3 pin interattivi, callout che scompaiono a `opacity: 0` quando si passa il mouse su un'altra sede, e lista allineata con riquadri uniformi per i 3 loghi: San Rossore, San Verano e il logo vettoriale estratto dal cartello di **Studi Medici San Pietro — Piazza Toscanini 3, Fucecchio**, `logo-san-pietro.svg`/`.png`, scheda `fucecchio-san-pietro.yaml` con foto esterno `sede-fucecchio-esterno.jpg`). **Dove opero** mostra le 3 strutture chirurgiche (San Rossore, CESAT Fucecchio, Villa Donatello) con le foto reali degli edifici fornite da Michele.
+> - **Percorso formativo (03 in Home)**: eyebrow **«Percorso formativo»**, titolo **«Incarichi professionali e fellowship internazionali.»**, mantenendo lo **scorrimento sticky originale** (data grande + foto a sinistra che si aggiorna dinamicamente scorrendo le tappe a destra; nello screenshot statico della presentazione il dottore vedeva solo il `2015` fisso).
+> - **Logo ufficiale Dott. Michele Novi, Header & Menu mobile sticky**: estratto il tracciato vettoriale puro da `fonti/pdf/logo_michele_novi.ai`/`.pdf` in `site/src/components/ui/Logo.tsx` (con compensazione ottica dell'asta verticale destra e senza riquadro di contorno) e `site/public/images/logo-michele-novi.svg`/`.png`, inserito in `Header.tsx`, `Footer.tsx`, `opengraph-image.tsx`, `icon.svg`, `apple-icon.png` e `favicon.ico`. Aumentata la spaziatura tra le voci del menu desktop (`lg:gap-x-6 xl:gap-x-8`). Risolto il bug per cui aprendo il menu mobile dopo aver scrollato in basso l'header sticky saltava in cima alla pagina (causato da `document.body.style.overflow = "hidden"` insieme a `html { overflow-x: clip }`). Alzato `.hero-scorri` a `bottom: 2.5rem` in `globals.css`. Aggiornato anche il **CRM** (scheda contatto `#1003` e lavoro `#64`).
+>
+> Prima: **27 settembre 2026**. Home: riga dei fatti bassa, **Cosa curo su fondo bianco con segni blu e in una schermata** (spalla grande + tre aree alla pari), **foto a colori** da Unsplash al posto del bianco e nero, **icone delle tre tecniche** in Come si opera. **Cosa curo (hub)**: tre aree alla pari, niente più «Inoltre». **Dove** con le quattro sedi una volta sola. **Chi sono**: foto vera di una visita e passi con animazione al passaggio del mouse. Sottotitolo di **Pubblicazioni** riscritto. Committato, `main` portato avanti e pubblicato su Vercel (vedi «Deploy e repo»).  
 > Prima: 21 settembre 2026, notte. Upgrade visivo «miaobau» su `main`; «quaderno» sparito dal codice; pagina patologia con **sommario che segue**; **«Lettura» dei paper fatta** (5 integrali + 2 abstract, serif Source Serif 4); recensioni e approfondimenti in home su **striscia guidata dallo scroll** (desktop) / colonna (telefono), niente più frecce; recensioni **ridimensionate**, parole che si compongono.
 
-## Prossima volta — segnato il 23/09, non affrontato
+## Prossima volta — da fare col prossimo agente (segnato il 03/11)
 
-Mauro: solo da segnare, non da fare in quella sessione.
+1. ~~**Pulsante «SCORRI ↓» nella Hero (desktop)**~~ *(Fatto il 03/11: alzato a `bottom: 2.5rem` in `site/src/app/globals.css`).*
+2. ~~**Inserimento del logo ufficiale del Dott. Michele Novi**~~ *(Fatto il 03/11: creato `Logo.tsx` vettoriale e aggiornati `Header.tsx`, `Footer.tsx`, `opengraph-image.tsx`, `icon.svg`, `apple-icon.png`, `favicon.ico` e `public/images/logo-michele-novi.svg`/`.png`).*
+3. **Valutazione finale mappa Toscana (`Dove visito`):** decidere se mantenere l'attuale tracciato vettoriale ad alto dettaglio della Toscana (`MappaToscana.tsx`) oppure passare a una mappa geografica interattiva (Leaflet/OpenStreetMap filtrata in palette stile Novaterra) o a un'immagine illustrata dedicata.
 
-1. **Pubblicazioni e Approfondimenti.** Entrando in entrambe le pagine si vede tutto insieme. Chiarire come è organizzata la distinzione, e se passa da Keystatic.
+## Prossimamente online — Cookie, Analytics, Mail e Piano per il prossimo contatto con il Dott. Novi (03/11)
+
+### 1. Cosa è già pronto e attivo nel codice (IT + EN)
+
+- **Cookie Banner & Gestione Consenso (`site/src/components/CookieBanner.tsx`, `site/src/app/[locale]/layout.tsx`):**
+  - Il banner compare al primo accesso in basso a destra (in stile Aesop/Odyssée: fondo `bg-osso`, bordo `border-linea`, ombra discreta `shadow-osso`) con due scelte paritetiche: **«Accetta»** (`mn_consenso = "si"`) e **«Solo tecnici»** (`mn_consenso = "no"`).
+  - Nella pagina `/it/cookie` (`/en/cookie`) è presente il pulsante interattivo **«Rivedi preferenze cookie»** (`BottonePreferenzeCookie`) che riapre istantaneamente il banner per modificare o revocare il consenso in qualsiasi momento (obbligo GDPR / Linee Guida Garante 2021).
+- **Google Analytics 4 + Eventi di conversione (`CookieBanner.tsx`, `ContactForm.tsx`):**
+  - Predisposto per caricare `gtag.js` (con `anonymize_ip: true`) **esclusivamente dopo il consenso** (`mn_consenso === "si"`) non appena su Vercel viene valorizzata la variabile d'ambiente `NEXT_PUBLIC_GA_ID` (`G-XXXXXXXXXX`).
+  - Tracciamento automatico già cablato per i 4 eventi chiave:
+    1. `click_call` — click su qualsiasi numero di telefono (`tel:`)
+    2. `click_whatsapp` — click su link WhatsApp (`wa.me`)
+    3. `click_maps` — click su «Apri in Google Maps» nelle schede sede
+    4. `form_submit` — invio completato del modulo in `/contatti` (con parametro `sede` e `locale`)
+- **Informativa Privacy, Cookie Policy e Disclaimer medico (`site/src/i18n/legale.ts`, `site/src/components/blocks/Legale.tsx`):**
+  - Rimosso il badge provvisorio *«Testo in bozza»*.
+  - Testi completi in italiano e inglese ai sensi dell'art. 13 GDPR con i dati ufficiali del titolare (`Dott. Michele Novi`, `OMCeO Pisa n. 5749`, `P. IVA 02296540509`, PEC `michele.novi.w5is@pi.omceo.it`), clausola di **esclusione di raccolta dati sanitari** nel form e **disclaimer deontologico sanitario** (Legge 145/2018 e artt. 55–56 Codice di Deontologia Medica).
+  - Nel form contatti (`ContactForm.tsx`) il checkbox di accettazione dell'Informativa Privacy è obbligatorio (`required`) e viene registrato con timestamp nella mail inviata alla segreteria.
+- **Collegamento alla mail (`site/content/settings.yaml`, `site/src/app/api/contatto/route.ts`):**
+  - Impostato `emailDestinazioneForm: michelenoviortopedico@gmail.com` come destinatario immediato delle richieste inviate dal form (mentre `email` pubblico resta vuoto finché non è attiva la casella `info@` sul dominio definitivo, così la Gmail personale non compare in chiaro nel footer).
+
+### 2. Piano operativo per il prossimo contatto con il Dott. Michele Novi (Dominio, Mail e Go-Live)
+
+1. **Scelta e acquisto del nuovo dominio (insieme a Michele):**
+   - Scegliere tra **`michelenovi.it`** (consigliato: corto, diretto, memorabile) o **`michelenoviortopedico.it`**.
+   - Registrare il dominio intestandolo direttamente al Dott. Michele Novi (con attivazione di almeno 1 casella email).
+2. **Casella email della segreteria e collegamento del modulo contatti (Resend):**
+   - Creare la casella **`info@michelenovi.it`** (letta dalla segreteria oppure con inoltro automatico a `michelenoviortopedico@gmail.com`).
+   - Verificare il dominio su **Resend** aggiungendo i 3 record DNS (`DKIM`, `SPF`, `DMARC`).
+   - Su Vercel (`michele-novi-sito` → *Settings → Environment Variables*) inserire:
+     - `RESEND_API_KEY` = chiave API di Resend
+     - `RESEND_FROM` = `Dott. Michele Novi <info@michelenovi.it>`
+   - In `site/content/settings.yaml` inserire `email: info@michelenovi.it` e `emailDestinazioneForm: info@michelenovi.it` (o lasciarlo su `michelenoviortopedico@gmail.com` se preferisce ricevere lì i form).
+3. **Ultime 2 conferme rapide da chiedere a Michele / segreteria:**
+   - **Numero di telefono unico:** confermare che il numero definitivo sia **`348 4331733`** (già inserito sul sito) e chiedere se vuole attivare anche il pulsante **WhatsApp** (`settings.whatsapp`).
+   - **Orari della segreteria:** farsi dare la riga di orari da mostrare in Contatti e nel Footer (`settings.orari`, es. *"Lun–Ven 9:00–13:00 / 15:00–18:30"*).
+4. **Collegamento Dominio su Vercel, Sblocco SEO e Redirect 301 dal vecchio sito:**
+   - Aggiungere `michelenovi.it` e `www.michelenovi.it` in **Vercel → Settings → Domains** e configurare i DNS (`A @ → 76.76.21.21`, `CNAME www → cname.vercel-dns.com`).
+   - In `site/content/settings.yaml` impostare `dominio: https://www.michelenovi.it`: questo **sblocca automaticamente `robots.txt`** (`Allow: /` + `sitemap.xml`) e aggiorna tutti i tag canonical, `hreflang`, JSON-LD, OpenGraph e `/llms.txt`.
+   - Configurare il **Redirect 301** dal vecchio dominio **`centrosaluteonline.it`** (che resta acceso per almeno 12 mesi) verso il nuovo dominio per trasferire l'anzianità SEO su Google.
+5. **Attivazione Google Analytics 4, Search Console e Google Business Profile:**
+   - Creare lo stream **GA4** del nuovo dominio e inserire `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX` nelle variabili d'ambiente di Vercel.
+   - Verificare il nuovo dominio su **Google Search Console**, inviare `https://www.michelenovi.it/sitemap.xml` e avviare la procedura di *Cambio di indirizzo* da `centrosaluteonline.it`.
+   - Aggiornare l'URL del sito web sulle 4 schede **Google Business Profile**, su Instagram e su LinkedIn.
+
+### Segnati in precedenza (23/09)
+
+1. **Pubblicazioni e Approfondimenti.** (Già separati il 27/09).
 2. **Copy.** Rilettura dei testi vari.
 3. **Galleria negli approfondimenti.** Possibilità di inserire una galleria di foto dentro un approfondimento.
 4. **Controllo tecnico.** SEO e HTML, SEO per gli AI, cookie, analytics.
@@ -137,6 +194,7 @@ Il campo `abstract` è ora compilato per tutti e sette (prima era vuoto). Per ag
 | 21/09 pomeriggio | Ramo **`versione-miaobau`** («nuovo ramo principale»). Da skyclinics.al senza librerie: hero che si posa, cifre che si contano, Percorso sticky con lastra del lavoro, trama, frecce. Poi: cifre `cifra-m`; **Come si opera fuori da Cosa curo** (fascia «Il metodo»); Cosa curo a **tre colonne che fluttuano**; Chi sono con **ritratto b/n a tutta altezza** (Mauro: «mi fa impazzire»); **Come valuto** con lastra e tre passi; Approfondimenti in **rotaia** + «Vedi tutto in griglia»; **«quaderno» rinominato ovunque** in `approfondimenti`. Proposta «Lettura» dei paper con verifica copyright: in attesa. |
 
 | 27/09 | Mauro sulla home: riga dei fatti «solo transazionale» → bassa, cifra e didascalia sulla stessa riga (`.cifra-s`). «Togli il bianco e nero»: non era un filtro, i file erano b/n (bozze generate e uno Unsplash b/n); cercate **quattro foto a colori** su Unsplash, stesso stile (luce morbida, fondi chiari, pelle calda), Come si opera nella sua versione a colori. **Cosa curo su fondo blu**, poi «troppo lunga» → **in una schermata**: spalla grande a sinistra, gomito · sport · anca e ginocchio **alla pari** a destra; infine «ho cambiato idea» → **fondo bianco, segni blu** (`.fascia-bianca`). Nell'hub le tre aree alla pari in tre colonne, «Inoltre» eliminato. Secondo giro, dopo il deploy di `886e30c`: in home anca e ginocchio al posto dello sport accanto alla spalla, **sport in una fascia a parte** sotto; colonna di destra allineata alla spalla con sottogriglia e miniature più grandi; numeri di Come valuto in petrolio. Committato e pubblicato anche questo. **Icone delle tecniche** in Come si opera (`IconaTecnica`, disegnate a mano in SVG). **Dove**: niente più due colonne con sedi ripetute, quattro sedi con etichette Visite/Chirurgia. **Chi sono**: foto generata della visita → foto vera Unsplash; passi di Come valuto con animazione al passaggio del mouse. **Pubblicazioni**: sottotitolo riscritto. |
+| 03/11 | Presentazione `MODIFICHE SITO MN.pptx` mandata da Michele (12 slide + nuova foto in sala col camice sterile). Implementate tutte le modifiche: Hero con `Dott. Michele Novi` piccolo sopra e `Chirurgia della Spalla. Arto Superiore. Protesica` grande + nuovo copy; rimossa `FasciaFatti`; rinominati menu/hub in **Percorsi di cura** e sezione 01 in **Patologie trattate**; rimosse le caption pubblicazioni/città sotto le card; eyebrow sintomi **Per il paziente** + sintomo ginocchio; **Attività chirurgica** (ex Come si opera) con 4 icone senza sottotitolo (aggiunta `Ecografia interventistica`) e foto col camice sterile compressa a 103.7 KB; separazione **Dove visito** (mappa Toscana SVG + 3 pin + loghi San Rossore / San Verano + nuova sede **Studi Medici San Pietro, Piazza Toscanini 3, Fucecchio**) e **Dove opero** (foto reali di San Rossore, CESAT e Villa Donatello); **Percorso formativo** con date grandi alternate destra/sinistra. |
 
 ## Cosa fare adesso (ordine)
 

@@ -1,11 +1,12 @@
 import { ImageResponse } from "next/og";
 import { getProfilo, getSettings } from "@/lib/content";
 import { pick } from "@/i18n";
+import { LOGO_MN_PATH } from "@/components/ui/Logo";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Immagine social di default, generata dai dati. */
+/** Immagine social di default, generata dai dati con il logo ufficiale. */
 export default async function OgImage() {
   const [s, p] = await Promise.all([getSettings(), getProfilo()]);
   return new ImageResponse(
@@ -15,9 +16,9 @@ export default async function OgImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          background: "linear-gradient(135deg, #e8f3f4 0%, #f7f6f3 50%, #fdf2ed 100%)",
-          padding: 64,
-          fontFamily: "Georgia, serif",
+          background: "#f7f6f3",
+          padding: 56,
+          fontFamily: "sans-serif",
         }}
       >
         <div
@@ -26,19 +27,36 @@ export default async function OgImage() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            background: "linear-gradient(165deg, #ffffff, #f3f1ec)",
-            borderRadius: "72px 96px 72px 104px",
-            border: "1px solid rgba(26,30,34,0.06)",
-            boxShadow: "0 30px 80px -30px rgba(26,30,34,0.25)",
+            background: "#ffffff",
+            border: "1px solid rgba(26, 30, 34, 0.1)",
             padding: 64,
           }}
         >
-          <div style={{ fontSize: 24, letterSpacing: 4, textTransform: "uppercase", color: "#5b6470", fontFamily: "sans-serif" }}>{pick(s.ruolo, "it")}</div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 92, lineHeight: 1, color: "#1a1e22" }}>{s.nome}</div>
-            <div style={{ marginTop: 20, fontSize: 32, color: "#0c535c", fontStyle: "italic" }}>{pick(p.titolo, "it")}</div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div
+              style={{
+                fontSize: 22,
+                fontWeight: 600,
+                letterSpacing: 4,
+                textTransform: "uppercase",
+                color: "#1e6aa8",
+              }}
+            >
+              {pick(s.ruolo, "it")}
+            </div>
+            <svg width="72" height="89" viewBox="0 0 398 494" fill="none">
+              <path fill="#1e6aa8" fillRule="evenodd" clipRule="evenodd" d={LOGO_MN_PATH} />
+            </svg>
           </div>
-          <div style={{ height: 3, width: 400, background: "linear-gradient(90deg, transparent, #c9785c, transparent)" }} />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 82, fontWeight: 500, lineHeight: 1.02, letterSpacing: -2, color: "#0f3a5a" }}>
+              {s.nome}
+            </div>
+            <div style={{ marginTop: 18, fontSize: 30, lineHeight: 1.35, color: "#5b6470", maxWidth: 880 }}>
+              {pick(p.titolo, "it")}
+            </div>
+          </div>
+          <div style={{ height: 4, width: 120, background: "#1e6aa8" }} />
         </div>
       </div>
     ),

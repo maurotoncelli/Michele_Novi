@@ -20,8 +20,8 @@ import { ElencoSintomi } from "./Sintomi";
 import { sintomiVari, type Sintomo } from "@/lib/sintomi";
 import { ArchivioPubblicazioni } from "./ListaPubblicazioni";
 
-/* ------------------------------------------------------------------ Hero: immagine a tema a tutto schermo (desktop), testo sopra in basso a sinistra.
-   Su mobile: immagine sopra, testo sotto. Non è un ritratto: il dottore sta in Chi sono. */
+/* ------------------------------------------------------------------ Hero: immagine a tema a tutto schermo (verticale su mobile, ampia su desktop),
+   testo in bianco in sovraimpressione in basso. */
 export function Hero({ home, settings, locale }: { home: Home; settings: Settings; locale: Locale }) {
   const m = getMessages(locale);
   const tel = telHref(settings.telefono);
@@ -30,9 +30,9 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
   const foto = srcMedia(immagine?.src, "home") ?? "/images/home/hero-sala-placeholder.jpg";
 
   return (
-    <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-campo">
+    <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-profondo">
       <div className="hero-griglia">
-        {/* Immagine a vivo: sopra su mobile, a tutto schermo da desktop. Il soggetto sta a destra, il testo a sinistra. */}
+        {/* Immagine a vivo a tutto schermo: centrata sul dottore su mobile e desktop. */}
         <div className="hero-media">
           <Image
             src={foto}
@@ -45,15 +45,15 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
           />
         </div>
 
-        {/* Testo */}
-        <div className="hero-testo margine-sx flex flex-col justify-end pb-12 pt-10 lg:pb-20 lg:pt-16 lg:pr-12">
+        {/* Testo in sovraimpressione */}
+        <div className="hero-testo margine-sx flex flex-col justify-end pb-8 pt-10 sm:pb-12 lg:pb-20 lg:pt-16 lg:pr-12">
           <Reveal immediate className="max-w-4xl">
             {pick(home.eyebrow, locale) && (
-              <p className="mb-3 text-[clamp(1.15rem,1rem+0.45vw,1.45rem)] font-normal tracking-[0.02em] text-inchiostro/85 lg:text-osso">
+              <p className="mb-2 text-[clamp(1rem,0.9rem+0.45vw,1.45rem)] font-normal tracking-[0.02em] text-osso/90 sm:mb-3 lg:text-osso">
                 {pick(home.eyebrow, locale)}
               </p>
             )}
-            <h1 className="text-[clamp(2.05rem,0.9rem+3.8vw,4.35rem)] font-medium leading-[1.02] tracking-[-0.04em] [text-wrap:initial]">
+            <h1 className="text-[clamp(1.95rem,0.7rem+4.2vw,4.35rem)] font-medium leading-[1.03] tracking-[-0.04em] text-osso [text-wrap:initial]">
               {pick(home.titolo, locale)
                 .split(/\n+/)
                 .map((riga, idx) => (
@@ -62,7 +62,7 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
                   </span>
                 ))}
             </h1>
-            <div className="mt-10 flex flex-wrap items-center gap-2">
+            <div className="mt-6 flex flex-wrap items-center gap-2 sm:mt-10">
               {tel && (
                 <a href={tel} className="btn btn-petrolio">
                   <Segno nome="telefono" size={18} />

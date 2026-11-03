@@ -221,14 +221,14 @@ export async function SchedaMetodo({ p, locale }: { p: Patologia; locale: Locale
         <p className="eyebrow">{m.cosaCuro.metodoEyebrow}</p>
         <h3 className="display-m mt-4 transition-colors duration-500 group-hover:text-petrolio">{pick(p.titolo, locale)}</h3>
         <p className="lead mt-5 max-w-xl whitespace-pre-line text-[1.02rem] leading-relaxed">{pick(p.lead, locale)}</p>
-        <ul className="mt-7 grid max-w-xl grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
+        <ul className="mt-7 grid max-w-xl grid-cols-4 gap-x-2 gap-y-4 sm:gap-x-4">
           {m.cosaCuro.tecniche.map((t) => (
-            <li key={t.icona} className="flex min-w-0 flex-col items-start">
-              <span className="grid size-14 place-items-center rounded-full bg-petrolio-3 text-petrolio transition-colors duration-500 group-hover:bg-petrolio group-hover:text-osso">
-                {isTecnica(t.icona) && <IconaTecnica nome={t.icona} size={32} />}
+            <li key={t.icona} className="flex min-w-0 flex-col items-center text-center">
+              <span className="grid size-13 place-items-center rounded-full bg-petrolio-3 text-petrolio transition-colors duration-500 group-hover:bg-petrolio group-hover:text-osso sm:size-14">
+                {isTecnica(t.icona) && <IconaTecnica nome={t.icona} size={28} className="sm:size-8" />}
               </span>
-              <span className="mt-3 text-[0.98rem] font-medium leading-tight">{t.nome}</span>
-              {t.nota && <span className="mt-1 text-[0.82rem] leading-snug text-grafite">{t.nota}</span>}
+              <span className="mt-2.5 max-w-[5.5rem] text-[0.78rem] font-medium leading-[1.2] tracking-[-0.01em] sm:mt-3 sm:max-w-none sm:text-[0.95rem] sm:leading-tight">{t.nome}</span>
+              {t.nota && <span className="mt-1 text-[0.72rem] leading-snug text-grafite sm:text-[0.82rem]">{t.nota}</span>}
             </li>
           ))}
         </ul>

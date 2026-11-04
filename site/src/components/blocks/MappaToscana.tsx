@@ -21,23 +21,23 @@ type PinId = "pisa" | "fucecchio" | "peccioli";
 
 /**
  * Coordinate esatte nel sistema di coordinate del tracciato ad alto dettaglio
- * della Toscana (viewBox 0 0 520 510, con transform translate(102, 74) scale(0.71)
- * per lasciare ampio margine di mare blu tutto intorno al profilo).
+ * della Toscana (viewBox 0 0 520 510, con transform translate(62, 44) scale(0.85)
+ * per bilanciare la grandezza della regione e il margine di mare blu intorno).
  */
 const PIN_COORDS: Record<PinId, { cx: number; cy: number }> = {
-  pisa: { cx: 175.8, cy: 191.2 },
-  fucecchio: { cx: 227.7, cy: 190.4 },
-  peccioli: { cx: 217, cy: 218.8 },
+  pisa: { cx: 150.4, cy: 184.3 },
+  fucecchio: { cx: 212.5, cy: 183.4 },
+  peccioli: { cx: 199.7, cy: 217.4 },
 };
 
 const CITTA_RIF = [
-  { nome: "Viareggio", cx: 161.6, cy: 168.4, dx: -7, dy: 3, anchor: "end" as const },
-  { nome: "Lucca", cx: 191.5, cy: 172, dx: 6, dy: 3, anchor: "start" as const },
-  { nome: "Livorno", cx: 168, cy: 218.8, dx: -7, dy: 3.5, anchor: "end" as const },
-  { nome: "Firenze", cx: 280.2, cy: 184, dx: 7, dy: 3.5, anchor: "start" as const },
-  { nome: "Siena", cx: 288.7, cy: 255.8, dx: 7, dy: 3.5, anchor: "start" as const },
-  { nome: "Arezzo", cx: 354, cy: 232.3, dx: 7, dy: 3.5, anchor: "start" as const },
-  { nome: "Grosseto", cx: 263.2, cy: 343.8, dx: 7, dy: 3.5, anchor: "start" as const },
+  { nome: "Viareggio", cx: 133.4, cy: 157.1, dx: -7, dy: 3, anchor: "end" as const },
+  { nome: "Lucca", cx: 169.1, cy: 161.3, dx: 6, dy: 3, anchor: "start" as const },
+  { nome: "Livorno", cx: 141.1, cy: 217.4, dx: -7, dy: 3.5, anchor: "end" as const },
+  { nome: "Firenze", cx: 275.4, cy: 175.8, dx: 7, dy: 3.5, anchor: "start" as const },
+  { nome: "Siena", cx: 285.6, cy: 261.6, dx: 7, dy: 3.5, anchor: "start" as const },
+  { nome: "Arezzo", cx: 363.8, cy: 233.6, dx: 7, dy: 3.5, anchor: "start" as const },
+  { nome: "Grosseto", cx: 255.0, cy: 367.0, dx: 7, dy: 3.5, anchor: "start" as const },
 ];
 
 /* Tracciati geografici reali ad alto dettaglio della Toscana e dell'Arcipelago Toscano */
@@ -136,13 +136,13 @@ export function MappaToscanaVisite({
             <line x1="390" y1="0" x2="390" y2="510" />
           </g>
 
-          {/* Tracciato reale ad alto dettaglio della Toscana e dell'Arcipelago (scalato a 0.71 e centrato per ampio margine blu) */}
-          <g transform="translate(102, 74) scale(0.71)" filter="url(#ombra-regione)">
+          {/* Tracciato reale ad alto dettaglio della Toscana e dell'Arcipelago (scalato a 0.85: via di mezzo tra 1.0 e 0.71) */}
+          <g transform="translate(62, 44) scale(0.85)" filter="url(#ombra-regione)">
             <path
               d={TOSCANA_MAIN_PATH}
               fill="url(#terra-toscana)"
               stroke="#c4bcad"
-              strokeWidth="1.9"
+              strokeWidth="1.7"
               strokeLinejoin="round"
             />
             {ARCIPELAGO_PATHS.map((d, idx) => (
@@ -151,7 +151,7 @@ export function MappaToscanaVisite({
                 d={d}
                 fill="url(#terra-toscana)"
                 stroke="#c4bcad"
-                strokeWidth="1.6"
+                strokeWidth="1.5"
                 strokeLinejoin="round"
               />
             ))}
@@ -182,15 +182,15 @@ export function MappaToscanaVisite({
             onMouseEnter={() => setAttiva("fucecchio")}
             onMouseLeave={() => setAttiva(null)}
           >
-            <line x1="227.7" y1="190.4" x2="264" y2="112" stroke="#1e6aa8" strokeWidth="1.4" />
-            <rect x="212" y="58" width="212" height="54" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth={attiva === "fucecchio" ? "2" : "1"} />
-            <text x="224" y="78" fill="#0f3a5a" className="fill-[#0f3a5a] text-[11px] font-semibold">
+            <line x1="212.5" y1="183.4" x2="254" y2="100" stroke="#1e6aa8" strokeWidth="1.4" />
+            <rect x="202" y="46" width="212" height="54" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth={attiva === "fucecchio" ? "2" : "1"} />
+            <text x="214" y="66" fill="#0f3a5a" className="fill-[#0f3a5a] text-[11px] font-semibold">
               Fucecchio (FI)
             </text>
-            <text x="224" y="93" fill="#1e6aa8" className="fill-[#1e6aa8] text-[10.5px] font-medium">
+            <text x="214" y="81" fill="#1e6aa8" className="fill-[#1e6aa8] text-[10.5px] font-medium">
               Studi Medici San Pietro
             </text>
-            <text x="224" y="105" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
+            <text x="214" y="93" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
               Piazza Toscanini, 3
             </text>
           </g>
@@ -203,15 +203,15 @@ export function MappaToscanaVisite({
             onMouseEnter={() => setAttiva("pisa")}
             onMouseLeave={() => setAttiva(null)}
           >
-            <line x1="175.8" y1="191.2" x2="128" y2="238" stroke="#1e6aa8" strokeWidth="1.4" />
-            <rect x="30" y="238" width="184" height="54" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth={attiva === "pisa" ? "2" : "1"} />
-            <text x="42" y="258" fill="#0f3a5a" className="fill-[#0f3a5a] text-[11px] font-semibold">
+            <line x1="150.4" y1="184.3" x2="112" y2="236" stroke="#1e6aa8" strokeWidth="1.4" />
+            <rect x="20" y="236" width="184" height="54" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth={attiva === "pisa" ? "2" : "1"} />
+            <text x="32" y="256" fill="#0f3a5a" className="fill-[#0f3a5a] text-[11px] font-semibold">
               Pisa (PI)
             </text>
-            <text x="42" y="273" fill="#1e6aa8" className="fill-[#1e6aa8] text-[10.5px] font-medium">
+            <text x="32" y="271" fill="#1e6aa8" className="fill-[#1e6aa8] text-[10.5px] font-medium">
               Casa di Cura San Rossore
             </text>
-            <text x="42" y="285" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
+            <text x="32" y="283" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
               Viale delle Cascine, 152/F
             </text>
           </g>
@@ -224,15 +224,15 @@ export function MappaToscanaVisite({
             onMouseEnter={() => setAttiva("peccioli")}
             onMouseLeave={() => setAttiva(null)}
           >
-            <line x1="217" y1="218.8" x2="258" y2="302" stroke="#1e6aa8" strokeWidth="1.4" />
-            <rect x="206" y="302" width="208" height="54" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth={attiva === "peccioli" ? "2" : "1"} />
-            <text x="218" y="322" fill="#0f3a5a" className="fill-[#0f3a5a] text-[11px] font-semibold">
+            <line x1="199.7" y1="217.4" x2="248" y2="300" stroke="#1e6aa8" strokeWidth="1.4" />
+            <rect x="196" y="300" width="208" height="54" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth={attiva === "peccioli" ? "2" : "1"} />
+            <text x="208" y="320" fill="#0f3a5a" className="fill-[#0f3a5a] text-[11px] font-semibold">
               Peccioli (PI)
             </text>
-            <text x="218" y="337" fill="#1e6aa8" className="fill-[#1e6aa8] text-[10.5px] font-medium">
+            <text x="208" y="335" fill="#1e6aa8" className="fill-[#1e6aa8] text-[10.5px] font-medium">
               Centro Medico San Verano
             </text>
-            <text x="218" y="349" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
+            <text x="208" y="347" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
               Viale Cavour, 13
             </text>
           </g>

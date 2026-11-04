@@ -35,12 +35,15 @@ export function PercorsoScorrevole({ tappe, media }: { tappe: Tappa[]; media?: R
   return (
     <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-24">
       <div className="lg:sticky lg:top-[calc(var(--header-h)+5rem)] lg:self-start">
-        <p className="cifra hidden text-inchiostro lg:block" aria-hidden="true">
+        <p
+          className="hidden text-right text-[clamp(2.1rem,1.2rem+2.5vw,3.35rem)] font-medium leading-[0.95] tracking-[-0.04em] text-inchiostro tabular-nums lg:block"
+          aria-hidden="true"
+        >
           <span key={corrente?.anno} className="anno-entra inline-block">
             {corrente?.anno}
           </span>
         </p>
-        {media && <div className="mx-auto max-w-sm lg:mx-0 lg:mt-10 lg:max-w-none">{media}</div>}
+        {media && <div className="mx-auto max-w-sm lg:mx-0 lg:mt-5 lg:max-w-none">{media}</div>}
       </div>
 
       <ol className="divide-y divide-linea">

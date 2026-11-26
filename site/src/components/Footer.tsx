@@ -28,10 +28,10 @@ export async function Footer({ locale }: { locale: Locale }) {
               <p className="mt-1 text-sm text-osso/60">{pick(s.ruolo, locale)}</p>
             </div>
           </div>
-          <ul className="mt-6 space-y-2 text-[0.95rem]">
+          <ul className="mt-6 space-y-0 text-[0.95rem] md:space-y-2">
             {tel && (
               <li>
-                <a href={tel} className="inline-flex items-center gap-2 hover:text-[var(--color-petrolio-chiaro)]">
+                <a href={tel} className="inline-flex items-center gap-2 py-2.5 md:py-0 hover:text-[var(--color-petrolio-chiaro)]">
                   <Segno nome="telefono" size={18} className="text-osso/45" />
                   <Telefono numero={s.telefono ?? ""} />
                 </a>
@@ -39,14 +39,14 @@ export async function Footer({ locale }: { locale: Locale }) {
             )}
             {s.email && (
               <li>
-                <a href={`mailto:${s.email}`} className="inline-flex items-center gap-2 hover:text-[var(--color-petrolio-chiaro)]">
+                <a href={`mailto:${s.email}`} className="inline-flex items-center gap-2 py-2.5 md:py-0 hover:text-[var(--color-petrolio-chiaro)]">
                   <Segno nome="mail" size={18} className="text-osso/45" />
                   {s.email}
                 </a>
               </li>
             )}
             {orari && (
-              <li className="flex items-start gap-2 text-osso/60">
+              <li className="flex items-start gap-2 py-2.5 text-osso/60 md:py-0">
                 <Segno nome="orologio" size={18} className="mt-0.5 shrink-0 text-osso/45" />
                 <span className="whitespace-pre-line">{orari}</span>
               </li>
@@ -76,10 +76,10 @@ export async function Footer({ locale }: { locale: Locale }) {
 
         <div className="md:col-span-4">
           <p className="eyebrow">{m.footer.sedi}</p>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-3 space-y-0 md:space-y-2">
             {sedi.map((sede) => (
               <li key={sede.slug}>
-                <Link href={href(locale, { kind: "dove", slug: sede.slug })} className="group inline-flex items-baseline gap-2 hover:text-[var(--color-petrolio-chiaro)]">
+                <Link href={href(locale, { kind: "dove", slug: sede.slug })} className="group inline-flex items-baseline gap-2 py-2.5 md:py-0 hover:text-[var(--color-petrolio-chiaro)]">
                   <span className="font-medium">{sede.citta}</span>
                   <span className="text-sm text-osso/55 group-hover:text-[var(--color-petrolio-chiaro)]">{sede.nome}</span>
                 </Link>
@@ -90,14 +90,14 @@ export async function Footer({ locale }: { locale: Locale }) {
 
         <div className="md:col-span-3">
           <p className="eyebrow">{m.footer.legale}</p>
-          <ul className="mt-3 space-y-2 text-[0.95rem]">
+          <ul className="mt-3 space-y-0 text-[0.95rem] md:space-y-2">
             <li>
-              <Link href={href(locale, { kind: "privacy" })} className="hover:text-[var(--color-petrolio-chiaro)]">
+              <Link href={href(locale, { kind: "privacy" })} className="inline-block py-2.5 md:py-0 hover:text-[var(--color-petrolio-chiaro)]">
                 {m.footer.privacy}
               </Link>
             </li>
             <li>
-              <Link href={href(locale, { kind: "cookie" })} className="hover:text-[var(--color-petrolio-chiaro)]">
+              <Link href={href(locale, { kind: "cookie" })} className="inline-block py-2.5 md:py-0 hover:text-[var(--color-petrolio-chiaro)]">
                 {m.footer.cookie}
               </Link>
             </li>
@@ -130,7 +130,7 @@ export async function Footer({ locale }: { locale: Locale }) {
                 href="https://www.maurotoncelli.it"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-osso/70 underline decoration-white/25 underline-offset-2 transition-colors hover:text-[var(--color-petrolio-chiaro)] hover:decoration-[var(--color-petrolio-chiaro)]"
+                className="inline-block py-3 text-osso/70 underline decoration-white/25 sm:py-0 underline-offset-2 transition-colors hover:text-[var(--color-petrolio-chiaro)] hover:decoration-[var(--color-petrolio-chiaro)]"
               >
                 Mauro Toncelli - maurotoncelli.it
               </a>

@@ -93,7 +93,8 @@ export function href(locale: Locale, route: Route): string {
     case "nota":
       return `${base}/${s("approfondimenti")}/${route.slug}`;
     case "tag":
-      return `${base}/${s("approfondimenti")}/${s("tag")}/${route.tag}`;
+      // I tag possono contenere spazi o accenti ("prima visita"): nell'URL pubblico vanno codificati.
+      return `${base}/${s("approfondimenti")}/${s("tag")}/${encodeURIComponent(route.tag)}`;
     case "contatti":
       return `${base}/${s("contatti")}`;
     case "privacy":

@@ -1,7 +1,13 @@
 # Handoff
 
 > Prima lettura per una chat nuova. Workspace: `/Volumes/Siti web/Michele Novi/Hero 1` (e worktree `Hero 2`).  
-> Aggiornato: **3 novembre 2026**. Recepiti e implementati **tutti i feedback del Dott. Michele Novi** dalla presentazione `MODIFICHE SITO MN.pptx` (archiviata in `fonti/pdf/2026-11-03_MODIFICHE_SITO_MN.pptx`, dettaglio slide per slide in [`../fonti/appunti/2026-11-03_feedback-pptx-michele.md`](../fonti/appunti/2026-11-03_feedback-pptx-michele.md)):
+> Aggiornato: **26 novembre 2026**. Due giri nello stesso giorno, dettaglio in [`../fonti/appunti/2026-11-26_correzioni-michele.md`](../fonti/appunti/2026-11-26_correzioni-michele.md):
+> - **Mattina:** correzioni di Michele dalla presentazione `correzioni.pptx` (12 slide), dati Scopus/ORCID, 15 pubblicazioni aggiunte (29 in archivio), testi integrali dove la licenza lo consente.
+> - **Pomeriggio (revisione di Mauro):** tolta la frase «Gli orari saranno pubblicati a breve» (**gli orari non si pubblicano**); corretta l'**anteprima social** della home e l'immagine del JSON-LD (prima uscivano indirizzi rotti); indirizzo del tag con lo spazio codificato in sitemap; **«Michele Novi» in evidenza** tra gli autori (elenco e pagina del paper, `site/src/lib/autori.ts`); **mappa leggibile su telefono** (sotto 640px solo le tre città in grande accanto ai pin) e aree di tocco da ~44px nel piè di pagina; nelle 15 schede nuove **abstract parola per parola dalla fonte, autori come in rivista, righe di copyright e licenza verificate, sintesi riscritte** senza affermazioni che l'abstract non contiene.
+> - **In attesa da Mauro:** la foto hero migliorata (`site/public/images/home/hero-novi-v8.jpg`, 2048×1142, 1,1 MB). Quando torna: sostituire il file, togliere `unoptimized` dall'`<Image>` in `Home.tsx` (o aggiungere una versione leggera per telefono).
+> - **Al go-live ricordarsi:** `robots.txt` blocca tutto finché `settings.dominio` è vuoto. Compilare il dominio è il passo che apre il sito a Google.
+>
+> Prima: **3 novembre 2026**. Recepiti e implementati **tutti i feedback del Dott. Michele Novi** dalla presentazione `MODIFICHE SITO MN.pptx` (archiviata in `fonti/pdf/2026-11-03_MODIFICHE_SITO_MN.pptx`, dettaglio slide per slide in [`../fonti/appunti/2026-11-03_feedback-pptx-michele.md`](../fonti/appunti/2026-11-03_feedback-pptx-michele.md)):
 > - **Hero Home & Fascia Profilo clinico**: invertita gerarchia (`Dott. Michele Novi` piccolo elegante **in bianco** sopra, H1 grande su **3 righe distinte** `Chirurgia della Spalla.` / `Arto Superiore.` / `Protesica` sotto). Il sottotitolo (`Chirurgia della spalla, trattamento delle patologie complesse e chirurgia ricostruttiva.`) e i due paragrafi descrittivi di Michele (`Mi occupo del trattamento chirurgico…` / `Svolgo inoltre attività chirurgica…`) stanno subito sotto la Hero nella nuova fascia a colonna singola **`FasciaIntro`** (eyebrow `Profilo clinico`), al posto della vecchia `FasciaFatti` coi numeri (rimossa su richiesta del dottore).
 > - **Patologie trattate & Percorsi di cura**: voce di menu e pagina `/cosa-curo` rinominate in **«Percorsi di cura»** (con nuovo sottotitolo e rimozione della scritta a destra dei sintomi); in Home l'eyebrow `01` è **«Patologie trattate»**; aggiornati i lead di *La spalla* e *Anca e ginocchio*; **rimosse le caption** (`2 pubblicazioni · Pisa · Peccioli`, ecc.) sotto tutte le card; eyebrow dei sintomi cambiato in **«Per il paziente»**, aggiunto il 9° sintomo sul ginocchio (*«Ho sempre più difficoltà a camminare e fare le scale»*), griglia sintomi in `/cosa-curo` portata a **3×3** con sfondo distinto azzurro chiaro (`bg-petrolio-3`) per staccare da *La spalla* (su sfondo bianco).
 > - **Attività chirurgica (ex Come si opera)**: titolo cambiato in **«Attività chirurgica»**, nuovo copy introduttivo, **4 icone senza didascalia sotto il titoletto** (`Artroscopia`, `Chirurgia open`, `Chirurgia protesica`, `Ecografia interventistica`), nuova foto in sala col **camice sterile** (`come-si-opera-chirurgo.jpg`, compressa da 1.81 MB a 103.7 KB), più il 4° capitolo dedicato a `Ecografia interventistica` / `Interventional ultrasound` in `come-si-opera/index.mdoc` e `corpoEn.mdoc`.
@@ -71,7 +77,7 @@ Per evitare di configurare manualmente record DNS, caselle e redirect nei pannel
 
 4. **Ultime 2 conferme rapide da chiedere a Michele / segreteria durante il contatto:**
    - **Numero di telefono unico:** confermare che il numero definitivo sia **`348 4331733`** (già attivo sul sito) e chiedere se vuole attivare anche il pulsante **WhatsApp** (`settings.whatsapp`).
-   - **Orari della segreteria:** farsi dare la riga di orari da mostrare in Contatti e nel Footer (`settings.orari`, es. *"Lun–Ven 9:00–13:00 / 15:00–18:30"*).
+   - ~~**Orari della segreteria**~~ *(Chiuso il 26/11: gli orari non si pubblicano. `settings.orari` resta vuoto e la riga non compare.)*
 
 5. **Attivazione Google Analytics 4, Search Console e Google Business Profile:**
    - Creare lo stream **GA4** del nuovo dominio e passare il `G-XXXXXXXXXX` all'agente (che lo inserisce in `NEXT_PUBLIC_GA_ID` su Vercel).
@@ -181,6 +187,21 @@ Il campo `abstract` è ora compilato per tutti e sette (prima era vuoto). Per ag
 - Transizioni di pagina con la View Transitions API (il titolo della scheda «vola» al titolo della pagina), solo CSS.
 - Piè di pagina con la firma: nome in display-l a tutta larghezza come chiusura editoriale.
 
+### Idee per i prossimi sviluppi (segnate il 26/11)
+
+- **Prenotazione online con calendario**: possibile espansione del sito. Oggi si prenota solo per telefono o dal modulo; l'idea è un calendario con le disponibilità per sede. Da progettare con Michele e la segreteria (chi gestisce l'agenda, quale strumento). Era già in «Fuori v1».
+- **Approfondimenti**: oggi c'è un solo articolo. La sezione va studiata (temi, cadenza, chi scrive) prima di spingerla; finché è vuota conviene non darle spazio in home.
+- **Home più corta**: proposta fatta a Mauro il 26/11, non decisa. Percorso formativo in una fascia compatta al posto della sequenza sticky, recensioni in griglia al posto della striscia orizzontale, Approfondimenti in home solo da tre articoli in su, «Dove opero» su una riga.
+- **Foto hero per telefono**: versione più leggera dedicata, dopo la foto nuova.
+
+### Da far vedere a Michele (26/11)
+
+- Le **sintesi «in breve»** delle 15 pubblicazioni aggiunte: riscritte restando dentro l'abstract, ma non le ha ancora lette.
+- **Quali 26 documenti conta Scopus**: l'anteprima pubblica conferma 26 documenti, 310 citazioni, h-index 11, ma ne elenca solo due. L'archivio del sito ne ha 29; la nota in pagina ora dice le due cose separatamente. Se serve la corrispondenza esatta, Michele può esportare l'elenco da Scopus.
+- **Simone Nicoletti** compare come coautore in tre schede (machine learning 2025, tenotomia 2024, remplissage 2022). È l'elenco autori della rivista, non una citazione nostra; la regola «non nominarlo» va confermata o precisata per questo caso.
+- Lasciate fuori per scelta dell'agente: l'abstract di una pagina su JSE 2022 (`10.1016/j.jse.2022.01.015`) e una voce del 2015 sulla colonna.
+- Testi integrali con licenza **NC / NC-SA** (zona grigia per un sito professionale): Mauro ha deciso di lasciarli così per ora.
+
 ## Deploy e repo
 
 - **Vercel**: `michele-novi-sito`, team ATSTUDIO, root `site`, Node 24. <https://michele-novi-sito.vercel.app>. Env: `KEYSTATIC_STORAGE=github`, owner/repo `maurotoncelli/Michele_Novi`, `KEYSTATIC_PATH_PREFIX=site`. Da aggiungere: chiavi GitHub App, `KEYSTATIC_SECRET`, `RESEND_API_KEY`, `NEXT_PUBLIC_GA_ID`.
@@ -216,7 +237,7 @@ Il campo `abstract` è ora compilato per tutti e sette (prima era vuoto). Per ag
 **Dati (bloccano il go-live, non il design)**
 
 1. Far **ricontrollare il cellulare** (348 4332733 detto vs 348 4331733 online). Poi `settings.telefono` / `whatsapp`.
-2. Dominio (cliente) → `settings.dominio`. Orari segreteria → `settings.orari`.
+2. Dominio (cliente) → `settings.dominio` (sblocca anche `robots.txt`). ~~Orari segreteria~~: non si pubblicano (26/11).
 3. 7 PDF paywall da Michele, se li vuole sul sito.
 4. URL delle 4 schede Google. Shooting: scheda per il fotografo in [`fonti/appunti/2026-09-23_scheda-shooting.md`](../fonti/appunti/2026-09-23_scheda-shooting.md) (luci, focali, quattro schemi). Riferimento pose in sala: **grigoriak.doctor**, annotato in [06_design.md](06_design.md#riferimenti-visivi-in-ordine-di-arrivo). La foto stock in **Come si opera** (`public/images/patologie/come-si-opera-sala.jpg`) si sostituisce con lo shooting.
 5. Far validare le bozze `site/content/patologie/*`.

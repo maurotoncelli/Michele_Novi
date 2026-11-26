@@ -3,17 +3,17 @@ titolo: 'Replacement of radial head'
 titoloBreve:
   it: 'Sostituzione protesica del capitello radiale'
   en: 'Radial head replacement'
-autori: 'Giuseppe Porcellini, Gian Mario Micheloni, Alberto Negri, Michele Novi, Erica Keeling, Luigi Tarallo'
+autori: 'Giuseppe Porcellini, Gian M. Micheloni, Alberto Negri, Michele Novi, Erica Keeling, Luigi Tarallo'
 rivista: 'Minerva Orthopedics'
 anno: 2022
-volume: '73(2)'
+volume: '73(2):176–183'
 doi: '10.23736/S2784-8469.21.04099-6'
 pubmedId: ''
 abstract: |
-  Radial head prosthesis (RHP) is the primary solution for the treatment of unfixable radial head fractures, especially if also associated with complex elbow instability. The aim of the implant is to replicate the physiological tracking, reproducing the mechanical function of a native radial head. In this review we analyzed indications and types of implants. The surgical technique is also accurately discussed, considering this implantation with the same attention and precision used for the replacement of all the other joints. The most common complications after RHP are loosening, overstuffing, stiffness and heterotopic ossifications. However, recent studies reported good clinical results in particular where correct rehabilitation programs were followed. Studies with high level of clinical evidence are necessary to provide definitive evidence to support the widespread use of this implant.
+  Radial head prosthesis (RHP) is the primary solution for the treatment of unfixable radial head fractures, especially if also associated with complex elbow instability. The aim of the implant is to replicate the physiological tracking, reproducing the mechanical function of a native radial head. In this review we analyzed indications and types of implants. The surgical technique is also accurately discussed, considering this implantation with the same attention and precision used for the replacement of all the other joints. The most common complications after RHP are loosening, overstuffing, stiffness and heterotopic ossifications. However recent studies reported good clinical results in particular where correct rehabilitation programs were followed. Studies with high level of clinical evidence are necessary to provide definitive evidence to support the widespread use of this implant.
 riassunto:
-  it: 'Quando una frattura del capitello radiale non è ricostruibile — soprattutto in presenza di instabilità complessa del gomito — la protesi di capitello radiale ripristina stabilità e biomeccanica. La revisione analizza indicazioni, modelli, tecnica chirurgica e gestione delle complicanze.'
-  en: 'When a radial head fracture is unfixable — especially with complex elbow instability — a radial head prosthesis restores stability and mechanics. This review covers indications, implant designs, surgical technique and management of complications.'
+  it: 'La protesi è la soluzione principale per le fratture del capitello radiale non ricostruibili, soprattutto se associate a instabilità complessa del gomito: l''impianto deve riprodurre la funzione meccanica del capitello nativo. La revisione tratta indicazioni, tipi di impianto e tecnica chirurgica; le complicanze più comuni sono mobilizzazione, sovradimensionamento (overstuffing), rigidità e ossificazioni eterotopiche.'
+  en: 'Radial head prosthesis is the primary solution for unfixable radial head fractures, especially when associated with complex elbow instability: the implant aims to reproduce the mechanical function of the native radial head. The review covers indications, implant types and surgical technique; the most common complications are loosening, overstuffing, stiffness and heterotopic ossification.'
 tag:
   - gomito
   - protesi
@@ -22,3 +22,4 @@ principale: false
 patologie:
   - arto-superiore
 pubblicato: true
+licenza: '© 2021 Edizioni Minerva Medica. Minerva Orthopedics. Solo abstract: il testo integrale è sulla rivista.'

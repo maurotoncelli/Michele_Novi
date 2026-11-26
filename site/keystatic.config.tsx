@@ -126,7 +126,7 @@ export default config({
         }),
         orari: testo("Orari segreteria", {
           multiline: true,
-          description: "Vuoto finché la segreteria non li conferma.",
+          description: "Lasciare vuoto: gli orari non si pubblicano (deciso il 26/11/2026). Se compilato, compaiono in Contatti e nel piè di pagina.",
         }),
         instagram: fields.url({ label: "Instagram" }),
         linkedin: fields.url({ label: "LinkedIn" }),

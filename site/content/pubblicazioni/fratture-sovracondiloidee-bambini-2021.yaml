@@ -12,10 +12,10 @@ pubmedId: '34313666'
 pdf: fratture-sovracondiloidee-bambini-2021.pdf
 url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8420822/'
 abstract: |
-  Supracondylar humeral fractures are widely considered the most common elbow fracture in children. Gartland classification plays a fundamental role in decision-making regarding management and prognosis. Recent literature recommends conservative management for non- or minimally displaced fractures, whereas there seems to be a trend towards surgical treatment for all displaced fractures. The preferred treatment for displaced Gartland II and Gartland III fractures is closed reduction and percutaneous fixation with lateral pins. In particular patterns a medial pin is recommended to obtain a stable construct. Neurovascular complications are mostly associated with Type III fractures and sometimes surgical exploration with fracture reduction is needed. Correct diagnosis and a proper management protocol are mandatory to avoid early and late complications such as neurovascular impairment and malunion.
+  Supracondylar humeral fractures are widely considered the most common elbow fracture in children. Gartland classification plays a fundamental role in decision-making regarding management and prognosis. Recent literature recommends conservative management for non or minimally displaced fractures, whereas there seems to be a trend towards surgical treatment for all displaced fractures. The preferred treatment for displaced Gartland II and Gartland III fractures is closed reduction and percutaneous fixation with lateral pins. In particular patterns medial pin is recommended for obtain a stable construct. Neurovascular complications are mostly associated with Type III fractures and sometimes surgical exploration with fracture reduction is needed. Correct diagnosis and proper management protocol is mandatory for avoid early and late complications such as neurovascular impairment and malunion.
 riassunto:
-  it: 'Le fratture sovracondiloidee sono le fratture del gomito più frequenti in età pediatrica. Il lavoro riassume la gestione secondo la classificazione di Gartland, dalla scelta conservativa alla riduzione e sintesi percutanea con fili per evitare complicanze vascolonervose e vizi di consolidazione.'
-  en: 'Supracondylar fractures are the most common elbow fractures in children. The review outlines management according to the Gartland classification, from conservative care to closed reduction and percutaneous pinning to prevent neurovascular complications and malunion.'
+  it: 'Le fratture sovracondiloidee dell''omero sono considerate le fratture del gomito più frequenti nei bambini. Il lavoro riassume la gestione secondo la classificazione di Gartland: trattamento conservativo per le fratture composte o poco scomposte, riduzione chiusa e sintesi percutanea con fili laterali per quelle scomposte di tipo II e III. Diagnosi corretta e protocollo adeguato servono a evitare complicanze neurovascolari e vizi di consolidazione.'
+  en: 'Supracondylar humeral fractures are widely considered the most common elbow fractures in children. The review summarises management according to the Gartland classification: conservative treatment for non-displaced or minimally displaced fractures, closed reduction and percutaneous fixation with lateral pins for displaced type II and III fractures. Correct diagnosis and a proper protocol are needed to avoid neurovascular complications and malunion.'
 tag:
   - gomito
   - frattura
@@ -24,7 +24,7 @@ principale: false
 patologie:
   - arto-superiore
 pubblicato: true
-licenza: '© 2021 the authors. Acta Biomedica (Mattioli 1885), licenza CC BY-NC 4.0. Riprodotto senza figure e tabelle.'
+licenza: '© 2020 Acta Bio Medica Society of Medicine and Natural Sciences of Parma. Acta Biomedica (Mattioli 1885), licenza CC BY-NC-SA 4.0 come indicata su PubMed Central. Riprodotto senza figure e tabelle.'
 testoIntegrale: |
   ## Abstract
 

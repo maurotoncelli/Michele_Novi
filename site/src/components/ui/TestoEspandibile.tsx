@@ -124,7 +124,7 @@ export function TestoEspandibile({
           e.stopPropagation();
           setOpen((v) => !v);
         }}
-        className="mt-2 inline-flex items-center gap-1.5 text-[0.86rem] font-semibold text-petrolio hover:text-petrolio-2 md:hidden"
+        className="mt-0.5 inline-flex min-h-11 items-center gap-1.5 text-[0.86rem] font-semibold text-petrolio hover:text-petrolio-2 md:hidden"
       >
         <span>{open ? less : more}</span>
         <Segno

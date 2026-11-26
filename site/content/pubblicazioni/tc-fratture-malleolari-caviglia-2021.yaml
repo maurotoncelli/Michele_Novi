@@ -11,10 +11,10 @@ doi: '10.5312/wjo.v12.i3.129'
 pubmedId: '33816140'
 url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7995337/'
 abstract: |
-  Malleolar ankle fractures have been classified using plain radiographs, and there is no consensus regarding the role of computed tomography (CT) scans in preoperative planning. We analyzed critical aspects, such as limits of standard radiographs, types of injury, classification methods and cost/benefit evaluations. CT scans allow a 3D analysis of the fracture to be obtained and consequently assess the indication for surgical procedure, surgical access and the type of fixation devices required. This exam is useful for detecting lesions that may go unnoticed on radiographs and will help surgeons to clarify the pathoanatomy of ankle fractures. According to Arbeitsgemeinschaft fur Osteosynthesefragen / Orthopaedic Trauma Association (AO/OTA) classification, CT scan is recommended in medial malleolar fractures with vertical rim, type 44B fractures with posterior malleolar involvement and all type 44C fractures. Also Tillaux-Chaput fractures, malleolar fractures in the presence of distal tibial fractures and distal tibia fractures in adolescents should be studied with CT scans.
+  Malleolar ankle fractures have been classified using plain radiographs, and there is no consensus regarding the role of computed tomography (CT) scans in preoperative planning. We analyzed critical aspects, such as limits of standard radiographs, types of injury, classification methods and cost/benefit evaluations. CT scans allow a 3D analysis of the fracture to be obtained and consequently assess the indication for surgical procedure, surgical access and the type of fixation devices required. This exam is useful for detecting lesions that may go unnoticed on radiographs and will help surgeons to clarify the pathoanatomy of ankle fractures. According to Arbeitsgemeinschaft fur Osteosynthesefragen/ Orthopaedic Trauma Association (AO/OTA) classification, CT scan is recommended in medial malleolar fractures with vertical rim, type 44B fractures with posterior malleolar involvement and all type 44C fractures (according to AO/OTA). Also Tillaux-Chaput fractures (43-B1 according to AO/OTA), malleolar fractures in the presence of distal tibial fractures (43 according to AO/OTA) and distal tibia fractures in adolescents should be studied with CT scans.
 riassunto:
-  it: 'Analisi critica del ruolo della TC nella pianificazione preoperatoria delle fratture malleolari di caviglia: quando le radiografie standard non bastano e in quali quadri di frattura la TC 3D cambia accesso chirurgico e scelta dei mezzi di sintesi.'
-  en: 'Critical review of the role of CT scans in preoperative planning for malleolar ankle fractures: when plain X-rays are insufficient and which fracture patterns benefit from 3D CT assessment to guide surgical approach and fixation.'
+  it: 'Analisi del ruolo della TC nella pianificazione preoperatoria delle fratture malleolari di caviglia: la TC consente un''analisi tridimensionale della frattura, mostra lesioni che alle radiografie possono sfuggire e aiuta a definire indicazione, accesso chirurgico e mezzi di sintesi. Il lavoro indica in quali tipi di frattura, secondo la classificazione AO/OTA, è raccomandata.'
+  en: 'Analysis of the role of CT in preoperative planning for malleolar ankle fractures: CT provides a 3D analysis of the fracture, detects lesions that may go unnoticed on radiographs and helps define the indication, the surgical access and the fixation devices. The paper indicates in which fracture types, according to the AO/OTA classification, it is recommended.'
 tag:
   - frattura
   - tecnologia
@@ -22,7 +22,7 @@ principale: false
 patologie:
   - traumatologia-sportiva
 pubblicato: true
-licenza: '© 2021 the authors. World Journal of Orthopedics (Baishideng), licenza CC BY-NC 4.0. Riprodotto senza figure e tabelle.'
+licenza: '© The Author(s) 2021. Published by Baishideng Publishing Group Inc. World Journal of Orthopedics, licenza CC BY-NC 4.0. Riprodotto senza figure e tabelle.'
 testoIntegrale: |
   ## Abstract
 

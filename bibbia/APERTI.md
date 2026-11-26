@@ -19,7 +19,9 @@ Una cifra. Farlo digitare o chiamarlo insieme. Poi quello va in header, footer, 
 Candidati: `michelenovi.it`, `michelenoviortopedico.it`. Non scelto.  
 Verificare disponibilità. Poi casella `info@` letta dalla segreteria.
 
-### Orari segreteria
+### Orari segreteria — chiuso il 26/11
+
+**Non si pubblicano.** `settings.orari` resta vuoto; Contatti e piè di pagina non mostrano nessuna riga sugli orari. Il testo sotto resta come storia.
 
 «Li comunica la segreteria» non è una riga da footer. Serve una fascia unica, o la formula fissa «su appuntamento, risponde la segreteria».  
 Fuori orario: richiama / solo in fascia / altro — **non chiesto**.

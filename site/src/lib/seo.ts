@@ -41,7 +41,8 @@ export function buildMetadata(settings: Settings, input: MetaInput): Metadata {
 
   const title = input.title;
   const description = input.description?.trim() || m.meta.homeDescription;
-  const image = input.image ? `${base}${input.image}` : `${base}/opengraph-image`;
+  // input.image è un percorso pubblico ("/images/…") o un URL completo: un nome file nudo darebbe un indirizzo rotto.
+  const image = !input.image ? `${base}/opengraph-image` : /^https?:\/\//.test(input.image) ? input.image : `${base}${input.image.startsWith("/") ? "" : "/"}${input.image}`;
 
   // Se il titolo SEO scritto a mano contiene già il nome del sito, non applichiamo il template del layout.
   const includesName = title.includes(settings.nome) || title.includes(m.meta.siteName);
@@ -91,10 +92,10 @@ export function physicianJsonLd(settings: Settings, profilo: Profilo, sedi: Sede
     "@id": physicianId(settings),
     name: profilo.nome,
     honorificPrefix: locale === "it" ? "Dott." : "Dr",
-    jobTitle: pick(profilo.titolo, locale),
+    jobTitle: pick(profilo.titolo, locale)?.replace(/\s*\n\s*/g, " "),
     description: pick(profilo.apertura, locale),
     url: `${base}${href(locale, { kind: "home" })}`,
-    image: profilo.ritratto?.src ? `${base}${profilo.ritratto.src}` : undefined,
+    image: srcMedia(profilo.ritratto?.src, "profilo") ? `${base}${srcMedia(profilo.ritratto?.src, "profilo")}` : undefined,
     medicalSpecialty: "Orthopedic",
     telephone: telefonoLd(settings),
     email: settings.email || undefined,

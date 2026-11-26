@@ -1128,3 +1128,27 @@ a.osso:hover,
   box-shadow: none;
 }
 }
+
+/*
+ * Mappa delle sedi su telefono (fuori dai layer, così vince sulle utility di dimensione del testo).
+ * Sotto 40rem i riquadri con struttura e indirizzo scendono a 6–7px: si nascondono e resta la sola città,
+ * grande, accanto al pin (ETICHETTE_STRETTE in MappaToscana.tsx). Le altre scritte si ingrandiscono.
+ */
+.mappa-solo-stretta {
+  display: none;
+}
+@media (max-width: 39.99rem) {
+  .mappa-solo-larga {
+    display: none;
+  }
+  .mappa-solo-stretta {
+    display: inline;
+  }
+  .mappa-rif text {
+    font-size: 13px;
+  }
+  .mappa-titolo {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+  }
+}

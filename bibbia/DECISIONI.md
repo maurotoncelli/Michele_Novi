@@ -141,9 +141,17 @@ Convenzione di esclusività chirurgica con San Rossore: nota interna, non da sba
 - **Dove visito / Dove opero ovunque**: divise in **Home**, **`/dove`**, **`/contatti`** e nelle schede patologia; in **Dove visito** mappa vettoriale reale ad alto dettaglio della Toscana (senza triangolo tratteggiato né linea FI-PI-LI/Arno) e 3 card con riquadri logo uniformi (`logo-san-rossore.png`, `logo-san-pietro.png` ricostruito in vettoriale dal cartello di Piazza Toscanini 3, `logo-san-verano.png`).
 - **Logo ufficiale del Dott. Michele Novi**: estratto in vettoriale da `fonti/pdf/logo_michele_novi.ai`/`.pdf` (`site/src/components/ui/Logo.tsx`, `site/public/images/logo-michele-novi.svg`/`.png`) e inserito in `Header.tsx` (al posto dell'icona provvisoria nel quadrato), `Footer.tsx`, `opengraph-image.tsx` e favicon (`icon.svg`, `apple-icon.png`, `favicon.ico`).
 
+### Chiuse il 26/11 (revisione di Mauro)
+
+- **Orari della segreteria: non si pubblicano.** Niente frase «saranno pubblicati a breve».
+- **Pubblicazioni, regole per le schede:** abstract **parola per parola** dalla fonte (PubMed o pagina dell'editore), senza correzioni; autori **come in rivista** (se la rivista dà le iniziali, restano iniziali: niente nomi completati a intuito); riga di copyright e licenza copiata dalla fonte; la sintesi «in breve» dice solo ciò che sta nell'abstract.
+- **«Michele Novi» in evidenza** negli elenchi autori (peso maggiore, non colore).
+- **Testi integrali con licenza NC / NC-SA:** per ora restano.
+- **Nota sull'archivio:** «L'archivio raccoglie N pubblicazioni… Il profilo Scopus dell'autore conta 26 documenti»: due fatti separati, non «26 su 29».
+
 ## Fuori v1 (annotato, non costruito)
 
-- Prenotazione / calendario
+- Prenotazione / calendario — il 26/11 Mauro l'ha messa tra le **idee per i prossimi sviluppi** (vedi HANDOFF)
 - Videochiamate
 - Area paziente
 - Pagamenti

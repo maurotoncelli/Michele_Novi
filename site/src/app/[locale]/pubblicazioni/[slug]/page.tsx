@@ -4,7 +4,8 @@ import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getPatologie, getPubblicazione, getPubblicazioni, getSettings, slugPatologia } from "@/lib/content";
+import { getPatologie, getProfilo, getPubblicazione, getPubblicazioni, getSettings, slugPatologia } from "@/lib/content";
+import { elencoAutori, riconosciTitolare } from "@/lib/autori";
 import { hrefArticolo, srcPaper } from "@/lib/media";
 import { headingsMarkdown, renderMarkdown } from "@/lib/markdoc";
 import { breadcrumbJsonLd, buildMetadata, paperJsonLd } from "@/lib/seo";
@@ -54,8 +55,10 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/pubblic
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const p = await getPubblicazione(slug);
   if (!p) notFound();
-  const [s, patologie, tutte] = await Promise.all([getSettings(), getPatologie(), getPubblicazioni()]);
+  const [s, patologie, tutte, profilo] = await Promise.all([getSettings(), getPatologie(), getPubblicazioni(), getProfilo()]);
   const m = getMessages(l);
+  const autori = elencoAutori(p.autori);
+  const eTitolare = riconosciTitolare(profilo.nome);
   const correlate = (p.patologie ?? []).map((sl) => patologie.find((x) => x.slug === sl)).filter(Boolean) as typeof patologie;
   const altre = tutte.filter((x) => x.slug !== p.slug && (x.tag ?? []).some((t) => (p.tag ?? []).includes(t))).slice(0, 3);
   const titoloBreve = pick(p.titoloBreve, l);
@@ -101,10 +104,18 @@ export default async function PaperPage({ params }: PageProps<"/[locale]/pubblic
               {p.titolo}
             </h1>
             <dl className="mt-6 grid gap-x-8 gap-y-3 text-[0.95rem] sm:grid-cols-2">
-              {p.autori && (
+              {autori.length > 0 && (
                 <div>
                   <dt className="eyebrow">{m.approfondimenti.autori}</dt>
-                  <dd className="mt-1 text-grafite">{p.autori}</dd>
+                  {/* Il titolare del sito in evidenza dentro l'elenco, che resta com'è in rivista. */}
+                  <dd className="mt-1 text-grafite">
+                    {autori.map((a, i) => (
+                      <span key={`${a}-${i}`}>
+                        {eTitolare(a) ? <strong className="font-medium text-inchiostro">{a}</strong> : a}
+                        {i < autori.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
+                  </dd>
                 </div>
               )}
               {p.rivista && (

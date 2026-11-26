@@ -3,17 +3,17 @@ titolo: 'Treatment of flexor tendon reconstruction failures: multicentric experi
 titoloBreve:
   it: 'Ricostruzione dei tendini flessori della mano con impianto tendineo attivo di Brunelli'
   en: 'Multicentric experience with the Brunelli active tendon implant in failed flexor tendon repairs'
-autori: 'Andrea Poggetti, Michele Novi, Marco Rosati, Davide Ciclamini, Michelangelo Scaglione, Bruno Battiston'
+autori: 'A. Poggetti, M. Novi, M. Rosati, D. Ciclamini, M. Scaglione, B. Battiston'
 rivista: 'European Journal of Orthopaedic Surgery & Traumatology'
 anno: 2018
 volume: '28(5):877–883'
 doi: '10.1007/s00590-017-2102-x'
 pubmedId: '29218649'
 abstract: |
-  INTRODUCTION: Secondary repair of flexor tendon injuries remains a challenging procedure for hand surgeons. Usually, secondary reconstruction should be performed by a staged approach. When the tendon and pulley integrity are intact, tenolysis may be the first surgical option. One-/two-stage tendon grafts are suggested when the integrity of the flexor tendon is compromised. Active tendon implants (Brunelli prostheses) may represent an efficient option in patients with a poor prognosis, as well as whenever classical techniques fail. Due to lack of literature about this second-line treatment, the authors present the experience of two different orthopedic departments with the permanent active tendon implant. MATERIALS AND METHOD: Nineteen consecutive patients with failed previous flexor tendon repairs were treated with active tendon implants between 2000 and 2011. The functional outcome of the patients was examined with a mean follow-up of 5.6 years, using Strickland assessment and QuickDASH. RESULTS: In 16 cases, the tendon implants were well tolerated and patients resulted satisfied with a QuickDASH score less than 33. Strickland score was fair to excellent in 10 patients. We registered adhesion complications in 3 cases. CONCLUSION: These prostheses represent an alternative to biological reconstructions and a potentially permanent procedure in complicated flexor tendon injuries.
+  INTRODUCTION: Secondary repair of flexor tendon injuries remain a challenging procedure for hand surgeons. Usually, secondary reconstruction should be performed by staged approach. When the tendon and pulley integrity are intact, tenolysis may be the first surgical option. One-/two-stage tendon grafts are suggested when the integrity of flexor tendon is compromised. Active tendon implants (Brunelli prostheses) may represent an efficient option in patients with a poor prognosis, as well as whenever classical techniques fail. Due to lack of literature about this second-line treatment, the authors present the experience of two different orthopedic departments with the permanent active tendon implant. MATERIALS AND METHOD: Nineteen consecutive patients with failed previous flexor tendons repairs were treated with active tendon implants between 2000 and 2011. The functional outcome of the patients was examined with a mean follow-up of 5.6 years, using Strickland assessment and QuickDASH. RESULTS: In 16 cases, the tendon implants were well tolerated and patients resulted satisfied with a QuickDASH score less than 33. Strickland score was fair to excellent in 10 patients. We registered adhesion complications in 3 cases. CONCLUSION: We can conclude that these prostheses represent an alternative to biological reconstructions and a potentially permanent procedure in complicated flexor tendon injuries. LEVEL OF EVIDENCE: Multicentric case series, Level IV.
 riassunto:
-  it: 'Esperienza multicentrica su 19 pazienti con esiti complessi di lesioni dei tendini flessori della mano già operati senza successo: l''impianto tendineo attivo di Brunelli offre una valida alternativa ricostruttiva a oltre 5 anni di follow-up medio.'
-  en: 'Multicentric study of 19 patients with complex failed flexor tendon repairs of the hand: the Brunelli active tendon implant provides a viable reconstructive alternative at over 5 years of mean follow-up.'
+  it: 'Esperienza di due reparti su 19 pazienti con fallimento di una precedente riparazione dei tendini flessori, trattati con impianto tendineo attivo (protesi di Brunelli) e seguiti in media per 5,6 anni: in 16 casi l''impianto è stato ben tollerato e i pazienti erano soddisfatti, il punteggio di Strickland è risultato da discreto a eccellente in 10 pazienti e in 3 casi si sono avute aderenze. Per gli autori è un''alternativa alle ricostruzioni biologiche.'
+  en: 'Experience of two departments with 19 patients with failed previous flexor tendon repairs, treated with an active tendon implant (Brunelli prosthesis) and followed for a mean of 5.6 years: in 16 cases the implant was well tolerated and patients were satisfied, the Strickland score was fair to excellent in 10 patients and adhesions occurred in 3 cases. For the authors it is an alternative to biological reconstructions.'
 tag:
   - mano
   - tendine
@@ -21,4 +21,4 @@ principale: false
 patologie:
   - arto-superiore
 pubblicato: true
-licenza: '© 2017 Springer-Verlag France SAS. European Journal of Orthopaedic Surgery & Traumatology. Solo abstract: il testo integrale è sulla rivista.'
+licenza: '© 2017 Springer-Verlag France SAS, part of Springer Nature. European Journal of Orthopaedic Surgery & Traumatology. Solo abstract: il testo integrale è sulla rivista.'

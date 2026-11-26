@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { href, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import type { Profilo, Pubblicazione } from "@/lib/content";
+import { getProfilo, type Profilo, type Pubblicazione } from "@/lib/content";
+import { elencoAutori, riconosciTitolare } from "@/lib/autori";
 import { hrefArticolo, srcPaper } from "@/lib/media";
 import { Reveal } from "../ui/Reveal";
 import { Segno } from "../ui/Segno";
@@ -9,22 +10,43 @@ import { ListaEspandibile } from "./ListaEspandibile";
 
 const INIZIALI = 3;
 
-/** "Novi M. et al." dalla riga autori com'è in rivista. */
-function primoAutore(autori: string | null | undefined) {
-  if (!autori) return "";
-  const [primo, ...altri] = autori.split(",");
-  return altri.length ? `${primo.trim()} et al.` : primo.trim();
+/**
+ * Riga autori breve: primo autore + il titolare del sito in evidenza, ovunque sia nell'elenco.
+ * "Michele Novi et al." · "Luigi Tarallo, Michele Novi et al." · "Giuseppe Porcellini, … Michele Novi et al."
+ */
+function AutoriBrevi({ autori, eTitolare }: { autori: string | null | undefined; eTitolare: (autore: string) => boolean }) {
+  const nomi = elencoAutori(autori);
+  if (!nomi.length) return null;
+  const i = nomi.findIndex(eTitolare);
+  const titolare = i >= 0 ? <span className="font-medium text-inchiostro">{nomi[i]}</span> : null;
+  const coda = nomi.length > Math.max(i, 0) + 1 ? " et al." : "";
+  if (i <= 0) {
+    return (
+      <>
+        {titolare ?? nomi[0]}
+        {coda}
+      </>
+    );
+  }
+  return (
+    <>
+      {nomi[0]}
+      {i === 1 ? ", " : ", … "}
+      {titolare}
+      {coda}
+    </>
+  );
 }
 
 /** Elenco bibliografico: anno, titolo, autore e rivista, PDF o link all'articolo. `espandibile` mostra le prime tre e apre le altre. */
-export function ListaPubblicazioni({ pubblicazioni, locale, espandibile = false }: { pubblicazioni: Pubblicazione[]; locale: Locale; espandibile?: boolean }) {
+export async function ListaPubblicazioni({ pubblicazioni, locale, espandibile = false }: { pubblicazioni: Pubblicazione[]; locale: Locale; espandibile?: boolean }) {
   const m = getMessages(locale);
   if (!pubblicazioni.length) return null;
+  const eTitolare = riconosciTitolare((await getProfilo()).nome);
 
   const riga = (p: Pubblicazione) => {
     const pdf = srcPaper(p.pdf);
     const articolo = hrefArticolo(p.doi, p.url);
-    const autore = primoAutore(p.autori);
     return (
       <li key={p.slug} className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:gap-4">
         <Link href={href(locale, { kind: "paper", slug: p.slug })} className="group flex min-w-0 flex-1 items-baseline gap-4">
@@ -32,7 +54,12 @@ export function ListaPubblicazioni({ pubblicazioni, locale, espandibile = false 
           <span className="min-w-0 flex-1">
             <span className="serif block text-[1.1rem] leading-snug group-hover:text-petrolio">{pick(p.titoloBreve, locale) || p.titolo}</span>
             <span className="mt-0.5 block text-sm text-grafite">
-              {autore && `${autore} · `}
+              {p.autori && (
+                <>
+                  <AutoriBrevi autori={p.autori} eTitolare={eTitolare} />
+                  {" · "}
+                </>
+              )}
               <span className="italic">{p.rivista}</span>
             </span>
           </span>
@@ -129,7 +156,7 @@ export function ArchivioPubblicazioni({
                     href={scopusUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-medium tabular-nums text-petrolio underline decoration-petrolio/35 underline-offset-4 hover:decoration-petrolio"
+                    className="inline-flex items-center gap-1 font-medium tabular-nums max-md:py-2 text-petrolio underline decoration-petrolio/35 underline-offset-4 hover:decoration-petrolio"
                   >
                     {metriche.scopusId}
                     <Segno nome="esterno" size={14} />
@@ -145,7 +172,7 @@ export function ArchivioPubblicazioni({
                     href={orcidUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 tabular-nums text-grafite underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio"
+                    className="inline-flex items-center gap-1 tabular-nums max-md:py-2 text-grafite underline decoration-linea underline-offset-4 hover:text-petrolio hover:decoration-petrolio"
                   >
                     {metriche.orcid}
                     <Segno nome="esterno" size={14} />

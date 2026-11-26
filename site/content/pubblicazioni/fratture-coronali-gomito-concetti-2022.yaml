@@ -3,17 +3,17 @@ titolo: 'Current concepts in management of coronal shear fractures of the elbow'
 titoloBreve:
   it: 'Concetti attuali nel trattamento delle fratture coronali del gomito'
   en: 'Current concepts in coronal shear fractures of the elbow'
-autori: 'Michele Novi, Luigi Tarallo, Alessandro Donà, Gian Mario Micheloni, Andrea Giorgini, Giuseppe Porcellini'
+autori: 'Michele Novi, Luigi Tarallo, Alessandro Donà, Gianmario Micheloni, Andrea Giorgini, Giuseppe Porcellini'
 rivista: 'Minerva Orthopedics'
 anno: 2022
-volume: '73(2)'
+volume: '73(2):132–137'
 doi: '10.23736/S2784-8469.21.04096-0'
 pubmedId: ''
 abstract: |
-  Coronal shear fracture of the capitellum is a rare articular injury of the distal humerus and could be burdened by high complications if an accurate reduction is not achieved. This complex lesion is usually displaced and requires open reduction and internal fixation for a better outcome. Better results are reported in isolated radiocapitellar joint fracture, while lower results are associated with trochlear involvement and articular comminution. CT scan is helpful to understand the fracture pattern and for surgical planning. Several classifications have been proposed, mainly based on topography of the lesion or more management oriented such as Dubberley's classification. Headless screws guarantee a stable fixation, but when medial extension of the fracture or comminution are present, an extensible approach and supplemental fixation with cannulated screws or plate are indicated. Fragment excision can be attempted for small fragments difficult to fix, with a higher risk of elbow instability especially if associated lesions are present. Arthroscopic reduction and elbow arthroplasty are also described for selected cases. Anatomical reduction provides high union rates and good elbow function. Complications' rate is approximately 30%, mostly elbow stiffness, and in a minor part pseudoarthrosis and osteonecrosis.
+  Coronal shear fracture of the capitellum is a rare articular injury of the distal humerus and could be burdened by high complications if an accurate reduction is not achieved. This complex lesion is usually displaced and requires open reduction and internal fixation for a better outcome. Better results are reported in isolated radiocapitellar joint fracture, while lower results are associated with trochlear involvement and articular comminution. CT scan is helpful to understand the fracture pattern and for a surgical planning. Several classifications have been proposed, mainly based on topography of the lesion or more management oriented such as Dubberly’s classification. Headless screws guarantee a stable fixation but when medial extension of the fracture or comminution are present, an extensible approach and supplemental fixation with cannulated screws or plate are indicated. Fragment excision can be attempted for small fragments difficult to fix, with a higher risk of elbow instability especially if associated lesions are present. Arthroscopic reduction and elbow arthroplasty are also described for selected cases. Anatomical reduction provides high union rates and good elbow function. Complications’ rate is approximately 30%, mostly elbow stiffness, and in a minor part pseudoarthrosis and osteonecrosis.
 riassunto:
-  it: 'Revisione completa sulle fratture coronali del capitulum humeri: ruolo della TC per la pianificazione, classificazione di Dubberley, scelta tra viti senza testa, placche o protesi e prevenzione della rigidità del gomito.'
-  en: 'Comprehensive review of coronal shear fractures of the capitellum: role of CT planning, Dubberley classification, choosing among headless screws, plates or arthroplasty, and preventing elbow stiffness.'
+  it: 'Revisione sulle fratture coronali del capitulum humeri, lesioni articolari rare del gomito: utilità della TC per capire la frattura e pianificare l''intervento, classificazioni (tra cui quella di Dubberley), fissazione con viti senza testa, con viti cannulate o placca nelle fratture più estese o comminute. Le complicanze sono circa il 30%, soprattutto rigidità del gomito.'
+  en: 'Review of coronal shear fractures of the capitellum, rare articular injuries of the elbow: usefulness of CT to understand the fracture pattern and plan surgery, classifications (including Dubberley''s), fixation with headless screws, with cannulated screws or a plate for more extended or comminuted fractures. The complication rate is approximately 30%, mostly elbow stiffness.'
 tag:
   - gomito
   - frattura
@@ -21,3 +21,4 @@ principale: false
 patologie:
   - arto-superiore
 pubblicato: true
+licenza: '© 2021 Edizioni Minerva Medica. Minerva Orthopedics. Solo abstract: il testo integrale è sulla rivista.'

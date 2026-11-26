@@ -31,13 +31,25 @@ const PIN_COORDS: Record<PinId, { cx: number; cy: number }> = {
 };
 
 const CITTA_RIF = [
-  { nome: "Viareggio", cx: 133.4, cy: 157.1, dx: -7, dy: 3, anchor: "end" as const },
-  { nome: "Lucca", cx: 169.1, cy: 161.3, dx: 6, dy: 3, anchor: "start" as const },
+  // `stretta: false` = su telefono si nasconde: cadrebbe sotto le etichette grandi delle sedi.
+  { nome: "Viareggio", cx: 133.4, cy: 157.1, dx: -7, dy: 3, anchor: "end" as const, stretta: false },
+  { nome: "Lucca", cx: 169.1, cy: 161.3, dx: 6, dy: 3, anchor: "start" as const, stretta: false },
   { nome: "Livorno", cx: 141.1, cy: 217.4, dx: -7, dy: 3.5, anchor: "end" as const },
   { nome: "Firenze", cx: 275.4, cy: 175.8, dx: 7, dy: 3.5, anchor: "start" as const },
   { nome: "Siena", cx: 285.6, cy: 261.6, dx: 7, dy: 3.5, anchor: "start" as const },
   { nome: "Arezzo", cx: 363.8, cy: 233.6, dx: 7, dy: 3.5, anchor: "start" as const },
   { nome: "Grosseto", cx: 255.0, cy: 367.0, dx: 7, dy: 3.5, anchor: "start" as const },
+];
+
+/**
+ * Etichette per schermi stretti (sotto 40rem): lì la mappa è larga ~350px e i riquadri con nome e indirizzo
+ * scendono a 6–7px, illeggibili. Al loro posto solo la città, grande, accanto al pin; struttura e indirizzo
+ * sono nell'elenco subito sotto. Coordinate nel viewBox 520×510; `filo` unisce etichetta e pin.
+ */
+const ETICHETTE_STRETTE: { id: PinId; nome: string; x: number; y: number; w: number; filo: [number, number, number, number] }[] = [
+  { id: "fucecchio", nome: "Fucecchio", x: 153, y: 122, w: 119, filo: [212.5, 153, 212.5, 166] },
+  { id: "pisa", nome: "Pisa", x: 66, y: 169, w: 64, filo: [130, 184, 141, 184] },
+  { id: "peccioli", nome: "Peccioli", x: 213, y: 212, w: 110, filo: [206, 219, 213, 224] },
 ];
 
 /* Tracciati geografici reali ad alto dettaglio della Toscana e dell'Arcipelago Toscano */
@@ -159,7 +171,7 @@ export function MappaToscanaVisite({
 
           {/* Città di riferimento */}
           {CITTA_RIF.map((c) => (
-            <g key={c.nome} opacity="0.72">
+            <g key={c.nome} opacity="0.72" className={`mappa-rif${c.stretta === false ? " mappa-solo-larga" : ""}`}>
               <circle cx={c.cx} cy={c.cy} r="2.3" fill="#5b6470" />
               <text
                 x={c.cx + c.dx}
@@ -177,7 +189,7 @@ export function MappaToscanaVisite({
           {/* 1. Fucecchio callout box (in alto a destra) */}
           <g
             filter="url(#ombra-card)"
-            className={`cursor-pointer transition-opacity duration-200 ${attiva && attiva !== "fucecchio" ? "pointer-events-none" : ""}`}
+            className={`mappa-solo-larga cursor-pointer transition-opacity duration-200 ${attiva && attiva !== "fucecchio" ? "pointer-events-none" : ""}`}
             opacity={attiva && attiva !== "fucecchio" ? 0 : 1}
             onMouseEnter={() => setAttiva("fucecchio")}
             onMouseLeave={() => setAttiva(null)}
@@ -198,7 +210,7 @@ export function MappaToscanaVisite({
           {/* 2. Pisa callout box (a sinistra) */}
           <g
             filter="url(#ombra-card)"
-            className={`cursor-pointer transition-opacity duration-200 ${attiva && attiva !== "pisa" ? "pointer-events-none" : ""}`}
+            className={`mappa-solo-larga cursor-pointer transition-opacity duration-200 ${attiva && attiva !== "pisa" ? "pointer-events-none" : ""}`}
             opacity={attiva && attiva !== "pisa" ? 0 : 1}
             onMouseEnter={() => setAttiva("pisa")}
             onMouseLeave={() => setAttiva(null)}
@@ -219,7 +231,7 @@ export function MappaToscanaVisite({
           {/* 3. Peccioli callout box (in basso a destra) */}
           <g
             filter="url(#ombra-card)"
-            className={`cursor-pointer transition-opacity duration-200 ${attiva && attiva !== "peccioli" ? "pointer-events-none" : ""}`}
+            className={`mappa-solo-larga cursor-pointer transition-opacity duration-200 ${attiva && attiva !== "peccioli" ? "pointer-events-none" : ""}`}
             opacity={attiva && attiva !== "peccioli" ? 0 : 1}
             onMouseEnter={() => setAttiva("peccioli")}
             onMouseLeave={() => setAttiva(null)}
@@ -235,6 +247,19 @@ export function MappaToscanaVisite({
             <text x="208" y="347" fill="#5b6470" className="fill-[#5b6470] text-[9.2px]">
               Viale Cavour, 13
             </text>
+          </g>
+
+          {/* Schermi stretti: al posto dei riquadri, la sola città in grande accanto al pin (vedi ETICHETTE_STRETTE). */}
+          <g className="mappa-solo-stretta" filter="url(#ombra-card)" aria-hidden="true">
+            {ETICHETTE_STRETTE.map((e) => (
+              <g key={e.id}>
+                <line x1={e.filo[0]} y1={e.filo[1]} x2={e.filo[2]} y2={e.filo[3]} stroke="#1e6aa8" strokeWidth="1.6" />
+                <rect x={e.x} y={e.y} width={e.w} height="31" rx="5" fill="#ffffff" stroke="#1e6aa8" strokeWidth="1" />
+                <text x={e.x + e.w / 2} y={e.y + 22} textAnchor="middle" fill="#0f3a5a" className="fill-[#0f3a5a] text-[19px] font-semibold">
+                  {e.nome}
+                </text>
+              </g>
+            ))}
           </g>
 
           {/* I 3 Pin sulla mappa */}
@@ -272,7 +297,7 @@ export function MappaToscanaVisite({
             textAnchor="end"
             fill="#ffffff"
             fillOpacity="0.85"
-            className="fill-white text-[9.5px] font-semibold tracking-[0.2em] uppercase"
+            className="mappa-titolo fill-white text-[9.5px] font-semibold tracking-[0.2em] uppercase"
           >
             {locale === "en" ? "Tuscany · Outpatient clinics" : "Toscana · Sedi di visita"}
           </text>

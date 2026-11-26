@@ -65,13 +65,12 @@ export default async function ContattiPage({ params }: PageProps<"/[locale]/cont
                   <p className="mt-3 max-w-md text-[1.15rem] leading-relaxed text-grafite">{m.contatti.telefonoMancante}</p>
                 )}
               </div>
-              {orari ? (
+              {/* Gli orari non si pubblicano (Mauro, 26/11): la riga compare solo se un giorno il campo viene compilato. */}
+              {orari && (
                 <div>
                   <p className="eyebrow">{m.contatti.orari}</p>
                   <p className="mt-1 whitespace-pre-line text-grafite">{orari}</p>
                 </div>
-              ) : (
-                <p className="text-sm text-nebbia">{m.contatti.orariMancanti}</p>
               )}
               {s.email && (
                 <div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
 import { getHome, getNote, getPatologie, getProfilo, getPubblicazioni, getRecensioni, getSedi, getSettings } from "@/lib/content";
+import { srcMedia } from "@/lib/media";
 import { buildMetadata, physicianJsonLd } from "@/lib/seo";
 import { getSintomi } from "@/lib/sintomi";
 import { JsonLd } from "@/components/JsonLd";
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
     route: { kind: "home" },
     title: pick(home.seo?.title, l) || m.meta.homeTitle,
     description: pick(home.seo?.description, l) || m.meta.homeDescription,
-    image: home.seo?.ogImage ?? home.ritratto?.src,
+    image: home.seo?.ogImage ?? srcMedia(home.ritratto?.src, "home") ?? undefined,
   });
 }
 

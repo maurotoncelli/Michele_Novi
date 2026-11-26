@@ -24,4 +24,113 @@ patologie:
   - spalla
   - come-si-opera
 pubblicato: true
-licenza: '© 2025 the authors. JSES International (Elsevier), licenza CC BY 4.0.'
+licenza: '© 2025 the authors. JSES International (Elsevier), licenza CC BY 4.0. Riprodotto senza figure e tabelle.'
+testoIntegrale: |
+  ## Abstract
+
+  **Background:** The integration of machine learning in orthopedic surgery, including shoulder procedures, has garnered increasing interest. This retrospective analysis aims to externally validate a predictive analytics platform within a patient cohort undergoing reverse total shoulder arthroplasty for eccentric or concentric glenohumeral osteoarthritis.
+
+  **Methods:** Ninety patients who underwent reverse total shoulder arthroplasty at our institution in 2022 were selected for this study. Patients were divided into 2 groups based on the type of implant (50 Exactech Equinoxe and 40 Zimmer Biomet Comprehensive). Preoperative evaluations included 19 variables per the tool requirements (demographics, diagnosis, comorbidities, patient-reported pain and function, and range of motion). The study compared the tool's outcome predictions with postoperative outcomes at 3-6 months, 1 year, and 2 years postsurgery for visual analog scale and active range of movement. We also quantified the mean absolute error (MAE) separately in the 2 groups and compared it to the MAE from the internal validation of the same tool.
+
+  **Results:** Significant improvements in visual analog scale, active forward elevation, active abduction, and active external rotation met the minimal clinically important difference at 3-6 months, 1 year, and 2 years in both implant groups. Additionally, a modest improvement in active internal rotation was observed in both cohorts. In terms of MAE, we found a higher error than the internal validation only for forward elevation at 3-6 months in group 2 and a lower error in all the other outcome measures at all time points for both groups.
+
+  **Conclusion:** The predictive analytics platform demonstrated a lower or similar MAE than the internal validation for both groups. Notably, we found that the tool's predictions are generalizable to another shoulder prosthesis, even though it was not trained on that particular product. This tool holds promise for aiding clinicians in managing patient expectations.
+
+  Interest in possible artificial intelligence applications in orthopedic surgery grew exponentially in the last 4 years.[13],[16] In particular, machine learning, given the large amount of data available in the previous decade, has been used in its many declinations (the most widely known is deep learning) to help clinicians in diagnostics and outcome predictions.[7],[16] In shoulder surgery, in particular, between 2010 and 2022, 45 studies regarding artificial intelligence applications in surgical and nonsurgical shoulder pathology were published,[5] and the main research objects, as well as those where the best results were obtained, were imaging in diagnostics of rotator cuff pathology and prediction of functional outcomes in prosthetic surgery.[6],[15] We have therefore decided to externally validate, at our institution, a predictive analytics platform (Predict+ Rev B 12-0001480; Exactech, Gainesville, FL, USA) by comparing its predictions with our results at 3-6 months, 1 year, and 2 years postsurgery.
+
+  Predict+, an Exactech product, is defined as a “data-driven, clinical decision support tool that creates personalized patient outcome predictions using preoperative data to anticipate patients' postoperative results after anatomic or reverse total shoulder arthroplasty (rTSA)”.
+
+  This machine learning–powered predictive analytics platform was clinically released in 2020. Predict+ had been trained with a database of over 6,500 patients, two-third of which were used to create the prediction model and one-third to test the model[11],[12]; of the 291 inputs recorded for each patient, the 19 that most influenced postoperative outcomes were selected. Visual analog scale (VAS), a range of motion, Global Shoulder Function, and Shoulder Arthroplasty Smart Score are predicted from 3 months to 7 years postoperative (Figs. 1 and 2).[11],[12]
+
+  ## Materials and methods
+
+  All patients who underwent rTSA for glenohumeral osteoarthritis or cuff tear arthropathy in our institution in 2022 were eligible for inclusion in this study. Exclusion criteria were the absence of the preoperative inputs required by Predict+ (demographic data, diagnosis, comorbidities, patient-reported pain and function, ranges of motion), the absence of follow-up visits at 3-6 months, 1 year, and 2 years, and visits that do not include pain and range of motion measurements (Table I).
+
+  A total of 90 patients met the inclusion criteria. The composition of the groups group 1, treated with Equinoxe rTSA (Exactech); group 2, treated with Comprehensive rTSA, (Zimmer Biomet, Warsaw IN, USA) was the following (Table II).
+
+  The inputs above were inserted in Predict+, creating an anonymized file for every patient. Immediately after the insertion and confirmation of the inserted data, a prediction of the following clinical items at 6 time points after surgery (3 months, 6 months, 1 year, 2 years, 3-5 years, 7 years) is created by the tool: VAS score, Global shoulder function, Shoulder Arthroplasty Smart score, active abduction (aAB), active forward elevation (aFE), active external rotation (aER), and active functional internal rotation (aFIR).
+
+  Due to the retrospective nature of the study, we only considered the items of which we had a complete preoperative and postoperative evaluation at 3-6 months, 1 year, and 2 years, namely VAS, aAB, active forward flexion, aER, and aFIR.
+
+  The first data we evaluated were if the difference between pre and postoperative mean values in the 2 groups reached the minimal clinically important difference (MCID), namely: 1.4 points for VAS, 12° for aFE, 7° for aAB, and 3° for aER.[21],[22]
+
+  We have not found an MCID value for aFIR[21],[22] in the current literature. We have therefore compared the mean values of our outcomes (at 3-6 months, 1 year, and 2 years postoperative, separately in the 2 groups) with Predict+ predicted outcomes, evaluating if the difference was below the MCID for VAS, active anterior flexion, aAB, and aER and measuring the difference between postoperative and predicted aFIR (aFIR values: 1 = lateral thigh; 2 = buttocks;3 = sacrum;4 = L4-L5; 5 = L1-L2; 6 = D10-D12; 7 = Higher than D10).
+
+  We also assessed the mean absolute error (MAE), namely the mean difference between the predicted and postoperative value for every outcome measure listed in Table III, separately in the 2 groups, at 3 different postoperative time points. MAEs we found were compared to the MAEs from the internal validation.[10],[12]
+
+  ## Results
+
+  Table III contains the preoperative mean values in the 2 groups:
+
+  There is no clinically significant difference between the 2 groups.
+
+  Table IV is the 3-6 months outcomes vs. Predict+ prediction at 3 months (average values):
+
+  As displayed in VAS (groups 1 and 2), forward elevation (group 1), and external rotation (groups 1 and 2), the difference between postoperative outcomes and Predict+ projections is below the MCID for those values.
+
+  Table V is the 1-year outcomes vs. Predict+ prediction at 1 year (average values):
+
+  As shown, Predict+ projections deviated minimally (less than MCID) from postoperative outcomes in VAS (groups 1 and 2), anterior flexion (groups 1 and 2), abduction (group 2), and external rotation (group 1).
+
+  Table VI is the 2-year outcomes vs. Predict+ prediction at 2 years (average values):
+
+  As shown, deviations below the MCID were found in VAS (groups 1 and 2), anterior flexion (groups 1 and 2), abduction (group 2), and external rotation (group 1).
+
+  Table VII is the MAE in the 2 groups at all time points for every outcome measure, separately compared with the MAE from the internal validation:
+
+  To summarize, in group 1 (Equinoxe), Predict+ projected outcomes diverged less than MCID from actual outcomes in VAS at 3-6 months, at 1 year, and 2 years; anterior flexion at 3-6 months, at 1 year, and 2 years, and external rotation at 3-6 months, at 1 year, and 2 years; in group 2 (Comprehensive) similar accuracy was found in VAS at 3-6 months, at 1 year, and 2 years; anterior flexion at 1 year and 2 years, abduction at 1 year and 2 years, and external rotation at 3-6 months. In terms of MAE, we found good results in both groups, similar to or better than those of internal validation.
+
+  ## Discussion
+
+  The primary endpoint of our study was to externally validate a specific prediction tool in rTSA. We calculated the difference between expected and postoperative average values of the 2 groups and the MAE considering every patient at every time point. Regarding the difference between mean values, we found the best accuracy in VAS and active forward flexion prediction, as well as for internal rotation, despite the lack of a recognized MCID; our results are consistent with previous literature.[4],[9],[11],[17],[18]
+
+  The MAE results for both groups are certainly encouraging, as they are lower than those of the internal validation. We found a MAE similar to, lower than, or markedly lower (up to 60.9% for VAS at 1 year in group 2) compared to that of the internal validation study. Simmons et al, in an external validation of the same tool (only for the Equinoxe implant, group 1), found similar good results regarding MAE.[19]
+
+  Another study[20] assessed the possibility that a surgeon might change the surgical indication (rTSA vs. anatomic total shoulder arthroplasty) after consulting a Clinical Decision Support Tool: we did not evaluate this aspect, but we believe that this tool may be more patient-oriented than surgeon-oriented, precisely because of the prevalence of pessimistic rather than optimistic predictions.
+
+  We also compared the accuracy of predictions for Equinoxe implants, for which the tool was developed, with the accuracy of predictions for a different implant by another company. We did not find significant differences in the accuracy of predictions, possibly because the 19 input parameters used affect outputs the same way with a different implant.[12] The observation of a MAE in group 2 (Zimmer Biomet Comprehensive), similar to that of group 1 (Exactech Equinoxe), and comparable to or lower than previous internal and external validations is, in our opinion, a significant result.[10],[12],[19] This is the first study where the Predict+ tool has been used for an implant for which it was not trained, and we can say that the tool gave similar results in predicting functional outcomes even when used for an implant from a different company and with different characteristics: Exactech Equinoxe is classified as a lateralized humerus/medialized glenoid implant, while Zimmer Biomet Comprehensive is classified as a lateralized humerus/lateralized glenoid implant.[23] In addition, we didn't find significant differences in postoperative results between the 2 groups.
+
+  Preoperative ROM is the primary determinant of postoperative ROM, particularly for active anterior flexion.[1], [2], [3],[8] Postoperative external and internal rotation is also determined by factors not considered by the tool, such as teres minor atrophy (for external rotation)[3] or greater tuberosity distalization (for functional internal rotation)[8] his could explain why we found better results in aFE predictions.
+
+  In the near future, predictions based on preoperative parameters may be integrated with intraoperative data collected by computer-assisted surgery tools and with apps able to quantify a patient's ROM reproducibly and with tools that classify preoperative and postoperative radiographs (already validated).[24] The better quality of the data provided will improve the training phase of machine learning tools and their accuracy. However, a recent study on complications after rTSA stated that patient-specific risk factors (those counted by our tool) are more strictly associated with complications rate than implant design and surgical technique.[14]
+
+  The main strength of our study is the comparison, for the first time, between the predictions for 2 different prosthetic implants, which furthermore gave similar and reliable results even though the tool was not trained on the implant used in group 2.
+
+  As for the limitations, our analysis was carried out on a limited patient cohort, and due to its retrospective nature, we could only study the outcomes that were constantly present in our outpatient visits (VAS and active range of motion). Moreover, due to the short duration of our follow-up (no more than 2 years), we could not fully utilize Predict+, which provides predictions for up to 7 years. Another limitation is that the sample size of the 2 groups was different (50 vs. 40), and there were differences in the timing of the first postoperative visit. However, all patients had 1 visit within the 3-6 month range.
+
+  ## Conclusion
+
+  In our experience, Predict+ provided similar or better results compared to previous literature for VAS and active range of motion predictions after rTSA, even for an implant which was not used during the training phase of the outcome prediction tool. In our opinion, the tool can be advantageous in managing patient expectations and enhancing adherence to rehabilitation protocols. Further investigations are needed to externally validate this tool, and its accuracy can be further increased with the aid of other machine learning–based programs.
+
+  ## Disclaimers:
+
+  Funding: No funding was disclosed by the authors.
+
+  Conflicts of interest: The authors, their immediate families, and any research foundations with which they are affiliated have not received any financial payments or other benefits from any commercial entity related to the subject of this article.
+
+  ## References
+
+  1. CollinP.MatsukawaT.DenardP.J.GainS.LädermannA.Pre-operative factors influence the recovery of range of motion following reverse shoulder arthroplastyInt Orthop4120172135214210.1007/s00264-017-3573-428791445
+  2. CrutsenJ.R.W.Lambers HeerspinkF.O.van LeentE.A.P.JanssenE.R.C.Predictive factors for postoperative outcomes after reverse shoulder arthroplasty: a systematic reviewBMC Musculoskelet Disord25202443910.1186/s12891-024-07500-338835042PMC11151553
+  3. DucharneL.GodenècheA.NérotC.AswadR.MüllerJ.H.HibonA.Factors that affect external rotation following reverse shoulder arthroplasty: a retrospective multi-centre study on 501 shouldersArch Orthop Trauma Surg14320236487649610.1007/s00402-023-04935-637318630
+  4. FranceschettiE.GregoriP.De GiorgiS.MartireT.ZaP.PapaliaG.F.Machine learning can predict anterior elevation after reverse total shoulder arthroplasty: a new tool for daily outpatient clinic?Musculoskelet Surg108202416317110.1007/s12306-023-00811-z38265563
+  5. GuptaP.HaeberleH.S.ZimmerZ.R.LevineW.N.WilliamsR.J.RamkumarP.N.Artificial intelligence-based applications in shoulder surgery leaves much to be desired: a systematic reviewJSES Rev Rep Tech3202318920010.1016/j.xrrt.2022.12.00637588443PMC10426484
+  6. GuptaP.MarigiE.M.Sanchez-SoteloJ.Research on artificial intelligence in shoulder and elbow surgery is increasingJSES Int7202315816110.1016/j.jseint.2022.10.00436820427PMC9937849
+  7. HaleemA.VaishyaR.JavaidM.KhanI.H.Artificial Intelligence (AI) applications in orthopaedics: an innovative technology to embraceJ Clin Orthop Trauma112020S80S8110.1016/j.jcot.2019.06.01231992923PMC6977175
+  8. HochreiterB.HaslerA.HaslerJ.KriechlingP.BorbasP.GerberC.Factors influencing functional internal rotation after reverse total shoulder arthroplastyJSES Int5202167968710.1016/j.jseint.2021.03.00534223415PMC8245997
+  9. KarimiA.H.LangbergJ.MaligeA.RahmanO.AbboudJ.A.StoneM.A.Accuracy of machine learning to predict the outcomes of shoulder arthroplasty: a systematic reviewArthroplasty620242610.1186/s42836-024-00244-438702749PMC11069283
+  10. KumarV.RocheC.OvermanS.SimovitchR.FlurinP.H.WrightT.Using machine learning to predict clinical outcomes after shoulder arthroplasty with a minimal feature setJ Shoulder Elbow Surg302021e225e23610.1016/j.jse.2020.07.04232822878
+  11. KumarV.RocheC.OvermanS.SimovitchR.FlurinP.H.WrightT.What is the accuracy of three different machine learning techniques to predict clinical outcomes after shoulder arthroplasty?Clin Orthop Relat Res47820202351236310.1097/CORR.000000000000126332332242PMC7491877
+  12. KumarV.SchochB.S.AllenC.OvermanS.TeredesaiA.AibinderW.Using machine learning to predict internal rotation after anatomic and reverse total shoulder arthroplastyJ Shoulder Elbow Surg312022e234e24510.1016/j.jse.2021.10.03234813889
+  13. LalehzarianS.P.GowdA.K.LiuJ.N.Machine learning in orthopaedic surgeryWorld J Orthop12202168569910.5312/wjo.v12.i9.68534631452PMC8472446
+  14. MarigiE.M.OedingJ.F.NieboerM.MarigiI.M.WahligB.BarlowJ.D.The relationship between design-based lateralization, humeral bearing design, polyethylene angle, and patient-related factors on surgical complications after reverse shoulder arthroplasty: a machine learning analysisJ Shoulder Elbow Surg34202546247210.1016/j.jse.2024.04.02238852709
+  15. MclendonP.B.ChristmasK.N.SimonP.PlummerO.R.HuntA.AhmedA.S.Machine learning can predict level of improvement in shoulder arthroplastyJB JS Open Access62021e20.0012810.2106/JBJS.OA.20.00128PMC835260634386682
+  16. MyersT.G.RamkumarP.N.RicciardiB.F.UrishK.L.KipperJ.KetonisC.Artificial intelligence and orthopaedics: an introduction for cliniciansJ Bone Joint Surg Am102202083084010.2106/JBJS.19.0112832379124PMC7508289
+  17. NunesJ.AndradeR.AzevedoC.FerreiraN.V.OliveiraN.CalvoE.Improved clinical outcomes after lateralized reverse shoulder arthroplasty: a systematic reviewClin Orthop Relat Res480202294995710.1097/CORR.000000000000206534904964PMC9007193
+  18. ParsonsM.RoutmanH.D.RocheC.P.FriedmanR.J.Patient-reported outcomes of reverse total shoulder arthroplasty: a comparative risk factor analysis of improved versus unimproved casesJSES Open Access3201917417810.1016/j.jses.2019.07.00431709358PMC6834991
+  19. SimmonsC.DeGrasseJ.PolakovicS.AibinderW.ThrockmortonT.NoerdlingerM.Initial clinical experience with a predictive clinical decision support tool for anatomic and reverse total shoulder arthroplastyEur J Orthop Surg Traumatol3420241307131810.1007/s00590-023-03796-438095688
+  20. SimmonsC.S.RocheC.SchochB.S.ParsonsM.AibinderW.R.Surgeon confidence in planning total shoulder arthroplasty improves after consulting a clinical decision support toolEur J Orthop Surg Traumatol3320232385239110.1007/s00590-022-03446-136436090
+  21. SimovitchR.FlurinP.H.WrightT.ZuckermanJ.D.RocheC.P.Quantifying success after total shoulder arthroplasty: the minimal clinically important differenceJ Shoulder Elbow Surg27201829830510.1016/j.jse.2017.09.01329162305
+  22. TashjianR.Z.HungM.KeenerJ.D.BowenR.C.McAllisterJ.ChenW.Determining the minimal clinically important difference for the American Shoulder and Elbow Surgeons score, Simple Shoulder Test, and visual analog scale (VAS) measuring pain after shoulder arthroplastyJ Shoulder Elbow Surg26201714414810.1016/j.jse.2016.06.00727545048
+  23. WerthelJ.D.WalchG.VegehanE.DeransartP.Sanchez-SoteloJ.ValentiP.Lateralization in reverse shoulder arthroplasty: a descriptive analysis of different implants in current practiceInt Orthop4320192349236010.1007/s00264-019-04365-331254018
+  24. YangL.OedingJ.F.de MarinisR.MarigiE.Sanchez-SoteloJ.Deep learning to automatically classify very large sets of preoperative and postoperative shoulder arthroplasty radiographsJ Shoulder Elbow Surg33202477378010.1016/j.jse.2023.09.02137879598

@@ -1,0 +1,27 @@
+slug: 'Assessing the accuracy of a machine learning prediction for 2 different shoulder prostheses: an external validation study'
+titolo: 'Assessing the accuracy of a machine learning prediction for 2 different shoulder prostheses: an external validation study'
+titoloBreve:
+  it: 'Intelligenza artificiale per prevedere il recupero dopo protesi inversa di spalla'
+  en: 'Machine learning outcome prediction across two reverse shoulder prostheses'
+autori: 'Gianluca Caprili, Andrea G. Calamita, Michele Novi, Domenico A. Campanacci, Simone Nicoletti'
+rivista: 'JSES International'
+anno: 2025
+volume: '9(4):1352–1356'
+doi: '10.1016/j.jseint.2025.04.024'
+pubmedId: '40958998'
+url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12435022/'
+abstract: |
+  BACKGROUND: The integration of machine learning in orthopedic surgery, including shoulder procedures, has garnered increasing interest. This retrospective analysis aims to externally validate a predictive analytics platform within a patient cohort undergoing reverse total shoulder arthroplasty for eccentric or concentric glenohumeral osteoarthritis. METHODS: Ninety patients who underwent reverse total shoulder arthroplasty at our institution in 2022 were selected for this study. Patients were divided into 2 groups based on the type of implant (50 Exactech Equinoxe and 40 Zimmer Biomet Comprehensive). Preoperative evaluations included 19 variables per the tool requirements (demographics, diagnosis, comorbidities, patient-reported pain and function, and range of motion). The study compared the tool's outcome predictions with postoperative outcomes at 3–6 months, 1 year, and 2 years postsurgery for visual analog scale and active range of movement. We also quantified the mean absolute error (MAE) separately in the 2 groups and compared it to the MAE from the internal validation of the same tool. RESULTS: Significant improvements in visual analog scale, active forward elevation, active abduction, and active external rotation met the minimal clinically important difference at 3–6 months, 1 year, and 2 years in both implant groups. Additionally, a modest improvement in active internal rotation was observed in both cohorts. In terms of MAE, we found a higher error than the internal validation only for forward elevation at 3–6 months in group 2 and a lower error in all the other outcome measures at all time points for both groups. CONCLUSION: The predictive analytics platform demonstrated a lower or similar MAE than the internal validation for both groups. Notably, we found that the tool's predictions are generalizable to another shoulder prosthesis, even though it was not trained on that particular product. This tool holds promise for aiding clinicians in managing patient expectations.
+riassunto:
+  it: 'Studio di validazione su 90 pazienti operati di protesi inversa di spalla con due impianti diversi: un modello predittivo basato su machine learning stima in modo affidabile dolore e recupero del movimento fino a 2 anni, aiutando a condividere aspettative realistiche prima dell''intervento.'
+  en: 'External validation on 90 patients undergoing reverse total shoulder arthroplasty with two different implants: a machine-learning predictive platform reliably estimates pain and range-of-motion recovery up to 2 years, supporting realistic pre-operative expectations.'
+tag:
+  - spalla
+  - protesi
+  - tecnologia
+principale: false
+patologie:
+  - spalla
+  - come-si-opera
+pubblicato: true
+licenza: '© 2025 the authors. JSES International (Elsevier), licenza CC BY 4.0.'

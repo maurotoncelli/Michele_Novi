@@ -1,23 +1,31 @@
 nome: Michele Novi
 titolo:
-  it: Ortopedico e traumatologo. Chirurgia della spalla, del gomito e dell'arto superiore.
-  en: Orthopaedic and trauma surgeon. Shoulder, elbow and upper-limb surgery.
+  it: |-
+    Ortopedico e Traumatologo. Chirurgia della Spalla e Arto Superiore.
+    Chirurgia Protesica e Artroscopica
+  en: |-
+    Orthopaedic and Trauma Surgeon. Shoulder and Upper Limb Surgery.
+    Joint Replacement and Arthroscopic Surgery
 apertura:
-  it: >-
-    Sono dirigente medico della SOC Ortopedia Protesica dell'Ospedale San Pietro Igneo di Fucecchio e visito
-    in libera professione a Pisa, Fucecchio e Peccioli. Mi occupo di chirurgia artroscopica, protesica e traumatologica
-    dell'arto superiore, con la spalla al centro. Alla prima visita cerco di capire una cosa sola: qual è la
-    strada giusta per quella persona, non quale intervento si può fare.
-  en: >-
-    I am a consultant in the Joint Replacement Unit at San Pietro Igneo Hospital in Fucecchio and see patients
-    privately in Pisa, Fucecchio and Peccioli. My work is arthroscopic, joint-replacement and trauma surgery of the upper
-    limb, with the shoulder at its centre. At the first visit I try to understand one thing only: which path is
-    right for that person, not which operation could be done.
+  it: |-
+    Sono il Dott. Michele Novi, specialista in Ortopedia e Traumatologia, con una particolare esperienza nella diagnosi e nel trattamento delle patologie della spalla e dell'arto superiore. Mi occupo principalmente di chirurgia della spalla, sia ricostruttiva artroscopica che protesica, e del trattamento delle patologie traumatiche e degenerative dell'apparato muscolo-scheletrico.
+
+    Laureato e Specializzato con Lode presso l'Università di Pisa, ho maturato la mia esperienza clinica e chirurgica presso centri specialistici in Italia e all'estero, tra cui l'Ospedale Cervesi di Cattolica, il Policlinico Universitario di Modena, la University of Washington di Seattle, l'Ospedale Universitario Charité di Berlino e Harvard – Mass General Hospital di Boston. Attualmente svolgo attività clinica, chirurgica e di ricerca presso l'Ospedale San Pietro Igneo di Fucecchio (Centro Eccellenza Sostituzione Articolare Toscana). Affianco all'attività medica un costante impegno nella ricerca scientifica, nella formazione e nell'aggiornamento, con l'obiettivo di offrire a ogni paziente un percorso diagnostico e terapeutico personalizzato, basato sulle più attuali evidenze scientifiche.
+  en: |-
+    I am Dr Michele Novi, a specialist in Orthopaedics and Traumatology with specific expertise in the diagnosis and treatment of shoulder and upper limb conditions. My work focuses on shoulder surgery — both arthroscopic reconstructive and joint replacement — as well as the treatment of traumatic and degenerative conditions of the musculoskeletal system.
+
+    Having graduated and specialised with honours at the University of Pisa, I gained clinical and surgical experience at specialist centres in Italy and abroad, including Cervesi Hospital in Cattolica, the University Hospital of Modena, the University of Washington in Seattle, Charité University Hospital in Berlin and Harvard – Massachusetts General Hospital in Boston. I currently carry out clinical, surgical and research activity at San Pietro Igneo Hospital in Fucecchio (Tuscany Centre of Excellence for Joint Replacement). Alongside clinical practice, I maintain a continuous commitment to scientific research, training and professional development, aiming to offer every patient a personalised diagnostic and therapeutic pathway based on the latest scientific evidence.
 ritratto:
   src: ritratto-michele-bn.jpg
   alt:
     it: Ritratto in bianco e nero del Dott. Michele Novi
     en: Black and white portrait of Dr Michele Novi
+attivitaScientifica:
+  documenti: 26
+  citazioni: 310
+  hIndex: 11
+  scopusId: '57198887872'
+  orcid: '0000-0003-4867-463X'
 inEvidenza:
   - anno: '2015'
     titolo:

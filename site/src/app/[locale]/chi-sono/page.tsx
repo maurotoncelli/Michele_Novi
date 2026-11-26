@@ -69,16 +69,10 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
   const oggi = tappe.find((v) => v.attuale) ?? tappe.find((v) => /^(dal|since)\s/i.test(v.anno ?? "")) ?? tappe.at(-1);
   const altre = tappe.filter((v) => v !== oggi);
   const oggiAnno = oggi?.anno?.match(/\d{4}/)?.[0] ?? oggi?.anno ?? "";
-
-  // Riga dei fatti sotto l'apertura: cose verificabili, non aggettivi.
-  const lavoroAttuale = (p.timeline ?? [])
-    .filter((t) => tipoPercorso(t) === "lavoro" && /^dal\s/i.test(t.periodo ?? ""))
-    .sort((a, b) => annoPercorso(b.periodo) - annoPercorso(a.periodo))[0];
-  const fatti = [
-    s.albo,
-    lavoroAttuale ? `${pick(lavoroAttuale.titolo, l)} · ${lavoroAttuale.periodo}` : null,
-    p.lingue?.length ? p.lingue.join(" · ") : null,
-  ].filter(Boolean) as string[];
+  const aperturaParagrafi = pick(p.apertura, l)
+    .split(/\n+/)
+    .map((x) => x.trim())
+    .filter(Boolean);
 
   return (
     <>
@@ -93,7 +87,7 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
       />
       <Briciole items={[{ label: m.meta.siteName, href: href(l, { kind: "home" }) }, { label: m.chiSono.titolo }]} />
 
-      {/* 1. Apertura: il ritratto a sinistra prende tutta l'altezza del testo; i fatti chiudono in basso, allineati al bordo della foto. */}
+      {/* 1. Apertura: il ritratto a sinistra prende tutta l'altezza del testo. */}
       <section className="contenitore pb-16 pt-8 md:pb-24 md:pt-12">
         <Reveal immediate>
           <div className="grid gap-10 md:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] md:items-stretch md:gap-14 lg:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] lg:gap-20">
@@ -109,16 +103,17 @@ export default async function ChiSonoPage({ params }: PageProps<"/[locale]/chi-s
             <div className="flex min-w-0 flex-col">
               <p className="eyebrow mb-5">{m.chiSono.titolo}</p>
               <h1 className="display-l">{p.nome}</h1>
-              {pick(p.titolo, l) && <p className="mt-5 max-w-lg text-[1.15rem] leading-snug text-grafite md:text-[1.25rem]">{pick(p.titolo, l)}</p>}
-              <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={3} className="mt-8 max-w-2xl">
-                <p className="lead text-inchiostro">{pick(p.apertura, l)}</p>
-              </TestoEspandibile>
-              {fatti.length > 0 && (
-                <ul className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-linea pt-6 text-sm text-grafite max-md:mt-10 md:pt-6">
-                  {fatti.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
+              {pick(p.titolo, l) && <p className="mt-5 max-w-2xl whitespace-pre-line text-[1.12rem] leading-snug text-grafite md:text-[1.22rem]">{pick(p.titolo, l)}</p>}
+              {aperturaParagrafi.length > 0 && (
+                <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={4} className="mt-7 max-w-2xl">
+                  <div className="space-y-4">
+                    {aperturaParagrafi.map((par, idx) => (
+                      <p key={idx} className="text-[1.03rem] leading-relaxed text-inchiostro md:text-[1.08rem]">
+                        {par}
+                      </p>
+                    ))}
+                  </div>
+                </TestoEspandibile>
               )}
             </div>
           </div>

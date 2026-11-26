@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getMessages, pick } from "@/i18n";
-import { getDisegni, getPatologia, getPatologie, getPubblicazioni, getSedi, getSettings, slugPatologia, srcDisegno } from "@/lib/content";
+import { getDisegni, getPatologia, getPatologie, getPubblicazioni, getSettings, slugPatologia, srcDisegno } from "@/lib/content";
 import { Disegno } from "@/components/ui/Disegno";
 import { renderBody, headings } from "@/lib/markdoc";
 import { breadcrumbJsonLd, buildMetadata, faqItems, faqJsonLd, medicalWebPageJsonLd } from "@/lib/seo";
@@ -15,7 +15,7 @@ import { AvvisoLingua, Briciole, Disclaimer } from "@/components/blocks/Pagina";
 import { Faq } from "@/components/blocks/Faq";
 import { Sommario } from "@/components/blocks/Sommario";
 import { srcMedia } from "@/lib/media";
-import { classeFuoco, ModuloSede, SchedaPatologia } from "@/components/blocks/Schede";
+import { classeFuoco, SchedaPatologia } from "@/components/blocks/Schede";
 import { FasciaContatto } from "@/components/blocks/FasciaContatto";
 
 export const dynamicParams = false;
@@ -51,7 +51,7 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
   const l = (isLocale(locale) ? locale : "it") as Locale;
   const p = await getPatologia(slug, l);
   if (!p) notFound();
-  const [s, tutte, sedi, paper, catalogo] = await Promise.all([getSettings(), getPatologie(), getSedi(), getPubblicazioni(), getDisegni()]);
+  const [s, tutte, paper, catalogo] = await Promise.all([getSettings(), getPatologie(), getPubblicazioni(), getDisegni()]);
   const foto = srcMedia(p.immagine?.src, "patologie");
   const disegno = foto ? null : srcDisegno(catalogo, p.segno, l);
   const mediaAlt = pick(p.immagine?.alt, l) || pick(p.titolo, l);
@@ -61,12 +61,11 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
   const indice = await headings(l === "en" && !fallbackToIt ? p.corpoEn : p.corpo);
   const faq = faqItems(p.faq, l);
   const correlate = (p.correlate ?? []).map((sl) => tutte.find((x) => x.slug === sl)).filter(Boolean) as typeof tutte;
-  const doveSiTratta = (p.sedi ?? []).map((sl) => sedi.find((x) => x.slug === sl)).filter(Boolean) as typeof sedi;
   const citati = (p.pubblicazioni ?? []).map((sl) => paper.find((x) => x.slug === sl)).filter(Boolean) as typeof paper;
   const pubSlug = slugPatologia(p, l);
+  const faqTitolo = p.area === "spalla" ? m.cosaCuro.faqSpalla : m.cosaCuro.faq;
   const sommario = [
     ...indice.map((h) => ({ id: h.id, label: h.text })),
-    ...(doveSiTratta.length ? [{ id: "dove", label: m.cosaCuro.doveSiTratta }] : []),
     ...(citati.length ? [{ id: "pubblicazioni", label: m.cosaCuro.pubblicazioniCorrelate }] : []),
     ...(faq.length ? [{ id: "faq", label: m.cosaCuro.faq }] : []),
   ];
@@ -91,7 +90,7 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
           <div className="relative grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-center">
             <div>
               <h1 className="display-l">{pick(p.titolo, l)}</h1>
-              <p className="mt-4 max-w-2xl text-[1.1rem] leading-relaxed text-grafite">{pick(p.lead, l)}</p>
+              <p className="mt-4 max-w-2xl whitespace-pre-line text-[1.1rem] leading-relaxed text-grafite">{pick(p.lead, l)}</p>
             </div>
             {(foto || disegno) && (
               <div className="relative aspect-[5/4] overflow-hidden bg-osso-2">
@@ -106,7 +105,7 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
         </Reveal>
       </header>
 
-      {/* Sommario sticky a sinistra che segue la lettura; a destra il corpo, poi Dove, Ne ho scritto, FAQ: tutto nel flusso, tutto con ancora. */}
+      {/* Sommario sticky a sinistra che segue la lettura; a destra il corpo, poi Ne ho scritto, FAQ: tutto nel flusso, tutto con ancora. */}
       <div className="contenitore grid gap-12 py-12 md:py-16 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-20 xl:grid-cols-[17rem_minmax(0,1fr)]">
         <div className="lg:sticky lg:top-[calc(var(--header-h)+2.5rem)] lg:self-start">
           <Sommario voci={sommario} eyebrow={m.cosaCuro.inQuestaPagina} />
@@ -117,43 +116,6 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
           <TestoEspandibile modo="blocco" sfondo="campo" more={m.cta.leggiTutto} less={m.cta.riduci}>
             <div className={`testo max-w-[44rem]${p.area === "metodo" || p.area === "spalla" || p.area === "arto-superiore" || p.area === "sport" ? " testo-metodo" : ""}`}>{element}</div>
           </TestoEspandibile>
-
-          {doveSiTratta.length > 0 && (
-            <section id="dove" className="ancora mt-20 max-w-[44rem]">
-              <p className="eyebrow">{m.nav.dove}</p>
-              <h2 className="mt-3 text-[1.75rem] leading-tight">{m.cosaCuro.doveSiTratta}</h2>
-              <div className="mt-6 space-y-8">
-                {doveSiTratta.some((sd) => sd.visite) && (
-                  <div>
-                    <p className="eyebrow mb-2">{m.dove.doveVisitoTitolo}</p>
-                    <ul className="divide-y divide-linea border-y border-linea">
-                      {doveSiTratta
-                        .filter((sd) => sd.visite)
-                        .map((sd) => (
-                          <li key={`visite-${sd.slug}`} className="min-w-0">
-                            <ModuloSede s={sd} locale={l} compatto modo="visite" />
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                )}
-                {doveSiTratta.some((sd) => sd.chirurgia) && (
-                  <div>
-                    <p className="eyebrow mb-2">{m.dove.doveOperoTitolo}</p>
-                    <ul className="divide-y divide-linea border-y border-linea">
-                      {doveSiTratta
-                        .filter((sd) => sd.chirurgia)
-                        .map((sd) => (
-                          <li key={`chirurgia-${sd.slug}`} className="min-w-0">
-                            <ModuloSede s={sd} locale={l} compatto modo="chirurgia" />
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </section>
-          )}
 
           {citati.length > 0 && (
             <section id="pubblicazioni" className="ancora mt-20 max-w-[44rem]">
@@ -177,7 +139,7 @@ export default async function PatologiaPage({ params }: PageProps<"/[locale]/cos
 
           {faq.length > 0 && (
             <section id="faq" className="ancora mt-20 max-w-[44rem]">
-              <Faq titolo={m.cosaCuro.faq} items={faq} />
+              <Faq titolo={faqTitolo} items={faq} />
             </section>
           )}
           <Disclaimer testo={m.cosaCuro.disclaimer} />

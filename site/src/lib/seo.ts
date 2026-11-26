@@ -71,7 +71,13 @@ export function buildMetadata(settings: Settings, input: MetaInput): Metadata {
 
 const telefonoLd = (s: Settings) => telHref(s.telefono)?.replace(/^tel:/, "") || undefined;
 
-const sameAs = (s: Settings) => [s.instagram, s.linkedin, s.youtube].filter(Boolean) as string[];
+const sameAs = (s: Settings, p?: Profilo) => {
+  const scopus = p?.attivitaScientifica?.scopusId
+    ? `https://www.scopus.com/authid/detail.uri?authorId=${p.attivitaScientifica.scopusId}`
+    : null;
+  const orcid = p?.attivitaScientifica?.orcid ? `https://orcid.org/${p.attivitaScientifica.orcid}` : null;
+  return [s.instagram, s.linkedin, s.youtube, scopus, orcid].filter(Boolean) as string[];
+};
 
 export function physicianId(settings: Settings) {
   return `${siteUrl(settings)}/#physician`;
@@ -92,7 +98,7 @@ export function physicianJsonLd(settings: Settings, profilo: Profilo, sedi: Sede
     medicalSpecialty: "Orthopedic",
     telephone: telefonoLd(settings),
     email: settings.email || undefined,
-    sameAs: sameAs(settings),
+    sameAs: sameAs(settings, profilo),
     knowsLanguage: profilo.lingue ?? undefined,
     workLocation: sedi.map((s) => ({
       "@type": s.tipo === "ospedale" ? "Hospital" : "MedicalClinic",

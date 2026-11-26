@@ -105,10 +105,11 @@
     "lead": "Trattamenti personalizzati basati sulle evidenze scientifiche. L'ascolto del paziente porta ad una corretta diagnosi, la fiducia nel medico ad una rapidità nei risultati.",
     "chiusura": "La prima visita decide il percorso: curare, aspettare o operare.",
     "faq": "Domande frequenti",
+    "faqSpalla": "Domande frequenti sulla chirurgia della spalla",
     "correlate": "Pagine correlate",
     "doveSiTratta": "Dove si tratta",
     "pubblicazioniCorrelate": "Ne ho scritto qui",
-    "disclaimer": "Queste pagine informano, non sostituiscono la visita. Ogni caso si valuta di persona."
+    "disclaimer": "Queste informazioni hanno finalità divulgative e non sostituiscono una valutazione specialistica. Ogni indicazione terapeutica viene definita dopo una visita e l'analisi degli eventuali esami diagnostici."
   },
   "dove": {
     "titolo": "Dove visito e dove opero.",
@@ -142,7 +143,13 @@
     "altri": "Altri approfondimenti",
     "pubblicazioniLead": "Le pubblicazioni scientifiche del Dott. Michele Novi su riviste con revisione tra pari. Per ogni lavoro, una sintesi in italiano e il collegamento all'articolo originale.",
     "archivioScientifico": "Archivio scientifico",
-    "peerReviewed": "lavori pubblicati su riviste con revisione tra pari",
+    "peerReviewed": "documenti su riviste internazionali",
+    "citazioni": "citazioni",
+    "hIndex": "H-index",
+    "scopusId": "Scopus ID",
+    "orcid": "ORCID",
+    "selezioneArchivio": "Selezione di {n} lavori principali con sintesi e PDF su {totale} documenti indicizzati. L'elenco completo è consultabile su Scopus.",
+    "archivioCompleto": "Archivio completo: {n} pubblicazioni su riviste scientifiche ({totale} indicizzate su Scopus).",
     "paperAffini": "Pubblicazioni sullo stesso tema",
     "paroleChiave": "Parole chiave",
     "tag": "Tag",

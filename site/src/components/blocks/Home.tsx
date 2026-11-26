@@ -103,10 +103,12 @@ export function Hero({ home, settings, locale }: { home: Home; settings: Setting
 /* ------------------------------------------------------------------ Fascia introduttiva sotto la Hero (al posto dei numeri) */
 export function FasciaIntro({ home, locale }: { home: Home; locale: Locale }) {
   const m = getMessages(locale);
-  const righe = pick(home.sottotitolo, locale)
-    .split(/\n+/)
+  const testo = pick(home.sottotitolo, locale).trim();
+  const blocchi = testo
+    .split(/\n\s*\n/)
     .map((s) => s.trim())
     .filter(Boolean);
+  const righe = blocchi.length > 1 ? blocchi : testo.split(/\n+/).map((s) => s.trim()).filter(Boolean);
   const titoloIntro = righe.length > 1 ? righe[0] : null;
   const paragrafi = righe.length > 1 ? righe.slice(1) : righe;
   if (!paragrafi.length) return null;
@@ -117,16 +119,18 @@ export function FasciaIntro({ home, locale }: { home: Home; locale: Locale }) {
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-3">{m.home.introEyebrow}</p>
           {titoloIntro && (
-            <h2 className="display-m">
+            <h2 className="display-m whitespace-pre-line">
               {titoloIntro}
             </h2>
           )}
           <TestoEspandibile more={m.cta.leggiTutto} less={m.cta.riduci} righe={3} className="mt-5">
-            {paragrafi.map((par, idx) => (
-              <p key={idx} className="text-[1.06rem] leading-relaxed text-grafite md:text-[1.12rem]">
-                {par}
-              </p>
-            ))}
+            <div className="space-y-3">
+              {paragrafi.map((par, idx) => (
+                <p key={idx} className="text-[1.06rem] leading-relaxed text-grafite md:text-[1.12rem]">
+                  {par}
+                </p>
+              ))}
+            </div>
           </TestoEspandibile>
         </Reveal>
       </div>
@@ -148,7 +152,8 @@ export function FasciaFatti({ sedi, paper, profilo, locale }: { sedi: Sede[]; pa
     fatti.push({ prefisso: pre?.trim() || undefined, valore: anno ?? ospedale.anno, label: m.home.fattiOspedale });
   }
   if (harvard?.anno) fatti.push({ valore: harvard.anno, label: m.home.fattiHarvard });
-  if (paper.length) fatti.push({ valore: String(paper.length), label: m.home.fattiPaper });
+  const totPaper = profilo.attivitaScientifica?.documenti ?? paper.length;
+  if (totPaper) fatti.push({ valore: String(totPaper), label: m.home.fattiPaper });
   if (fatti.length < 2) return null;
 
   return (
@@ -410,7 +415,15 @@ export function FasciaApprofondimenti({ note, locale }: { note: Nota[]; locale: 
 }
 
 /* ------------------------------------------------------------------ 06 Pubblicazioni: archivio scientifico, compatto e bibliografico */
-export function FasciaPubblicazioni({ pubblicazioni, locale }: { pubblicazioni: Pubblicazione[]; locale: Locale }) {
+export function FasciaPubblicazioni({
+  pubblicazioni,
+  metriche,
+  locale,
+}: {
+  pubblicazioni: Pubblicazione[];
+  metriche?: Profilo["attivitaScientifica"];
+  locale: Locale;
+}) {
   const m = getMessages(locale);
   if (!pubblicazioni.length) return null;
   return (
@@ -422,7 +435,12 @@ export function FasciaPubblicazioni({ pubblicazioni, locale }: { pubblicazioni: 
       azione={{ href: href(locale, { kind: "pubblicazioni" }), label: m.cta.tuttePubblicazioni }}
       tinta="bianca"
     >
-      <ArchivioPubblicazioni pubblicazioni={pubblicazioni.slice(0, 3)} totale={pubblicazioni.length} locale={locale} />
+      <ArchivioPubblicazioni
+        pubblicazioni={pubblicazioni.slice(0, 3)}
+        totale={metriche?.documenti ?? pubblicazioni.length}
+        metriche={metriche}
+        locale={locale}
+      />
     </Sezione>
   );
 }

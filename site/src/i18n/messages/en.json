@@ -105,10 +105,11 @@
     "lead": "Personalised treatments based on scientific evidence. Listening to the patient leads to an accurate diagnosis; trust in the physician leads to faster results.",
     "chiusura": "The first visit decides the path: treat, wait or operate.",
     "faq": "Frequently asked questions",
+    "faqSpalla": "Frequently asked questions on shoulder surgery",
     "correlate": "Related pages",
     "doveSiTratta": "Where it is treated",
     "pubblicazioniCorrelate": "I have written about this",
-    "disclaimer": "These pages inform; they do not replace a consultation. Every case is assessed in person."
+    "disclaimer": "This information is for educational purposes only and does not replace a specialist consultation. Every treatment indication is defined after an examination and review of any diagnostic imaging."
   },
   "dove": {
     "titolo": "Where I see patients and where I operate.",
@@ -142,7 +143,13 @@
     "altri": "More articles",
     "pubblicazioniLead": "Dr Michele Novi's scientific publications in peer-reviewed journals. Each paper comes with a short summary and a link to the original article.",
     "archivioScientifico": "Scientific archive",
-    "peerReviewed": "papers published in peer-reviewed journals",
+    "peerReviewed": "documents in international journals",
+    "citazioni": "citations",
+    "hIndex": "H-index",
+    "scopusId": "Scopus ID",
+    "orcid": "ORCID",
+    "selezioneArchivio": "Selection of {n} key papers with summary and PDF out of {totale} indexed documents. The complete list is available on Scopus.",
+    "archivioCompleto": "Complete archive: {n} publications in scientific journals ({totale} indexed in Scopus).",
     "paperAffini": "Publications on the same topic",
     "paroleChiave": "Keywords",
     "tag": "Tag",

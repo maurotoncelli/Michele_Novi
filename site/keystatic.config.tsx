@@ -144,9 +144,19 @@ export default config({
       format: { data: "yaml" },
       schema: {
         nome: fields.text({ label: "Nome e cognome", defaultValue: "Michele Novi" }),
-        titolo: testo("Titolo professionale"),
+        titolo: testo("Titolo professionale", { multiline: true }),
         apertura: testo("Apertura (2–3 frasi)", { multiline: true }),
         ritratto: immagine("Ritratto", "profilo"),
+        attivitaScientifica: fields.object(
+          {
+            documenti: fields.integer({ label: "Documenti su riviste internazionali" }),
+            citazioni: fields.integer({ label: "Citazioni" }),
+            hIndex: fields.integer({ label: "H-index" }),
+            scopusId: fields.text({ label: "Scopus Author ID" }),
+            orcid: fields.text({ label: "ORCID" }),
+          },
+          { label: "Attività scientifica (Scopus / ORCID)" },
+        ),
         inEvidenza: fields.array(
           fields.object({
             anno: fields.text({ label: "Anno" }),

@@ -57,7 +57,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           case "approfondimenti":
             return <FasciaApprofondimenti key={tipo} note={note} locale={l} />;
           case "pubblicazioni":
-            return <FasciaPubblicazioni key={tipo} pubblicazioni={paper} locale={l} />;
+            return <FasciaPubblicazioni key={tipo} pubblicazioni={paper} metriche={profilo.attivitaScientifica} locale={l} />;
           case "contatto":
             return <FasciaContatto key={tipo} locale={l} />;
           default:

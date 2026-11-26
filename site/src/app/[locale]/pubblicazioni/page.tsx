@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { href, isLocale, type Locale } from "@/i18n/routing";
 import { getMessages } from "@/i18n";
-import { getPubblicazioni, getSettings } from "@/lib/content";
+import { getProfilo, getPubblicazioni, getSettings } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Intestazione } from "@/components/blocks/Pagina";
@@ -19,8 +19,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/pubblica
 export default async function PubblicazioniPage({ params }: PageProps<"/[locale]/pubblicazioni">) {
   const { locale } = await params;
   const l = (isLocale(locale) ? locale : "it") as Locale;
-  const [s, pubblicazioni] = await Promise.all([getSettings(), getPubblicazioni()]);
+  const [s, profilo, pubblicazioni] = await Promise.all([getSettings(), getProfilo(), getPubblicazioni()]);
   const m = getMessages(l);
+  const metriche = profilo.attivitaScientifica;
   return (
     <>
       <JsonLd
@@ -38,7 +39,13 @@ export default async function PubblicazioniPage({ params }: PageProps<"/[locale]
       />
       <section className="border-b border-linea bg-osso">
         <div className="contenitore py-12 md:py-16">
-          <ArchivioPubblicazioni pubblicazioni={pubblicazioni} totale={pubblicazioni.length} locale={l} />
+          <ArchivioPubblicazioni
+            pubblicazioni={pubblicazioni}
+            totale={metriche?.documenti ?? pubblicazioni.length}
+            metriche={metriche}
+            mostraNotaSelezione
+            locale={l}
+          />
         </div>
       </section>
       <FasciaContatto locale={l} />

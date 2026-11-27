@@ -81,7 +81,7 @@ Sul sito, quando c’è il dominio: `info@` letta dalla segreteria. La Gmail per
 
 - Nome struttura, città, indirizzo, pin mappa
 - Visite / chirurgia / entrambi
-- Come si prenota: **sempre segreteria MN** (non centralino struttura sul MN)
+- Come si prenota: **sempre segreteria MN** (non centralino struttura sul MN). Sul sito si scrive solo «Tramite la segreteria del Dott. Novi»: il 27/11 Michele ha fatto togliere «non tramite il centralino della struttura».
 - Orari suoi in quella sede, o «su appuntamento»
 - Foto ingresso / sala / come si arriva (shooting)
 - Parcheggio, scalini, accessibilità

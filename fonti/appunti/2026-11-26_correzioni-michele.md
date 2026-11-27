@@ -59,3 +59,7 @@ Dopo il giudizio complessivo sul sito, Mauro ha risposto punto per punto. Fatto:
 7. **Controlli:** tutti gli altri 28 DOI rispondono. Scopus (anteprima pubblica, 26/11): 26 documenti, 310 citazioni da 296 documenti, h-index 11: i numeri sul sito sono giusti. L'anteprima elenca solo 2 documenti su 26, quindi **non si può dire quali** dei 29 in archivio siano i 26 di Scopus: l'ipotesi fatta al mattino sui tre esclusi non ha fonte ed è ritirata. La nota in pagina è stata riscritta di conseguenza.
 
 Non toccato, per decisione di Mauro: i testi integrali con licenza NC / NC-SA. Idee e cose da far vedere a Michele: in `bibbia/HANDOFF.md`.
+
+## 27 novembre — correzione di Michele (screenshot dal telefono)
+
+In «Come si prenota» (Home, `/dove`, pagine delle sedi) Michele ha barrato «non tramite il centralino della struttura». La frase ora è solo «Tramite la segreteria del Dott. Novi.» (`dove.prenotaTesto`, IT + EN).
